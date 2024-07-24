@@ -117,12 +117,12 @@ function hienThiBang(trang, danhSachTruyenHienTai = danhSachTruyen) {
         bangTruyen.appendChild(truyen.taoHang());
     });
 
-    capNhatPhanTrang();
+    capNhatPhanTrang(danhSachTruyenHienTai);
     scrollToTop();
 }
 
-function capNhatPhanTrang() {
-    const tongSoTrang = Math.ceil(danhSachTruyen.length / soTruyenMoiTrang);
+function capNhatPhanTrang(danhSachTruyenHienTai = danhSachTruyen) {
+    const tongSoTrang = Math.ceil(danhSachTruyenHienTai.length / soTruyenMoiTrang);
     const pageInfo = document.getElementById('pageInfo');
     pageInfo.innerHTML = '';
 
@@ -142,7 +142,7 @@ function capNhatPhanTrang() {
         trang.className = (i === trangHienTai) ? 'current-page' : '';
         trang.addEventListener('click', () => {
             trangHienTai = i;
-            hienThiBang(trangHienTai);
+            hienThiBang(trangHienTai, danhSachTruyenHienTai);
         });
         pageInfo.appendChild(trang);
     }
@@ -156,7 +156,7 @@ function capNhatPhanTrang() {
         trangCuoi.textContent = tongSoTrang;
         trangCuoi.addEventListener('click', () => {
             trangHienTai = tongSoTrang;
-            hienThiBang(trangHienTai);
+            hienThiBang(trangHienTai, danhSachTruyenHienTai);
         });
         pageInfo.appendChild(trangCuoi);
     }
@@ -174,9 +174,9 @@ function searchComics() {
     const searchTerm = document.getElementById('searchInput').value.toLowerCase();
     const filteredTruyen = danhSachTruyen.filter(truyen => {
         return truyen.TenTruyen.toLowerCase().includes(searchTerm) ||
-               truyen.SoChuong.toString().includes(searchTerm) ||
-               truyen.DanhMuc.toLowerCase().includes(searchTerm)||
-               truyen.TacGia.toLowerCase().includes(searchTerm);})
+               truyen.DanhMuc.toLowerCase().includes(searchTerm) ||
+               truyen.Tacgia.toLowerCase().includes(searchTerm);
+    });
     hienThiBang(trangHienTai, filteredTruyen);
 }
 
@@ -188,16 +188,18 @@ document.addEventListener('DOMContentLoaded', () => {
         new HangTruyen('../image/thanhguom.png', 'Thanh gươm diệt quỷ', 'Action', 45, "Gotōge Koyoharu"),
         new HangTruyen('../image/Harry_Potter_và_Hòn_đá_phù_thủy_bìa_2003.jpeg', 'Harry Potter và Hòn đá Phù thủy', 'Dremy', 1, "J. K. Rowling"),
         new HangTruyen('../image/thanhguom.png', 'Thanh gươm diệt quỷ', 'Action', 45, "Gotōge Koyoharu"),
-        new HangTruyen('../image/Harry_Potter_và_Hòn_đá_phù_thủy_bìa_2003.jpeg', 'Harry Potter và Hòn đá Phù thủy', 'Dremy', 1, "J. K. Rowling"), new HangTruyen('../image/thanhguom.png', 'Thanh gươm diệt quỷ', 'Action', 45, "Gotōge Koyoharu"),
-        new HangTruyen('../image/Harry_Potter_và_Hòn_đá_phù_thủy_bìa_2003.jpeg', 'Harry Potter và Hòn đá Phù thủy', 'Dremy', 1, "J. K. Rowling"), new HangTruyen('../image/thanhguom.png', 'Thanh gươm diệt quỷ', 'Action', 45, "Gotōge Koyoharu"),
-        new HangTruyen('../image/Harry_Potter_và_Hòn_đá_phù_thủy_bìa_2003.jpeg', 'Harry Potter và Hòn đá Phù thủy', 'Dremy', 1, "J. K. Rowling"), new HangTruyen('../image/thanhguom.png', 'Thanh gươm diệt quỷ', 'Action', 45, "Gotōge Koyoharu"),
-        new HangTruyen('../image/Harry_Potter_và_Hòn_đá_phù_thủy_bìa_2003.jpeg', 'Harry Potter và Hòn đá Phù thủy', 'Dremy', 1, "J. K. Rowling"), new HangTruyen('../image/thanhguom.png', 'Thanh gươm diệt quỷ', 'Action', 45, "Gotōge Koyoharu"),
+        new HangTruyen('../image/Harry_Potter_và_Hòn_đá_phù_thủy_bìa_2003.jpeg', 'Harry Potter và Hòn đá Phù thủy', 'Dremy', 1, "J. K. Rowling"),
+        new HangTruyen('../image/thanhguom.png', 'Thanh gươm diệt quỷ', 'Action', 45, "Gotōge Koyoharu"),
+        new HangTruyen('../image/Harry_Potter_và_Hòn_đá_phù_thủy_bìa_2003.jpeg', 'Harry Potter và Hòn đá Phù thủy', 'Dremy', 1, "J. K. Rowling"),
+        new HangTruyen('../image/thanhguom.png', 'Thanh gươm diệt quỷ', 'Action', 45, "Gotōge Koyoharu"),
+        new HangTruyen('../image/Harry_Potter_và_Hòn_đá_phù_thủy_bìa_2003.jpeg', 'Harry Potter và Hòn đá Phù thủy', 'Dremy', 1, "J. K. Rowling"),
+        new HangTruyen('../image/thanhguom.png', 'Thanh gươm diệt quỷ', 'Action', 45, "Gotōge Koyoharu"),
+        new HangTruyen('../image/Harry_Potter_và_Hòn_đá_phù_thủy_bìa_2003.jpeg', 'Harry Potter và Hòn đá Phù thủy', 'Dremy', 1, "J. K. Rowling"),
         new HangTruyen('../image/thanhguom.png', 'Thanh gươm diệt quỷ', 'Action', 45, "Gotōge Koyoharu"),
         new HangTruyen('../image/thanhguom.png', 'Thanh gươm diệt quỷ', 'Action', 45, "Gotōge Koyoharu"),
         new HangTruyen('../image/thanhguom.png', 'Thanh gươm diệt quỷ', 'Action', 45, "Gotōge Koyoharu"),
         new HangTruyen('../image/thanhguom.png', 'Thanh gươm diệt quỷ', 'Action', 45, "Gotōge Koyoharu"),
         new HangTruyen('../image/thanhguom.png', 'Thanh gươm diệt quỷ', 'Action', 45, "Gotōge Koyoharu"),
-       
     ];
 
     hienThiBang(trangHienTai);
