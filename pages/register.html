@@ -16,15 +16,15 @@
         <form id="formRegister" style="width: 400px;" action="/register" method="POST">
             <h3 class="text-center">Đăng ký tài khoản</h3>
             <div class="mb-3">
-                <label for="userName" class="form-label">Họ và tên</label>
+                <label for="userName" class="form-label">Tên người dùng</label>
                 <input 
                 type="text" 
                 class="form-control" 
                 id="userName" 
                 name="userName"
-                placeholder="Nhập họ và tên"
+                placeholder="Abc123"
                 required>
-                <div id="userNameError" style="color: red; display: none;">*Bắt buộc.</div>
+                <div id="userNameError" style="color: red; display: none;">*Không hợp lệ.</div>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Địa chỉ email</label>
@@ -36,7 +36,7 @@
                 placeholder="Nhập địa chỉ email"
                 aria-describedby="email"
                 required>
-                <div id="emailError" class="form-text" style="color:red; display: none;">*Bắt buộc</div>
+                <div id="emailError" class="form-text" style="color:red; display: none;">*Không hợp lệ</div>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Nhập mật khẩu</label>
@@ -81,11 +81,27 @@
         document.getElementById("formRegister").addEventListener("submit", function(event) {
             const password = document.getElementById("password").value;
             const repassword = document.getElementById("repassword").value;
+            const userName = document.getElementById("userName").value;
+            const email = document.getElementById("email").value;
+
             const passwordError = document.getElementById("passwordError");
             const rePasswordError = document.getElementById("rePasswordError");
+            const emailError = document.getElementById("emailError");
+            const userNameError = document.getElementById("userNameError");
+
 
             passwordError.style.display = "none";
             rePasswordError.style.display = "none";
+            userNameError.style.display = "none";
+            emailError.style.display = "none";
+
+            const userPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]/;
+            if(!userPattern.test(userName)){
+                userNameError.style.display = "block";
+                event.preventDefault();
+                return;
+        
+            }
 
             const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
             if (!passwordPattern.test(password)) {
