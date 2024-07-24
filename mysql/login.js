@@ -46,3 +46,4 @@ app.post("/", encoder, function(req, res){
 app.listen(5500, function() {
     console.log("Server is running on port 5500");
 });
+
