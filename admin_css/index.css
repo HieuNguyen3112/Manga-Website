@@ -55,8 +55,8 @@ a{
 ::-webkit-scrollbar-thumb{
     background: var(--primary-color)
 }
-section{
-    padding: 3.125rem 0;
+section-title{
+     border-bottom:none;
 }
 .taikhoan{
     font-size: 1rem;
@@ -76,6 +76,7 @@ section{
     border-color: var(--secondary-color);
     color:var(--text-white);
 }
+
 .taikhoan {
     padding: 10px 15px;
     border: 2px solid transparent; /* Khung mặc định trong suốt */
@@ -111,6 +112,7 @@ h5{
     color:var(--primary-text);
     font-weight: 500;
     font-family: var(--secondary-font);
+    padding-bottom: 0.5rem;
 }
 h6{
 
@@ -137,6 +139,7 @@ margin-right: -35px;
 font-family: "Merriweather", serif;  ;
 border: 2px solid rgb(248,26,92);
 }
+/* tìm kiếm */
 .btn0{
     height: 40px;
     width: 40%;
@@ -148,7 +151,7 @@ border: 2px solid rgb(248,26,92);
 }
 /* style.css */
 
-/* Thêm đoạn này để chắc chắn rằng phần header có border-bottom */
+/* header có border-bottom */
 .header_wrapper {
     padding: .9375rem;
     background-color: var(--bg--white);
@@ -209,4 +212,55 @@ border: 2px solid rgb(248,26,92);
     100%{
         top:0;
     }
+}
+/* truyen */
+/* chỉnh mờ và size ảnh */
+.truyens_wrapper .truyen-items{
+     position: relative;
+    overflow: hidden;
+}
+.truyens_wrapper .truyen-items img{
+    width: 100%;
+    -webkit-transition:all 400ms ease-in-out 0s;    
+    transition:all 400ms ease-in-out 0s;
+}
+.truyens_wrapper .truyen-items:hover img{
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform:scale3d(1.05, 1.05, 1.05);
+}
+.truyens_wrapper .truyen-items::before{
+    content: '';
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color:  var(--bg-black);
+    opacity: 0;
+    z-index: 1;
+    transition: all 400ms ease-in-out 0s;   
+}
+.truyens_wrapper .truyen-items:hover::before{
+    opacity: 0.5;
+}
+.truyens_wrapper .truyen-item-wrap{
+    position: absolute;
+    left: 1.875rem;
+    right: 1.875rem;
+    top:50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+.truyens_wrapper .truyen-items .truyen-content{
+    border: .125rem solid var(--bg--white);
+    padding: 5rem 1.875rem;
+    transform:  scale3d(1.2,1.2, 1.2);
+    transition: all 500ms ease-in 0s;
+    opacity: 0;
+
+}
+.truyens_wrapper .truyen-items:hover .truyen-content{
+    opacity: 1;
+    transform: scale3d(1, 1 ,1);
+
 }
