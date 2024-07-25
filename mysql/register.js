@@ -1,3 +1,14 @@
+document.getElementById("showpassword").addEventListener("change", function() {
+    const password = document.getElementById("password");
+    const repassword = document.getElementById("repassword");
+    if (this.checked) {
+        password.type = "text";
+        repassword.type = "text";
+    } else {
+        password.type = "password";
+        repassword.type = "password";
+    }
+});
 const mysql = require('mysql');
 const express = require('express');
 const bodyParser = require('body-parser');
