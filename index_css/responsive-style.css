@@ -31,7 +31,21 @@
     }
 
 }
+.about_wrapper{
+    padding-top: 22.375rem;
 
+}
+
+/* truyện */
+.truyen-items .truyen-content{
+    padding: 2rem 1.875rem;
+}
+.truyen-items .truyen-content h5{
+    font-size: 1.2rem;
+}
+.truyen-items .truyen-content p{
+    font-size: 0.25rem;
+}
 
 @media (max-width:767px) {
     h1{
