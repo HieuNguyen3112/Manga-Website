@@ -27,7 +27,7 @@
 
 }
 .navbar-brand:hover{
-color:red
+color:red;
 }
 .nav-link{
     margin-right: 10px;
@@ -262,5 +262,140 @@ border: 2px solid rgb(248,26,92);
 .truyens_wrapper .truyen-items:hover .truyen-content{
     opacity: 1;
     transform: scale3d(1, 1 ,1);
-
 }
+.hot-item-wrap{
+    background-color: var(--bg-white);
+}
+.hot-item-area ul li a{
+    display: block;
+    margin-bottom: 2.8125rem;
+}
+.hot-item-area ul li a .hot-icon{
+    height: 5.625rem;
+    width: 5.625rem;
+    background-color: var(--secondary-color);   
+}
+.hot-menu-area ul li a .hot-icon:hover,
+.hot-menu-area ul li a.active .hot-icon{
+    background-color: var(--primary-color);
+    color: var(--text-white);
+    box-shadow: 0 .125rem rgb(34 30 31 /40% );
+}
+.hot-menu-area ul li:nth-child(1)
+{
+    margin-left: 0.5625rem;
+}
+.hot-menu-area ul li:nth-child(2){
+    margin-left: -6.375rem;
+}
+.hot_wrapper {
+    padding: 20px 0;
+}
+
+.section-title {
+    margin-bottom: 5px;
+}
+
+.hot-item-wrap .tab-content img {
+    width: 60%;
+    height: auto;
+}
+
+.hot-menu-area {
+    padding: 10px;
+}
+
+.hot-menu-area ul.nav {
+    list-style: none;
+    padding: 0;
+}
+
+.hot-menu-area ul.nav li {
+    margin-bottom: 10px;
+}
+
+.hot-menu-area ul.nav li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.hot-menu-area ul.nav li a .hot-icon {
+    margin-right: 10px;
+}
+
+.hot-menu-area ul.nav li a h5 {
+    margin: 0;
+}
+
+.hot-menu-area ul.nav li a p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+.section-title h5 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+/* mới ra mắt */
+.gallery_wrapper .mid-info{
+    background-color: var(--secondary-color);
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    padding: 1.25rem;
+    margin-bottom: -4.6875rem;
+    transition: all 0.3s ease-in-out;
+}
+.gallery_wrapper .card:hover .mid-info{
+    margin-bottom: 0;
+}
+.gallery_wrapper .mid-info h5,
+.gallery_wrapper .mid-info p
+{
+    color:var(--text-white);
+}
+.gallery_wrapper .mid-info .social-network{
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    padding: 1.25rem;
+    margin: 1.25rem -1.25rem -1.25rem;
+    background-color: var(--primary-color);
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+}
+.gallery_wrapper .mid-info .social-network li a{
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    display: block;
+    border-radius: 50%;
+    font-size: .9375rem;
+    color:var(--text-white);
+    border: 0.625rem solid var(--bg--white);   
+}
+.section-title {
+    margin-bottom: 2rem; /* Adjust margin to create more space between sections */
+}
+
+.gallery_wrapper .card {
+    margin-bottom: 1.5rem; /* Ensure there is space between the images and the next section */
+}
+
+.mid2_wrapper .mid2-item-content {
+    position: relative;
+    margin-top: 1rem; /* Ensure there is space between the image and the text */
+}
+
+.mid2_wrapper h5 {
+    margin-top: 1rem; /* Add margin-top to ensure text is not overlapping with previous images */
+}
+
+
+
