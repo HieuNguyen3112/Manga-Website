@@ -55,8 +55,8 @@ a{
 ::-webkit-scrollbar-thumb{
     background: var(--primary-color)
 }
-section-title{
-     border-bottom:none;
+section{
+    padding: 3.125rem 0;
 }
 .taikhoan{
     font-size: 1rem;
@@ -76,7 +76,6 @@ section-title{
     border-color: var(--secondary-color);
     color:var(--text-white);
 }
-
 .taikhoan {
     padding: 10px 15px;
     border: 2px solid transparent; /* Khung mặc định trong suốt */
@@ -112,7 +111,6 @@ h5{
     color:var(--primary-text);
     font-weight: 500;
     font-family: var(--secondary-font);
-    padding-bottom: 0.5rem;
 }
 h6{
 
@@ -139,7 +137,6 @@ margin-right: -35px;
 font-family: "Merriweather", serif;  ;
 border: 2px solid rgb(248,26,92);
 }
-/* tìm kiếm */
 .btn0{
     height: 40px;
     width: 40%;
@@ -151,7 +148,7 @@ border: 2px solid rgb(248,26,92);
 }
 /* style.css */
 
-/* header có border-bottom */
+/* Thêm đoạn này để chắc chắn rằng phần header có border-bottom */
 .header_wrapper {
     padding: .9375rem;
     background-color: var(--bg--white);
@@ -212,6 +209,7 @@ border: 2px solid rgb(248,26,92);
     100%{
         top:0;
     }
+<<<<<<< HEAD
 }
 /* truyen */
 /* chỉnh mờ và size ảnh */
@@ -399,3 +397,6 @@ border: 2px solid rgb(248,26,92);
 
 
 
+=======
+}
+>>>>>>> 02c21faeee0e0c6a97e827100e197681646ef617
