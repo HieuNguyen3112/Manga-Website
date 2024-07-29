@@ -38,3 +38,6 @@ app.listen(5500, ()=> {
     console.log("Server is running!");
 });
 
+
+//Json Web Token
+
