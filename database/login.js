@@ -34,7 +34,7 @@ app.use("/v1/user", userRoute);
 
 //Phân quyền
 
-app.listen(5500, ()=> {
+app.listen(8000, ()=> {
     console.log("Server is running!");
 });
 
