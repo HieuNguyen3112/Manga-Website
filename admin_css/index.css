@@ -209,7 +209,6 @@ border: 2px solid rgb(248,26,92);
     100%{
         top:0;
     }
-<<<<<<< HEAD
 }
 /* truyen */
 /* chỉnh mờ và size ảnh */
@@ -378,9 +377,8 @@ border: 2px solid rgb(248,26,92);
     color:var(--text-white);
     border: 0.625rem solid var(--bg--white);   
 }
-.section-title {
-    margin-bottom: 2rem; /* Adjust margin to create more space between sections */
-}
+ 
+/*mid2 */
 
 .gallery_wrapper .card {
     margin-bottom: 1.5rem; /* Ensure there is space between the images and the next section */
@@ -396,7 +394,3 @@ border: 2px solid rgb(248,26,92);
 }
 
 
-
-=======
-}
->>>>>>> 02c21faeee0e0c6a97e827100e197681646ef617
