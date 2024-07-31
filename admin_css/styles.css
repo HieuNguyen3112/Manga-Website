@@ -1,16 +1,63 @@
 /* Toàn bộ body */
 body {
-    font-family: 'Bookman', sans-serif;
+    font-family: '', sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
     height: 200vh;
-    background-color: #f4f4f4;
+    background-color: #f3f4f7;
 }
 
 /* Thanh bên (sidebar) */
+.sidebar ul li ul.submenu li a .fas {
+    display: inline-block;
+    width: 20px; /* Giảm kích thước biểu tượng tròn */
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #222630;
+    color: #fafbfb;
+    margin-right: 10px; /* Khoảng cách giữa biểu tượng và văn bản */
+}
+
+
+/* Ẩn con trỏ để dễ dàng nhấp vào các biểu tượng */
+.sidebar ul li ul.submenu li a {
+    display: flex;
+    align-items: center;
+    font-size: 15px; /* Thay đổi kích thước chữ nếu cần */
+}
+
+/* Đảm bảo rằng các biểu tượng tròn nhỏ không quá lớn */
+.sidebar ul li ul.submenu li a .fas.fa-circle {
+    font-size: 0.5rem; /* Giảm kích thước biểu tượng */
+}
+
+/* Thay đổi kích thước các biểu tượng trong thanh bên chính */
+.sidebar ul li a .fas {
+    font-size: 18px; 
+    margin-right: 0.1cm;      /* Kích thước biểu tượng chính */
+}
+
+/* Căn chỉnh khoảng cách giữa biểu tượng và văn bản */
+.sidebar ul li a {
+    
+    align-items: center;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    font-size: 18px; /* Kích thước chữ của liên kết */
+    margin-left: 15px;
+}
+
+/* Thay đổi kích thước biểu tượng trong các modal nếu cần */
+.modal-content .fas {
+    font-size: px; /* Kích thước biểu tượng trong modal */
+}
+
 .sidebar {
-    background-color: #910707;
+    background-color: #222630;
     color: #fff;
     width: 250px;
     padding: 20px;
@@ -18,11 +65,16 @@ body {
 }
 
 .sidebar h2 {
-    text-align: center;
-    margin-bottom: 100px;
+    text-align:start;
+    margin-bottom: 30px;
     font-size: 30px;
 }
-
+.sidebar h3 {
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
 .sidebar ul {
     list-style-type: none;
     padding: 0;
@@ -33,18 +85,53 @@ body {
 }
 
 .sidebar ul li a {
-    color: #fff;
+    color: #f3f4f7;
     text-decoration: none;
     display: block;
     padding: 10px;
-    border-radius: 4px;
     transition: background-color 0.3s;
 }
 
 .sidebar ul li a:hover {
-    background-color: #e60808;
+    background-color:#2b303c;
 }
 
+/* Submenu styling */
+.toggle-menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Thêm dòng này để căn chỉnh mũi tên bên phải */
+    cursor: pointer;
+}
+.submenu {
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.submenu li a {
+    background-color: #222630;
+}
+
+.submenu li a:hover {
+    background-color: #2b303c;
+}
+.arrow {
+    border: solid #f3f4f7;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    margin-left: 70px;
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
 /* Nội dung chính (main content) */
 .main-content {
     flex-grow: 1;
@@ -110,8 +197,8 @@ header h1 {
 
 /* Các loại thống kê khác */
 .stat-icon.book { color: #ff6f00; }
-.stat-icon.like { color: #f44336; }
-.stat-icon.eye { color: #2196f3; }
+.stat-icon.like { color: #da2013; }
+.stat-icon.eye { color: #0e6ab5; }
 .stat-icon.member { color: #0b07f2; }
 
 .stat-info h3 { margin: 0; }
@@ -320,3 +407,57 @@ html {
         background-color: #45a049; /* Darker green on hover */
     }
 
+/* Căn giữa nội dung của modal xóa */
+#deleteModal .modal-content {
+    text-align: center;
+}
+
+/* Khoảng cách dưới cho tiêu đề của modal xóa */
+#deleteModal .modal-content h2 {
+    margin-bottom: 20px;
+}
+
+/* Khoảng cách dưới và kích thước font cho đoạn văn bản trong modal xóa */
+#deleteModal .modal-content p {
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+/* Căn giữa nhóm các nút trong modal xóa */
+#deleteModal .modal-content .button-group {
+    display: flex;
+    justify-content: center;
+}
+
+/* Khoảng cách, padding, kích thước font và bo tròn cho các nút trong modal xóa */
+#deleteModal .modal-content .button-group button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Nút xác nhận xóa với nền màu đỏ và chữ màu trắng */
+#deleteModal .modal-content .button-group #confirmDelete {
+    background-color: #f44336; /* Nền màu đỏ */
+    color: white;
+    border: none;
+}
+
+/* Nút xác nhận xóa khi hover với nền màu đỏ đậm hơn */
+#deleteModal .modal-content .button-group #confirmDelete:hover {
+    background-color: #d32f2f; /* Nền màu đỏ đậm hơn khi hover */
+}
+
+/* Nút hủy với nền màu xám và chữ màu đen */
+#deleteModal .modal-content .button-group #cancelDelete {
+    background-color: #ccc; /* Nền màu xám */
+    color: black;
+    border: none;
+}
+
+/* Nút hủy khi hover với nền màu xám đậm hơn */
+#deleteModal .modal-content .button-group #cancelDelete:hover {
+    background-color: #b0b0b0; /* Nền màu xám đậm hơn khi hover */
+} 

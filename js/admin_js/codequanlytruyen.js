@@ -52,7 +52,11 @@ class HangTruyen {
         const editButton = this.taoNut('edit', 'Chỉnh sửa');
         editButton.addEventListener('click', () => this.moChinhSua());
         cellHanhDong.appendChild(editButton);
-        cellHanhDong.appendChild(this.taoNut('trash-alt', 'Xóa'));
+
+        const deleteButton = this.taoNut('trash-alt', 'Xóa');
+        deleteButton.addEventListener('click', () => this.moXoa());
+        cellHanhDong.appendChild(deleteButton);
+        
         cellHanhDong.appendChild(this.taoNut('eye', 'Xem'));
         Hang.appendChild(cellHanhDong);
 
@@ -80,7 +84,32 @@ class HangTruyen {
             modal.style.display = 'none';
         };
     }
+    moXoa() {
+        const deleteModal = document.getElementById('deleteModal');
+        deleteModal.style.display = 'block';
+
+        document.getElementById('confirmDelete').onclick = () => {
+            danhSachTruyen = danhSachTruyen.filter(truyen => truyen !== this);
+            hienThiBang(trangHienTai);
+            deleteModal.style.display = 'none';
+        };
+
+        document.getElementById('cancelDelete').onclick = () => {
+            deleteModal.style.display = 'none';
+        };
+
+        document.getElementById('closeDeleteModal').onclick = () => {
+            deleteModal.style.display = 'none';
+        };
+
+        window.onclick = (event) => {
+            if (event.target == deleteModal) {
+                deleteModal.style.display = 'none';
+            }
+        };
+    }
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('editModal');
