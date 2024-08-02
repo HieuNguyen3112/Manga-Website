@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEOW MEOW </title>
+    <!-- fontawesome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- bootstrap css -->
+    <link rel = "stylesheet" href = "bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <!-- custom css -->
+    <link rel = "stylesheet" href = "./admin_css/main.css">
+    <head>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </head>
+    
+</head>
+<body>
+    
+    <!-- navbar -->
+    <nav class = "navbar navbar-expand-lg navbar-light bg-white py-4 fixed-top">
+        <div class = "container">
+            <a class = "navbar-brand d-flex justify-content-between align-items-center order-lg-0" href = "Trang_truyen.html">
+                <img src = "image/logo-am-ban.jpg" alt = "site icon">
+                <span class = "text-uppercase fw-lighter ms-2">Meow</span>
+            </a>
+
+            <div class = "order-lg-2 nav-btns">
+                <button type = "button" class = "btn position-relative">
+                    <div class="user-account-box">
+                    <i class="fa-regular fa-user text-danger"></i>
+                 <span> Tài khoản</span>
+                </div>
+                </button>
+                <button type = "button" class = "btn position-relative">
+                    <i class = "fa fa-heart "></i>
+                    <span class = "position-absolute top-0 start-100 translate-middle badge bg-primary">2</span>
+                </button>
+                <button type = "button" class = "btn position-relative">
+                    <i class = "fa fa-search"></i>
+                </button>
+            </div>
+
+            <button class = "navbar-toggler border-0" type = "button" data-bs-toggle = "collapse" data-bs-target = "#navMenu">
+                <span class = "navbar-toggler-icon"></span>
+            </button>
+
+            <div class = "collapse navbar-collapse order-lg-1" id = "navMenu">
+                <ul class = "navbar-nav mx-auto text-center">
+                    <li class = "nav-item px-2 py-2">
+                        <a class = "nav-link text-uppercase text-dark" href = "#header">Trang chủ</a>
+                    </li>
+                    <li class = "nav-item px-2 py-2">
+                        <a class = "nav-link text-uppercase text-dark" href = "#collection">Mới ra mắt</a>
+                    </li>
+                    <li class = "nav-item px-2 py-2">
+                        <a class = "nav-link text-uppercase text-dark" href = "#special">Yêu thích</a>
+                    </li>
+                    <li class = "nav-item px-2 py-2">
+                        <a class = "nav-link text-uppercase text-dark" href = "#blogs">Truyện chữ</a>
+                    </li>
+                    <li class="nav-item dropdown px-2 py-2">
+                        <a class="nav-link dropdown-toggle text-uppercase text-dark" href="#" id="theloaiDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Thể loại 
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="theloaiDropdown">
+                            <li><a class="dropdown-item" href="#theloai1">Thể loại 1</a></li>
+                            <li><a class="dropdown-item" href="#theloai2">Thể loại 2</a></li>
+                            <li><a class="dropdown-item" href="#theloai3">Thể loại 3</a></li>
+                            <li><a class="dropdown-item" href="#theloai4">Thể loại 4</a></li>
+                            <!-- Thêm các thể loại khác ở đây -->
+                        </ul>
+                        
+                    </li>
+                    
+                    <li class = "nav-item px-2 py-2 border-0">
+                        <a class = "nav-link text-uppercase text-dark" href = "#popular">Thống kê </a>
+                    </li>
+                   
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- end of navbar -->
+
+    <!-- header -->
+
+    <!-- collection -->
+    <section id = "collection" class = "py-5">
+        <div class = "container">
+            <div class = "title text-center">
+                <h2 class = "position-relative d-inline-block">New Collection</h2>
+            </div>
+
+            <div class = "row g-0">
+                <div class = "d-flex flex-wrap justify-content-center mt-5 filter-button-group">
+                    <button type = "button" class = "btn m-2 text-dark active-filter-btn" data-filter = "*">Tất cả</button>
+                    <button type = "button" class = "btn m-2 text-dark" data-filter = ".best">Tuyện hot</button>
+                    <button type = "button" class = "btn m-2 text-dark" data-filter = ".feat">Nhiều người đọc</button>
+                    <button type = "button" class = "btn m-2 text-dark" data-filter = ".new">Mới ra mắt</button>
+                </div>
+
+                <div class = "collection-list mt-4 row gx-0 gy-3">
+                    <div class = "col-md-6 col-lg-4 col-xl-3 p-2 best">
+                        <div class = "collection-img position-relative">
+                            <img src = "image/HARRY-7.jpg" class="w-100 img-fluid custom-img">
+                             <span class = "position-absolute bg-primary text-white d-flex align-items-center justify-content-center">Hot</span>
+                          <!--  <span class = "position-absolute bg-primary text-white d-flex align-items-center justify-content-center"></span> -->
+                        </div>
+                        <div class = "text-center">
+                            <div class = "rating mt-3">
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-capitalize fw-bold">My hero academia</p>
+                                <span class="fw-bold d-block">
+                                    <a href="#" class="btn btn-primary mt-3">Đọc ngay</a>
+                                    <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class = "col-md-6 col-lg-4 col-xl-3 p-2 feat">
+                        <div class = "collection-img position-relative">
+                            <img src = "image/Jujutsu.png" class="w-100 img-fluid custom-img">
+                            <span class = "position-absolute bg-primary text-white d-flex align-items-center justify-content-center">Hot</span>
+                        </div>
+                        <div class = "text-center">
+                            <div class = "rating mt-3">
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-capitalize fw-bold">My hero academia</p>
+                                <span class="fw-bold d-block">
+                                    <a href="#" class="btn btn-primary mt-3">Đọc ngay</a>
+                                    <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class = "col-md-6 col-lg-4 col-xl-3 p-2 new">
+                        <div class = "collection-img position-relative">
+                            <img src = "image/one-piece2.jpg" class="w-100 img-fluid custom-img">
+                            <span class = "position-absolute bg-primary text-white d-flex align-items-center justify-content-center">New</span>
+                        </div>
+                        <div class = "text-center">
+                            <div class = "rating mt-3">
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class="fa-solid fa-star-half-stroke"></i></span>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-capitalize fw-bold">My hero academia</p>
+                                <span class="fw-bold d-block">
+                                    <a href="#" class="btn btn-primary mt-3">Đọc ngay</a>
+                                    <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class = "col-md-6 col-lg-4 col-xl-3 p-2 best">
+                        <div class = "collection-img position-relative">
+                            <img src = "image/uzumaki-boruto.jpg" class="w-100 img-fluid custom-img">
+                            <span class = "position-absolute bg-primary text-white d-flex align-items-center justify-content-center">Hot</span>
+                        </div>
+                        <div class = "text-center">
+                            <div class = "rating mt-3">
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-capitalize fw-bold">My hero academia</p>
+                                <span class="fw-bold d-block">
+                                    <a href="#" class="btn btn-primary mt-3">Đọc ngay</a>
+                                    <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class = "col-md-6 col-lg-4 col-xl-3 p-2 feat">
+                        <div class = "collection-img position-relative">
+                            <img src = "image/hoc-vien-anh-hung.jpg" class="w-100 img-fluid custom-img">
+                        </div>
+                        <div class = "text-center">
+                            <div class = "rating mt-3">
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class="fa-solid fa-star-half-stroke"></i></span>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-capitalize fw-bold">My hero academia</p>
+                                <span class="fw-bold d-block">
+                                    <a href="#" class="btn btn-primary mt-3">Đọc ngay</a>
+                                    <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class = "col-md-6 col-lg-4 col-xl-3 p-2 new">
+                        <div class = "collection-img position-relative">
+                            <img src = "image/Black-Clover-S3_Viu-Slide-Banner.jpg" class="w-100 img-fluid custom-img">
+                            <span class = "position-absolute bg-primary text-white d-flex align-items-center justify-content-center">New</span>
+                        </div>
+                        <div class = "text-center">
+                            <div class = "rating mt-3">
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class="fa-solid fa-star-half-stroke"></i></span>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-capitalize fw-bold">My hero academia</p>
+                                <span class="fw-bold d-block">
+                                    <a href="#" class="btn btn-primary mt-3">Đọc ngay</a>
+                                    <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class = "col-md-6 col-lg-4 col-xl-3 p-2 best">
+                        <div class = "collection-img position-relative">
+                            <img src = "image/One punch.webp" class="w-100 img-fluid custom-img">
+                            <span class = "position-absolute bg-primary text-white d-flex align-items-center justify-content-center">Hot</span>
+                        </div>
+                        <div class = "text-center">
+                            <div class = "rating mt-3">
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-capitalize fw-bold">My hero academia</p>
+                                <span class="fw-bold d-block">
+                                    <a href="#" class="btn btn-primary mt-3">Đọc ngay</a>
+                                    <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class = "col-md-6 col-lg-4 col-xl-3 p-2 feat">
+                        <div class = "collection-img position-relative">
+                            <img src = "image/Connan.jpg" class="w-100 img-fluid custom-img">
+                        </div>
+                        <div class = "text-center">
+                            <div class = "rating mt-3">
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                                <span class = "text-primary"><i class = "fas fa-star"></i></span>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-capitalize fw-bold">My hero academia</p>
+                                <span class="fw-bold d-block">
+                                    <a href="#" class="btn btn-primary mt-3">Đọc ngay</a>
+                                    <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end of HEADER-->
+
+    <!-- special SP-->
+    <section id = "special" class = "py-5">
+        <div class = "container">
+            <div class = "title text-center py-5">
+                <h2 class = "position-relative d-inline-block">Yêu thích của bạn</h2>
+            </div>
+
+            <div class = "special-list row g-0">
+                <div class = "col-md-6 col-lg-4 col-xl-3 p-2">
+                    <div class = "special-img position-relative overflow-hidden">
+                        <img src = "image/bleach.webp"  class="w-100 img-fluid heart-img">
+                        <span class = "position-absolute d-flex align-items-center justify-content-center text-primary fs-4">
+                            <i class = "fas fa-heart"></i>
+                        </span>
+                    </div>
+                    <div class = "text-center">
+                        <p class = "text-capitalize mt-3 mb-1">Phát hành: 2020</p>
+                        <span class = "fw-bold d-block">Bleach</span>
+                        <a href = "#" class = "btn btn-primary mt-3">Đọc ngay   </a>
+                    </div>
+                </div>
+
+                <div class = "col-md-6 col-lg-4 col-xl-3 p-2">
+                    <div class = "special-img position-relative overflow-hidden">
+                        <img src = "image/Doraemon.webp"  class="w-100 img-fluid heart-img">
+                        <span class = "position-absolute d-flex align-items-center justify-content-center text-primary fs-4">
+                            <i class = "fas fa-heart"></i>
+                        </span>
+                    </div>
+                    <div class = "text-center">
+                        <p class = "text-capitalize mt-3 mb-1">Phát hành:</p>
+                        <span class = "fw-bold d-block">Doraemon</span>
+                        <a href = "#" class = "btn btn-primary mt-3">Đọc ngay </a>
+                    </div>
+                </div>
+
+                <div class = "col-md-6 col-lg-4 col-xl-3 p-2">
+                    <div class = "special-img position-relative overflow-hidden">
+                        <img src = "image/Tokyo Ghoul.jpg" class="w-100 img-fluid heart-img">
+                        <span class = "position-absolute d-flex align-items-center justify-content-center text-primary fs-4">
+                            <i class = "fas fa-heart"></i>
+                        </span>
+                    </div>
+                    <div class = "text-center">
+                        <p class = "text-capitalize mt-3 mb-1">Phát hành</p>
+                        <span class = "fw-bold d-block">Tokyo Ghoul</span>
+                        <a href = "#" class = "btn btn-primary mt-3">Đọc ngay </a>
+                    </div>
+                </div>
+
+                <div class = "col-md-6 col-lg-4 col-xl-3 p-2">
+                    <div class = "special-img position-relative overflow-hidden">
+                        <img src = "image/AKame.jpg"  class="w-100 img-fluid heart-img">
+                        <span class = "position-absolute d-flex align-items-center justify-content-center text-primary fs-4">
+                            <i class = "fas fa-heart"></i>
+                        </span>
+                    </div>
+                    <div class = "text-center">
+                        <p class = "text-capitalize mt-3 mb-1">gaaa</p>
+                        <span class = "fw-bold d-block">Akame</span>
+                        <a href = "#" class = "btn btn-primary mt-3">Đọc ngay </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end of special products -->
+
+    <!-- SP CỦA NĂM -->
+    <section id = "offers" class = "py-5">
+        <div class = "container">
+            <div class = "row d-flex align-items-center justify-content-center text-center justify-content-lg-start text-lg-start">
+                <div class = "offers-content">
+                    <span class = "text-white">Ra mắt ngày 1/1/1999</span>
+                    <h2 class = "mt-2 mb-4 text-white">Siêu phẩm sắp ra mắt</h2>
+                    <h2 class = "mt-2 mb-4 text-danger">Kimetsu No Yaiba</h2>
+                    <a href = "#" class = "btn">Thêm vào yêu thích</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end of blogs -->
+
+    <!-- TRUYỆN CHỮ-->
+    <section id = "blogs" class = "py-5">
+        <div class = "container">
+            <div class = "title text-center py-5">
+                <h2 class = "position-relative d-inline-block">Truyện chữ</h2>
+            </div>
+
+            <div class = "row g-3">
+                <div class = "card border-0 col-md-6 col-lg-4 bg-transparent my-3">
+                    <img src = "image/Farry.jpg" alt = "" class="truyenchu-img">
+                    <div class = "card-body px-0">
+                        <h4 class = "card-title">Fairy Tail-Hội pháp sư</h4>
+                        <p class = "card-text mt-3 text-muted">Được tác giả: <span class = "fw-bold">Mashima Hiro </span> cho đăng tải vào ngày 2 tháng 8 năm 2006. Truyện kể về Natsu Dragneel (một pháp sư Sát Long Nhân của hội Fairy Tail) khám phá Vương quốc Fiore để tìm kiếm người cha nuôi mất tích của mình là rồng Igneel.</p>
+                        <p class = "card-text">
+                            <small class = "text-muted">
+                                <span class = "fw-bold">Tác giả: </span>Mashima Hiro
+                            </small>
+                        </p>
+                        <a href = "#" class = "btn">Thêm vào yêu thích</a>
+                    </div>
+                </div>
+
+                <div class = "card border-0 col-md-6 col-lg-4 bg-transparent my-3">
+                    <img src = "image/Vua đầu bếp.webp" alt = "" class="truyenchu-img">
+                    <div class = "card-body px-0">
+                        <h4 class = "card-title">Shokugeki no Soma-Vua đầu bếp</h4>
+                        <p class = "card-text mt-3 text-muted">Được tác giả: <span class = "fw-bold">Yūto Tsukuda </span>cho đăng tải vào ngày 26 tháng 11 năm 2012.Truyện kể câu chuyện về một chàng trai tên là Yukihira Sōma, người mơ ước trở thành một đầu bếp chuyên nghiệp trong nhà hàng của bố mình và vượt qua kỹ năng nấu nướng của bố.</p>
+                        <p class = "card-text">
+                            <small class = "text-muted">
+                                <span class = "fw-bold">Tác giả: </span> Yūto Tsukuda 
+                            </small>
+                        </p>
+                        <a href = "#" class = "btn">Thêm vào yêu thích</a>
+                    </div>
+                </div>
+
+                <div class = "card border-0 col-md-6 col-lg-4 bg-transparent my-3">
+                    <img src = "image/Naru.jpg" alt = "" class="truyenchu-img">
+                    <div class = "card-body px-0">
+                        <h4 class = "card-title">Naruto</h4>
+                        <p class = "card-text mt-3 text-muted">Được tác giả: <span class = "fw-bold">Kishimoto Masashi </span>cho đăng tải vào tháng 11 năm 1999.Truyện lấy bối cảnh từ sự việc xảy ra vào mười hai năm trước, con Hồ Ly Chín Đuôi (Kyuubi-Kurama) đã tấn công Làng Lá  (Mộc Diệp Ẩn Lý) Konohagakure / Konohagakure no Sato?. </p>
+                        <p class = "card-text">
+                            <small class = "text-muted">
+                                <span class = "fw-bold">Author: </span>Kishimoto Masashi
+                            </small>
+                        </p>
+                        <a href = "#" class = "btn">Thêm vào yêu thích</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end Truyện -->
+
+    <!-- SP chạy nhất năm -->
+    <section id = "about" class = "py-5">
+        <div class = "container">
+            <div class = "row gy-lg-5 align-items-center">
+                <div class = "col-lg-6 order-lg-1 text-center text-lg-start">
+                    <div class = "title pt-3 pb-5">
+                        <h2 class = "position-relative d-inline-block ms-4">Truyện được đọc nhiều nhất trong năm qua</h2>
+                    </div>
+                    <p class = "lead text-danger">Oshi no Ko - Dưới Ánh Hào Quang. </p>
+                    <span class = "fw-bold">Author: </span>	Akasaka Aka
+                    <p>Oshi no Ko[a] ( "Đứa trẻ tôi yêu mến" hoặc "Đứa con của thần tượng". ) 
+                        là một bộ manga Nhật Bản được viết cốt truyện bởi Akasaka Aka (tác giả của Kaguya-sama) và minh họa bởi
+                         Yokoyari Mengo (tác giả của Kuzu no Honkai). 
+                         Oshi no Ko được phát hành trên tạp chí Tuần san Young Jump của nhà xuất bản Shueisha từ tháng 4 năm 2020 
+                         và các chương của nó được tập hợp trong 15 tập tankōbon đến tháng 7 năm 2024.</p>
+                </div>
+                <div class = "col-lg-6 order-lg-0">
+                    <img src = "image/oshi_no_ko_5_-_bia_1_e40a704a717d45758be933029d6a79a9_master.webp" alt = "" class = "SPCHAY-img">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end TRUYỆN của năm  -->
+
+
+    <!-- Thống kê -->
+    <section id = "popular" class = "py-5">
+        <div class = "container">
+            <div class = "title text-center pt-3 pb-5">
+                <h2 class = "position-relative d-inline-block ms-4">Thống kê của năm</h2>
+            </div>
+
+            <div class = "row">
+                <div class = "col-md-6 col-lg-4 row g-3">
+                    <h3 class = "fs-5">Top tuần</h3>
+                    <div class = "d-flex align-items-start justify-content-start">
+                        <img src = "image/One punch.webp" alt = "" class = "thongke-img">
+                        <div>
+                            <p class = "mb-0">One Punch Man</p>
+                            <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
+                        </div>
+                    </div>
+                    <div class = "d-flex align-items-start justify-content-start">
+                        <img src = "image/one-piece2.jpg" alt = "" class = "thongke-img">
+                        <div>
+                            <p class = "mb-0">One Piece</p>
+                            <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
+                        </div>
+                    </div>
+                    <div class = "d-flex align-items-start justify-content-start">
+                        <img src = "image/Doraemon.webp" alt = "" class = "thongke-img">
+                        <div>
+                            <p class = "mb-0">Doraemon</p>
+                            <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class = "col-md-6 col-lg-4 row g-3">
+                    <h3 class = "fs-5">Top tháng</h3>
+                    <div class = "d-flex align-items-start justify-content-start">
+                        <img src = "image/one-piece2.jpg" alt = "" class = "thongke-img">
+                        <div>
+                            <p class = "mb-0">One Piece</p>
+                            <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
+                        </div>
+                    </div>
+                    <div class = "d-flex align-items-start justify-content-start">
+                        <img src = "image/SWORD.jpg" alt = "" class = "thongke-img">
+                        <div>
+                            <p class = "mb-0">Sword Art Online</p>
+                            <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
+                        </div>
+                    </div>
+                    <div class = "d-flex align-items-start justify-content-start">
+                        <img src = "image/Connan.jpg" alt = "" class = "thongke-img">
+                        <div>
+                            <p class = "mb-0">Connan</p>
+                            <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class = "col-md-6 col-lg-4 row g-3">
+                    <h3 class = "fs-5">Top năm</h3>
+                    <div class = "d-flex align-items-start justify-content-start">
+                        <img src = "image/one-piece2.jpg" alt = "" class = "thongke-img">
+                        <div>
+                            <p class = "mb-0">One Piece</p>
+                            <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
+                        </div>
+                    </div>
+                    <div class = "d-flex align-items-start justify-content-start">
+                        <img src = "image/Farry.jpg" alt = "" class = "thongke-img">
+                        <div>
+                            <p class = "mb-0">Fairy Tail</p>
+                            <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
+                        </div>
+                    </div>
+                    <div class = "d-flex align-items-start justify-content-start">
+                        <img src = "image/oshi_no_ko_5_-_bia_1_e40a704a717d45758be933029d6a79a9_master.webp" alt = "" class = "thongke-img">
+                        <div>
+                            <p class = "mb-0">Oshi no Ko</p>
+                            <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end THống kê -->
+
+
+    <!-- MEOW MEOW -->
+    <section id = "meow" class = "py-5">
+        <div class = "container">
+            <div class = "d-flex flex-column align-items-center justify-content-center">
+                <div class = "title text-center pt-3 pb-5">
+                    <h2 class = "position-relative d-inline-block ms-4">MEOW MEOW</h2>
+                </div>
+
+                <p class = "text-center text-muted">Chào mừng mọi người đến với web truyện của MEOW MEOW.
+                     Nếu mọi người có yêu quý thì hãy ủng hộ bằng cách đăng kí web của bọn mình nha!!!</p>
+                <div class = "input-group mb-3 mt-3">
+                    <input type = "text" class = "form-control" placeholder="Số điện thoại hoặc email...">
+                    <button class = "btn btn-primary" type = "submit">Subscribe</button>
+                </div>
+            </div>
+        </div>  
+    </section>
+    <!-- end MEOW MEOW -->
+
+
+    <!-- footer -->
+    <footer class = "bg-dark py-5">
+        <div class = "container">
+            <div class = "row text-white g-4">
+                <div class = "col-md-6 col-lg-3">
+                    <a class = "text-uppercase text-decoration-none brand text-white" href = "index.html">Meow</a>
+                    <p class = "text-white text-muted mt-3">Chào mừng mọi người đến với web truyện của MEOW MEOW. Nếu có gì thắc mắc thì xin hãy liên hệ ở đây.</p>
+                    <a href = "#" class = "btn-note">Đóng góp ý kiến</a>
+                </div>
+
+                <div class = "col-md-6 col-lg-3">
+                    <h5 class = "fw-light">Links</h5>
+                    <ul class = "list-unstyled">
+                        <li class = "my-3">
+                            <a href = "#" class = "text-white text-decoration-none text-muted">
+                                <i class = "fas fa-chevron-right me-1"></i>Trang chủ
+                            </a>
+                        </li>
+                        <li class = "my-3">
+                            <a href = "#" class = "text-white text-decoration-none text-muted">
+                                <i class = "fas fa-chevron-right me-1"></i> Mới ra mắt
+                            </a>
+                        </li>
+                        <li class = "my-3">
+                            <a href = "#" class = "text-white text-decoration-none text-muted">
+                                <i class = "fas fa-chevron-right me-1"></i> Yêu thích
+                            </a>
+                        </li>
+                        <li class = "my-3">
+                            <a href = "#" class = "text-white text-decoration-none text-muted">
+                                <i class = "fas fa-chevron-right me-1"></i> Thống kê
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class = "col-md-6 col-lg-3">
+                    <h5 class = "fw-light mb-3">Địa chỉ</h5>
+                    <div class = "d-flex justify-content-start align-items-start my-2 text-muted">
+                        <span class = "me-3">
+                            <i class = "fas fa-map-marked-alt"></i>
+                        </span>
+                        <span class = "fw-light">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.650665616816!2d106.67959617480462!3d10.76138318938645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b8a072901%3A0x2fb4502ebd044212!2zxJDhuqFpIEjhu41jIFPGsCBQaOG6oW0gVHAuSENNIENTMQ!5e0!3m2!1svi!2s!4v1722180039624!5m2!1svi!2s"
+                             width="250" height="200" style="border:0;" allowfullscreen="" 
+                             loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </span>
+                    </div>
+
+                    <div class="d-flex justify-content-start align-items-start my-2 text-muted">
+                        <span class="me-3">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        <span class="fw-light">
+                            <p><a href="mailto:buiquochuy08122003@gmail.com" 
+                                class="text-secondary">buiquochuy08122003@gmail.com</a></p>
+                        </span>
+                    </div>
+                    
+
+                    <div class = "d-flex justify-content-start align-items-start my-2 text-muted">
+                        <span class = "me-3">
+                            <i class = "fas fa-phone-alt"></i>
+                        </span>
+                        <span class = "fw-light  ">
+                            <p> <a href="tel:"
+                                class="text-secondary"> 0822097983</a></p>  
+                        </span>
+                    </div>
+                </div>
+
+                <div class = "col-md-6 col-lg-3">
+                    <h5 class = "fw-light mb-3">Liên hệ</h5>
+                    <div>
+                        <ul class="list-unstyled row">
+                            <li class="col-3 mb-3 text-center">
+                                <a href="https://www.facebook.com/bity0984549118" class="text-white text-decoration-none text-muted fs-4 d-flex flex-column align-items-center">
+                                    <i class="fab fa-facebook"></i> 
+                                    <span class="custom-small-text">Quốc Huy</span>
+                                </a>
+                            </li>
+                            <li class="col-3 mb-3 text-center">
+                                <a href="https://www.facebook.com/profile.php?id=100059127823057" class="text-white text-decoration-none text-muted fs-4 d-flex flex-column align-items-center">
+                                    <i class="fab fa-facebook"></i> 
+                                    <span class="custom-small-text">Nguyễn Minh Hiếu</span>
+                                </a>
+                            </li>
+                            <li class="col-3 mb-3 text-center">
+                                <a href="https://www.facebook.com/danghuynhkhanhdoan974" class="text-white text-decoration-none text-muted fs-4 d-flex flex-column align-items-center">
+                                    <i class="fab fa-facebook"></i> 
+                                    <span class="custom-small-text">Đàng Huỳnh Khánh Đoan</span>
+                                </a>
+                            </li>
+                            <li class="col-3 mb-3 text-center">
+                                <a href="https://www.facebook.com/profile.php?id=100034309667088" class="text-white text-decoration-none text-muted fs-4 d-flex flex-column align-items-center">
+                                    <i class="fab fa-facebook"></i> 
+                                    <span class="custom-small-text">Nguyễn Quang Vinh</span>
+                                </a>
+                            </li>
+                        </ul>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- end of footer -->
+
+
+
+
+    <!-- jquery -->
+    <script src = "js/jquery-3.6.0.js"></script>
+    <!-- isotope js -->
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+    <!-- bootstrap js -->
+    <script src = "bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
+    <!-- custom js -->
+    <script src = "js/script1.js"></script>
+</body>
+</html>
