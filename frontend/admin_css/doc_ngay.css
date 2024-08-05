@@ -1,0 +1,536 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+.body {
+    font-family: sans-serif;
+    background-color: #8e3939;
+
+  }
+.contain-main {
+  background-color: rgb(233, 225, 225);
+  margin-top: 0;
+  padding-top: 0;
+  /* display: flex;
+  flex-direction: column;  */
+  
+}
+
+.contain-main {
+  position: relative;
+  top: 0;
+  z-index: 0;
+}
+.container-flex {
+    max-width: 80%;
+    margin: auto;
+   max-height:100vh;
+    margin-top: 105px;
+    background: rgb(255, 255, 255);
+    box-shadow: 5px 5px 10px 3px rgba(0, 0, 0, 0.3);
+    display: flex; /* Thêm flex để canh giữa nội dung trong container */
+    align-items: center; /* Canh giữa theo chiều dọc */
+    justify-content: center; /* Canh giữa theo chiều ngang */
+  }
+.list-info {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+.name{
+  font-weight: bold;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.row {
+  display: flex;
+  align-items: flex-start; /* Căn chỉnh phần tử con theo đầu */
+  margin-bottom: 10px;
+}
+.col-xs-3 {
+  width: 30%;
+  font-size: 16px; /* Tăng kích thước chữ cho nhãn */
+  min-width: 100px; /* Đặt chiều rộng tối thiểu */
+  max-width: 30%;
+}
+.col-xs-9 {
+  width: 70%;
+  font-size: 16px; 
+  overflow: hidden; 
+  word-wrap: break-word;
+  margin: 0; 
+}
+/* LINE */
+.divider {
+  border: none; 
+  border-top: 1px solid #100f0f; /*  line */
+  margin: 20px 0; 
+}
+
+/* read, tim, like */
+.story-detail-menu {
+  list-style-type: none; 
+  padding: 0;
+  margin: 0;
+  display: flex; 
+  gap: 10px; /* Khoảng cách giữa các phần tử */
+}
+
+.story-detail-menu li {
+  display: inline-block;
+}
+
+.story-detail-menu .button {
+  display: block;
+  padding: 10px 20px;
+  text-align: center;
+  color: #fff; /* Màu chữ */
+  /* background-color: #d9534f; 
+  border: 2px solid #d9534f;  */
+  border-radius: 5px; /* Bo tròn góc */
+  text-decoration: none;
+  font-size: 16px; 
+}
+
+.story-detail-menu .green-button:hover {
+  background-color: #61e8a7; /*  nền  */  
+  border-color: #ececec; /* Màu viền  */
+}
+.green-button {
+  background-color: #28a745; /* Màu xanh lá cây */
+  color: #fff; /* Màu chữ trắng */
+  border: none;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.red-button {
+  background-color: #dc2760; 
+  color: #fff; /* Màu chữ trắng */
+  border: none;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+.story-detail-menu .red-button:hover {
+  background-color: #be6c8d; /*  nền  */  
+  border-color: #ececec; /* Màu viền  */
+}
+.purple-button {
+  background-color: #620565; 
+  color: #fff; /* Màu chữ trắng */
+  border: none;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+.story-detail-menu .purple-button:hover {
+  background-color: #854577; /*  nền  */  
+  border-color: #ececec; /* Màu viền  */
+}
+.story-detail-menu .button i {
+  margin-right: 5px; 
+}
+
+.title-fluid {
+text-align: center;
+}
+
+.right {
+  flex: 1;
+  margin-right: 20px;
+}
+  .left, .right {
+    width: 50%;
+    padding: 30px;
+  }
+  
+  .flex {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .flex1 {
+    display: flex;  
+  }
+  
+  .main_image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-top: 0px;
+  }
+  
+.label {
+    display: inline-block;
+    width: 80px; /* Đặt chiều rộng cố định cho nhãn */
+    text-align: left; /* Canh trái nhãn */
+}
+.tac-gia {
+   margin-left: 5cm;
+   display: inline-block;
+}
+  .slide {
+    width: auto; /* Đặt chiều rộng tự động */
+    height: 500px; /* Chiều cao tối đa chiếm toàn bộ chiều cao của phần tử cha */
+    max-height: 100%;  /* Đảm bảo không vượt quá chiều cao của phần tử cha */
+    object-fit: contain; /* Hiển thị toàn bộ ảnh mà không bị cắt */
+  }
+  
+
+/* GIOI THIEU */
+
+  .option img {
+    width: 75px;
+    height: 75px;
+    padding: 10px;
+  }
+  
+  .right {
+    padding: 50px 100px 50px 50px;
+    margin-top: 50px;
+  }
+  
+  h3 {
+    color: #af827d;
+    margin: 20px 0;
+    font-size: 25px;
+  }
+  
+  h5,
+  p,
+  small {
+    color: #837D7C;
+  }
+  
+  h4 {
+    color: red;
+  }
+  
+  p {
+    margin: 20px 0 50px 0;
+    line-height: 25px;
+  }
+  
+  h5 {
+    font-size: 15px;
+  }
+  
+  label,
+  .add span,
+  .color span {
+    width: 25px;
+    height: 25px;
+    background: #000;
+    border-radius: 50%;
+    margin: 20px 10px 20px 0;
+  }
+
+  .add label,
+  .add span {
+    background: none;
+    border: 1px solid #C1908B;
+    color: #C1908B;
+    text-align: center;
+    line-height: 25px;
+  }
+  
+  .add label {
+    padding: 10px 30px 0 20px;
+    border-radius: 50px;
+    line-height: 0;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background: #C1908B;
+    color: white;
+    margin-top: 20%;
+    border-radius: 30px;
+  }
+  
+  @media only screen and (max-width:768px) {
+    .container {
+      max-width: 90%;
+      margin: auto;
+      height: auto;
+    }
+  
+    .left, .right {
+      width: 100%;
+    }
+  
+    .container {
+      flex-direction: column;
+    }
+  }
+  
+  @media only screen and (max-width:511px) {
+    .container {
+      max-width: 100%;
+      height: auto;
+      padding: 10px;
+    }
+  
+    .left, .right {
+      padding: 0;
+    }
+  
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  
+    .option {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+/* 
+.main-wrap .product .product-details {
+    
+    flex-basis: 53%;
+    background: #fff;
+    box-shadow: -10px 5px 10px 10px rgb(0, 0, 0, 0.1);
+    padding: 40px 30px 40px 40px;
+
+}
+.main-wrap .product .product-details h2{
+     font-size: 25px;
+     font-weight: 600;
+     line-height: 35px;
+     margin-bottom: 15px;
+     color:#011627;
+
+}
+
+.main-wrap .product .product-details .details h2{
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 35px;
+    margin-bottom: 15px;
+    color:#011627;
+}
+
+.main-wrap .product .product-details .details h3{
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 35px;
+    margin-bottom: 10px;
+    color:#011627;
+}
+.main-wrap .product .product-details .details h4{
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 35px;
+    text-transform: uppercase;
+ 
+    color:#011627;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+section{
+    width: 100%;
+    height: 100vh;
+    background-image: url(image/bg.png);
+    background-size: cover;
+    background-position: center;
+}
+
+section nav{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 0 0 10px #089da1;
+    background: #fff;
+    position: fixed;
+    left: 0;
+    z-index: 100;
+}
+
+section nav .logo img{
+    width: 100px;
+    cursor: pointer;
+    margin: 8px 0;
+}
+
+section nav ul{
+    list-style: none;
+}
+
+section nav li{
+    display: inline-block;
+    padding: 0 10px;
+}
+
+section nav li a{
+    text-decoration: none;
+    color: #000;
+}
+
+section nav li a:hover{
+    color: #089da1;
+}
+
+section nav .social_icon i{
+    margin: 0 5px;
+    font-size: 18px;
+}
+
+section nav .social_icon i:hover{
+    color: #089da1;
+    cursor: pointer;
+}
+
+section .main{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    top: 10%;
+}
+
+section .main h1{
+    position: relative;
+    font-size: 55px;
+    top: 80px;
+    left: 25px;
+}
+
+section .main h1 span{
+    color: #089da1;
+}
+
+section .main p{
+    width: 650px;
+    text-align: justify;
+    line-height: 22px;
+    position: relative;
+    top: 125px;
+    left: 25px;
+}
+
+section .main .main_tag .main_btn{
+    background: #089da1;
+    padding: 10px 20px;
+    position: relative;
+    top: 200px;
+    left: 25px;
+    color: #fff;
+    text-decoration: none;
+}
+
+section .main .main_img img{
+    width: 780px;
+    position: relative;
+    top: 90px;
+    left: 20px;
+}
+
+
+
+
+/*services*/
+/* 
+.services{
+    width: 100%;
+    height: auto;
+    margin: 35px 0;
+}
+
+.services .services_box{
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.services .services_box .services_card{
+    text-align: center;
+    width: 310px;
+    height: auto;
+    box-shadow: 0 0 8px #089da1;
+    padding: 15px 10px;
+}
+
+.services .services_box .services_card i{
+    color: #089da1;
+    font-size: 45px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.services .services_box .services_card h3{
+    margin-bottom: 10px;
+}
+ */
+
+
+
+/*about*/
+/* 
+.about{
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.about .about_image img{
+    width: 800px;
+}
+
+.about .about_tag h1{
+    font-size: 50px;
+    position: relative;
+    bottom: 35px;
+}
+
+.about .about_tag p{
+    line-height: 22px;
+    width: 650px;
+    text-align: justify;
+    margin-bottom: 15px;
+}
+
+.about .about_tag .about_btn{
+    padding: 10px 20px;
+    background: #089da1;
+    color: #fff;
+    text-decoration: none;
+    position: relative;
+    top: 50px;
+} */ 

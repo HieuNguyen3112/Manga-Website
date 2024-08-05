@@ -1,4 +1,8 @@
 {
+<<<<<<< HEAD
     "livePreview.defaultPreviewPath": "/index.html",
     "liveServer.settings.port": 5501
+=======
+    "livePreview.defaultPreviewPath": "/frontend/Trang_truyen.html"
+>>>>>>> c9b9aeb5260de9452635aeca0267f396d0148d47
 }

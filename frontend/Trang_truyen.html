@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,79 +11,116 @@
     <!-- bootstrap css -->
     <link rel = "stylesheet" href = "bootstrap-5.0.2-dist/css/bootstrap.min.css">
     <!-- custom css -->
-    <link rel = "stylesheet" href = "./admin_css/main.css">
+    <link rel = "stylesheet" href = "/frontend/admin_css/main.css">
     <head>
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <!-- Font body-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+     
+        <!-- FONT MEOW-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Playwrite+BE+VLG:wght@100..400&family=Playwrite+CL:wght@100..400&family=Playwrite+CU:wght@100..400&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     </head>
     
 </head>
 <body>
-    
-    <!-- navbar -->
-    <nav class = "navbar navbar-expand-lg navbar-light bg-white py-4 fixed-top">
-        <div class = "container">
-            <a class = "navbar-brand d-flex justify-content-between align-items-center order-lg-0" href = "Trang_truyen.html">
-                <img src = "image/logo-am-ban.jpg" alt = "site icon">
-                <span class = "text-uppercase fw-lighter ms-2">Meow</span>
-            </a>
+   
 
-            <div class = "order-lg-2 nav-btns">
-                <button type = "button" class = "btn position-relative">
-                    <div class="user-account-box">
-                    <i class="fa-regular fa-user text-danger"></i>
-                 <span> Tài khoản</span>
-                </div>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-custom py-0 fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center order-lg-0" href="Trang_truyen.html">
+                <img src="image/logo-am-ban.jpg" alt="site icon">
+                <span class="text-uppercase fw-lighter ms-1 text-white">Meow</span>
+            </a>
+    
+            <div class="order-lg-2 nav-btns d-flex align-items-center">
+                <button type="button" class="btn position-relative">
+                    <div class="user-account-box d-flex align-items-center">
+                        <img src="image/R.png" class="user-pic" onclick="toggleMenu()" style="width: 30px; height: 30px;">
+                        <span class="text-uppercase text-decoration-none text-white ms-1 user-pic" onclick="toggleMenu()"> Tài khoản</span>
+                    </div>
+                    <div class="sub-menu-wrap" id="subMenu">
+                        <div class="sub-menu">
+                            <div class="user-info">
+                                <h2>MEO MEOW</h2>
+                            </div>
+                            <hr>
+                            <a href="#" class="sub-menu-link">
+                                <img src="image/profile.png">
+                                <p>Edit Profile</p>
+                            </a>
+                            <a href="#" class="sub-menu-link">
+                                <img src="image/setting.png">
+                                <p>Settings</p>
+                            </a>
+                            <a href="#" class="sub-menu-link">
+                                <img src="image/help.png">
+                                <p>Help</p>
+                            </a>
+                            <a href="#" class="sub-menu-link">
+                                <img src="image/logout.png">
+                                <p>Logout</p>
+                            </a>
+                        </div>
+                    </div>
+                </button>   
+    
+                <button type="button" class="btn position-relative">
+                    <i class="text-white fa fa-heart"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge bg-primary">2</span>
                 </button>
-                <button type = "button" class = "btn position-relative">
-                    <i class = "fa fa-heart "></i>
-                    <span class = "position-absolute top-0 start-100 translate-middle badge bg-primary">2</span>
-                </button>
-                <button type = "button" class = "btn position-relative">
-                    <i class = "fa fa-search"></i>
+                <button type="button" class="btn position-relative">
+                    <i class="text-white fa fa-search"></i>
                 </button>
             </div>
-
-            <button class = "navbar-toggler border-0" type = "button" data-bs-toggle = "collapse" data-bs-target = "#navMenu">
-                <span class = "navbar-toggler-icon"></span>
+    
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
             </button>
-
-            <div class = "collapse navbar-collapse order-lg-1" id = "navMenu">
-                <ul class = "navbar-nav mx-auto text-center">
-                    <li class = "nav-item px-2 py-2">
-                        <a class = "nav-link text-uppercase text-dark" href = "#header">Trang chủ</a>
+    
+            <div class="collapse navbar-collapse order-lg-1" id="navMenu">
+                <ul class="navbar-nav mx-auto text-center">
+                    <li class="nav-item px-2 py-2 border-0">
+                        <a class="nav-link text-uppercase text-dark" href="#icon">
+                            <img src="image/moon.png" id="icon-fluid">
+                        </a>
                     </li>
-                    <li class = "nav-item px-2 py-2">
-                        <a class = "nav-link text-uppercase text-dark" href = "#collection">Mới ra mắt</a>
+                    <li class="nav-item px-2 py-2">
+                        <a class="nav-link text-uppercase text-white" href="Trang_truyen.html">Trang chủ</a>
                     </li>
-                    <li class = "nav-item px-2 py-2">
-                        <a class = "nav-link text-uppercase text-dark" href = "#special">Yêu thích</a>
+                    <li class="nav-item px-2 py-2">
+                        <a class="nav-link text-uppercase text-white" href="#collection">Mới ra mắt</a>
                     </li>
-                    <li class = "nav-item px-2 py-2">
-                        <a class = "nav-link text-uppercase text-dark" href = "#blogs">Truyện chữ</a>
+                    <li class="nav-item px-2 py-2">
+                        <a class="nav-link text-uppercase text-white" href="#special">Yêu thích</a>
+                    </li>
+                    <li class="nav-item px-2 py-2">
+                        <a class="nav-link text-uppercase text-white" href="#blogs">Truyện chữ</a>
                     </li>
                     <li class="nav-item dropdown px-2 py-2">
-                        <a class="nav-link dropdown-toggle text-uppercase text-dark" href="#" id="theloaiDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Thể loại 
+                        <a class="nav-link dropdown-toggle text-uppercase text-white" href="#" id="theloaiDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Thể loại
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="theloaiDropdown">
                             <li><a class="dropdown-item" href="#theloai1">Thể loại 1</a></li>
                             <li><a class="dropdown-item" href="#theloai2">Thể loại 2</a></li>
                             <li><a class="dropdown-item" href="#theloai3">Thể loại 3</a></li>
                             <li><a class="dropdown-item" href="#theloai4">Thể loại 4</a></li>
-                            <!-- Thêm các thể loại khác ở đây -->
                         </ul>
-                        
                     </li>
-                    
-                    <li class = "nav-item px-2 py-2 border-0">
-                        <a class = "nav-link text-uppercase text-dark" href = "#popular">Thống kê </a>
+                    <li class="nav-item px-2 py-2 border-0">
+                        <a class="nav-link text-uppercase text-white" href="#popular">Thống kê</a>
                     </li>
-                   
                 </ul>
             </div>
         </div>
     </nav>
+    
     <!-- end of navbar -->
 
     <!-- header -->
@@ -91,7 +129,7 @@
     <section id = "collection" class = "py-5">
         <div class = "container">
             <div class = "title text-center">
-                <h2 class = "position-relative d-inline-block">New Collection</h2>
+                <!-- <h2 class = "position-relative d-inline-block">New Collection</h2> -->
             </div>
 
             <div class = "row g-0">
@@ -121,7 +159,7 @@
                                 <p class="text-capitalize fw-bold">My hero academia</p>
                                 <span class="fw-bold d-block">
                                     <a href="#" class="btn btn-primary mt-3">Đọc ngay</a>
-                                    <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
+                                    <a href="#" class="btn btn-primary mt-3 "><i class="fa-regular fa-heart"></i></a>
                                 </span>
                             </div>
                         </div>
@@ -247,7 +285,7 @@
                     <div class = "col-md-6 col-lg-4 col-xl-3 p-2 best">
                         <div class = "collection-img position-relative">
                             <img src = "image/One punch.webp" class="w-100 img-fluid custom-img">
-                            <span class = "position-absolute bg-primary text-white d-flex align-items-center justify-content-center">Hot</span>
+                           
                         </div>
                         <div class = "text-center">
                             <div class = "rating mt-3">
@@ -319,27 +357,27 @@
                 <div class = "col-md-6 col-lg-4 col-xl-3 p-2">
                     <div class = "special-img position-relative overflow-hidden">
                         <img src = "image/Doraemon.webp"  class="w-100 img-fluid heart-img">
-                        <span class = "position-absolute d-flex align-items-center justify-content-center text-primary fs-4">
-                            <i class = "fas fa-heart"></i>
-                        </span>
+                            <span class = "position-absolute d-flex align-items-center justify-content-center text-primary fs-4">
+                                <i class = "fas fa-heart"></i>
+                            </span>
                     </div>
-                    <div class = "text-center">
-                        <p class = "text-capitalize mt-3 mb-1">Phát hành:</p>
+                <div class = "text-center">
+                     <p class = "text-capitalize mt-3 mb-1">Phát hành:</p>
                         <span class = "fw-bold d-block">Doraemon</span>
-                        <a href = "#" class = "btn btn-primary mt-3">Đọc ngay </a>
+                             <a href = "#" class = "btn btn-primary mt-3">Đọc ngay </a>
                     </div>
                 </div>
 
                 <div class = "col-md-6 col-lg-4 col-xl-3 p-2">
                     <div class = "special-img position-relative overflow-hidden">
                         <img src = "image/Tokyo Ghoul.jpg" class="w-100 img-fluid heart-img">
-                        <span class = "position-absolute d-flex align-items-center justify-content-center text-primary fs-4">
-                            <i class = "fas fa-heart"></i>
-                        </span>
+                             <span class = "position-absolute d-flex align-items-center justify-content-center text-primary fs-4">
+                                <i class = "fas fa-heart"></i>
+                            </span>
                     </div>
                     <div class = "text-center">
                         <p class = "text-capitalize mt-3 mb-1">Phát hành</p>
-                        <span class = "fw-bold d-block">Tokyo Ghoul</span>
+                            <span class = "fw-bold d-block">Tokyo Ghoul</span>
                         <a href = "#" class = "btn btn-primary mt-3">Đọc ngay </a>
                     </div>
                 </div>
@@ -347,13 +385,13 @@
                 <div class = "col-md-6 col-lg-4 col-xl-3 p-2">
                     <div class = "special-img position-relative overflow-hidden">
                         <img src = "image/AKame.jpg"  class="w-100 img-fluid heart-img">
-                        <span class = "position-absolute d-flex align-items-center justify-content-center text-primary fs-4">
-                            <i class = "fas fa-heart"></i>
+                            <span class = "position-absolute d-flex align-items-center justify-content-center text-primary fs-4">
+                                 <i class = "fas fa-heart"></i>
                         </span>
                     </div>
                     <div class = "text-center">
                         <p class = "text-capitalize mt-3 mb-1">gaaa</p>
-                        <span class = "fw-bold d-block">Akame</span>
+                             <span class = "fw-bold d-block">Akame</span>
                         <a href = "#" class = "btn btn-primary mt-3">Đọc ngay </a>
                     </div>
                 </div>
@@ -457,90 +495,119 @@
 
 
     <!-- Thống kê -->
-    <section id = "popular" class = "py-5">
-        <div class = "container">
-            <div class = "title text-center pt-3 pb-5">
-                <h2 class = "position-relative d-inline-block ms-4">Thống kê của năm</h2>
+    <section id="popular" class="py-5">
+        <div class="container">
+          <div class="title text-center pt-3 pb-5">
+             <h2 class="position-relative d-inline-block ms-4">Thống kê của năm</h2>
+          </div>
+      
+          <div class="row">
+            <!-- Top tuần -->
+            <div class="col-md-4">
+              <h3 class="fs-5">Top tuần</h3>
+                <div class="d-flex flex-column align-items-start mb-3 position-relative">
+                    <img src="image/One punch.webp" alt="One punch" class="thongke-img mb-2">
+                         <span class="position-absolute bg-primary text-white d-flex align-items-center justify-content-center hot-badge">
+                             <i class="fa-regular fa-heart"></i>
+                        </span>
+                <div class="text-center">
+                  <p class="text-capitalize fw-bold text-center">My Hero Academia</p>
+              </div>
             </div>
-
-            <div class = "row">
-                <div class = "col-md-6 col-lg-4 row g-3">
-                    <h3 class = "fs-5">Top tuần</h3>
-                    <div class = "d-flex align-items-start justify-content-start">
-                        <img src = "image/One punch.webp" alt = "" class = "thongke-img">
-                        <div>
-                            <p class = "mb-0">One Punch Man</p>
-                            <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
-                        </div>
-                    </div>
-                    <div class = "d-flex align-items-start justify-content-start">
-                        <img src = "image/one-piece2.jpg" alt = "" class = "thongke-img">
-                        <div>
-                            <p class = "mb-0">One Piece</p>
-                            <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
-                        </div>
-                    </div>
-                    <div class = "d-flex align-items-start justify-content-start">
-                        <img src = "image/Doraemon.webp" alt = "" class = "thongke-img">
-                        <div>
-                            <p class = "mb-0">Doraemon</p>
-                            <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
-                        </div>
-                    </div>
+      
+              <div class="d-flex flex-column align-items-start mb-3 position-relative">
+                  <img src="image/one-piece2.jpg" alt="One Piece" class="thongke-img mb-2">
+                     <span class="position-absolute bg-primary text-white d-flex align-items-center justify-content-center hot-badge">
+                          <i class="fa-regular fa-heart"></i>
+                </span>
+                <div class="text-center">
+                      <p class="text-capitalize fw-bold text-center">One Piece</p>
                 </div>
-
-                <div class = "col-md-6 col-lg-4 row g-3">
-                    <h3 class = "fs-5">Top tháng</h3>
-                    <div class = "d-flex align-items-start justify-content-start">
-                        <img src = "image/one-piece2.jpg" alt = "" class = "thongke-img">
-                        <div>
-                            <p class = "mb-0">One Piece</p>
-                            <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
-                        </div>
-                    </div>
-                    <div class = "d-flex align-items-start justify-content-start">
-                        <img src = "image/SWORD.jpg" alt = "" class = "thongke-img">
-                        <div>
-                            <p class = "mb-0">Sword Art Online</p>
-                            <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
-                        </div>
-                    </div>
-                    <div class = "d-flex align-items-start justify-content-start">
-                        <img src = "image/Connan.jpg" alt = "" class = "thongke-img">
-                        <div>
-                            <p class = "mb-0">Connan</p>
-                            <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class = "col-md-6 col-lg-4 row g-3">
-                    <h3 class = "fs-5">Top năm</h3>
-                    <div class = "d-flex align-items-start justify-content-start">
-                        <img src = "image/one-piece2.jpg" alt = "" class = "thongke-img">
-                        <div>
-                            <p class = "mb-0">One Piece</p>
-                            <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
-                        </div>
-                    </div>
-                    <div class = "d-flex align-items-start justify-content-start">
-                        <img src = "image/Farry.jpg" alt = "" class = "thongke-img">
-                        <div>
-                            <p class = "mb-0">Fairy Tail</p>
-                            <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
-                        </div>
-                    </div>
-                    <div class = "d-flex align-items-start justify-content-start">
-                        <img src = "image/oshi_no_ko_5_-_bia_1_e40a704a717d45758be933029d6a79a9_master.webp" alt = "" class = "thongke-img">
-                        <div>
-                            <p class = "mb-0">Oshi no Ko</p>
-                            <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
-                        </div>
-                    </div>
+              </div>
+      
+              <div class="d-flex flex-column align-items-start mb-3 position-relative">
+                  <img src="image/Doraemon.webp" alt="Doraemon" class="thongke-img mb-2">
+                         <span class="position-absolute bg-primary text-white d-flex align-items-center justify-content-center hot-badge">
+                              <i class="fa-regular fa-heart"></i>
+                          </span>
+                <div class="text-center">
+                   <p class="text-capitalize fw-bold text-center">Doraemon</p>
                 </div>
             </div>
         </div>
-    </section>
+      
+            <!--  Top tháng -->
+            <div class="col-md-4">
+              <h3 class="fs-5">Top tháng</h3>
+                    <div class="d-flex flex-column align-items-start mb-3 position-relative">
+                       <img src="image/one-piece2.jpg" alt="One Piece" class="thongke-img mb-2">
+                             <span class="position-absolute bg-primary text-white d-flex align-items-center justify-content-center hot-badge">  <i class="fa-regular fa-heart"></i>
+                </span>
+                <div class="text-center">
+                    <p class="text-capitalize fw-bold text-center">One Piece</p>
+                  </div>
+              </div>
+      
+              <div class="d-flex flex-column align-items-start mb-3 position-relative" >
+                   <img src="image/SWORD.jpg" alt="Sword Art Online" class="thongke-img mb-2">
+                       <span class="position-absolute bg-primary text-white d-flex align-items-center justify-content-center hot-badge">
+                           <i class="fa-regular fa-heart"></i>
+                </span>
+                <div class="text-center">
+                    <p class="text-capitalize fw-bold text-center">Doraemon</p>
+                  </div>
+              </div>
+      
+              <div class="d-flex flex-column align-items-start mb-3 position-relative">
+                     <img src="image/Connan.jpg" alt="Conan" class="thongke-img mb-2">
+                         <span class="position-absolute bg-primary text-white d-flex align-items-center justify-content-center hot-badge">
+                               <i class="fa-regular fa-heart"></i>
+                         </span>
+                <div class="text-center">
+                    <p class="text-capitalize fw-bold text-center">Conan</p>
+                  </div>
+              </div>
+            </div>
+      
+            <!-- Top năm -->
+            <div class="col-md-4">
+                <h3 class="fs-5">Top năm</h3>
+                     <div class="d-flex flex-column align-items-start mb-3 position-relative">
+                           <img src="image/one-piece2.jpg" alt="One Piece" class="thongke-img mb-2">
+                              <span class="position-absolute bg-primary text-white d-flex align-items-center justify-content-center hot-badge"> 
+                                 <i class="fa-regular fa-heart"></i>
+                   </span>
+                  <div class="text-center">
+                      <p class="text-capitalize fw-bold text-center">One Piece</p>
+                    </div>
+                </div>
+        
+                <div class="d-flex flex-column align-items-start mb-3 position-relative" >
+                  <img src="image/Farry.jpg" alt="Sword Art Online" class="thongke-img mb-2">
+                  <span class="position-absolute bg-primary text-white d-flex align-items-center justify-content-center hot-badge">
+                      <i class="fa-regular fa-heart"></i>
+                  </span>
+                  <div class="text-center">
+                      <p class="text-capitalize fw-bold text-center">Fairy Tail</p>
+                    </div>
+                </div>
+        
+                <div class="d-flex flex-column align-items-start mb-3 position-relative">
+                  <img src="image/oshi_no_ko_5_-_bia_1_e40a704a717d45758be933029d6a79a9_master.webp" alt="Conan" class="thongke-img mb-2">
+                         <span class="position-absolute bg-primary text-white d-flex align-items-center justify-content-center hot-badge">
+                                <i class="fa-regular fa-heart"></i>
+                  </span>
+                  <div class="text-center">
+                      <p class="text-capitalize fw-bold text-center">Oshi No Ko</p>
+                    </div>
+                </div>
+              </div>
+          </div>
+        
+      </section>
+      
+      
+      
     <!-- end THống kê -->
 
 
@@ -669,10 +736,10 @@
                         
                     </div>
                 </div>
-            </div>
+            </div> 
         </div>
     </footer>
-    <!-- end of footer -->
+    <!-- end footer -->
 
 
 
@@ -685,5 +752,27 @@
     <script src = "bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
     <!-- custom js -->
     <script src = "js/script1.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const icon = document.getElementById('icon');
+        
+            icon.addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+                document.body.classList.toggle('light-mode');
+            });
+        });
+        </script>
+        
+
+
+        <!-- LOGOUT-->
+        <script>
+            let subMenu= document.getElementById("subMenu");
+    
+            function toggleMenu() {
+                subMenu.classList.toggle("open-menu");
+            }
+        </script>
 </body>
 </html>

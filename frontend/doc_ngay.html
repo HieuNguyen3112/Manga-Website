@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEOW MEOW </title>
+    <!-- fontawesome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- bootstrap css -->
+    <link rel = "stylesheet" href = "bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <!-- custom css -->
+    <link rel = "stylesheet" href = "/frontend/admin_css/doc_ngay.css">
+    <link rel = "stylesheet" href = "/frontend/admin_css/main.css">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Playwrite+BE+VLG:wght@100..400&family=Playwrite+CU:wght@100..400&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+     
+        <!-- FONT MEOW-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Playwrite+BE+VLG:wght@100..400&family=Playwrite+CL:wght@100..400&family=Playwrite+CU:wght@100..400&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+ </head>
+    
+
+<body>
+   
+
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-custom py-0 fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center order-lg-0" href="Trang_truyen.html">
+                <img src="image/logo-am-ban.jpg" alt="site icon">
+                <span class="text-uppercase fw-lighter ms-1 text-white">Meow</span>
+            </a>
+    
+            <div class="order-lg-2 nav-btns d-flex align-items-center">
+                <button type="button" class="btn position-relative">
+                    <div class="user-account-box d-flex align-items-center">
+                        <img src="image/R.png" class="user-pic" onclick="toggleMenu()" style="width: 30px; height: 30px;">
+                        <span class="text-uppercase text-decoration-none text-white ms-1 user-pic" onclick="toggleMenu()"> Tài khoản</span>
+                    </div>
+                    <div class="sub-menu-wrap" id="subMenu">
+                        <div class="sub-menu">
+                            <div class="user-info">
+                                <h2>MEO MEOW</h2>
+                            </div>
+                            <hr>
+                            <a href="#" class="sub-menu-link">
+                                <img src="image/profile.png">
+                                <p>Edit Profile</p>
+                            </a>
+                            <a href="#" class="sub-menu-link">
+                                <img src="image/setting.png">
+                                <p>Settings</p>
+                            </a>
+                            <a href="#" class="sub-menu-link">
+                                <img src="image/help.png">
+                                <p>Help</p>
+                            </a>
+                            <a href="#" class="sub-menu-link">
+                                <img src="image/logout.png">
+                                <p>Logout</p>
+                            </a>
+                        </div>
+                    </div>
+                </button>   
+    
+                <button type="button" class="btn position-relative">
+                    <i class="text-white fa fa-heart"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge bg-primary">2</span>
+                </button>
+                <button type="button" class="btn position-relative">
+                    <i class="text-white fa fa-search"></i>
+                </button>
+            </div>
+    
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse order-lg-1" id="navMenu">
+                <ul class="navbar-nav mx-auto text-center">
+                    <li class="nav-item px-2 py-2 border-0">
+                        <a class="nav-link text-uppercase text-dark" href="#icon">
+                            <img src="image/moon.png" id="icon-fluid">
+                        </a>
+                    </li>
+                    <li class="nav-item px-2 py-2">
+                        <a class="nav-link text-uppercase text-white" href="Trang_truyen.html">Trang chủ</a>
+                    </li>
+                    <li class="nav-item px-2 py-2">
+                        <a class="nav-link text-uppercase text-white" href="#collection">Mới ra mắt</a>
+                    </li>
+                    <li class="nav-item px-2 py-2">
+                        <a class="nav-link text-uppercase text-white" href="#special">Yêu thích</a>
+                    </li>
+                    <li class="nav-item px-2 py-2">
+                        <a class="nav-link text-uppercase text-white" href="#blogs">Truyện chữ</a>
+                    </li>
+                    <li class="nav-item dropdown px-2 py-2">
+                        <a class="nav-link dropdown-toggle text-uppercase text-white" href="#" id="theloaiDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Thể loại
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="theloaiDropdown">
+                            <li><a class="dropdown-item" href="#theloai1">Thể loại 1</a></li>
+                            <li><a class="dropdown-item" href="#theloai2">Thể loại 2</a></li>
+                            <li><a class="dropdown-item" href="#theloai3">Thể loại 3</a></li>
+                            <li><a class="dropdown-item" href="#theloai4">Thể loại 4</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item px-2 py-2 border-0">
+                        <a class="nav-link text-uppercase text-white" href="#popular">Thống kê</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+
+<!-- end NAV-->
+
+
+<section>
+    <div class ="contain-main">
+    <div class="container-flex">
+      <div class="left">
+        <div class="main_image">
+          <img src="image/AKame.jpg" class="slide">
+        </div>
+      </div>
+      <div class="right">
+        <h3 class="title-fluid text-danger">AKame Ga Kill</h3>
+        <hr class="divider">
+        <ul class="list-info">
+          <li class="author row">
+            <div class="name col-xs-3">
+              <i class="fa fa-user"></i> Tác giả
+            </div>
+            <div class="col-xs-9">Đang Cập Nhật</div>
+          </li>
+          <li class="status row">
+            <div class="name col-xs-3">
+              <i class="fa fa-rss"></i> Tình trạng
+            </div>
+            <div class="col-xs-9">Đang Cập Nhật</div>
+          </li>
+          <li class="row">
+            <div class="name col-xs-3">
+              <i class="fa fa-thumbs-up"></i> Lượt thích
+            </div>
+            <div class="col-xs-9 number-like">2210</div>
+          </li>
+          <li class="row">
+            <div class="name col-xs-3">
+              <i class="fa fa-heart"></i> Lượt theo dõi
+            </div>
+            <div class="col-xs-9">13,584</div>
+          </li>
+          <li class="row">
+            <div class="name col-xs-3">
+              <i class="fa fa-eye"></i> Lượt xem
+            </div>
+            <div class="col-xs-9">2,126,539</div>
+          </li>
+          <ul class="story-detail-menu">
+            <li class="li01">
+                <a href="#" class="button is-rounded green-button">
+                  <i class="fa fa-book"></i> Đọc từ đầu
+                </a>
+              </li>
+              
+            <li class="li02">
+              <a href="#" class="button is-danger is-rounded btn-subscribe subscribeBook red-button" data-page="index" data-id="3898">
+                <span class="fa fa-heart"></span> Theo dõi
+              </a>
+            </li>
+            <li class="li03">
+              <a href="#" class="button is-danger is-rounded btn-like purple-button" data-id="3898">
+                <i class="fa fa-thumbs-up"></i> Thích
+              </a>
+            </li>
+          </ul>
+  </section>
+
+    <div class="contain-main">
+      <div class="container-demo">
+          </div>
+        </div>
+          <hr class="divider">
+          <ul class="list-info">
+            <!-- Các phần tử thông tin khác -->
+          </ul>
+          <ul class="story-detail-menu">
+            <!-- Các nút chức năng -->
+          </ul>
+          <div class="danh_sach">
+            <div class="gioi_thieu">
+              <i class="fa fa-info-circle text-warning"></i> Giới thiệu:
+            </div>
+            <div class="noi_dung_gioi_thieu">
+              Tatsumi là một chiến binh, cùng hai người bạn thời thơ ấu của mình, đến Thủ đô tìm cách kiếm tiền để làm giàu cho ngôi làng nghèo khó của mình. Sau khi bị lạc và đến thủ đô một mình, Tatsumi không những thất bại trong việc gia nhập quân đội mà còn bị lừa cho hết tiền. 
+              Sau đó anh được một gia đình quý tộc giúp đỡ, nhưng thực ra họ có ý định tra tấn và giết anh, giống như họ đã làm với hai người bạn của anh và hàng chục người khác. Tatsumi được giải cứu bởi một nhóm sát thủ được gọi là Night Raid.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+    
+
+
+
+
+
+
+  <script>
+    function img(anything) {
+      document.querySelector('.slide').src = anything;
+    }
+
+    function change(change) {
+      const line = document.querySelector('.home');
+      line.style.background = change;
+    }
+  </script>
+  
+
+
+
+    <script src = "js/jquery-3.6.0.js"></script>
+    <!-- isotope js -->
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+    <!-- bootstrap js -->
+    <script src = "bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
+<!-- custom js -->
+    <script src = "js/script1.js"></script>
+
+
+    
+
+    
+</body>
+</html>
