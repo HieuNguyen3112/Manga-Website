@@ -6,16 +6,29 @@
   
 .body {
     font-family: sans-serif;
-    background-color: #433b3b;
-    background: #837D7C;
+    background-color: #8e3939;
+
   }
+.contain-main {
+  background-color: rgb(233, 225, 225);
+  margin-top: 0;
+  padding-top: 0;
+  /* display: flex;
+  flex-direction: column;  */
   
+}
+
+.contain-main {
+  position: relative;
+  top: 0;
+  z-index: 0;
+}
 .container-flex {
     max-width: 80%;
     margin: auto;
-    height: 80vh;
-    margin-top: 10%;
-    background: rgb(202, 157, 157);
+   max-height:100vh;
+    margin-top: 105px;
+    background: rgb(255, 255, 255);
     box-shadow: 5px 5px 10px 3px rgba(0, 0, 0, 0.3);
     display: flex; /* Thêm flex để canh giữa nội dung trong container */
     align-items: center; /* Canh giữa theo chiều dọc */
