@@ -1,11 +1,87 @@
 /* Toàn bộ body */
 body {
-    font-family: '', sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
     height: 200vh;
     background-color: #f3f4f7;
+}
+
+/* User Info */
+.user-info {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.user-info img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.user-dropdown span {
+    cursor: pointer;
+    font-weight: bold;
+    color: #333;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    width: 200px;
+}
+
+.dropdown-content button {
+    background-color: #222630;
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px 0;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    display: block;
+}
+
+.dropdown-content button:hover {
+    background-color: #22263076;
+}
+
+.user-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Animation for dropdown */
+.dropdown-content {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+.user-dropdown:hover .dropdown-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 /* Thanh bên (sidebar) */
@@ -20,7 +96,6 @@ body {
     color: #fafbfb;
     margin-right: 10px; /* Khoảng cách giữa biểu tượng và văn bản */
 }
-
 
 /* Ẩn con trỏ để dễ dàng nhấp vào các biểu tượng */
 .sidebar ul li ul.submenu li a {
@@ -37,12 +112,11 @@ body {
 /* Thay đổi kích thước các biểu tượng trong thanh bên chính */
 .sidebar ul li a .fas {
     font-size: 18px; 
-    margin-right: 0.1cm;      /* Kích thước biểu tượng chính */
+    margin-right: 0.1cm; /* Kích thước biểu tượng chính */
 }
 
 /* Căn chỉnh khoảng cách giữa biểu tượng và văn bản */
 .sidebar ul li a {
-    
     align-items: center;
     padding: 10px;
     border-radius: 4px;
@@ -65,16 +139,18 @@ body {
 }
 
 .sidebar h2 {
-    text-align:start;
+    text-align: start;
     margin-bottom: 30px;
     font-size: 30px;
 }
+
 .sidebar h3 {
     text-align: center;
     font-size: 25px;
     margin-bottom: 15px;
     color: #ffffff;
 }
+
 .sidebar ul {
     list-style-type: none;
     padding: 0;
@@ -93,7 +169,7 @@ body {
 }
 
 .sidebar ul li a:hover {
-    background-color:#2b303c;
+    background-color: #2b303c;
 }
 
 /* Submenu styling */
@@ -103,6 +179,7 @@ body {
     justify-content: space-between; /* Thêm dòng này để căn chỉnh mũi tên bên phải */
     cursor: pointer;
 }
+
 .submenu {
     padding-left: 20px;
     margin-top: 10px;
@@ -115,6 +192,7 @@ body {
 .submenu li a:hover {
     background-color: #2b303c;
 }
+
 .arrow {
     border: solid #f3f4f7;
     border-width: 0 2px 2px 0;
@@ -132,6 +210,7 @@ body {
     transform: rotate(-135deg);
     -webkit-transform: rotate(-135deg);
 }
+
 /* Nội dung chính (main content) */
 .main-content {
     flex-grow: 1;
@@ -264,14 +343,6 @@ button:hover {
     margin-top: 20px;
 }
 
-/* #pagination button {
-    margin: 0 5px;
-    padding: 5px 10px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    cursor: pointer;
-} */
-
 #pagination button.current-page {
     background-color: #ccd1d7;
     color: #fff;
@@ -279,7 +350,6 @@ button:hover {
 }
 
 #pagination button:disabled {
-    
     opacity: 0.5;
 }
 
@@ -331,7 +401,7 @@ html {
     background-color: #555;
 }
 
-
+/* Modal */
 .modal {
     display: none;
     position: fixed;
@@ -356,8 +426,6 @@ html {
     max-width: 500px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     border-radius: 10px;
-    
-
 }
 
 .close {
@@ -373,39 +441,43 @@ html {
     text-decoration: none;
     cursor: pointer;
 }
+
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
+
 .modal-content label {
     margin-top: 10px;
-    font-weight: bold; }
-    .modal-content input[type="text"],
-    .modal-content input[type="number"] {
-        padding: 10px;
-        margin-top: 5px;
-        margin-bottom: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px; /* Rounded corners for inputs */
-        width: 100%;
-        box-sizing: border-box;
-    }
-    
-    /* Style for the save button */
-    #saveEdit {
-        background-color: #4CAF50; /* Green background */
-        color: white;
-        padding: 10px 20px;
-        margin-top: 10px;
-        border: none;
-        border-radius: 5px; /* Rounded corners */
-        cursor: pointer;
-        font-size: 16px;
-    }
-    
-    #saveEdit:hover {
-        background-color: #45a049; /* Darker green on hover */
-    }
+    font-weight: bold;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="number"] {
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px; /* Rounded corners for inputs */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Style for the save button */
+#saveEdit {
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#saveEdit:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
 
 /* Căn giữa nội dung của modal xóa */
 #deleteModal .modal-content {
@@ -460,4 +532,41 @@ html {
 /* Nút hủy khi hover với nền màu xám đậm hơn */
 #deleteModal .modal-content .button-group #cancelDelete:hover {
     background-color: #b0b0b0; /* Nền màu xám đậm hơn khi hover */
-} 
+}
+
+/* Thêm truyện mới */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="file"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#saveAdd {
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#saveAdd:hover {
+    background-color: #45a049; /* Darker green on hover */
+}

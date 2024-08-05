@@ -1,10 +1,11 @@
 class HangTruyen {
-    constructor(HinhAnh, TenTruyen, DanhMuc, SoChuong, Tacgia) {
-        this.HinhAnh = HinhAnh;
-        this.TenTruyen = TenTruyen;
-        this.DanhMuc = DanhMuc;
-        this.SoChuong = SoChuong;
-        this.Tacgia = Tacgia;
+    constructor(_id, image, title, category, chapters, author) {
+        this._id = _id;
+        this.image = image;
+        this.title = title;
+        this.category = category;
+        this.chapters = chapters;
+        this.author = author;
     }
 
     taoNut(iconClass, tieuDe) {
@@ -23,28 +24,29 @@ class HangTruyen {
         // Ô hình ảnh
         const cellHinhAnh = document.createElement('td');
         const Img = document.createElement('img');
-        Img.src = this.HinhAnh;
+        Img.src = this.image;
+        Img.style.width = "50px";  // Set image size
         cellHinhAnh.appendChild(Img);
         Hang.appendChild(cellHinhAnh);
 
         // Ô tên truyện
         const cellTenTruyen = document.createElement('td');
-        cellTenTruyen.textContent = this.TenTruyen;
+        cellTenTruyen.textContent = this.title;
         Hang.appendChild(cellTenTruyen);
 
         // Ô danh mục
         const cellDanhMuc = document.createElement('td');
-        cellDanhMuc.textContent = this.DanhMuc;
+        cellDanhMuc.textContent = this.category;
         Hang.appendChild(cellDanhMuc);
 
         // Ô số chương
         const cellSoChuong = document.createElement('td');
-        cellSoChuong.textContent = this.SoChuong;
+        cellSoChuong.textContent = this.chapters;
         Hang.appendChild(cellSoChuong);
 
         // Ô tác giả
         const cellTacgia = document.createElement('td');
-        cellTacgia.textContent = this.Tacgia;
+        cellTacgia.textContent = this.author;
         Hang.appendChild(cellTacgia);
 
         // Ô hành động
@@ -56,7 +58,7 @@ class HangTruyen {
         const deleteButton = this.taoNut('trash-alt', 'Xóa');
         deleteButton.addEventListener('click', () => this.moXoa());
         cellHanhDong.appendChild(deleteButton);
-        
+
         cellHanhDong.appendChild(this.taoNut('eye', 'Xem'));
         Hang.appendChild(cellHanhDong);
 
@@ -66,32 +68,74 @@ class HangTruyen {
     moChinhSua() {
         const modal = document.getElementById('editModal');
         const form = document.getElementById('editForm');
-        form.editHinhAnh.value = this.HinhAnh;
-        form.editTenTruyen.value = this.TenTruyen;
-        form.editDanhMuc.value = this.DanhMuc;
-        form.editSoChuong.value = this.SoChuong;
-        form.editTacgia.value = this.Tacgia;
+        form.editHinhAnh.value = this.image;
+        form.editTenTruyen.value = this.title;
+        form.editDanhMuc.value = this.category;
+        form.editSoChuong.value = this.chapters;
+        form.editTacgia.value = this.author;
         modal.style.display = 'block';
 
-        document.getElementById('saveEdit').onclick = () => {
-            this.HinhAnh = form.editHinhAnh.value;
-            this.TenTruyen = form.editTenTruyen.value;
-            this.DanhMuc = form.editDanhMuc.value;
-            this.SoChuong = form.editSoChuong.value;
-            this.Tacgia = form.editTacgia.value;
+        // Remove existing onclick event to avoid multiple bindings
+        document.getElementById('saveEdit').onclick = null;
 
-            hienThiBang(trangHienTai);
-            modal.style.display = 'none';
+        // Add new onclick event
+        document.getElementById('saveEdit').onclick = async () => {
+            this.image = form.editHinhAnh.value;
+            this.title = form.editTenTruyen.value;
+            this.category = form.editDanhMuc.value;
+            this.chapters = form.editSoChuong.value;
+            this.author = form.editTacgia.value;
+
+            try {
+                const response = await fetch(`http://localhost:3000/api/comics/${this._id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        image: this.image,
+                        title: this.title,
+                        category: this.category,
+                        chapters: this.chapters,
+                        author: this.author
+                    })
+                });
+
+                if (response.ok) {
+                    const updatedComic = await response.json();
+                    // Update the list with the updated comic
+                    danhSachTruyen = danhSachTruyen.map(truyen => truyen._id === updatedComic._id ? new HangTruyen(updatedComic._id, updatedComic.image, updatedComic.title, updatedComic.category, updatedComic.chapters, updatedComic.author) : truyen);
+                    hienThiBang(trangHienTai);
+                    modal.style.display = 'none';
+                } else {
+                    console.error("Lỗi cập nhật:", await response.text());
+                }
+            } catch (err) {
+                console.error("Lỗi cập nhật:", err);
+            }
         };
     }
+
     moXoa() {
         const deleteModal = document.getElementById('deleteModal');
         deleteModal.style.display = 'block';
 
-        document.getElementById('confirmDelete').onclick = () => {
-            danhSachTruyen = danhSachTruyen.filter(truyen => truyen !== this);
-            hienThiBang(trangHienTai);
-            deleteModal.style.display = 'none';
+        document.getElementById('confirmDelete').onclick = async () => {
+            try {
+                const response = await fetch(`http://localhost:3000/api/comics/${this._id}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    danhSachTruyen = danhSachTruyen.filter(truyen => truyen._id !== this._id);
+                    hienThiBang(trangHienTai);
+                    deleteModal.style.display = 'none';
+                } else {
+                    console.error("Lỗi xóa:", await response.text());
+                }
+            } catch (err) {
+                console.error("Lỗi xóa:", err);
+            }
         };
 
         document.getElementById('cancelDelete').onclick = () => {
@@ -110,20 +154,61 @@ class HangTruyen {
     }
 }
 
+async function themMoiTruyen(event) {
+    event.preventDefault();
 
-document.addEventListener('DOMContentLoaded', () => {
-    const modal = document.getElementById('editModal');
-    const span = document.getElementsByClassName('close')[0];
+    const form = document.getElementById('addForm');
+    const newComic = {
+        image: form.addHinhAnh.files[0] ? URL.createObjectURL(form.addHinhAnh.files[0]) : '', // Handle file input
+        title: form.addTenTruyen.value,
+        category: form.addDanhMuc.value,
+        chapters: form.addSoChuong.value,
+        author: form.addTacgia.value,
+        moTaNgan: form.addMoTaNgan.value,
+        noiDungTruyen: form.addNoiDungTruyen.value
+    };
 
-    span.onclick = function() {
-        modal.style.display = 'none';
+    try {
+        const response = await fetch('http://localhost:3000/api/comics', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newComic)
+        });
+
+        if (response.ok) {
+            const createdComic = await response.json();
+            danhSachTruyen.push(new HangTruyen(createdComic._id, createdComic.image, createdComic.title, createdComic.category, createdComic.chapters, createdComic.author));
+            hienThiBang(trangHienTai);
+            form.reset(); // Clear the form fields
+            showSection('quanlytruyen'); // Switch to the comic list section
+        } else {
+            console.error("Lỗi thêm mới truyện:", await response.text());
+        }
+    } catch (err) {
+        console.error("Lỗi thêm mới truyện:", err);
     }
+}
 
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = 'none';
+document.addEventListener('DOMContentLoaded', async () => {
+    async function fetchComics() {
+        try {
+            const response = await fetch('http://localhost:3000/api/comics');
+            const data = await response.json();
+            console.log(data); // Log the data to verify it's being received
+            return data.map(comic => new HangTruyen(comic._id, comic.image, comic.title, comic.category, comic.chapters, comic.author));
+        } catch (error) {
+            console.error('Error fetching comics:', error);
+            return [];
         }
     }
+
+    danhSachTruyen = await fetchComics();
+    hienThiBang(trangHienTai);
+
+    document.getElementById('prevPage').addEventListener('click', () => thayDoiTrang(-1));
+    document.getElementById('nextPage').addEventListener('click', () => thayDoiTrang(1));
 });
 
 const soTruyenMoiTrang = 9; 
@@ -199,12 +284,12 @@ function thayDoiTrang(huong) {
     }
 }
 
-function searchComics() {
+async function searchComics() {
     const searchTerm = document.getElementById('searchInput').value.toLowerCase();
     const filteredTruyen = danhSachTruyen.filter(truyen => {
-        return truyen.TenTruyen.toLowerCase().includes(searchTerm) ||
-               truyen.DanhMuc.toLowerCase().includes(searchTerm) ||
-               truyen.Tacgia.toLowerCase().includes(searchTerm);
+        return truyen.title.toLowerCase().includes(searchTerm) ||
+               truyen.category.toLowerCase().includes(searchTerm) ||
+               truyen.author.toLowerCase().includes(searchTerm);
     });
     hienThiBang(trangHienTai, filteredTruyen);
 }
@@ -212,25 +297,8 @@ function searchComics() {
 document.getElementById('searchButton').addEventListener('click', searchComics);
 document.getElementById('searchInput').addEventListener('input', searchComics);
 
-document.addEventListener('DOMContentLoaded', () => {
-    danhSachTruyen = [
-        new HangTruyen('../image/thanhguom.png', 'Thanh gươm diệt quỷ', 'Action', 45, "Gotōge Koyoharu"),
-        new HangTruyen('../image/Harry_Potter_và_Hòn_đá_phù_thủy_bìa_2003.jpeg', 'Harry Potter và Hòn đá Phù thủy', 'Dremy', 1, "J. K. Rowling"),
-        new HangTruyen('../image/thanhguom.png', 'Thanh gươm diệt quỷ', 'Action', 45, "Gotōge Koyoharu"),
-        new HangTruyen('../image/Harry_Potter_và_Hòn_đá_phù_thủy_bìa_2003.jpeg', 'Harry Potter và Hòn đá Phù thủy', 'Dremy', 1, "J. K. Rowling"),
-        new HangTruyen('../image/thanhguom.png', 'Thanh gươm diệt quỷ', 'Action', 45, "Gotōge Koyoharu"),
-        new HangTruyen('../image/Harry_Potter_và_Hòn_đá_phù_thủy_bìa_2003.jpeg', 'Harry Potter và Hòn đá Phù thủy', 'Dremy', 1, "J. K. Rowling"),
-        new HangTruyen('../image/thanhguom.png', 'Thanh gươm diệt quỷ', 'Action', 45, "Gotōge Koyoharu"),
-        new HangTruyen('../image/Harry_Potter_và_Hòn_đá_phù_thủy_bìa_2003.jpeg', 'Harry Potter và Hòn đá Phù thủy', 'Dremy', 1, "J. K. Rowling"),
-        new HangTruyen('../image/thanhguom.png', 'Thanh gươm diệt quỷ', 'Action', 45, "Gotōge Koyoharu"),
-        new HangTruyen('../image/Harry_Potter_và_Hòn_đá_phù_thủy_bìa_2003.jpeg', 'Harry Potter và Hòn đá Phù thủy', 'Dremy', 1, "J. K. Rowling"),
-        new HangTruyen('../image/thanhguom.png', 'Thanh gươm diệt quỷ', 'Action', 45, "Gotōge Koyoharu"),
-        new HangTruyen('../image/thanhguom.png', 'Thanh gươm diệt quỷ', 'Action', 45, "Gotōge Koyoharu"),
-        new HangTruyen('../image/thanhguom.png', 'Thanh gươm diệt quỷ', 'Action', 45, "Gotōge Koyoharu"),
-        new HangTruyen('../image/thanhguom.png', 'Thanh gươm diệt quỷ', 'Action', 45, "Gotōge Koyoharu"),
-        new HangTruyen('../image/thanhguom.png', 'Thanh gươm diệt quỷ', 'Action', 45, "Gotōge Koyoharu"),
-    ];
-
+document.addEventListener('DOMContentLoaded', async () => {
+    danhSachTruyen = await fetchComics();
     hienThiBang(trangHienTai);
 
     document.getElementById('prevPage').addEventListener('click', () => thayDoiTrang(-1));

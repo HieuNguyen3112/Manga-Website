@@ -100,3 +100,21 @@ document.querySelector('.toggle-menu').addEventListener('click', function(event)
         arrow.classList.add('down');
     }
 });
+// Đặt đoạn mã này vào code.js hoặc một file JavaScript thích hợp khác
+document.addEventListener('DOMContentLoaded', function() {
+    var userDropdown = document.querySelector('.user-dropdown span');
+    var dropdownContent = document.querySelector('.dropdown-content');
+
+    userDropdown.addEventListener('click', function() {
+        dropdownContent.classList.toggle('show');
+    });
+
+    // Đóng dropdown khi nhấp ra ngoài
+    window.addEventListener('click', function(event) {
+        if (!event.target.matches('.user-dropdown span')) {
+            if (dropdownContent.classList.contains('show')) {
+                dropdownContent.classList.remove('show');
+            }
+        }
+    });
+});
