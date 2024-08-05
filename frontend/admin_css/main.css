@@ -2,11 +2,12 @@
 
 :root{
     --lg-font: 'Kaisei Tokumin', serif;
-    --sm-font: 'Poppins', sans-serif;
+    --sm-font:  "Rubik", sans-serif;
     --pink: #e5345b;
 }
 body{
     font-family: var(--sm-font);
+    background-color: white;
 }
 /* LOG OUT */
 /* .hero{
@@ -31,7 +32,7 @@ nav{ */
 }
 
 nav {
-    background: #e5345b;
+    background: #641a2a;
     width: 100%;
     padding: 10px 10%;
     display: flex;
@@ -46,7 +47,17 @@ nav {
 .logo {
     width: 120px;
 }
+.navbar-brand .text-uppercase {
+     font-family: "Playwrite CL", cursive;
+     font-size: medium;
+}
 
+.user-account-box{
+    width: 100px;
+    height: 50px;
+    right: -10px;
+    left: -10px;
+}
 .user-pic {
     width: 30px; /* Giảm kích thước hình ảnh */
     height: 30px; /* Đảm bảo hình ảnh là hình vuông */
@@ -74,7 +85,7 @@ nav ul li a {
 .sub-menu-wrap {
     position: absolute;
     top: 100%;
-    right: 10%;
+    right: -100px;
     width: 280px; /* Giảm kích thước menu */
     max-height: 0px;
     overflow: hidden;
@@ -83,12 +94,15 @@ nav ul li a {
 
 .sub-menu-wrap.open-menu {
     max-height: 400px;
+    right: -100px;
 }
 
 .sub-menu {
     background: #fff;
     padding: 20px;
     margin: 10px;
+    position: relative;
+   
 }
 
 .user-info {
@@ -97,7 +111,7 @@ nav ul li a {
 }
 
 .user-info h3 {
-    font-weight: 500;
+    font-weight: 400;
 }
 
 .user-info img {
@@ -117,7 +131,7 @@ nav ul li a {
 
 .sub-menu-link {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     text-decoration: none;
     color: #525252;
     margin: 12px 0;
@@ -167,6 +181,8 @@ nav ul li a {
 
 
 
+
+
 /* button */
 .bg-primary{
     background-color: var(--pink)!important;
@@ -181,11 +197,11 @@ nav ul li a {
 }
 .btn:not(.nav-btns button):hover{
     background-color: var(--pink);
-    color: #fff;
+    color: #5a3d3d;
     border-color: var(--pink);
 }
 .bg-custom{
-    color:#e5345b;
+    color:#60333d;
 }
 
 /* demo */
@@ -258,7 +274,9 @@ body.dark-mode {
 .navbar.dark-mode {
     background-color: #343a40;
 }
-
+.navbar-toggler-icon{
+    color: #e5e5e5;
+}
 
 
 /* navbar */
@@ -291,6 +309,17 @@ body.dark-mode {
 .nav-item{
     border-bottom: 0.5px solid rgba(0, 0, 0, 0.05);
 }
+
+
+
+.navbar-nav .nav-link {
+    line-height: 1.5; /* Điều chỉnh line-height */
+    height: 100%; /* Đảm bảo tất cả các liên kết có chiều cao đầy đủ */
+}
+
+
+
+
 
 /* header */
 #header{
@@ -386,8 +415,6 @@ body.dark-mode {
 }
 
 
-
-
 /*  SP SPECIAL  */
 #offers{
     background: url(../image/thanhguom.png) center/100% 180% no-repeat;
@@ -438,6 +465,39 @@ body.dark-mode {
     flex-direction: column;
     align-items: center;
 }
+#about {
+    background-color: #c5c5ce; /* Nền nhẹ */
+    border: 1px solid #7e6767; /* Đường viền nhẹ */
+    border-radius: 10px; /* Bo góc đường viền */
+    padding: 2rem; /* Padding cho toàn bộ phần */
+    margin-bottom: 2rem; /* Margin phía dưới */
+}
+
+/* #about h2 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #343a40;
+}
+
+#about .lead {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+#about p {
+    font-size: 1rem;
+    color: #554f4f;
+}
+
+#about .fw-bold {
+    font-weight: 700;
+}
+
+#about img.SPCHAY-img {
+    max-width: 100%;
+    border-radius: 10px; /* Bo góc hình ảnh */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng cho hình ảnh */
+/* } */
 
 /* thống kê */
 
