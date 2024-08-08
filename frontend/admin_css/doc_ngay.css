@@ -143,7 +143,17 @@
 .story-detail-menu .button i {
   margin-right: 5px; 
 }
+.user-pic {
+  border-radius: 50%;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-bottom: 100px;
+  
+}
 
+/* .user-account-box {
+  margin-bottom: 50px;
+} */
 .title-fluid {
 text-align: center;
 }
@@ -193,6 +203,11 @@ text-align: center;
   
 
 /* GIOI THIEU */
+.gioi_thieu {
+  font-size:1.5em; /* Tăng kích thước chữ cho phần Giới thiệu */
+  /* font-weight: bold; In đậm chữ Giới thiệu */
+  color: #821919; /* Màu chữ của phần Giới thiệu */
+}
 
   .option img {
     width: 75px;
@@ -266,6 +281,100 @@ text-align: center;
     border-radius: 30px;
   }
   
+/* DANH SACH CHUONG */
+.list-flex{
+  background-color:rgb(233, 225, 225);
+  margin-bottom: -20px;
+}
+.list-chapter {
+  border: 1px solid #000; /* Viền đen nhẹ */
+  border-radius: 5px; /* Bo góc nhẹ */
+  padding: 10px;
+  max-width: 1200px; /* Giới hạn chiều rộng */
+  margin: 0 auto; /* Canh giữa trang */
+  font-family: Arial, sans-serif; /* Font chữ */
+  background-color: rgb(255, 254, 254);
+  max-height: 600px;
+  overflow-y: auto;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.works-chapter-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd; /* Đường kẻ dưới nhẹ */
+  padding: 10px 0;
+}
+
+.works-chapter-item:last-child {
+  border-bottom: none; /* Loại bỏ đường kẻ dưới của phần tử cuối */
+}
+
+.name-chap {
+  flex: 1;
+  text-align: left;
+}
+
+.time-chap {
+  text-align: right;
+  color: #555; /* Màu chữ nhạt hơn cho ngày phát hành */
+}
+
+a {
+  text-decoration: none;
+  color: #000; /* Màu chữ */
+}
+
+.contain-danhsach {
+  background-color: rgb(202, 186, 186);
+  margin-top: 0;
+  padding-top: 0;
+}
+/* COMENT */
+
+ .comment-container {
+  padding: 20px;
+  background-color: #fff;
+  /* border: 1px solid #000; */
+  border-radius: 5px;
+  max-width: 700px;
+  
+} 
+
+.comment-flex
+{
+  font-size:1.5em; 
+  color: #821919;
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Tạo khoảng cách giữa biểu tượng và chữ Bình Luận */
+}
+
+
+.notify-fanpage {
+  margin-top: 10px;
+}
+.large-input {
+  font-size: 1.2em; /* Tăng kích thước chữ */
+  padding: 15px; /* Tăng khoảng cách bên trong */
+  height: auto;
+  width: 100%;
+  
+}
+.text {
+  width: 100%;
+}
+.comment-demo .form-control.large-input {
+  width: 100% !important;
+}
+.large-button {
+  font-size: 1.5em; /* Tăng kích thước chữ */
+  padding: 15px; /* Tăng khoảng cách bên trong */
+  height: auto; /* Đảm bảo chiều cao tự động */
+}
+
+
   @media only screen and (max-width:768px) {
     .container {
       max-width: 90%;
@@ -281,7 +390,7 @@ text-align: center;
       flex-direction: column;
     }
   }
-  
+
   @media only screen and (max-width:511px) {
     .container {
       max-width: 100%;
