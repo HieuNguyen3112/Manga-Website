@@ -116,7 +116,42 @@ const authController = {
         res.clearCookie("refreshToken");
         refreshTokens = refreshTokens.filter(token => token !== req.cookies.refreshToken);
         res.status(200).json("Logged out successfully");
+    },
+
+    // Forgot password
+    forgotPassword: async (req, res) => {
+        const { userName, email, newPassword } = req.body;
+    
+        try {
+            // Tìm người dùng trong bảng users dựa trên username
+            const user = await User.findOne({ username: userName });
+    
+            // Kiểm tra nếu người dùng không tồn tại
+            if (!user) {
+                return res.status(404).json({ success: false, message: "User not found" });
+            }
+    
+            // Kiểm tra email của người dùng để xác thực (nếu cần)
+            if (user.email !== email) {
+                return res.status(400).json({ success: false, message: "Email does not match" });
+            }
+    
+            // Mã hóa mật khẩu mới
+            const salt = await bcrypt.genSalt(10);
+            const hashedPassword = await bcrypt.hash(newPassword, salt);
+    
+            // Cập nhật mật khẩu mới cho người dùng trong bảng users
+            user.password = hashedPassword;
+            await user.save();
+    
+            res.status(200).json({ success: true, message: "Password reset successful" });
+    
+        } catch (error) {
+            console.error('Error resetting password:', error);
+            res.status(500).json({ success: false, message: "Internal server error" });
+        }
     }
+    
 };
 
 //store token
