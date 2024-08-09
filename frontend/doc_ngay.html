@@ -42,7 +42,7 @@
             <div class="order-lg-2 nav-btns d-flex align-items-center">
                 <button type="button" class="btn position-relative">
                     <div class="user-account-box d-flex align-items-center">
-                        <img src="image/R.png" class="user-pic" onclick="toggleMenu()" style="width: 30px; height: 30px;">
+                        <img src="image/R.png" class="user-pic" onclick="toggleMenu()" >
                         <span class="text-uppercase text-decoration-none text-white ms-1 user-pic" onclick="toggleMenu()"> Tài khoản</span>
                     </div>
                     <div class="sub-menu-wrap" id="subMenu">
@@ -125,78 +125,77 @@
 
 <!-- end NAV-->
 
-
 <section>
-    <div class ="contain-main">
-        <div class="container-flex">
+  <div class="contain-main">
+      <div class="container-flex">
           <div class="left">
-            <div class="main_image">
-          <img src="image/AKame.jpg" class="slide">
+              <div class="main_image">
+                  <img src="image/AKame.jpg" class="slide">
+              </div>
+          </div>
+          <div class="right">
+            <h3 class="title-fluid text-danger title-adjust">AKame Ga Kill</h3> <!-- Adjust the value as needed -->
+              <hr class="divider">
+              <ul class="list-info">
+                  <li class="author row">
+                      <div class="name col-xs-3">
+                          <i class="fa fa-user"></i> Tác giả
+                      </div>
+                      <div class="col-xs-9">Đang Cập Nhật</div>
+                  </li>
+                  <li class="status row">
+                      <div class="name col-xs-3">
+                          <i class="fa fa-rss"></i> Tình trạng
+                      </div>
+                      <div class="col-xs-9">Đang Cập Nhật</div>
+                  </li>
+                  <li class="row">
+                      <div class="name col-xs-3">
+                          <i class="fa fa-thumbs-up"></i> Lượt thích
+                      </div>
+                      <div class="col-xs-9 number-like">2210</div>
+                  </li>
+                  <li class="row">
+                      <div class="name col-xs-3">
+                          <i class="fa fa-heart"></i> Lượt theo dõi
+                      </div>
+                      <div class="col-xs-9">13,584</div>
+                  </li>
+                  <li class="row">
+                      <div class="name col-xs-3">
+                          <i class="fa fa-eye"></i> Lượt xem
+                      </div>
+                      <div class="col-xs-9">2,126,539</div>
+                  </li>
+              </ul>
+              <ul class="story-detail-menu">
+                  <li class="li01">
+                      <a href="#" class="button is-rounded green-button">
+                          <i class="fa fa-book"></i> Đọc từ đầu
+                      </a>
+                  </li>
+                  <li class="li02">
+                      <a href="#" class="button is-danger is-rounded btn-subscribe subscribeBook red-button" data-page="index" data-id="3898">
+                          <span class="fa fa-heart"></span> Theo dõi
+                      </a>
+                  </li>
+                  <li class="li03">
+                      <a href="#" class="button is-danger is-rounded btn-like purple-button" data-id="3898">
+                          <i class="fa fa-thumbs-up"></i> Thích
+                      </a>
+                  </li>
+              </ul>
           </div>
       </div>
-        <div class="right">
-           <h3 class="title-fluid text-danger">AKame Ga Kill</h3>
-              <hr class="divider">
-               <ul class="list-info">
-                 <li class="author row">
-                    <div class="name col-xs-3">
-                      <i class="fa fa-user"></i> Tác giả
-                   </div>
-                        <div class="col-xs-9">Đang Cập Nhật</div>
-                 </li>
-              <li class="status row">
-            <div class="name col-xs-3">
-              <i class="fa fa-rss"></i> Tình trạng
-            </div>
-            <div class="col-xs-9">Đang Cập Nhật</div>
-          </li>
-          <li class="row">
-            <div class="name col-xs-3">
-              <i class="fa fa-thumbs-up"></i> Lượt thích
-            </div>
-            <div class="col-xs-9 number-like">2210</div>
-          </li>
-          <li class="row">
-            <div class="name col-xs-3">
-              <i class="fa fa-heart"></i> Lượt theo dõi
-            </div>
-            <div class="col-xs-9">13,584</div>
-          </li>
-          <li class="row">
-            <div class="name col-xs-3">
-              <i class="fa fa-eye"></i> Lượt xem
-            </div>
-            <div class="col-xs-9">2,126,539</div>
-          </li>
-          <ul class="story-detail-menu">
-            <li class="li01">
-                <a href="#" class="button is-rounded green-button">
-                  <i class="fa fa-book"></i> Đọc từ đầu
-                </a>
-              </li>
-              
-            <li class="li02">
-              <a href="#" class="button is-danger is-rounded btn-subscribe subscribeBook red-button" data-page="index" data-id="3898">
-                <span class="fa fa-heart"></span> Theo dõi
-              </a>
-            </li>
-            <li class="li03">
-              <a href="#" class="button is-danger is-rounded btn-like purple-button" data-id="3898">
-                <i class="fa fa-thumbs-up"></i> Thích
-              </a>
-            </li>
-          </ul>
-  </section>
+  </div>
+</section>
 
-    <!-- <div class="contain-main">
-      <div class="container-demo">
-          </div>
-        </div>
-      --> <div class="list-flex">
-          <hr class="divider">
+
+    
+       <div class="list-gioithieu">
         
           </ul> 
-          <div class="list-chapter">
+   
               <div class="gioi_thieu">
                 <i class="fa fa-info-circle text-warning"></i> Giới thiệu:
              </div>
@@ -212,17 +211,16 @@
 
 
   <div class="list-flex">
-    
   <h3>
     <i class="fa fa-database" aria-hidden="true"></i> Danh sách chương
     </h3>
  
         <div class="list-chapter">
-         <div class="works-chapter-list">
-           <div class="works-chapter-item">
-              <div class="name-chap">
+           <div class="works-chapter-list">
+               <div class="works-chapter-item">
+                  <div class="name-chap">
           
-            <a target="_self" href="#">Chương 67</a>
+                      <a target="_self" href="#">Chương 67</a>
               </div>
                 <div class="time-chap">
                      02/08/2024                         
@@ -326,9 +324,42 @@
           03/06/2024                            
         </div>
     </div>
+    <div class="works-chapter-item">
+      <div class="name-chap">
+         <a target="_self" href="#">Chương 60</a>
+  </div>
+      <div class="time-chap">
+        03/06/2024                            
+    </div>
+</div>
+<div class="works-chapter-item">
+  <div class="name-chap">
+     <a target="_self" href="#">Chương 59</a>
+</div>
+  <div class="time-chap">
+    03/06/2024                            
+</div>
+</div>
+<div class="works-chapter-item">
+  <div class="name-chap">
+     <a target="_self" href="#">Chương 58</a>
+</div>
+  <div class="time-chap">
+    03/06/2024                            
+</div>
+</div>
+<div class="works-chapter-item">
+  <div class="name-chap">
+     <a target="_self" href="#">Chương 59</a>
+</div>
+  <div class="time-chap">
+    03/06/2024                            
+</div>
+</div>
   </div>
 </div>
-<div class="list-chapter">
+
+<div class="list-comment">
     <div class="comment-container" id="comment_list">
        <span class="comment-flex"><i class="fa fa-comments text-warning "></i>Bình Luận <span class="comment-count">( 685 )</span>
       </span>
@@ -339,17 +370,38 @@
   <div class="comment-demo">
     <input type="text" class=" large-input" placeholder="Hãy bình luận tích cực nha mọi người">
   </div>
-  
+    </div>
   </div>
 </div>
+
        <!--- END DANH SACH-->
 
-
+        <!-- COMMENT-->
+        <div class="outer-container">
+          <div class="comment-main">
+            <div class="comment-container" id="comment_list">
+              <!-- <img src="https://4.bp.blogspot.com/_1Jw2fzSntT0/TZC7pj3PEEI/AAAAAAAABJU/Kv_h-jA_rHQ/w1600/001.gif" class="emo-img" alt="emo"> -->
+            </div>
+            <div class="content-wrapper">
+              <div class="img-frame">
+                <div class="img-and-text">
+                <img src="image/cmt1.jpg" alt="image-cmt" class="cmt-img">
+                <strong class="level name_3">Nguyen Minh Hieu
+                </strong>
+              </div>
+              </div>
+              <div class="line"></div> 
+              <strong>
+                <div class="text-content">
+                  Nếu bạn đọc được điều này,asdfghjkqweyuiovbnmhjkadfcvgbhnjkmyágiundygbiháddddddddddd
+                  ádnaaaaaaaaaaaaaaaaa
+                </div>
+              </strong>
+            </div>
+          </div>
+        </div>
         
-
-
-
-
+        
         
   <script>
     function img(anything) {

@@ -10,7 +10,7 @@
 
   }
 .contain-main {
-  background-color: rgb(233, 225, 225);
+  background-color:#F4D9D0;
   margin-top: 0;
   padding-top: 0;
   /* display: flex;
@@ -147,17 +147,36 @@
   border-radius: 50%;
   cursor: pointer;
   margin-left: 10px;
-  margin-bottom: 100px;
-  
+  margin-bottom: 60px !important;
+  /* margin-top: -40px; */
+}
+.user-account-box {
+  display: flex;
+  align-items: center;
+  width: 200px; /* Tăng chiều rộng của khung chứa */
+  height: 60px; /* Tăng chiều cao của khung chứa */
+  padding: 10px; /* Tạo khoảng trống bên trong khung chứa */
+ /* Màu nền, có thể thay đổi tùy ý */
+  border-radius: 10px; /* Góc bo tròn */
 }
 
+.user-account-box span {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: white;
+  margin-left: 10px;
+  cursor: pointer;
+}
 /* .user-account-box {
   margin-bottom: 50px;
 } */
 .title-fluid {
 text-align: center;
+margin-top: -100px;
 }
-
+.title-adjust {
+  margin-top: -80px;
+}
 .right {
   flex: 1;
   margin-right: 20px;
@@ -221,9 +240,9 @@ text-align: center;
   }
   
   h3 {
-    color: #af827d;
-    margin: 20px 0;
+    color: #b0625a;
     font-size: 25px;
+    /* margin-top: 30px; */
   }
   
   h5,
@@ -275,7 +294,7 @@ text-align: center;
     padding: 10px;
     border: none;
     outline: none;
-    background: #C1908B;
+    background: #F4D9D0;
     color: white;
     margin-top: 20%;
     border-radius: 30px;
@@ -283,8 +302,13 @@ text-align: center;
   
 /* DANH SACH CHUONG */
 .list-flex{
-  background-color:rgb(233, 225, 225);
-  margin-bottom: -20px;
+  background-color:#F4D9D0;;
+ 
+}
+.list-gioithieu { 
+  background-color:#F4D9D0;
+  /* margin-top: -20px; */
+
 }
 .list-chapter {
   border: 1px solid #000; /* Viền đen nhẹ */
@@ -297,9 +321,22 @@ text-align: center;
   max-height: 600px;
   overflow-y: auto;
   margin: 0 auto;
-  margin-bottom: 20px;
+  margin-bottom: -20px;
 }
 
+.list-comment {
+  border: 1px solid #000; /* Viền đen nhẹ */
+  border-radius: 5px; /* Bo góc nhẹ */
+  padding: 10px;
+  max-width: 1200px; /* Giới hạn chiều rộng */
+  margin: 0 auto; /* Canh giữa trang */
+  font-family: Arial, sans-serif; /* Font chữ */
+  background-color: rgb(255, 254, 254);
+  max-height: 600px;
+  overflow-y: auto;
+  margin: 0 auto;
+  margin-top: 21px;
+}
 .works-chapter-item {
   display: flex;
   justify-content: space-between;
@@ -350,7 +387,10 @@ a {
   align-items: center;
   gap: 20px; /* Tạo khoảng cách giữa biểu tượng và chữ Bình Luận */
 }
-
+.fa, .fas {
+  /* font-weight: 900; */
+  margin-bottom: -10px;
+}
 
 .notify-fanpage {
   margin-top: 10px;
@@ -374,6 +414,91 @@ a {
   height: auto; /* Đảm bảo chiều cao tự động */
 }
 
+/* Commetn */
+.outer-container {
+  background-color: #F4D9D0;
+  padding: 20px;
+  /* margin-top:-10px; */
+}
+.comment-main {
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 10px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  margin-top: -20px;
+}
+.comment-container{
+ 
+  background-color: #ffffff; /* Thay đổi nền để giống với comment-main */
+  border-radius: 5px; /* Bo góc nhẹ giống comment-main */
+  padding: 10px; /* Giữ nguyên padding */
+  max-width: 1200px; /* Cùng giới hạn chiều rộng như comment-main */
+  max-height: 600px;
+  overflow-y: auto;
+  margin: 0 auto;
+  margin-top: 2px; /* Canh giữa và làm margin-top giống với comment-main */
+  font-family: Arial, sans-serif; 
+}
+.emo-img {
+  width: 80px; /* Điều chỉnh chiều rộng tùy ý */
+  height: auto; /* Đảm bảo tỷ lệ của ảnh được giữ nguyên */
+  max-width: 100%; /* Đảm bảo ảnh không vượt quá chiều rộng của khung chứa */
+}
+.content-wrapper {
+  display: flex;
+  align-items: center; /* Canh giữa theo chiều dọc */
+  margin-top: 10px;
+}
+
+.img-frame {
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 5px; /* Khoảng cách giữa khung và ảnh */
+  margin-right: 15px; /* Khoảng cách giữa ảnh và chữ */
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1); /* Tạo bóng cho khung */
+}
+.img {
+  overflow: clip;
+}
+.cmt-img {
+  width: 100px; /* Thu nhỏ ảnh */
+  height: auto;
+}
+.img-and-text {
+  position: relative;
+}
+
+.name_3 {
+  position: absolute;
+  white-space: nowrap;
+  left: 100%; /* Đẩy chữ sang phải của ảnh */
+  margin-top: -35px;
+  font-size: 14px;
+  margin-left: 15px;
+}
+
+.line {
+  width: 90%; /* Chiều rộng của đường line ngang */
+  border: 1px solid #000; /* Màu sắc và độ dày của đường line */
+  margin-top: -90px ; /* Khoảng cách giữa ảnh và văn bản */
+}
+.text-content {
+  text-align: left;
+  margin-left: 0; /* Không sử dụng giá trị âm quá lớn */
+  padding-left: -100px; /* Tạo khoảng cách hợp lý từ cạnh trái */
+  
+  overflow-wrap: break-word; /* Đảm bảo từ bị ngắt ở vị trí hợp lý */
+  white-space: normal; /* Cho phép xuống dòng khi cần */
+  width: 100%; /* Đảm bảo nội dung chiếm đủ chiều rộng của khung */
+  overflow: hidden;
+}
+
+.text-content {
+  float: none; /* Đảm bảo không bị ảnh hưởng bởi các thuộc tính float */
+  clear: both; /* Đảm bảo rằng nội dung không bị ảnh hưởng bởi các yếu tố nổi trước đó */
+}
 
   @media only screen and (max-width:768px) {
     .container {
@@ -412,47 +537,7 @@ a {
       flex-wrap: wrap;
     }
   }
-/* 
-.main-wrap .product .product-details {
-    
-    flex-basis: 53%;
-    background: #fff;
-    box-shadow: -10px 5px 10px 10px rgb(0, 0, 0, 0.1);
-    padding: 40px 30px 40px 40px;
 
-}
-.main-wrap .product .product-details h2{
-     font-size: 25px;
-     font-weight: 600;
-     line-height: 35px;
-     margin-bottom: 15px;
-     color:#011627;
-
-}
-
-.main-wrap .product .product-details .details h2{
-    font-size: 25px;
-    font-weight: 600;
-    line-height: 35px;
-    margin-bottom: 15px;
-    color:#011627;
-}
-
-.main-wrap .product .product-details .details h3{
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 35px;
-    margin-bottom: 10px;
-    color:#011627;
-}
-.main-wrap .product .product-details .details h4{
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 35px;
-    text-transform: uppercase;
- 
-    color:#011627;
-} */
 
 
 
