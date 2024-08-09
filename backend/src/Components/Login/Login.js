@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const result = await response.json();
         if (response.ok) {
           console.log("Login successful:", result);
-          if (result.admin) { // Kiểm tra nếu người dùng là admin
+          if (result.admin) { 
             navigate("/frontend/pages/admin.html");
           } else {
             navigate("/frontend/Trang_truyen.html");
