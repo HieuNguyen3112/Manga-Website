@@ -321,7 +321,7 @@ margin-top: -100px;
   max-height: 600px;
   overflow-y: auto;
   margin: 0 auto;
-  margin-bottom: -20px;
+  margin-bottom: -21px;
 }
 
 .list-comment {
@@ -331,7 +331,7 @@ margin-top: -100px;
   max-width: 1200px; /* Giới hạn chiều rộng */
   margin: 0 auto; /* Canh giữa trang */
   font-family: Arial, sans-serif; /* Font chữ */
-  background-color: rgb(255, 254, 254);
+  background-color: #FB8985;
   max-height: 600px;
   overflow-y: auto;
   margin: 0 auto;
@@ -370,19 +370,23 @@ a {
 }
 /* COMENT */
 
- .comment-container {
-  padding: 20px;
-  background-color: #fff;
-  /* border: 1px solid #000; */
-  border-radius: 5px;
-  max-width: 700px;
-  
-} 
+.comment-container {
+  background-color: #ffffff; /* Thay đổi nền để giống với comment-main */
+  border-radius: 5px; /* Bo góc nhẹ giống comment-main */
+  padding: 10px; /* Giữ nguyên padding */
+  max-width: 1200px; /* Cùng giới hạn chiều rộng như comment-main */
+  max-height: 600px;
+  overflow-y: auto;
+  margin: 0 auto;
+  margin-top: 2px; /* Canh giữa và làm margin-top giống với comment-main */
+  font-family: Arial, sans-serif;
+}
+
 
 .comment-flex
 {
   font-size:1.5em; 
-  color: #821919;
+  color: #892727; /* chữ bình luận
   display: flex;
   align-items: center;
   gap: 20px; /* Tạo khoảng cách giữa biểu tượng và chữ Bình Luận */
@@ -417,7 +421,7 @@ a {
 /* Commetn */
 .outer-container {
   background-color: #F4D9D0;
-  padding: 20px;
+  padding: 0;
   /* margin-top:-10px; */
 }
 .comment-main {
@@ -427,7 +431,7 @@ a {
   max-width: 1200px;
   margin: 0 auto;
   font-family: Arial, sans-serif;
-  margin-top: -20px;
+  margin-top: 0px;
 }
 .comment-container{
  
@@ -441,23 +445,26 @@ a {
   margin-top: 2px; /* Canh giữa và làm margin-top giống với comment-main */
   font-family: Arial, sans-serif; 
 }
-.emo-img {
-  width: 80px; /* Điều chỉnh chiều rộng tùy ý */
-  height: auto; /* Đảm bảo tỷ lệ của ảnh được giữ nguyên */
-  max-width: 100%; /* Đảm bảo ảnh không vượt quá chiều rộng của khung chứa */
-}
-.content-wrapper {
-  display: flex;
-  align-items: center; /* Canh giữa theo chiều dọc */
-  margin-top: 10px;
-}
 
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px; /* Khoảng cách giữa các bình luận */
+    margin-top: 10px;
+}
+.comment-main .content-wrapper {
+  margin-bottom: 60px; /* Điều chỉnh khoảng cách giữa các bình luận */
+}
 .img-frame {
+  display: flex;
+  align-items: center;
   background-color: #ffffff;
   border-radius: 5px;
   padding: 5px; /* Khoảng cách giữa khung và ảnh */
   margin-right: 15px; /* Khoảng cách giữa ảnh và chữ */
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1); /* Tạo bóng cho khung */
+  box-shadow: 0px 0px 5px rgba(230, 31, 31, 0.1); /* Tạo bóng cho khung */
+  box-shadow: 0px 0px 10px 3px rgba(230, 31, 31, 0.1);
+
 }
 .img {
   overflow: clip;
@@ -469,36 +476,36 @@ a {
 .img-and-text {
   position: relative;
 }
-
+.noi-dung {
+  margin-left:50px;
+}
 .name_3 {
   position: absolute;
   white-space: nowrap;
-  left: 100%; /* Đẩy chữ sang phải của ảnh */
+  left: 100%; 
   margin-top: -35px;
   font-size: 14px;
-  margin-left: 15px;
+  margin-left: -100px;
 }
 
-.line {
-  width: 90%; /* Chiều rộng của đường line ngang */
-  border: 1px solid #000; /* Màu sắc và độ dày của đường line */
-  margin-top: -90px ; /* Khoảng cách giữa ảnh và văn bản */
+.action-comment {
+  display: flex; /* Sử dụng flexbox để sắp xếp các phần tử con */
+  align-items: center; /* Canh các phần tử sang bên trái */
+  margin-top: 10px; /* Khoảng cách giữa phần văn bản và action-comment */
 }
-.text-content {
-  text-align: left;
-  margin-left: 0; /* Không sử dụng giá trị âm quá lớn */
-  padding-left: -100px; /* Tạo khoảng cách hợp lý từ cạnh trái */
-  
-  overflow-wrap: break-word; /* Đảm bảo từ bị ngắt ở vị trí hợp lý */
-  white-space: normal; /* Cho phép xuống dòng khi cần */
-  width: 100%; /* Đảm bảo nội dung chiếm đủ chiều rộng của khung */
-  overflow: hidden;
+.text-and-actions {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-.text-content {
-  float: none; /* Đảm bảo không bị ảnh hưởng bởi các thuộc tính float */
-  clear: both; /* Đảm bảo rằng nội dung không bị ảnh hưởng bởi các yếu tố nổi trước đó */
+.like-comment,
+.reply-comment,
+.time {
+  margin-right: 10px; /* Khoảng cách giữa các phần tử */
 }
+
+
 
   @media only screen and (max-width:768px) {
     .container {
@@ -540,191 +547,3 @@ a {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-/* 
-section{
-    width: 100%;
-    height: 100vh;
-    background-image: url(image/bg.png);
-    background-size: cover;
-    background-position: center;
-}
-
-section nav{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    box-shadow: 0 0 10px #089da1;
-    background: #fff;
-    position: fixed;
-    left: 0;
-    z-index: 100;
-}
-
-section nav .logo img{
-    width: 100px;
-    cursor: pointer;
-    margin: 8px 0;
-}
-
-section nav ul{
-    list-style: none;
-}
-
-section nav li{
-    display: inline-block;
-    padding: 0 10px;
-}
-
-section nav li a{
-    text-decoration: none;
-    color: #000;
-}
-
-section nav li a:hover{
-    color: #089da1;
-}
-
-section nav .social_icon i{
-    margin: 0 5px;
-    font-size: 18px;
-}
-
-section nav .social_icon i:hover{
-    color: #089da1;
-    cursor: pointer;
-}
-
-section .main{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    position: relative;
-    top: 10%;
-}
-
-section .main h1{
-    position: relative;
-    font-size: 55px;
-    top: 80px;
-    left: 25px;
-}
-
-section .main h1 span{
-    color: #089da1;
-}
-
-section .main p{
-    width: 650px;
-    text-align: justify;
-    line-height: 22px;
-    position: relative;
-    top: 125px;
-    left: 25px;
-}
-
-section .main .main_tag .main_btn{
-    background: #089da1;
-    padding: 10px 20px;
-    position: relative;
-    top: 200px;
-    left: 25px;
-    color: #fff;
-    text-decoration: none;
-}
-
-section .main .main_img img{
-    width: 780px;
-    position: relative;
-    top: 90px;
-    left: 20px;
-}
-
-
-
-
-/*services*/
-/* 
-.services{
-    width: 100%;
-    height: auto;
-    margin: 35px 0;
-}
-
-.services .services_box{
-    width: 95%;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.services .services_box .services_card{
-    text-align: center;
-    width: 310px;
-    height: auto;
-    box-shadow: 0 0 8px #089da1;
-    padding: 15px 10px;
-}
-
-.services .services_box .services_card i{
-    color: #089da1;
-    font-size: 45px;
-    margin-bottom: 15px;
-    cursor: pointer;
-}
-
-.services .services_box .services_card h3{
-    margin-bottom: 10px;
-}
- */
-
-
-
-/*about*/
-/* 
-.about{
-    width: 100%;
-    height: auto;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.about .about_image img{
-    width: 800px;
-}
-
-.about .about_tag h1{
-    font-size: 50px;
-    position: relative;
-    bottom: 35px;
-}
-
-.about .about_tag p{
-    line-height: 22px;
-    width: 650px;
-    text-align: justify;
-    margin-bottom: 15px;
-}
-
-.about .about_tag .about_btn{
-    padding: 10px 20px;
-    background: #089da1;
-    color: #fff;
-    text-decoration: none;
-    position: relative;
-    top: 50px;
-} */ 
