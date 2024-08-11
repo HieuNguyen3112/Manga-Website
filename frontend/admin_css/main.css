@@ -64,6 +64,7 @@ nav {
     border-radius: 50%;
     cursor: pointer;
     margin-left: 10px; /* Giảm khoảng cách bên trái */
+    margin-bottom: 20px;
 }
 
 nav ul {
@@ -466,38 +467,14 @@ body.dark-mode {
     align-items: center;
 }
 #about {
-    background-color: #c5c5ce; /* Nền nhẹ */
-    border: 1px solid #7e6767; /* Đường viền nhẹ */
+    background-color: #F4D9D0; /* Nền nhẹ */
+    border: 1px solid #a17878; /* Đường viền nhẹ */
     border-radius: 10px; /* Bo góc đường viền */
     padding: 2rem; /* Padding cho toàn bộ phần */
     margin-bottom: 2rem; /* Margin phía dưới */
 }
 
-/* #about h2 {
-    font-size: 1.75rem;
-    font-weight: bold;
-    color: #343a40;
-}
 
-#about .lead {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-}
-
-#about p {
-    font-size: 1rem;
-    color: #554f4f;
-}
-
-#about .fw-bold {
-    font-weight: 700;
-}
-
-#about img.SPCHAY-img {
-    max-width: 100%;
-    border-radius: 10px; /* Bo góc hình ảnh */
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng cho hình ảnh */
-/* } */
 
 /* thống kê */
 

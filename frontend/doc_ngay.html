@@ -22,8 +22,10 @@
         <!-- FONT MEOW-->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      
         <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Playwrite+BE+VLG:wght@100..400&family=Playwrite+CL:wght@100..400&family=Playwrite+CU:wght@100..400&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
- </head>
+       
+      </head>
     
 
 <body>
@@ -40,7 +42,7 @@
             <div class="order-lg-2 nav-btns d-flex align-items-center">
                 <button type="button" class="btn position-relative">
                     <div class="user-account-box d-flex align-items-center">
-                        <img src="image/R.png" class="user-pic" onclick="toggleMenu()" style="width: 30px; height: 30px;">
+                        <img src="image/R.png" class="user-pic" onclick="toggleMenu()" >
                         <span class="text-uppercase text-decoration-none text-white ms-1 user-pic" onclick="toggleMenu()"> Tài khoản</span>
                     </div>
                     <div class="sub-menu-wrap" id="subMenu">
@@ -123,101 +125,349 @@
 
 <!-- end NAV-->
 
-
 <section>
-    <div class ="contain-main">
-    <div class="container-flex">
-      <div class="left">
-        <div class="main_image">
-          <img src="image/AKame.jpg" class="slide">
-        </div>
-      </div>
-      <div class="right">
-        <h3 class="title-fluid text-danger">AKame Ga Kill</h3>
-        <hr class="divider">
-        <ul class="list-info">
-          <li class="author row">
-            <div class="name col-xs-3">
-              <i class="fa fa-user"></i> Tác giả
-            </div>
-            <div class="col-xs-9">Đang Cập Nhật</div>
-          </li>
-          <li class="status row">
-            <div class="name col-xs-3">
-              <i class="fa fa-rss"></i> Tình trạng
-            </div>
-            <div class="col-xs-9">Đang Cập Nhật</div>
-          </li>
-          <li class="row">
-            <div class="name col-xs-3">
-              <i class="fa fa-thumbs-up"></i> Lượt thích
-            </div>
-            <div class="col-xs-9 number-like">2210</div>
-          </li>
-          <li class="row">
-            <div class="name col-xs-3">
-              <i class="fa fa-heart"></i> Lượt theo dõi
-            </div>
-            <div class="col-xs-9">13,584</div>
-          </li>
-          <li class="row">
-            <div class="name col-xs-3">
-              <i class="fa fa-eye"></i> Lượt xem
-            </div>
-            <div class="col-xs-9">2,126,539</div>
-          </li>
-          <ul class="story-detail-menu">
-            <li class="li01">
-                <a href="#" class="button is-rounded green-button">
-                  <i class="fa fa-book"></i> Đọc từ đầu
-                </a>
-              </li>
-              
-            <li class="li02">
-              <a href="#" class="button is-danger is-rounded btn-subscribe subscribeBook red-button" data-page="index" data-id="3898">
-                <span class="fa fa-heart"></span> Theo dõi
-              </a>
-            </li>
-            <li class="li03">
-              <a href="#" class="button is-danger is-rounded btn-like purple-button" data-id="3898">
-                <i class="fa fa-thumbs-up"></i> Thích
-              </a>
-            </li>
-          </ul>
-  </section>
-
-    <div class="contain-main">
-      <div class="container-demo">
+  <div class="contain-main">
+      <div class="container-flex">
+          <div class="left">
+              <div class="main_image">
+                  <img src="image/AKame.jpg" class="slide">
+              </div>
           </div>
-        </div>
-          <hr class="divider">
-          <ul class="list-info">
-            <!-- Các phần tử thông tin khác -->
-          </ul>
-          <ul class="story-detail-menu">
-            <!-- Các nút chức năng -->
-          </ul>
-          <div class="danh_sach">
-            <div class="gioi_thieu">
-              <i class="fa fa-info-circle text-warning"></i> Giới thiệu:
-            </div>
-            <div class="noi_dung_gioi_thieu">
+          <div class="right">
+            <h3 class="title-fluid text-danger title-adjust">AKame Ga Kill</h3> <!-- Adjust the value as needed -->
+              <hr class="divider">
+              <ul class="list-info">
+                  <li class="author row">
+                      <div class="name col-xs-3">
+                          <i class="fa fa-user"></i> Tác giả
+                      </div>
+                      <div class="col-xs-9">Đang Cập Nhật</div>
+                  </li>
+                  <li class="status row">
+                      <div class="name col-xs-3">
+                          <i class="fa fa-rss"></i> Tình trạng
+                      </div>
+                      <div class="col-xs-9">Đang Cập Nhật</div>
+                  </li>
+                  <li class="row">
+                      <div class="name col-xs-3">
+                          <i class="fa fa-thumbs-up"></i> Lượt thích
+                      </div>
+                      <div class="col-xs-9 number-like">2210</div>
+                  </li>
+                  <li class="row">
+                      <div class="name col-xs-3">
+                          <i class="fa fa-heart"></i> Lượt theo dõi
+                      </div>
+                      <div class="col-xs-9">13,584</div>
+                  </li>
+                  <li class="row">
+                      <div class="name col-xs-3">
+                          <i class="fa fa-eye"></i> Lượt xem
+                      </div>
+                      <div class="col-xs-9">2,126,539</div>
+                  </li>
+              </ul>
+              <ul class="story-detail-menu">
+                  <li class="li01">
+                      <a href="#" class="button is-rounded green-button">
+                          <i class="fa fa-book"></i> Đọc từ đầu
+                      </a>
+                  </li>
+                  <li class="li02">
+                      <a href="#" class="button is-danger is-rounded btn-subscribe subscribeBook red-button" data-page="index" data-id="3898">
+                          <span class="fa fa-heart"></span> Theo dõi
+                      </a>
+                  </li>
+                  <li class="li03">
+                      <a href="#" class="button is-danger is-rounded btn-like purple-button" data-id="3898">
+                          <i class="fa fa-thumbs-up"></i> Thích
+                      </a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </div>
+</section>
+
+
+    
+       <div class="list-gioithieu">
+        
+          </ul> 
+   
+              <div class="gioi_thieu">
+                <i class="fa fa-info-circle text-warning"></i> Giới thiệu:
+             </div>
+                   <div class="#">
               Tatsumi là một chiến binh, cùng hai người bạn thời thơ ấu của mình, đến Thủ đô tìm cách kiếm tiền để làm giàu cho ngôi làng nghèo khó của mình. Sau khi bị lạc và đến thủ đô một mình, Tatsumi không những thất bại trong việc gia nhập quân đội mà còn bị lừa cho hết tiền. 
               Sau đó anh được một gia đình quý tộc giúp đỡ, nhưng thực ra họ có ý định tra tấn và giết anh, giống như họ đã làm với hai người bạn của anh và hàng chục người khác. Tatsumi được giải cứu bởi một nhóm sát thủ được gọi là Night Raid.
-            </div>
+                   </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+
+  <div class="list-flex">
+  <h3>
+    <i class="fa fa-database" aria-hidden="true"></i> Danh sách chương
+    </h3>
+ 
+        <div class="list-chapter">
+           <div class="works-chapter-list">
+               <div class="works-chapter-item">
+                  <div class="name-chap">
+          
+                      <a target="_self" href="#">Chương 67</a>
+              </div>
+                <div class="time-chap">
+                     02/08/2024                         
+                </div>
+      </div>
+      <div class="works-chapter-item">
+         <div class="name-chap">
+            <a target="_self" href="#">Chương 66.5</a>
+        </div>
+          <div class="time-chap">
+            03/06/2024                            
+          </div>
+      </div>
+          <div class="works-chapter-item">
+             <div class="name-chap">
+                <a target="_self" href="#">Chương 66</a>
+            </div>
+               <div class="time-chap">
+                31/05/2024
+            </div>
+      </div>
+         <div class="works-chapter-item">
+            <div class="name-chap">
+               <a target="_self" href="#">Chương 65</a>
+        </div>
+            <div class="time-chap">
+              03/06/2024                            
+          </div>
+      </div>
+      <div class="works-chapter-item">
+        <div class="name-chap">
+          <a target="_self" href="#">Chương 64</a>
+        </div>
+        <div class="time-chap">
+          03/06/2024                            
+        </div>
+      </div>
+      
+      <div class="works-chapter-item">
+        <div class="name-chap">
+          <a target="_self" href="#">Chương 63</a>
+        </div>
+        <div class="time-chap">
+          03/06/2024                            
+        </div>
+      </div>
+      
+      </div>
+      <div class="works-chapter-item">
+        <div class="name-chap">
+          <a target="_self" href="#">Chương 63</a>
+        </div>
+        <div class="time-chap">
+          03/06/2024                            
+        </div>
+      </div>
+      <div class="works-chapter-item">
+        <div class="name-chap">
+          <a target="_self" href="#">Chương 63</a>
+        </div>
+        <div class="time-chap">
+          03/06/2024                            
+        </div>
+      </div>
+      <div class="works-chapter-item">
+        <div class="name-chap">
+          <a target="_self" href="#">Chương 63</a>
+        </div>
+        <div class="time-chap">
+          03/06/2024                            
+        </div>
+      </div>
+      <div class="works-chapter-item">
+        <div class="name-chap">
+           <a target="_self" href="#">Chương 66.5</a>
+       </div>
+         <div class="time-chap">
+           03/06/2024                            
+         </div>
+     </div>
+     <div class="works-chapter-item">
+        <div class="name-chap">
+           <a target="_self" href="#">Chương 62</a>
+       </div>
+             <div class="time-chap">
+          03/06/2024                            
+            </div>
+    </div>
+    <div class="works-chapter-item">
+      <div class="name-chap">
+         <a target="_self" href="#">Chương 61</a>
+     </div>
+       <div class="time-chap">
+         03/06/2024                            
+       </div>
+   </div>
+   <div class="works-chapter-item">
+      <div class="name-chap">
+         <a target="_self" href="#">Chương 61</a>
+   </div>
+        <div class="time-chap">
+          03/06/2024                            
+        </div>
+    </div>
+    <div class="works-chapter-item">
+      <div class="name-chap">
+         <a target="_self" href="#">Chương 60</a>
+  </div>
+      <div class="time-chap">
+        03/06/2024                            
+    </div>
+</div>
+      <div class="works-chapter-item">
+         <div class="name-chap">
+            <a target="_self" href="#">Chương 59</a>
+        </div>
+          <div class="time-chap">
+           03/06/2024                            
+         </div>
+     </div>
+      <div class="works-chapter-item">
+         <div class="name-chap">
+            <a target="_self" href="#">Chương 58</a>
+        </div>
+           <div class="time-chap">
+       03/06/2024                            
+        </div>
+    </div>
+<div class="works-chapter-item">
+  <div class="name-chap">
+     <a target="_self" href="#">Chương 59</a>
+</div>
+  <div class="time-chap">
+    03/06/2024                            
+</div>
+</div>
+  </div>
+</div>
+
+  <div class="outer-container">
+     <div class="list-comment">
+        <div class="comment-container" id="comment_list">
+        <span class="comment-flex">
+          <i class="fa fa-comments text-warning"></i>Bình Luận
+      <span class="comment-count">( 685 )</span>
+    </span>
+      <div class="notify-fanpage">
+      Vào <a rel="nofollow" href="https://www.facebook.com/bity0984549118" target="blank" class="text-danger">Fanpage</a> 
+      like và theo dõi để ủng hộ Truyen Meow Meow nhé.
+    </div>  
+    <div class="comment-demo">
+      <input type="text" class="large-input" placeholder="Hãy bình luận tích cực nha mọi người">
+    </div>
+  </div>
+</div>
+  </div>
   
-    
+       <!--- END DANH SACH-->
 
-
-
-
-
-
+        <!-- COMMENT-->
+        <div class="outer-container">
+          <div class="comment-main">
+            <div class="comment-container" id="comment_list">
+              <!-- Your content here -->
+            </div>
+            <div class="content-wrapper">
+              <div class="img-frame">
+                <div class="img-and-text">
+                  <img src="image/cmt1.jpg" alt="image-cmt" class="cmt-img">
+                  <strong class="level name_3">Nguyen Minh Hieu</strong>
+                </div>
+                <strong class="noi-dung">
+                  Nếu bạn đọc được điều này, asdfghjkqweyuiovbnmhjkadfcvgbhnjkmyágiundygbiháddddddddddd
+                  ádnaaaaaaaaaaaaaaaaa
+                </strong>
+              </div>  
+              <div class="text-and-actions">
+                <div class="comment-text">
+                 
+                </div>
+                <div class="action-comment">
+                  <span class="like-comment" data-id="5872152"><i class="fa fa-thumbs-up"></i>
+                    <span class="total-like-comment">0</span>
+                  </span>
+                  <span class="reply-comment" onclick="addReply(5872152)"><i class="fa fa-comment"></i> Trả lời</span>
+                  <span class="time"><i class="fa fa-clock"></i> 10 Giờ Trước</span>
+                </div>
+              </div>
+            </div>
+            <!-- CMT 2-->
+            <div class="content-wrapper">
+              <div class="img-frame">
+                <div class="img-and-text">
+                  <img src="image/cmt2.jpg" alt="image-cmt" class="cmt-img">
+                  <strong class="level name_3">Nguyen Minh Hieu</strong>
+                </div>
+                <strong class="noi-dung">
+                  Nếu bạn đọc được điều này, asdfghjkqweyuiovbnmhjkadfcvgbhnjkmyágiundygbiháddddddddddd
+                  ádnaaaaaaaaaaaaaaaaa
+                </strong>
+              </div>  
+              <div class="text-and-actions">
+                <div class="comment-text">
+                 
+                </div>
+                <div class="action-comment">
+                  <span class="like-comment" data-id="5872152"><i class="fa fa-thumbs-up"></i>
+                    <span class="total-like-comment">0</span>
+                  </span>
+                  <span class="reply-comment" onclick="addReply(5872152)"><i class="fa fa-comment"></i> Trả lời</span>
+                  <span class="time"><i class="fa fa-clock"></i> 10 Giờ Trước</span>
+                </div>
+              </div>
+            </div>
+              <!-- CMT 3-->
+            <div class="content-wrapper">
+              <div class="img-frame">
+                <div class="img-and-text">
+                  <img src="image/cmt3.jpg" alt="image-cmt" class="cmt-img">
+                  <strong class="level name_3">Nguyen Minh Hieu</strong>
+                </div>
+                <strong class="noi-dung">
+                  Nếu bạn đọc được điều này, asdfghjkqweyuiovbnmhjkadfcvgbhnjkmyágiundygbiháddddddddddd
+                  ádnaaaaaaaaaaaaaaaaa
+                </strong>
+              </div>  
+              <div class="text-and-actions">
+                <div class="comment-text">
+                 
+                </div>
+                <div class="action-comment">
+                  <span class="like-comment" data-id="5872152"><i class="fa fa-thumbs-up"></i>
+                    <span class="total-like-comment">0</span>
+                  </span>
+                  <span class="reply-comment" onclick="addReply(5872152)"><i class="fa fa-comment"></i> Trả lời</span>
+                  <span class="time"><i class="fa fa-clock"></i> 10 Giờ Trước</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+       
+          
+          </div>
+        </div>
+        
+        
   <script>
     function img(anything) {
       document.querySelector('.slide').src = anything;
@@ -229,6 +479,8 @@
     }
   </script>
   
+ <!-- CMT -->
+ 
 
 
 
