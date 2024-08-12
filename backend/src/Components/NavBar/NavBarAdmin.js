@@ -34,37 +34,35 @@ function parseJwt(token) {
     return JSON.parse(jsonPayload);
 }
 
-// Kiểm tra trạng thái đăng nhập và cập nhật giao diện
+// Kiểm tra trạng thái đăng nhập và cập nhật giao diện admin
 document.addEventListener('DOMContentLoaded', function() {
-    const accountMenuText = document.querySelector('.user-account-box .user-pic:nth-child(2)');
-    const logoutLink = document.querySelector('.sub-menu-link:last-child p');
+    const accountMenuText = document.querySelector('.account-box .account-info .account-name');
+    const logoutLink = document.querySelector('.account-box .logout-link');
 
     if (accountMenuText && logoutLink) {
-        checkLoginStatus();
+        checkAdminLoginStatus();
     } else {
         console.error("Required DOM elements not found");
     }
 });
 
-async function checkLoginStatus() {
+async function checkAdminLoginStatus() {
     let token = localStorage.getItem("accessToken") || sessionStorage.getItem("accessToken");
 
     // Kiểm tra token có tồn tại và in ra để kiểm tra
     console.log("Token:", token);
 
-    const accountMenuText = document.querySelector('.user-account-box .user-pic:nth-child(2)');
-    const logoutLink = document.querySelector('.sub-menu-link:last-child p');
+    const accountMenuText = document.querySelector('.account-box .account-info .account-name');
+    const logoutLink = document.querySelector('.account-box .logout-link');
 
     // Kiểm tra giá trị của token
     if (!token) {
         console.log("No token found in localStorage or sessionStorage");
-        accountMenuText.textContent = "Tài khoản";
+        accountMenuText.textContent = "Admin";
         logoutLink.textContent = "Login";
-        logoutLink.parentElement.href = "/frontend/pages/login.html";
+        logoutLink.href = "/frontend/pages/login.html";
         return;
     }
-
-    console.log("Token:", token);
 
     // Kiểm tra xem token có hết hạn không
     const decodedToken = parseJwt(token);
@@ -76,38 +74,34 @@ async function checkLoginStatus() {
             token = await refreshToken(); 
         } catch (error) {
             console.error("Could not refresh token:", error);
-            handleLogout(false);  
+            handleAdminLogout(false);  
             return;
         }
     }
 
-    // Gọi API để lấy thông tin người dùng với token mới
+    // Gọi API để lấy thông tin admin với token mới
     try {
-        const user = await fetchUserData(token);
-        console.log("User data:", user);
+        const user = await fetchAdminData(token);
+        console.log("Admin data:", user);
         if (user && user.username) {
-                accountMenuText.textContent = `Hi ${user.username}`;
-                accountMenuText.textContent = `Hi ${user.username}`;
-                // Thay đổi "Login" thành "Logout"
             accountMenuText.textContent = `Hi ${user.username}`;
-                // Thay đổi "Login" thành "Logout"
             logoutLink.textContent = "Logout";
-            logoutLink.parentElement.href = "#";
-            logoutLink.parentElement.addEventListener('click', function(event) {
+            logoutLink.href = "#";
+            logoutLink.addEventListener('click', function(event) {
                 event.preventDefault();
-                handleLogout(true);
+                handleAdminLogout(true);
             });
         }
     } catch (err) {
-        console.error("Error fetching user data:", err);
-        alert("Có lỗi xảy ra khi lấy thông tin người dùng.");
-        handleLogout(false);  // Đăng xuất nếu không thể lấy thông tin người dùng
+        console.error("Error fetching admin data:", err);
+        alert("Có lỗi xảy ra khi lấy thông tin admin.");
+        handleAdminLogout(false);  // Đăng xuất nếu không thể lấy thông tin admin
     }
 }
 
-async function fetchUserData(token) {
+async function fetchAdminData(token) {
     try {
-        const response = await fetch("http://localhost:8000/v1/user", {
+        const response = await fetch("http://localhost:8000/v1/user", { 
             method: "GET",
             headers: {
                 "Token": `Bearer ${token}`, 
@@ -115,22 +109,22 @@ async function fetchUserData(token) {
             }
         });
         if (response.ok) {
-            const userData = await response.json();
-            return userData;
+            const adminData = await response.json();
+            return adminData;
         } else if (response.status === 401) {
             console.error("Unauthorized: Invalid token.");
             throw new Error("Unauthorized");
         } else {
-            throw new Error("Failed to fetch user data");
+            throw new Error("Failed to fetch admin data");
         }
     } catch (error) {
-        console.error("Error fetching user data:", error);
+        console.error("Error fetching admin data:", error);
         throw error;
     }
 }
 
-// Hàm xử lý đăng xuất
-async function handleLogout(redirect) {
+// Hàm xử lý đăng xuất admin
+async function handleAdminLogout(redirect) {
     const token = localStorage.getItem("accessToken");
     try {
         const response = await fetch('http://localhost:8000/v1/auth/logout', {
@@ -148,15 +142,15 @@ async function handleLogout(redirect) {
             sessionStorage.removeItem("accessToken");
 
             // Cập nhật giao diện sau khi đăng xuất
-            const accountMenuText = document.querySelector('.user-account-box .user-pic:nth-child(2)');
-            const logoutLink = document.querySelector('.sub-menu-link:last-child p');
+            const accountMenuText = document.querySelector('.account-box .account-info .account-name');
+            const logoutLink = document.querySelector('.account-box .logout-link');
 
-            accountMenuText.textContent = "Tài khoản";
+            accountMenuText.textContent = "Admin";
             logoutLink.textContent = "Login";
-            logoutLink.parentElement.href = "/frontend/pages/login.html"; 
-            logoutLink.parentElement.removeEventListener('click', function(event) {
+            logoutLink.href = "/frontend/pages/login.html"; 
+            logoutLink.removeEventListener('click', function(event) {
                 event.preventDefault();
-                handleLogout(true);
+                handleAdminLogout(true);
             });
 
             // Giữ lại người dùng ở trang truyện chính hoặc chuyển hướng
@@ -176,7 +170,6 @@ async function handleLogout(redirect) {
         alert("Đã xảy ra lỗi khi đăng xuất.");
     }
 }
-
 
 // Hàm lưu token sau khi người dùng đăng nhập thành công
 function saveToken(accessToken) {
