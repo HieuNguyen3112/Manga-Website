@@ -10,7 +10,7 @@
 
   }
 .contain-main {
-  background-color: rgb(233, 225, 225);
+  background-color:#F4D9D0;
   margin-top: 0;
   padding-top: 0;
   /* display: flex;
@@ -143,11 +143,40 @@
 .story-detail-menu .button i {
   margin-right: 5px; 
 }
-
-.title-fluid {
-text-align: center;
+.user-pic {
+  border-radius: 50%;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-bottom: 60px !important;
+  /* margin-top: -40px; */
+}
+.user-account-box {
+  display: flex;
+  align-items: center;
+  width: 200px; /* Tăng chiều rộng của khung chứa */
+  height: 60px; /* Tăng chiều cao của khung chứa */
+  padding: 10px; /* Tạo khoảng trống bên trong khung chứa */
+ /* Màu nền, có thể thay đổi tùy ý */
+  border-radius: 10px; /* Góc bo tròn */
 }
 
+.user-account-box span {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: white;
+  margin-left: 10px;
+  cursor: pointer;
+}
+/* .user-account-box {
+  margin-bottom: 50px;
+} */
+.title-fluid {
+text-align: center;
+margin-top: -100px;
+}
+.title-adjust {
+  margin-top: -80px;
+}
 .right {
   flex: 1;
   margin-right: 20px;
@@ -193,6 +222,11 @@ text-align: center;
   
 
 /* GIOI THIEU */
+.gioi_thieu {
+  font-size:1.5em; /* Tăng kích thước chữ cho phần Giới thiệu */
+  /* font-weight: bold; In đậm chữ Giới thiệu */
+  color: #821919; /* Màu chữ của phần Giới thiệu */
+}
 
   .option img {
     width: 75px;
@@ -206,9 +240,9 @@ text-align: center;
   }
   
   h3 {
-    color: #af827d;
-    margin: 20px 0;
+    color: #b0625a;
     font-size: 25px;
+    /* margin-top: 30px; */
   }
   
   h5,
@@ -260,12 +294,219 @@ text-align: center;
     padding: 10px;
     border: none;
     outline: none;
-    background: #C1908B;
+    background: #F4D9D0;
     color: white;
     margin-top: 20%;
     border-radius: 30px;
   }
   
+/* DANH SACH CHUONG */
+.list-flex{
+  background-color:#F4D9D0;;
+ 
+}
+.list-gioithieu { 
+  background-color:#F4D9D0;
+  /* margin-top: -20px; */
+
+}
+.list-chapter {
+  border: 1px solid #000; /* Viền đen nhẹ */
+  border-radius: 5px; /* Bo góc nhẹ */
+  padding: 10px;
+  max-width: 1200px; /* Giới hạn chiều rộng */
+  margin: 0 auto; /* Canh giữa trang */
+  font-family: Arial, sans-serif; /* Font chữ */
+  background-color: rgb(255, 254, 254);
+  max-height: 600px;
+  overflow-y: auto;
+  margin: 0 auto;
+  margin-bottom: -21px;
+}
+
+.list-comment {
+  border: 1px solid #000; /* Viền đen nhẹ */
+  border-radius: 5px; /* Bo góc nhẹ */
+  padding: 10px;
+  max-width: 1200px; /* Giới hạn chiều rộng */
+  margin: 0 auto; /* Canh giữa trang */
+  font-family: Arial, sans-serif; /* Font chữ */
+  background-color: #FB8985;
+  max-height: 600px;
+  overflow-y: auto;
+  margin: 0 auto;
+  margin-top: 21px;
+}
+.works-chapter-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd; /* Đường kẻ dưới nhẹ */
+  padding: 10px 0;
+}
+
+.works-chapter-item:last-child {
+  border-bottom: none; /* Loại bỏ đường kẻ dưới của phần tử cuối */
+}
+
+.name-chap {
+  flex: 1;
+  text-align: left;
+}
+
+.time-chap {
+  text-align: right;
+  color: #555; /* Màu chữ nhạt hơn cho ngày phát hành */
+}
+
+a {
+  text-decoration: none;
+  color: #000; /* Màu chữ */
+}
+
+.contain-danhsach {
+  background-color: rgb(202, 186, 186);
+  margin-top: 0;
+  padding-top: 0;
+}
+/* COMENT */
+
+.comment-container {
+  background-color: #ffffff; /* Thay đổi nền để giống với comment-main */
+  border-radius: 5px; /* Bo góc nhẹ giống comment-main */
+  padding: 10px; /* Giữ nguyên padding */
+  max-width: 1200px; /* Cùng giới hạn chiều rộng như comment-main */
+  max-height: 600px;
+  overflow-y: auto;
+  margin: 0 auto;
+  margin-top: 2px; /* Canh giữa và làm margin-top giống với comment-main */
+  font-family: Arial, sans-serif;
+}
+
+
+.comment-flex
+{
+  font-size:1.5em; 
+  color: #892727; /* chữ bình luận
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Tạo khoảng cách giữa biểu tượng và chữ Bình Luận */
+}
+.fa, .fas {
+  /* font-weight: 900; */
+  margin-bottom: -10px;
+}
+
+.notify-fanpage {
+  margin-top: 10px;
+}
+.large-input {
+  font-size: 1.2em; /* Tăng kích thước chữ */
+  padding: 15px; /* Tăng khoảng cách bên trong */
+  height: auto;
+  width: 100%;
+  
+}
+.text {
+  width: 100%;
+}
+.comment-demo .form-control.large-input {
+  width: 100% !important;
+}
+.large-button {
+  font-size: 1.5em; /* Tăng kích thước chữ */
+  padding: 15px; /* Tăng khoảng cách bên trong */
+  height: auto; /* Đảm bảo chiều cao tự động */
+}
+
+/* Commetn */
+.outer-container {
+  background-color: #F4D9D0;
+  padding: 0;
+  /* margin-top:-10px; */
+}
+.comment-main {
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 10px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  margin-top: 0px;
+}
+.comment-container{
+ 
+  background-color: #ffffff; /* Thay đổi nền để giống với comment-main */
+  border-radius: 5px; /* Bo góc nhẹ giống comment-main */
+  padding: 10px; /* Giữ nguyên padding */
+  max-width: 1200px; /* Cùng giới hạn chiều rộng như comment-main */
+  max-height: 600px;
+  overflow-y: auto;
+  margin: 0 auto;
+  margin-top: 2px; /* Canh giữa và làm margin-top giống với comment-main */
+  font-family: Arial, sans-serif; 
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px; /* Khoảng cách giữa các bình luận */
+    margin-top: 10px;
+}
+.comment-main .content-wrapper {
+  margin-bottom: 60px; /* Điều chỉnh khoảng cách giữa các bình luận */
+}
+.img-frame {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 5px; /* Khoảng cách giữa khung và ảnh */
+  margin-right: 15px; /* Khoảng cách giữa ảnh và chữ */
+  box-shadow: 0px 0px 5px rgba(230, 31, 31, 0.1); /* Tạo bóng cho khung */
+  box-shadow: 0px 0px 10px 3px rgba(230, 31, 31, 0.1);
+
+}
+.img {
+  overflow: clip;
+}
+.cmt-img {
+  width: 100px; /* Thu nhỏ ảnh */
+  height: auto;
+}
+.img-and-text {
+  position: relative;
+}
+.noi-dung {
+  margin-left:50px;
+}
+.name_3 {
+  position: absolute;
+  white-space: nowrap;
+  left: 100%; 
+  margin-top: -35px;
+  font-size: 14px;
+  margin-left: -100px;
+}
+
+.action-comment {
+  display: flex; /* Sử dụng flexbox để sắp xếp các phần tử con */
+  align-items: center; /* Canh các phần tử sang bên trái */
+  margin-top: 10px; /* Khoảng cách giữa phần văn bản và action-comment */
+}
+.text-and-actions {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.like-comment,
+.reply-comment,
+.time {
+  margin-right: 10px; /* Khoảng cách giữa các phần tử */
+}
+
+
+
   @media only screen and (max-width:768px) {
     .container {
       max-width: 90%;
@@ -281,7 +522,7 @@ text-align: center;
       flex-direction: column;
     }
   }
-  
+
   @media only screen and (max-width:511px) {
     .container {
       max-width: 100%;
@@ -303,234 +544,71 @@ text-align: center;
       flex-wrap: wrap;
     }
   }
-/* 
-.main-wrap .product .product-details {
-    
-    flex-basis: 53%;
-    background: #fff;
-    box-shadow: -10px 5px 10px 10px rgb(0, 0, 0, 0.1);
-    padding: 40px 30px 40px 40px;
 
+
+
+  body.light-mode {
+    background-color: white;
+    color: black;
 }
-.main-wrap .product .product-details h2{
-     font-size: 25px;
-     font-weight: 600;
-     line-height: 35px;
-     margin-bottom: 15px;
-     color:#011627;
-
+#icon-fluid {
+    width: 30px; /* Chỉnh kích thước theo nhu cầu của bạn */
+    height: 30px; 
+    /* margin-bottom: 30px; */
 }
 
-.main-wrap .product .product-details .details h2{
-    font-size: 25px;
-    font-weight: 600;
-    line-height: 35px;
-    margin-bottom: 15px;
-    color:#011627;
+/* LIGHT DARK */  
+.icon.light-mode {
+    background-color: white;
+    color: black;
 }
 
-.main-wrap .product .product-details .details h3{
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 35px;
-    margin-bottom: 10px;
-    color:#011627;
+body.dark-mode {
+    background-color: black;
+    color: white;
 }
-.main-wrap .product .product-details .details h4{
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 35px;
-    text-transform: uppercase;
- 
-    color:#011627;
-} */
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* 
-section{
-    width: 100%;
-    height: 100vh;
-    background-image: url(image/bg.png);
-    background-size: cover;
-    background-position: center;
+body.dark-mode #icon {
+    content: url('image/sun.png');
 }
 
-section nav{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    box-shadow: 0 0 10px #089da1;
-    background: #fff;
-    position: fixed;
-    left: 0;
-    z-index: 100;
+body.light-mode #icon {
+    content: url('image/moon.png');
 }
 
-section nav .logo img{
-    width: 100px;
-    cursor: pointer;
-    margin: 8px 0;
+/* FOOTER */
+footer .brand{
+  font-family: var(--lg-font);
+  letter-spacing: 2px;
+}
+footer a{
+  -webkit-transition: color 0.3s ease;
+  -o-transition: color 0.3s ease;
+  transition: color 0.3s ease;
+}   
+footer a:hover{
+  color: var(--pink)!important;
 }
 
-section nav ul{
-    list-style: none;
+.btn-note:not(.nav-btns button):hover{
+  background-color: white;
+  color: #fff;
+  border-color: var(--pink);
 }
-
-section nav li{
-    display: inline-block;
-    padding: 0 10px;
+.btn-note:not(.nav-btns button){
+  background-color: #fff;
+  color: rgb(85, 85, 85);
+  padding: 10px 28px;
+  border-radius: 25px;
+  border: 1px solid rgb(85, 85, 85);
 }
-
-section nav li a{
-    text-decoration: none;
-    color: #000;
+.custom-small-text {
+  font-size: 1rem; /* Thay đổi giá trị này để điều chỉnh kích thước chữ */
 }
-
-section nav li a:hover{
-    color: #089da1;
+.fa-solid, .fas {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  margin-top: 25px;
 }
-
-section nav .social_icon i{
-    margin: 0 5px;
-    font-size: 18px;
+.fw-light {
+  margin-bottom: -28px;
 }
-
-section nav .social_icon i:hover{
-    color: #089da1;
-    cursor: pointer;
-}
-
-section .main{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    position: relative;
-    top: 10%;
-}
-
-section .main h1{
-    position: relative;
-    font-size: 55px;
-    top: 80px;
-    left: 25px;
-}
-
-section .main h1 span{
-    color: #089da1;
-}
-
-section .main p{
-    width: 650px;
-    text-align: justify;
-    line-height: 22px;
-    position: relative;
-    top: 125px;
-    left: 25px;
-}
-
-section .main .main_tag .main_btn{
-    background: #089da1;
-    padding: 10px 20px;
-    position: relative;
-    top: 200px;
-    left: 25px;
-    color: #fff;
-    text-decoration: none;
-}
-
-section .main .main_img img{
-    width: 780px;
-    position: relative;
-    top: 90px;
-    left: 20px;
-}
-
-
-
-
-/*services*/
-/* 
-.services{
-    width: 100%;
-    height: auto;
-    margin: 35px 0;
-}
-
-.services .services_box{
-    width: 95%;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.services .services_box .services_card{
-    text-align: center;
-    width: 310px;
-    height: auto;
-    box-shadow: 0 0 8px #089da1;
-    padding: 15px 10px;
-}
-
-.services .services_box .services_card i{
-    color: #089da1;
-    font-size: 45px;
-    margin-bottom: 15px;
-    cursor: pointer;
-}
-
-.services .services_box .services_card h3{
-    margin-bottom: 10px;
-}
- */
-
-
-
-/*about*/
-/* 
-.about{
-    width: 100%;
-    height: auto;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.about .about_image img{
-    width: 800px;
-}
-
-.about .about_tag h1{
-    font-size: 50px;
-    position: relative;
-    bottom: 35px;
-}
-
-.about .about_tag p{
-    line-height: 22px;
-    width: 650px;
-    text-align: justify;
-    margin-bottom: 15px;
-}
-
-.about .about_tag .about_btn{
-    padding: 10px 20px;
-    background: #089da1;
-    color: #fff;
-    text-decoration: none;
-    position: relative;
-    top: 50px;
-} */ 

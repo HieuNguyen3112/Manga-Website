@@ -9,20 +9,7 @@ body{
     font-family: var(--sm-font);
     background-color: white;
 }
-/* LOG OUT */
-/* .hero{
-    width: 100%;
-    min-height: 100vh;
-    background: #ecea;
-    color: #525252;
-}
-nav{ */
-/* * {
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', 'sans-serif';
-    box-sizing: border-box;
-} */
+
 
 .hero {
     width: 100%;
@@ -51,7 +38,14 @@ nav {
      font-family: "Playwrite CL", cursive;
      font-size: medium;
 }
-
+.fixed-top {
+    position: fixed;
+    top: -22px;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    
+}
 .user-account-box{
     width: 100px;
     height: 50px;
@@ -64,6 +58,7 @@ nav {
     border-radius: 50%;
     cursor: pointer;
     margin-left: 10px; /* Giảm khoảng cách bên trái */
+    margin-bottom: 40px;
 }
 
 nav ul {
@@ -203,6 +198,9 @@ nav ul li a {
 .bg-custom{
     color:#60333d;
 }
+.btn {
+    margin-right: 70px;
+}
 
 /* demo */
 body {
@@ -253,6 +251,7 @@ body.light-mode {
 #icon-fluid {
     width: 30px; /* Chỉnh kích thước theo nhu cầu của bạn */
     height: 30px; 
+    /* margin-bottom: 30px; */
 }
 
 
@@ -265,9 +264,15 @@ body.dark-mode {
     background-color: black;
     color: white;
 }
+body.dark-mode #icon {
+    content: url('image/sun.png');
+}
 
+body.light-mode #icon {
+    content: url('image/moon.png');
+}
 /* Optional: Change styles of other elements if needed */
-.navbar.light-mode {
+/* .navbar.light-mode {
     background-color: #f8f9fa;
 }
 
@@ -276,7 +281,7 @@ body.dark-mode {
 }
 .navbar-toggler-icon{
     color: #e5e5e5;
-}
+} */
 
 
 /* navbar */
@@ -432,6 +437,57 @@ body.dark-mode {
 .offers-content .btn{
     border-color: transparent!important;
 }
+/* YEU thích của bạn */
+.btn1:not(.nav-btns button) {
+    background-color: #fff;
+    color: rgb(85, 85, 85);
+    padding: 10px 28px;
+    border-radius: 25px;
+    border: 1px solid rgb(85, 85, 85);
+}
+
+.btn1 {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.special-list .btn1{
+    padding: 8px 20px!important;
+}
+/* Hover effect to change background color to red and text color to white */
+.btn1:not(.nav-btns button):hover{
+    background-color: var(--pink);
+    color: #5a3d3d;
+    border-color: var(--pink);
+}
+
+
+.carousel-item .btn1:hover{
+    border-color: var(--pink)!important;
+}
+
+.btn1:not(.nav-btns button){
+    background-color: #fff;
+    color: rgb(85, 85, 85);
+    padding: 10px 28px;
+    border-radius: 25px;
+    border: 1px solid rgb(85, 85, 85);
+}
 
 /* Truyện chữ img */
 
@@ -466,38 +522,14 @@ body.dark-mode {
     align-items: center;
 }
 #about {
-    background-color: #c5c5ce; /* Nền nhẹ */
-    border: 1px solid #7e6767; /* Đường viền nhẹ */
+    background-color: #F4D9D0; /* Nền nhẹ */
+    border: 1px solid #a17878; /* Đường viền nhẹ */
     border-radius: 10px; /* Bo góc đường viền */
     padding: 2rem; /* Padding cho toàn bộ phần */
     margin-bottom: 2rem; /* Margin phía dưới */
 }
 
-/* #about h2 {
-    font-size: 1.75rem;
-    font-weight: bold;
-    color: #343a40;
-}
 
-#about .lead {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-}
-
-#about p {
-    font-size: 1rem;
-    color: #554f4f;
-}
-
-#about .fw-bold {
-    font-weight: 700;
-}
-
-#about img.SPCHAY-img {
-    max-width: 100%;
-    border-radius: 10px; /* Bo góc hình ảnh */
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng cho hình ảnh */
-/* } */
 
 /* thống kê */
 
