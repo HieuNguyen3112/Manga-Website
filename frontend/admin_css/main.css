@@ -251,6 +251,7 @@ body.light-mode {
 #icon-fluid {
     width: 30px; /* Chỉnh kích thước theo nhu cầu của bạn */
     height: 30px; 
+    /* margin-bottom: 30px; */
 }
 
 
@@ -263,9 +264,15 @@ body.dark-mode {
     background-color: black;
     color: white;
 }
+body.dark-mode #icon {
+    content: url('image/sun.png');
+}
 
+body.light-mode #icon {
+    content: url('image/moon.png');
+}
 /* Optional: Change styles of other elements if needed */
-.navbar.light-mode {
+/* .navbar.light-mode {
     background-color: #f8f9fa;
 }
 
@@ -274,7 +281,7 @@ body.dark-mode {
 }
 .navbar-toggler-icon{
     color: #e5e5e5;
-}
+} */
 
 
 /* navbar */
@@ -429,6 +436,57 @@ body.dark-mode {
 }
 .offers-content .btn{
     border-color: transparent!important;
+}
+/* YEU thích của bạn */
+.btn1:not(.nav-btns button) {
+    background-color: #fff;
+    color: rgb(85, 85, 85);
+    padding: 10px 28px;
+    border-radius: 25px;
+    border: 1px solid rgb(85, 85, 85);
+}
+
+.btn1 {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.special-list .btn1{
+    padding: 8px 20px!important;
+}
+/* Hover effect to change background color to red and text color to white */
+.btn1:not(.nav-btns button):hover{
+    background-color: var(--pink);
+    color: #5a3d3d;
+    border-color: var(--pink);
+}
+
+
+.carousel-item .btn1:hover{
+    border-color: var(--pink)!important;
+}
+
+.btn1:not(.nav-btns button){
+    background-color: #fff;
+    color: rgb(85, 85, 85);
+    padding: 10px 28px;
+    border-radius: 25px;
+    border: 1px solid rgb(85, 85, 85);
 }
 
 /* Truyện chữ img */
