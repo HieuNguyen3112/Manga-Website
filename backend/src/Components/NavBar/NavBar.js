@@ -107,7 +107,7 @@ async function checkLoginStatus() {
 
 async function fetchUserData(token) {
     try {
-        const response = await fetch("http://localhost:8000/v1/user", {
+        const response = await fetch("http://localhost:8000/v1/user/me", {
             method: "GET",
             headers: {
                 "Token": `Bearer ${token}`, 
