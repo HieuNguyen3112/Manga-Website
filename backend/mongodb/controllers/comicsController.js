@@ -37,7 +37,7 @@ exports.createComic = [
                 image,
                 chapters: 0,// Đảm bảo chapters là chuỗi nếu schema yêu cầu
                 views: 0, // Lượt xem mặc định là 0
-                status: 'Ongoing', // Trạng thái mặc định là "Ongoing"
+                status: 'Đang cập nhật ', // Trạng thái mặc định là "Ongoing"
                 rating: 5 // Đánh giá mặc định
             });
 
