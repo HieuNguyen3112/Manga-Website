@@ -16,15 +16,31 @@ function showSection(section) {
     }
 
     // Ẩn modal khi chuyển sang phần khác
-    const editModal = document.getElementById("editModal");
-    if (editModal) {
-        editModal.style.display = 'none';
-    }
+    // const editModal = document.getElementById("editModal");
+    // if (editModal) {
+    //     editModal.style.display = 'none';
+    // }
     const deleteModal = document.getElementById("deleteModal");
     if (deleteModal) {
         deleteModal.style.display = 'none';
     }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Ensure the modal is hidden by default
+    const editModal = document.getElementById("editModal");
+    if (editModal) {
+        editModal.style.display = 'none';
+    }
+
+    // Add close button event listener
+    const closeModalButton = document.querySelector(".close");
+    if (closeModalButton) {
+        closeModalButton.addEventListener("click", () => {
+            editModal.style.display = 'none';
+        });
+    }
+});
 // Hàm để hiển thị modal
 function showEditModal() {
     const editModal = document.getElementById("editModal");

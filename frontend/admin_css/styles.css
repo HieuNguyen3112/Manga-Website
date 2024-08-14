@@ -134,9 +134,21 @@ body {
     background-color: #222630;
     color: #fff;
     width: 250px;
+    
     padding: 20px;
     box-sizing: border-box;
 }
+
+
+
+#quanlychuong {
+    max-width: 1200px; /* Đặt chiều rộng tối đa */
+    background-color: #ffffff; /* Màu nền để tạo sự tương phản */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Tạo bóng cho đẹp */
+}
+
 
 .sidebar h2 {
     text-align: start;
@@ -403,7 +415,6 @@ html {
 
 /* Modal */
 .modal {
-    display: none;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -569,4 +580,29 @@ textarea {
 
 #saveAdd:hover {
     background-color: #45a049; /* Darker green on hover */
+}
+.chapter-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.chapter-header img {
+    width: 200px;
+    height: auto;
+    margin-right: 20px;
+}
+.chapter-header div {
+    flex: 1;
+}
+.chapters table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+.chapters th, .chapters td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+.chapters th {
+    background-color: #f2f2f2;
 }

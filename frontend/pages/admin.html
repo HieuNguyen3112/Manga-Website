@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Quản lý truyện</title>
     <link rel="stylesheet" href="../admin_css/styles.css">
-    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script><body>
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+</head>
+
+<body>
     <div class="sidebar">
         <h2>MEOMEO</h2>
         <h3>Bảng điều khiển</h3>
@@ -14,9 +18,12 @@
             <li>
                 <a href="#" class="toggle-menu"><i class="fas fa-book"></i> Truyện <span class="arrow down"></span></a>
                 <ul class="submenu hidden">
-                    <li><a href="#" onclick="showSection('quanlytruyen')"><i class="fas fa-circle"></i> Danh sách truyện</a></li>
-                    <li><a href="#" onclick="showSection('quanlychuong')"><i class="fas fa-circle"></i> Danh sách chương</a></li>
-                    <li><a href="#" onclick="showSection('themmoitruyen')"><i class="fas fa-circle"></i> Thêm mới truyện</a></li>
+                    <li><a href="#" onclick="showSection('quanlytruyen')"><i class="fas fa-circle"></i> Danh sách
+                            truyện</a></li>
+                    <li><a href="#" onclick="showSection('quanlychuong')"><i class="fas fa-circle"></i> Danh sách
+                            chương</a></li>
+                    <li><a href="#" onclick="showSection('themmoitruyen')"><i class="fas fa-circle"></i> Thêm mới
+                            truyện</a></li>
                 </ul>
             </li>
             <li><a href="#" onclick="showSection('thongke')"><i class="fas fa-chart-bar"></i> Thống Kê</a></li>
@@ -41,7 +48,7 @@
             </div>
         </header>
         <main>
-            <section id="tongquan" class="section">
+            <section id="tongquan" class="section hidden">
                 <div class="stats">
                     <div class="stat-item">
                         <div class="stat-icon book">
@@ -108,31 +115,36 @@
                 <div id="pagination">
                     <span id="pageInfo"></span>
                 </div>
+                <!-- Modal Structure -->
                 <div id="editModal" class="modal hidden">
                     <div class="modal-content">
                         <span class="close">&times;</span>
-                        <h2>Chỉnh sửa truyện</h2>
                         <form id="editForm">
+                            <!-- Form content goes here -->
                             <label for="editHinhAnh">Hình ảnh:</label>
-                            <input type="text" id="editHinhAnh" name="hinhAnh"><br><br>
-                            
+                            <input type="file" id="editHinhAnh" name="editHinhAnh">
+
                             <label for="editTenTruyen">Tên truyện:</label>
-                            <input type="text" id="editTenTruyen" name="tenTruyen"><br><br>
-                            
+                            <input type="text" id="editTenTruyen" name="editTenTruyen">
+
                             <label for="editDanhMuc">Danh mục:</label>
-                            <input type="text" id="editDanhMuc" name="danhMuc"><br><br>
-                            
-                            <label for="editSoChuong">Số chương:</label>
-                            <input type="number" id="editSoChuong" name="soChuong"><br><br>
-                            
+                            <input type="text" id="editDanhMuc" name="editDanhMuc">
+
+                            <!-- <label for="editSoChuong">Số chương:</label>
+                            <input type="number" id="editSoChuong" name="editSoChuong"> -->
+
                             <label for="editTacgia">Tác giả:</label>
-                            <input type="text" id="editTacgia" name="tacgia"><br><br>
-                            
+                            <input type="text" id="editTacgia" name="editTacgia">
+
+                            <label for="editMoTaNgan">Mô tả ngắn:</label>
+                            <textarea id="editMoTaNgan" name="editMoTaNgan"></textarea>
+
                             <button type="button" id="saveEdit">Lưu</button>
                         </form>
                     </div>
                 </div>
-                <div id="deleteModal" class="modal modal hidden">
+
+                <div id="deleteModal" class="modal hidden">
                     <div class="modal-content">
                         <span class="close" id="closeDeleteModal">&times;</span>
                         <p>Bạn có chắc chắn muốn xóa truyện này không?</p>
@@ -143,42 +155,35 @@
             </section>
             <section id="quanlychuong" class="section hidden">
                 <div class="chapter-header">
-                    <button class="add-btn">Thêm chương mới</button>
+                    <img id="chapterImage" src="../image/AKame.jpg" alt="Truyện Image">
+                    <div>
+                        <h1 id="chapterTitle"></h1>
+                        <p id="chapterAuthor"><strong>Tác giả:</strong> </p>
+                        <p id="chapterStatus"><strong>Trạng thái:</strong> </p>
+                        <p id="chapterViews"><strong>Lượt xem:</strong></p>
+                        <p id="chapterDescription"><strong>Mô tả:</strong></p>
+                    </div>
                 </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Số chương</th>
-                            <th>Tiêu đề chương</th>
-                            <th>Truyện</th>
-                            <th>Trạng thái</th>
-                            <th>Ngày cập nhật</th>
-                            <th>Thao tác</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Chương mở đầu</td>
-                            <td>Thanh gươm diệt quỷ</td>
-                            <td>Đã xuất bản</td>
-                            <td>2024-07-19</td>
-                            <td>
-                                <button class="edit-btn"><i class="fas fa-edit"></i></button>
-                                <button class="delete-btn"><i class="fas fa-trash-alt"></i></button>
-                                <button class="view-btn"><i class="fas fa-eye"></i></button>
-                            </td>
-                        </tr>
-                        <!-- Thêm các hàng chương khác tại đây -->
-                    </tbody>
-                </table>
+                <div class="chapters">
+                    <h2>Danh Sách Chương</h2>
+                    <button class="add-btn">Thêm chương mới</button>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tên chương</th>
+                                <th>Ngày đăng</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="chapterTableBody"></tbody>
+                    </table>
+                </div>
             </section>
             <section id="themmoitruyen" class="section hidden">
-                <h2>Thêm truyện mới</h2>
-                <form id="addForm">
+                <form id="addForm" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="addHinhAnh">Hình ảnh:</label>
-                        <input type="file" id="addHinhAnh" name="hinhAnh">
+                        <input type="file" id="addHinhAnh" name="hinhAnh" >
                     </div>
                     <div class="form-group">
                         <label for="addTenTruyen">Tên truyện:</label>
@@ -189,27 +194,20 @@
                         <input type="text" id="addDanhMuc" name="danhMuc">
                     </div>
                     <div class="form-group">
-                        <label for="addSoChuong">Số chương:</label>
-                        <input type="number" id="addSoChuong" name="soChuong">
-                    </div>
-                    <div class="form-group">
                         <label for="addTacgia">Tác giả:</label>
                         <input type="text" id="addTacgia" name="tacgia">
                     </div>
                     <div class="form-group">
                         <label for="addMoTaNgan">Mô tả ngắn:</label>
-                        <textarea id="addMoTaNgan" name="moTaNgan"></textarea> <!-- textarea để sử dụng CKEditor -->
+                        <input type="text" id="addMoTaNgan" name="moTaNgan">
                     </div>
                     <div class="form-group">
-                        <label for="addNoiDungTruyen">Nội dung truyện:</label>
-                        <textarea id="addNoiDungTruyen" name="noiDungTruyen"></textarea> <!-- textarea để sử dụng CKEditor -->
-                    </div>
-                    <div class="form-group">
-                        <button type="button" id="saveAdd">Lưu</button>
+                        <button type="submit" id="saveAddForm">Lưu</button>
+
                     </div>
                 </form>
+                
             </section>
-            
             <section id="thongke" class="section hidden">
                 <h2>Thống Kê</h2>
                 <table>
@@ -249,16 +247,18 @@
     </div>
     <script src="../js/admin_js/code.js"></script>
     <script src="../js/admin_js/codequanlytruyen.js"></script>
+    <script src="../js/admin_js/codequanlychuong.js"></script>
     <script src="../js/admin_js/codethongke.js"></script>
     <script src="../js/admin_js/codethanhvien.js"></script>
     <script>
         // Khởi tạo CKEditor
-        document.addEventListener('DOMContentLoaded', function() {
-            CKEDITOR.replace('addMoTaNgan');
+        document.addEventListener('DOMContentLoaded', function () {
             CKEDITOR.replace('addNoiDungTruyen');
         });
+
     </script>
 
     <script src="/backend//src/Components/NavBar/NavBarAdmin.js"></script>
 </body>
+
 </html>
