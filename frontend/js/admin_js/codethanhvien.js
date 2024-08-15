@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const registrationDateCell = document.createElement('td');
             if (user.createdAt) {
                 const registrationDate = new Date(user.createdAt);
-                if (!isNaN(registrationDate)) {
+                if (!isNaN(registrationDate.getTime())) {
                     registrationDateCell.textContent = registrationDate.toLocaleDateString('vi-VN', {
                         day: '2-digit',
                         month: '2-digit',
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Cột vai trò
             const roleCell = document.createElement('td');
-            roleCell.textContent = (user.admin === true || user.admin === 'true') ? 'Admin' : 'Độc giả';
+            roleCell.textContent = user.admin && user.admin === true ? 'Admin' : 'Độc giả';
             row.appendChild(roleCell);
 
             memberTableBody.appendChild(row);
