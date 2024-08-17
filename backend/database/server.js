@@ -1,100 +1,34 @@
+require('dotenv').config(); 
+
 const express = require('express');
+const mongoose = require('mongoose');
 const cors = require('cors');
 const multer = require('multer');
-const { MongoClient, ObjectId } = require('mongodb');
+const path = require('path');
 
 const app = express();
-const upload = multer({ dest: 'uploads/' }); // Configure multer
+const port = 3000;
 
-const url = "mongodb+srv://vinh:0798595814@cluster0.q9lnnq3.mongodb.net/comicDB?retryWrites=true&w=majority&appName=Cluster0";
-const options = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 5000, // Increase timeout to 5000ms (5 seconds)
-};
-const mongoClient = new MongoClient(url, options);
-
+// Middleware để phân tích (parse) JSON
 app.use(express.json());
 app.use(cors());
+app.use('/backend/database/uploads', express.static(path.join(__dirname, 'uploads')));
 
-app.get('/api/comics', async (req, res) => {
-    try {
-        await mongoClient.connect();
-        const collection = mongoClient.db("comicDB").collection("comics");
-        const comics = await collection.find({}).toArray();
-        res.json(comics);
-    } catch (err) {
-        console.error("Error fetching comics:", err);
-        res.status(500).send(err.message);
-    } finally {
-        await mongoClient.close();
-    }
-});
+// Kết nối MongoDB
+const mongoUri = process.env.MONGOB_SERVER; 
 
-app.post('/api/comics', upload.single('image'), async (req, res) => {
-    try {
-        await mongoClient.connect();
-        const collection = mongoClient.db("comicDB").collection("comics");
-        const { title, category, chapters, author, moTaNgan, noiDungTruyen } = req.body;
-        const image = req.file ? `/uploads/${req.file.filename}` : '';
+mongoose.connect(mongoUri)
+    .then(() => {
+        console.log('Kết nối MongoDB thành công');
+    })
+    .catch(err => {
+        console.error('Lỗi kết nối', err);
+    });
 
-        const result = await collection.insertOne({ image, title, category, chapters, author, moTaNgan, noiDungTruyen });
+// Thiết lập các route
+app.use('/api/comics', require('../mongodb/Router/comics'));
+app.use('/api/chapters', require('../mongodb/Router/chapters'));
 
-        res.status(201).json(result.ops[0]);
-    } catch (err) {
-        console.error("Error creating comic:", err);
-        res.status(500).send(err.message);
-    } finally {
-        await mongoClient.close();
-    }
-});
-
-app.put('/api/comics/:id', async (req, res) => {
-    try {
-        await mongoClient.connect();
-        const collection = mongoClient.db("comicDB").collection("comics");
-        const { id } = req.params;
-        const { image, title, category, chapters, author } = req.body;
-
-        const result = await collection.updateOne({ _id: new ObjectId(id) }, {
-            $set: { image, title, category, chapters, author }
-        });
-
-        if (result.modifiedCount > 0) {
-            const updatedComic = await collection.findOne({ _id: new ObjectId(id) });
-            res.json(updatedComic);
-        } else {
-            res.status(404).send("Comic not found or not updated");
-        }
-    } catch (err) {
-        console.error("Error updating comic:", err);
-        res.status(500).send(err.message);
-    } finally {
-        await mongoClient.close();
-    }
-});
-
-app.delete('/api/comics/:id', async (req, res) => {
-    try {
-        await mongoClient.connect();
-        const collection = mongoClient.db("comicDB").collection("comics");
-        const { id } = req.params;
-
-        const result = await collection.deleteOne({ _id: new ObjectId(id) });
-
-        if (result.deletedCount > 0) {
-            res.sendStatus(204); // No content
-        } else {
-            res.status(404).send("Comic not found");
-        }
-    } catch (err) {
-        console.error("Error deleting comic:", err);
-        res.status(500).send(err.message);
-    } finally {
-        await mongoClient.close();
-    }
-});
-
-app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+app.listen(port, () => {
+    console.log(`Server đang chạy trên cổng ${port}`);
 });
