@@ -1,3 +1,5 @@
+require('dotenv').config(); 
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cloudinary = require('cloudinary').v2;
@@ -33,6 +35,19 @@ mongoose.connect('mongodb+srv://vinh:0798595814@cluster0.q9lnnq3.mongodb.net/com
 }).catch(err => {
   console.error('Lỗi kết nối MongoDB:', err);
 });
+
+app.use('/backend/database/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Kết nối MongoDB
+const mongoUri = process.env.MONGOB_SERVER; 
+
+mongoose.connect(mongoUri)
+    .then(() => {
+        console.log('Kết nối MongoDB thành công');
+    })
+    .catch(err => {
+        console.error('Lỗi kết nối', err);
+    });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
