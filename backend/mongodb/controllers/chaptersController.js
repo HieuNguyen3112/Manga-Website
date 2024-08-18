@@ -2,7 +2,10 @@ const Comic = require('../models/comics_model');
 const Chapter = require('../models/chapters_model');
 
 // Tạo mới một chapter
+// Đảm bảo rằng comicId được nhận đúng
 exports.createChapter = async (req, res) => {
+    console.log('Received comicId:', req.body.comicId);  // Kiểm tra comicId từ yêu cầu
+
     const { comicId, chapterNumber, chapterTitle, content } = req.body;
     try {
         const comic = await Comic.findById(comicId);
@@ -29,9 +32,11 @@ exports.createChapter = async (req, res) => {
 
         res.status(201).json(savedChapter);
     } catch (error) {
+        console.error('Error in createChapter:', error);  // Kiểm tra lỗi nếu có
         res.status(400).json({ message: error.message });
     }
 };
+
 
 // Lấy tất cả chapters
 exports.getChapters = async (req, res) => {

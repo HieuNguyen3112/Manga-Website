@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const chapterController = require('../controllers/chaptersController');
+const chaptersController = require('../controllers/chaptersController');
 
-router.post('/', chapterController.createChapter);
-router.get('/', chapterController.getChapters);
-router.get('/:id', chapterController.getChapterById);
-router.put('/:id', chapterController.updateChapter);
-router.delete('/:id', chapterController.deleteChapter);
+// Định nghĩa route cho chapters
+router.post('/', chaptersController.createChapter);
+router.get('/', chaptersController.getChapters);
+router.get('/:id', chaptersController.getChapterById);
+router.put('/:id', chaptersController.updateChapter);
+router.delete('/:id', chaptersController.deleteChapter);
 
 module.exports = router;

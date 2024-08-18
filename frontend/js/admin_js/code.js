@@ -15,41 +15,39 @@ function showSection(section) {
         selectedSection.classList.remove('hidden');
     }
 
-    // Ẩn modal khi chuyển sang phần khác
-    // const editModal = document.getElementById("editModal");
-    // if (editModal) {
-    //     editModal.style.display = 'none';
-    // }
-    const deleteModal = document.getElementById("deleteModal");
-    if (deleteModal) {
-        deleteModal.style.display = 'none';
-    }
+    // Ẩn các modal khi chuyển sang phần khác
+    closeEditModal();
+    closeDeleteModal();
+    closeAddChapterModal();
 }
 
+// Đảm bảo modal bị ẩn khi trang tải
 document.addEventListener('DOMContentLoaded', () => {
-    // Ensure the modal is hidden by default
     const editModal = document.getElementById("editModal");
     if (editModal) {
         editModal.style.display = 'none';
     }
 
-    // Add close button event listener
-    const closeModalButton = document.querySelector(".close");
-    if (closeModalButton) {
-        closeModalButton.addEventListener("click", () => {
-            editModal.style.display = 'none';
-        });
+    const deleteModal = document.getElementById("deleteModal");
+    if (deleteModal) {
+        deleteModal.style.display = 'none';
+    }
+
+    const addChapterModal = document.getElementById("addChapterModal");
+    if (addChapterModal) {
+        addChapterModal.style.display = 'none';
     }
 });
-// Hàm để hiển thị modal
+
+// Hiển thị modal chỉnh sửa
 function showEditModal() {
     const editModal = document.getElementById("editModal");
     if (editModal) {
-        editModal.style.display = 'flex'; // Hiển thị modal
+        editModal.style.display = 'flex';
     }
 }
 
-// Hàm để đóng modal
+// Đóng modal chỉnh sửa
 function closeEditModal() {
     const editModal = document.getElementById("editModal");
     if (editModal) {
@@ -57,19 +55,15 @@ function closeEditModal() {
     }
 }
 
-// Thêm sự kiện đóng modal khi nhấn nút đóng
-const closeModalButton = document.querySelector(".close");
-if (closeModalButton) {
-    closeModalButton.addEventListener("click", closeEditModal);
-}
-
+// Hiển thị modal xóa
 function showDeleteModal() {
     const deleteModal = document.getElementById('deleteModal');
     if (deleteModal) {
-        deleteModal.style.display = 'none';
+        deleteModal.style.display = 'flex';
     }
 }
 
+// Đóng modal xóa
 function closeDeleteModal() {
     const deleteModal = document.getElementById('deleteModal');
     if (deleteModal) {
@@ -77,30 +71,42 @@ function closeDeleteModal() {
     }
 }
 
-// Thêm sự kiện đóng modal khi nhấn nút đóng
-const confirmButton = document.getElementById('confirmDelete');
-const cancelButton = document.getElementById('cancelDelete');
+// Hiển thị modal thêm chương
+function showAddChapterModal() {
+    const modal = document.getElementById('addChapterModal');
+    if (modal) {
+        modal.style.display = 'flex';
+    }
+}
 
-if (confirmButton) {
-    confirmButton.onclick = () => {
-        // Thêm mã xóa truyện ở đây
+// Đóng modal thêm chương
+function closeAddChapterModal() {
+    const modal = document.getElementById('addChapterModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Sự kiện cho nút đóng của các modal
+document.querySelectorAll('.close').forEach(button => {
+    button.addEventListener('click', () => {
+        closeEditModal();
         closeDeleteModal();
-    };
-}
-
-if (cancelButton) {
-    cancelButton.onclick = closeDeleteModal;
-}
+        closeAddChapterModal();
+    });
+});
 
 // Đóng modal khi nhấn bên ngoài modal
-// window.onclick = function(event) {
-//     const deleteModal = document.getElementById('deleteModal');
-//     if (event.target == deleteModal) {
-//         deleteModal.style.display = 'none';
-//     }
-// }
+window.onclick = function(event) {
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    });
+};
 
-// Thêm sự kiện cho nút truyện để mở rộng hoặc thu gọn submenu
+// Sự kiện mở rộng hoặc thu gọn submenu
 document.querySelector('.toggle-menu').addEventListener('click', function(event) {
     event.preventDefault();
     const submenu = document.querySelector('.submenu');
@@ -116,7 +122,8 @@ document.querySelector('.toggle-menu').addEventListener('click', function(event)
         arrow.classList.add('down');
     }
 });
-// Đặt đoạn mã này vào code.js hoặc một file JavaScript thích hợp khác
+
+// Hiển thị dropdown người dùng
 document.addEventListener('DOMContentLoaded', function() {
     var userDropdown = document.querySelector('.user-dropdown span');
     var dropdownContent = document.querySelector('.dropdown-content');

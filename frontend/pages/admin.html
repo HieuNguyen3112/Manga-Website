@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Quản lý truyện</title>
     <link rel="stylesheet" href="../admin_css/styles.css">
-    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
+
 </head>
 
 <body>
@@ -20,8 +21,8 @@
                 <ul class="submenu hidden">
                     <li><a href="#" onclick="showSection('quanlytruyen')"><i class="fas fa-circle"></i> Danh sách
                             truyện</a></li>
-                    <li><a href="#" onclick="showSection('quanlychuong')"><i class="fas fa-circle"></i> Danh sách
-                            chương</a></li>
+                    <!-- <li><a href="#" onclick="showSection('quanlychuong')"><i class="fas fa-circle"></i> Danh sách
+                            chương</a></li> -->
                     <li><a href="#" onclick="showSection('themmoitruyen')"><i class="fas fa-circle"></i> Thêm mới
                             truyện</a></li>
                 </ul>
@@ -35,7 +36,7 @@
             <h1>Quản lý truyện</h1>
             <div class="user-info">
                 <div class="user-dropdown">
-                    <img src="../image/AKame.jpg" alt="User Avatar">
+                    <img src="/api/comics/files/1723695591004.jpg"" alt=" User Avatar">
                     <div class="dropdown-content">
                         <img src="../image/AKame.jpg" alt="User Avatar">
                         <div class="additional-buttons">
@@ -155,7 +156,7 @@
             </section>
             <section id="quanlychuong" class="section hidden">
                 <div class="chapter-header">
-                    <img id="chapterImage" src="../image/AKame.jpg" alt="Truyện Image">
+                    <img id="chapterImage" src="/file/1723742432493.jpg" alt="Truyện Image">
                     <div>
                         <h1 id="chapterTitle"></h1>
                         <p id="chapterAuthor"><strong>Tác giả:</strong> </p>
@@ -166,7 +167,7 @@
                 </div>
                 <div class="chapters">
                     <h2>Danh Sách Chương</h2>
-                    <button class="add-btn">Thêm chương mới</button>
+                    <button class="add-btn" onclick="showAddChapterModal()">Thêm chương mới</button>
                     <table>
                         <thead>
                             <tr>
@@ -175,38 +176,56 @@
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
-                        <tbody id="chapterTableBody"></tbody>
+                        <tbody id="chapterTableBody" data-comic-id="66bb8a7cec174ef949c35733">
                     </table>
                 </div>
             </section>
+
+            <!-- Modal thêm chương mới -->
+            <section id="addChapterModal" class="modal hidden">
+                <div class="modal-content">
+                    <span class="close" onclick="closeAddChapterModal()">&times;</span>
+                    <form id="addChapterForm">
+                        <div class="form-group">
+                            <label for="chapterTitle">Tên chương:</label>
+                            <input type="text" id="chapterTitle" name="chapterTitle">
+                        </div>
+                        <div class="form-group">
+                            <label for="chapterContent">Nội dung chương:</label>
+                            <textarea id="chapterContent" name="chapterContent"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" id="saveChapterForm">Lưu chương</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
             <section id="themmoitruyen" class="section hidden">
                 <form id="addForm" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="addHinhAnh">Hình ảnh:</label>
-                        <input type="file" id="addHinhAnh" name="hinhAnh" >
-                    </div>
-                    <div class="form-group">
-                        <label for="addTenTruyen">Tên truyện:</label>
-                        <input type="text" id="addTenTruyen" name="tenTruyen">
-                    </div>
-                    <div class="form-group">
-                        <label for="addDanhMuc">Danh mục:</label>
-                        <input type="text" id="addDanhMuc" name="danhMuc">
-                    </div>
-                    <div class="form-group">
-                        <label for="addTacgia">Tác giả:</label>
-                        <input type="text" id="addTacgia" name="tacgia">
-                    </div>
-                    <div class="form-group">
-                        <label for="addMoTaNgan">Mô tả ngắn:</label>
-                        <input type="text" id="addMoTaNgan" name="moTaNgan">
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" id="saveAddForm">Lưu</button>
 
-                    </div>
-                </form>
-                
+                    <label for="addHinhAnh">Hình ảnh</label>
+                    <input type="file" id="addHinhAnh" name="image">
+
+                    <label for="addTenTruyen">Tên truyện</label>
+                    <input type="text" id="addTenTruyen" name="addTenTruyen">
+
+                    <label for="addDanhMuc">Danh mục</label>
+                    <input type="text" id="addDanhMuc" name="addDanhMuc">
+
+                    <label for="addTacgia">Tác giả</label>
+                    <input type="text" id="addTacgia" name="addTacgia">
+
+                    <label for="addMoTaNgan">Mô tả ngắn</label>
+                    <textarea id="addMoTaNgan" name="addMoTaNgan"></textarea>
+
+
+
+                    <button type="submit" id="saveAddForm" class="btn-submit">Thêm Truyện</button>                </form>
+            </section>
+
+
+
             </section>
             <section id="thongke" class="section hidden">
                 <h2>Thống Kê</h2>
@@ -250,13 +269,8 @@
     <script src="../js/admin_js/codequanlychuong.js"></script>
     <script src="../js/admin_js/codethongke.js"></script>
     <script src="../js/admin_js/codethanhvien.js"></script>
-    <script>
-        // Khởi tạo CKEditor
-        document.addEventListener('DOMContentLoaded', function () {
-            CKEDITOR.replace('addNoiDungTruyen');
-        });
 
-    </script>
+
 
     <script src="/backend//src/Components/NavBar/NavBarAdmin.js"></script>
 </body>

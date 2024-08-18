@@ -1,8 +1,40 @@
+let moTaNganEditor;
+let ContentAdd;
+let editMoTaNgan;
+
+document.addEventListener('DOMContentLoaded', function () {
+    ClassicEditor
+        .create(document.querySelector('#addMoTaNgan'))
+        .then(editor => {
+            moTaNganEditor = editor;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    ClassicEditor
+        .create(document.querySelector('#chapterContent'))
+        .then(editor => {
+            ContentAdd = editor;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    ClassicEditor
+        .create(document.querySelector('#editMoTaNgan'))
+        .then(editor => {
+            editMoTaNgan = editor;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+});
 
 class HangTruyen {
-    constructor(_id, image, title, category, chapters, author, description,views, status, rating) {
+    constructor(_id, image, title, category, chapters, author, description, views, status, rating, creationDate, updateDate) {
         this._id = _id;
-        this.image = image;
+        this.imageUrl = image;  // Sử dụng đúng tên biến `image`
         this.title = title;
         this.category = category;
         this.chapters = chapters;
@@ -11,6 +43,8 @@ class HangTruyen {
         this.views = views;
         this.status = status;
         this.rating = rating;
+        this.creationDate = creationDate;
+        this.updateDate = updateDate;
     }
 
     taoNut(iconClass, tieuDe) {
@@ -29,10 +63,11 @@ class HangTruyen {
         // Ô hình ảnh
         const cellHinhAnh = document.createElement('td');
         const Img = document.createElement('img');
-        Img.src = this.image ;// Không cần chuyển đổi Base64 nữa
-        Img.style.width = "70px"; // Set image size
+        Img.src = this.imageUrl;  // Sử dụng URL từ Cloudinary
+        Img.style.width = "70px";
         cellHinhAnh.appendChild(Img);
         Hang.appendChild(cellHinhAnh);
+
         // Ô tên truyện
         const cellTenTruyen = document.createElement('td');
         cellTenTruyen.textContent = this.title;
@@ -75,45 +110,57 @@ class HangTruyen {
     moChinhSua() {
         const modal = document.getElementById('editModal');
         const form = document.getElementById('editForm');
+
+        // Cập nhật giá trị ban đầu của form
         form.editHinhAnh.value = ""; // Reset giá trị hình ảnh
         form.editTenTruyen.value = this.title;
         form.editDanhMuc.value = this.category;
         form.editTacgia.value = this.author !== "undefined" ? this.author : "";
-        form.editMoTaNgan.value = this.description;
+        editMoTaNgan.setData(this.description); // Cập nhật nội dung CKEditor với mô tả hiện tại
+
         modal.style.display = 'block';
-    
+
         document.getElementById('saveEdit').onclick = async () => {
-            const file = form.editHinhAnh.files[0];
+            const file = form.editHinhAnh.files[0]; // Lấy file ảnh từ form
             const formData = new FormData();
-    
+            const updatedDescription = editMoTaNgan.getData();
+
+            // Kiểm tra nếu có ảnh mới thì thêm vào formData, nếu không thì thêm URL ảnh cũ
             if (file) {
-                formData.append('image', file); // Nếu có hình ảnh mới, thêm vào formData
+                formData.append('image', file); // Thêm ảnh mới vào formData
+            } else {
+                formData.append('imageUrl', this.imageUrl); // Giữ nguyên URL của ảnh cũ
             }
+
+            // Thêm các trường khác vào formData
             formData.append('title', form.editTenTruyen.value);
             formData.append('category', form.editDanhMuc.value);
             formData.append('author', form.editTacgia.value);
-            formData.append('description', form.editMoTaNgan.value);
-    
+            formData.append('description', updatedDescription);
+            formData.append('updateDate', new Date().toISOString());
+
             try {
                 const response = await fetch(`http://localhost:3000/api/comics/${this._id}`, {
                     method: 'PUT',
                     body: formData // Gửi dữ liệu dưới dạng form data
                 });
-    
+
                 if (response.ok) {
                     const updatedComic = await response.json();
                     danhSachTruyen = danhSachTruyen.map(truyen =>
                         truyen._id === updatedComic._id ? new HangTruyen(
                             updatedComic._id,
-                            file ? `/uploads/${updatedComic.image.filename}` : this.image, // Nếu có hình ảnh mới, cập nhật đường dẫn, nếu không giữ nguyên
+                            updatedComic.imageUrl || this.imageUrl, // Đảm bảo hình ảnh được cập nhật đúng
                             updatedComic.title,
                             updatedComic.category,
-                            this.chapters,
+                            truyen.chapters,
                             updatedComic.author,
                             updatedComic.description,
-                            updatedComic.views,
-                            updatedComic.status,
-                            updatedComic.rating
+                            truyen.views,
+                            truyen.status,
+                            truyen.rating,
+                            truyen.creationDate,
+                            updatedComic.updateDate
                         ) : truyen
                     );
                     hienThiBang(trangHienTai);
@@ -126,19 +173,22 @@ class HangTruyen {
             }
         };
     }
-    
+
+
 
     moXoa() {
         const deleteModal = document.getElementById('deleteModal');
         deleteModal.style.display = 'block';
-
+    
         document.getElementById('confirmDelete').onclick = async () => {
             try {
+                // Gửi yêu cầu DELETE để xóa truyện và hình ảnh trên Cloudinary
                 const response = await fetch(`http://localhost:3000/api/comics/${this._id}`, {
                     method: 'DELETE'
                 });
-
+    
                 if (response.ok) {
+                    // Cập nhật lại danh sách và giao diện sau khi xóa
                     danhSachTruyen = danhSachTruyen.filter(truyen => truyen._id !== this._id);
                     hienThiBang(trangHienTai);
                     deleteModal.style.display = 'none';
@@ -149,90 +199,111 @@ class HangTruyen {
                 console.error("Lỗi xóa:", err);
             }
         };
-
+    
         document.getElementById('cancelDelete').onclick = () => {
             deleteModal.style.display = 'none';
         };
-
+    
         document.getElementById('closeDeleteModal').onclick = () => {
             deleteModal.style.display = 'none';
         };
-
+    
         window.onclick = (event) => {
             if (event.target == deleteModal) {
                 deleteModal.style.display = 'none';
             }
         };
     }
+    
+    
 
     async moXem() {
-        updateChapterHeader(this.image, this.title, this.author, this.status, this.views,this.description);
+        updateChapterHeader(this.imageUrl, this.title, this.author, this.status, this.views, this.description, this._id);
         await hienThiDanhSachChuong(this._id);
         showSection('quanlychuong');
     }
 }
+
+// Add Comic (Save Function)
 document.getElementById('saveAddForm').addEventListener('click', async function (event) {
     event.preventDefault();
 
     const form = document.getElementById('addForm');
+
+    if (!form) {
+        console.error('Form thêm truyện không tồn tại');
+        return;
+    }
+
     const file = form.addHinhAnh.files[0];
     const formData = new FormData();
 
     if (file) {
-        formData.append('image', file); // Thêm hình ảnh vào form data
+        formData.append('image', file);
+    } else {
+        console.error('Không có hình ảnh được chọn');
+        return;
     }
-    formData.append('title', form.addTenTruyen.value); // Thêm tiêu đề vào form data
-    formData.append('category', form.addDanhMuc.value); // Thêm danh mục vào form data
-    formData.append('author', form.addTacgia.value); // Thêm tác giả vào form data
-    formData.append('description', form.addMoTaNgan.value); // Thêm mô tả vào form data
-    // Thêm các trường mặc định nếu cần
-    formData.append('views', 0); // Lượt xem mặc định là 0
-    formData.append('status', 'Ongoing'); // Trạng thái mặc định là "Ongoing"
-    formData.append('rating', 5); // Đánh giá mặc định là 5
+
+    // Các trường khác
+    formData.append('title', form.addTenTruyen.value);
+    formData.append('category', form.addDanhMuc.value);
+    formData.append('author', form.addTacgia.value);
+    formData.append('description', moTaNganEditor.getData());
 
     try {
         const response = await fetch('http://localhost:3000/api/comics', {
             method: 'POST',
-            body: formData // Gửi dữ liệu dưới dạng form data
+            body: formData
         });
 
         if (response.ok) {
             const createdComic = await response.json();
+            console.log('Tạo truyện thành công:', createdComic);
+
+            // Cập nhật bảng truyện
             danhSachTruyen.push(new HangTruyen(
                 createdComic._id,
-                createdComic.image, // Đường dẫn ảnh từ MongoDB
+                createdComic.imageUrl,
                 createdComic.title,
                 createdComic.category,
-                createdComic.chapters || 0, // Mặc định chapters là 0 khi mới tạo
+                0, // Ban đầu số chương là 0
                 createdComic.author,
                 createdComic.description,
                 createdComic.views,
                 createdComic.status,
-                createdComic.rating
+                createdComic.rating,
+                createdComic.creationDate,
+                createdComic.updateDate
             ));
+
+            // Hiển thị bảng truyện với truyện mới được thêm vào
             hienThiBang(trangHienTai);
-            form.reset(); // Reset form sau khi thêm mới
-            
-        
+
+            // Reset form
+            form.reset();
+            moTaNganEditor.setData('');
+
+            // Hiển thị section quản lý truyện
+            showSection('quanlytruyen');
         } else {
-            console.error("Lỗi thêm mới truyện:", await response.text());
+            const errorText = await response.text();
+            console.error("Lỗi khi thêm mới truyện:", errorText);
         }
     } catch (err) {
-        console.error("Lỗi thêm mới truyện:", err);
+        console.error("Lỗi khi thêm mới truyện:", err);
     }
 });
 
-
-function updateChapterHeader(image, title, author, status, views,description) {
-    document.getElementById('chapterImage').src = image; // Không cần chuyển đổi Base64 nữa
+function updateChapterHeader(image, title, author, status, views, description, _id) {
+    document.getElementById('chapterImage').src = image;
     document.getElementById('chapterTitle').textContent = `Tên Truyện : ${title}`;
     document.getElementById('chapterAuthor').innerHTML = `<strong>Tác giả:</strong> ${author}`;
     document.getElementById('chapterStatus').innerHTML = `<strong>Trạng thái:</strong> ${status}`;
     document.getElementById('chapterViews').innerHTML = `<strong>Lượt xem:</strong> ${views}`;
-    document.getElementById('chapterDescription').innerHTML = `<strong>Mô tả </strong> ${description}`;
-
+    document.getElementById('chapterDescription').innerHTML = `<strong>Mô tả:</strong> ${description}`;
+    document.getElementById('chapterTableBody').dataset.comicId = _id;
 }
-
 
 async function hienThiDanhSachChuong(comicId) {
     const chapters = await fetchChapters(comicId);
@@ -258,29 +329,25 @@ async function fetchComics() {
     try {
         const response = await fetch('http://localhost:3000/api/comics');
         const comics = await response.json();
-        const chapters = await fetchChapters();
-
-        const chaptersMap = chapters.reduce((map, chapter) => {
-            if (!map[chapter.comicId]) {
-                map[chapter.comicId] = 0;
-            }
-            map[chapter.comicId]++;
-            return map;
-        }, {});
-
-        const comicsWithChapters = comics.map(comic => {
-            const chaptersCount = chaptersMap[comic._id] || 0;
-            return new HangTruyen(comic._id, comic.image, comic.title, comic.category, chaptersCount, comic.author, comic.description, comic.views, comic.status, comic.rating);
-        });
-
-        return comicsWithChapters;
+        return comics.map(comic => new HangTruyen(
+            comic._id,
+            comic.imageUrl,
+            comic.title,
+            comic.category,
+            comic.chapters || 0, // Mặc định chapters là 0
+            comic.author,
+            comic.description,
+            comic.views,
+            comic.status,
+            comic.rating,
+            comic.creationDate,
+            comic.updateDate
+        ));
     } catch (error) {
         console.error('Error fetching comics:', error);
         return [];
     }
 }
-
-
 
 document.addEventListener('DOMContentLoaded', async () => {
     danhSachTruyen = await fetchComics();
@@ -288,8 +355,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     document.getElementById('prevPage').addEventListener('click', () => thayDoiTrang(-1));
     document.getElementById('nextPage').addEventListener('click', () => thayDoiTrang(1));
-
-
 });
 
 const soTruyenMoiTrang = 9;
@@ -322,7 +387,6 @@ function capNhatPhanTrang(danhSachTruyenHienTai = danhSachTruyen) {
     pageInfo.innerHTML = '';
 
     const soTrangHienThiToiDa = 10;
-
     let trangBatDau = Math.max(1, trangHienTai - Math.floor(soTrangHienThiToiDa / 2));
     let trangKetThuc = trangBatDau + soTrangHienThiToiDa - 1;
 
@@ -377,3 +441,97 @@ async function searchComics() {
 
 document.getElementById('searchButton').addEventListener('click', searchComics);
 document.getElementById('searchInput').addEventListener('input', searchComics);
+
+class HangChuong {
+    constructor(_id, comicId, chapterTitle, createdDate) {
+        this._id = _id;
+        this.comicId = comicId;
+        this.chapterTitle = chapterTitle;
+        this.createdDate = new Date(createdDate).toLocaleDateString();
+    }
+
+    taoHang() {
+        const Hang = document.createElement('tr');
+
+        // Ô tên chương
+        const cellTenChuong = document.createElement('td');
+        cellTenChuong.textContent = this.chapterTitle;
+        Hang.appendChild(cellTenChuong);
+
+        // Ô ngày đăng
+        const cellNgayDang = document.createElement('td');
+        cellNgayDang.textContent = this.createdDate;
+        Hang.appendChild(cellNgayDang);
+
+        // Ô hành động
+        const cellHanhDong = document.createElement('td');
+        const editButton = this.taoNut('edit', 'Chỉnh sửa');
+        const deleteButton = this.taoNut('trash-alt', 'Xóa');
+        cellHanhDong.appendChild(editButton);
+        cellHanhDong.appendChild(deleteButton);
+        Hang.appendChild(cellHanhDong);
+
+        return Hang;
+    }
+
+    taoNut(iconClass, tieuDe) {
+        const nut = document.createElement('button');
+        nut.className = `${iconClass}-btn`;
+        nut.title = tieuDe;
+        const icon = document.createElement('i');
+        icon.className = `fas fa-${iconClass}`;
+        nut.appendChild(icon);
+        return nut;
+    }
+}
+
+document.getElementById('saveChapterForm').addEventListener('click', async function (event) {
+    event.preventDefault();
+
+    const form = document.getElementById('addChapterForm');
+    const comicId = document.getElementById('chapterTableBody').dataset.comicId; // Lấy ID của truyện từ dataset của tableBody
+
+    if (!comicId) {
+        console.error("Comic ID is missing");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('comicId', comicId);
+    formData.append('chapterTitle', form.chapterTitle.value);
+    const chapterContent = ContentAdd.getData(); // Lấy dữ liệu từ CKEditor
+    formData.append('content', chapterContent);
+
+    try {
+        const response = await fetch('http://localhost:3000/api/chapters', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            const createdChapter = await response.json();
+            const newChapter = new HangChuong(
+                createdChapter._id,
+                createdChapter.comicId,
+                createdChapter.chapterTitle,
+                createdChapter.createdDate
+            );
+            const tableBody = document.getElementById('chapterTableBody');
+            tableBody.appendChild(newChapter.taoHang());
+
+            const comic = danhSachTruyen.find(truyen => truyen._id === comicId);
+            if (comic) {
+                comic.chapters += 1;
+                hienThiBang(trangHienTai);
+            }
+
+            form.reset();
+            closeAddChapterModal(); // Đóng modal thêm chương
+        } else {
+            const errorText = await response.text();
+            console.error("Lỗi thêm chương:", errorText);
+        }
+    } catch (err) {
+        console.error("Lỗi thêm chương:", err);
+    }
+});
