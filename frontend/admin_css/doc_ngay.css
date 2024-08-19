@@ -143,33 +143,224 @@
 .story-detail-menu .button i {
   margin-right: 5px; 
 }
-.user-pic {
-  border-radius: 50%;
-  cursor: pointer;
-  margin-left: 10px;
-  margin-bottom: 60px !important;
-  /* margin-top: -40px; */
-}
-.user-account-box {
-  display: flex;
-  align-items: center;
-  width: 200px; /* Tăng chiều rộng của khung chứa */
-  height: 60px; /* Tăng chiều cao của khung chứa */
-  padding: 10px; /* Tạo khoảng trống bên trong khung chứa */
- /* Màu nền, có thể thay đổi tùy ý */
-  border-radius: 10px; /* Góc bo tròn */
+
+
+
+nav {
+    background: #641a2a;
+    width: 100%;
+    padding: 10px 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
 }
 
-.user-account-box span {
-  text-transform: uppercase;
-  text-decoration: none;
-  color: white;
-  margin-left: 10px;
-  cursor: pointer;
+.logo {
+    width: 120px;
 }
-/* .user-account-box {
-  margin-bottom: 50px;
+.navbar-brand .text-uppercase {
+     font-family: "Playwrite CL", cursive;
+     font-size: medium;
+     margin-bottom: -20px;
+}
+
+
+.user-pic {
+  width: 30px; /* Giảm kích thước hình ảnh */
+  height: 30px; /* Đảm bảo hình ảnh là hình vuông */
+  border-radius: 50%;
+  cursor: pointer;
+  margin-left: 10px; /* Giảm khoảng cách bên trái */
+  margin-bottom: 70px !important ;
+}
+
+nav ul {
+    width: 100%;
+    text-align: right;
+}
+
+nav ul li {
+    display: inline-block;
+    list-style: none;
+    margin: 10px 10px;    /* Giảm margin giữa các mục */
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+.sub-menu-wrap.open-menu {
+  max-height: 400px;
+  right: -100px;
+}
+
+.sub-menu-link {
+  display: flex;
+  text-decoration: none;
+  color: #525252;
+  margin:   -28px 0 !important;
+  padding: 8px 0;
+}
+.sub-menu-link p {
+  width: 100%;
+}
+
+.sub-menu-wrap {
+  overflow: visible;
+}
+
+
+.sub-menu {
+    background: #fff;
+    padding: 20px;
+    margin: 10px;
+    position: relative;
+   
+}
+
+.fixed-top {
+    position: fixed;
+    top: -22px;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    
+}
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-info h3 {
+    font-weight: 400;
+}
+
+.user-info img {
+    width: 40px; /* Giảm kích thước hình ảnh trong menu */
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.sub-menu hr {
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background: #ccc;
+    margin: 15px 0 10px;
+}
+
+.sub-menu-link {
+  display: flex;
+  text-decoration: none;
+  color: #525252;
+  margin: 12px 0;
+}
+
+.sub-menu-link p {
+  width: 100%;
+}
+
+.sub-menu-link img {
+  width: 30px; /* Giảm kích thước hình ảnh icon */
+  height: 30px;
+  background: #e5e5e5;
+  border-radius: 50%;
+  padding: 8px;
+  margin-right: 10px; /* Giảm khoảng cách bên phải */
+}
+
+.sub-menu-link span {
+  font-size: 20px;
+  transition: transform 0.5s;
+}
+
+.sub-menu-link:hover span {
+  transform: translate(5px);
+}
+
+.sub-menu-link:hover p {
+  font-weight: 600;
+}
+
+.account-info {
+    display: flex;
+    align-items: center;
+}
+
+.brand-text {
+    margin-right: 10px; /* Khoảng cách giữa văn bản và hình ảnh */
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.bg-custom{
+    color:#ff3366;
+}
+
+/*HEART SERCH */
+
+.btn2 {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  vertical-align: middle;
+  -moz-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  border-radius: .25rem;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+/* TÀI KHOẢN */
+/* .user-account-box1{
+  position: relative;
+  width: 120px;
+  height: -20px; 
+  right: -10px;
+  left: -10px;
 } */
+
+
+/* button */
+.bg-primary{
+    background-color: var(--pink)!important;
+}
+
+.fixed-top {
+ position: fixed;
+ top: -22px;
+ right: 0;
+ left: 0;
+ z-index: 1030;
+ 
+}
+.user-info {
+ display: flex;
+ align-items: center;
+}
+
+.user-info h3 {
+ font-weight: 400;
+}
+
+.user-info img {
+ width: 40px;   /* Giảm kích thước hình ảnh trong menu */
+ height: 40px;
+ border-radius: 50%;
+ margin-right: 15px;
+ margin-bottom: -100px;
+}
+
+
 .title-fluid {
 text-align: center;
 margin-top: -100px;
@@ -220,7 +411,25 @@ margin-top: -100px;
     object-fit: contain; /* Hiển thị toàn bộ ảnh mà không bị cắt */
   }
   
-
+  .btn {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
 /* GIOI THIEU */
 .gioi_thieu {
   font-size:1.5em; /* Tăng kích thước chữ cho phần Giới thiệu */
@@ -256,7 +465,7 @@ margin-top: -100px;
   }
   
   p {
-    margin: 20px 0 50px 0;
+    margin: 10px 0 50px 0;
     line-height: 25px;
   }
   
@@ -290,7 +499,6 @@ margin-top: -100px;
   }
   
   button {
-    width: 100%;
     padding: 10px;
     border: none;
     outline: none;
@@ -387,9 +595,7 @@ a {
 {
   font-size:1.5em; 
   color: #892727; /* chữ bình luận
-  display: flex;
-  align-items: center;
-  gap: 20px; /* Tạo khoảng cách giữa biểu tượng và chữ Bình Luận */
+
 }
 .fa, .fas {
   /* font-weight: 900; */
