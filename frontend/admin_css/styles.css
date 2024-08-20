@@ -41,7 +41,7 @@ body {
     position: absolute;
     right: 0;
     background-color: white;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
     padding: 15px;
     border-radius: 10px;
@@ -70,6 +70,10 @@ body {
     display: block;
 }
 
+.cke_update_notification {
+    display: none !important;
+}
+
 /* Animation for dropdown */
 .dropdown-content {
     opacity: 0;
@@ -87,32 +91,37 @@ body {
 /* Thanh bên (sidebar) */
 .sidebar ul li ul.submenu li a .fas {
     display: inline-block;
-    width: 20px; /* Giảm kích thước biểu tượng tròn */
+    width: 20px;
+    /* Giảm kích thước biểu tượng tròn */
     height: 20px;
     line-height: 20px;
     text-align: center;
     border-radius: 50%;
     background-color: #222630;
     color: #fafbfb;
-    margin-right: 10px; /* Khoảng cách giữa biểu tượng và văn bản */
+    margin-right: 10px;
+    /* Khoảng cách giữa biểu tượng và văn bản */
 }
 
 /* Ẩn con trỏ để dễ dàng nhấp vào các biểu tượng */
 .sidebar ul li ul.submenu li a {
     display: flex;
     align-items: center;
-    font-size: 15px; /* Thay đổi kích thước chữ nếu cần */
+    font-size: 15px;
+    /* Thay đổi kích thước chữ nếu cần */
 }
 
 /* Đảm bảo rằng các biểu tượng tròn nhỏ không quá lớn */
 .sidebar ul li ul.submenu li a .fas.fa-circle {
-    font-size: 0.5rem; /* Giảm kích thước biểu tượng */
+    font-size: 0.5rem;
+    /* Giảm kích thước biểu tượng */
 }
 
 /* Thay đổi kích thước các biểu tượng trong thanh bên chính */
 .sidebar ul li a .fas {
-    font-size: 18px; 
-    margin-right: 0.1cm; /* Kích thước biểu tượng chính */
+    font-size: 18px;
+    margin-right: 0.1cm;
+    /* Kích thước biểu tượng chính */
 }
 
 /* Căn chỉnh khoảng cách giữa biểu tượng và văn bản */
@@ -121,32 +130,158 @@ body {
     padding: 10px;
     border-radius: 4px;
     transition: background-color 0.3s;
-    font-size: 18px; /* Kích thước chữ của liên kết */
+    font-size: 18px;
+    /* Kích thước chữ của liên kết */
     margin-left: 15px;
 }
 
 /* Thay đổi kích thước biểu tượng trong các modal nếu cần */
 .modal-content .fas {
-    font-size: px; /* Kích thước biểu tượng trong modal */
+    font-size: px;
+    /* Kích thước biểu tượng trong modal */
 }
 
 .sidebar {
     background-color: #222630;
     color: #fff;
     width: 250px;
-    
+
     padding: 20px;
     box-sizing: border-box;
 }
 
+.select-container {
+    position: relative;
+    width: 00%;
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+
+/* Tùy chỉnh giao diện thẻ select */
+select {
+    appearance: none; /* Xóa giao diện mặc định của trình duyệt */
+    width: 100%;
+    padding: 15px;
+    padding-bottom:15px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+/* Thay đổi viền khi thẻ select được chọn */
+select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Tạo mũi tên thả xuống tùy chỉnh */
+.select-container::after {
+    content: '\25BC'; /* Mã unicode cho mũi tên xuống */
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    pointer-events: none; /* Đảm bảo mũi tên không chặn các sự kiện chuột */
+    font-size: 16px;
+    color: #007bff;
+}
+
+/* General Styling for the Modal */
+#addChapterForm {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+#addChapterForm label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: inline-block;
+    color: #333;
+}
+
+#addChapterForm input[type="text"],
+#addChapterForm select,
+#addChapterForm textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #333;
+}
+
+#addChapterForm textarea {
+    resize: none;
+    height: 150px;
+}
+
+/* Custom Styling for the Submit Button */
+#saveChapterForm {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    margin-top: 12px;
+}
+
+#saveChapterForm:hover {
+    background-color: #218838;
+}
+
+/* Modal Close Button */
+#addChapterForm .modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+#addChapterForm .modal-close:hover {
+    color: #000;
+}
+
+.ck-label.ck-voice-label {
+    display: none;
+}
+
+/* Adding some responsiveness */
+@media (max-width: 600px) {
+    #addChapterForm {
+        padding: 10px;
+        width: 100%;
+    }
+
+    #saveChapterForm {
+        font-size: 14px;
+    }
+}
 
 
 #quanlychuong {
-    max-width: 1200px; /* Đặt chiều rộng tối đa */
-    background-color: #ffffff; /* Màu nền để tạo sự tương phản */
+    max-width: 1200px;
+    /* Đặt chiều rộng tối đa */
+    background-color: #ffffff;
+    /* Màu nền để tạo sự tương phản */
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Tạo bóng cho đẹp */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Tạo bóng cho đẹp */
 }
 
 
@@ -188,7 +323,8 @@ body {
 .toggle-menu {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Thêm dòng này để căn chỉnh mũi tên bên phải */
+    justify-content: space-between;
+    /* Thêm dòng này để căn chỉnh mũi tên bên phải */
     cursor: pointer;
 }
 
@@ -287,12 +423,26 @@ header h1 {
 }
 
 /* Các loại thống kê khác */
-.stat-icon.book { color: #ff6f00; }
-.stat-icon.like { color: #da2013; }
-.stat-icon.eye { color: #0e6ab5; }
-.stat-icon.member { color: #0b07f2; }
+.stat-icon.book {
+    color: #ff6f00;
+}
 
-.stat-info h3 { margin: 0; }
+.stat-icon.like {
+    color: #da2013;
+}
+
+.stat-icon.eye {
+    color: #0e6ab5;
+}
+
+.stat-icon.member {
+    color: #0b07f2;
+}
+
+.stat-info h3 {
+    margin: 0;
+}
+
 .stat-info span {
     font-size: 24px;
     font-weight: bold;
@@ -313,11 +463,14 @@ table {
     margin-top: 20px;
 }
 
-table, th, td {
+table,
+th,
+td {
     border: 1px solid #000000;
 }
 
-th, td {
+th,
+td {
     padding: 10px;
     text-align: center;
 }
@@ -331,6 +484,51 @@ td img {
     width: 100px;
     height: 100px;
     object-fit: fill;
+}
+
+/* Bố trí phần form để căn giữa các phần tử */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Đặt nút ở phía bên phải */
+#saveAddForm {
+
+    align-self: flex-end;
+    /* Đưa nút sang phía bên phải */
+    background-color: #4CAF50;
+    /* Màu nền */
+    color: white;
+    /* Màu chữ */
+    padding: 12px 24px;
+    /* Kích thước padding */
+    border: none;
+    /* Xóa viền */
+    border-radius: 4px;
+    /* Bo tròn góc */
+    font-size: 16px;
+    /* Kích thước chữ */
+    cursor: pointer;
+    /* Biểu tượng con trỏ chuột */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    /* Hiệu ứng chuyển */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    /* Đổ bóng */
+}
+
+#saveAddForm:hover {
+    background-color: #45a049;
+    /* Màu nền khi hover */
+    transform: translateY(-2px);
+    /* Hiệu ứng khi di chuột */
+}
+
+#saveAddForm:active {
+    background-color: #3e8e41;
+    /* Màu nền khi nhấn */
+    transform: translateY(1px);
+    /* Hiệu ứng khi nhấn */
 }
 
 /* Các nút (button) */
@@ -422,7 +620,7 @@ html {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
     justify-content: center;
     align-items: center;
     display: flex;
@@ -435,7 +633,7 @@ html {
     border: 1px solid #eeebeb;
     width: 50%;
     max-width: 500px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
 }
 
@@ -454,8 +652,13 @@ html {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .modal-content label {
@@ -469,25 +672,29 @@ html {
     margin-top: 5px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px; /* Rounded corners for inputs */
+    border-radius: 5px;
+    /* Rounded corners for inputs */
     width: 100%;
     box-sizing: border-box;
 }
 
 /* Style for the save button */
 #saveEdit {
-    background-color: #4CAF50; /* Green background */
+    background-color: #4CAF50;
+    /* Green background */
     color: white;
     padding: 10px 20px;
     margin-top: 10px;
     border: none;
-    border-radius: 5px; /* Rounded corners */
+    border-radius: 5px;
+    /* Rounded corners */
     cursor: pointer;
     font-size: 16px;
 }
 
 #saveEdit:hover {
-    background-color: #45a049; /* Darker green on hover */
+    background-color: #45a049;
+    /* Darker green on hover */
 }
 
 /* Căn giữa nội dung của modal xóa */
@@ -523,26 +730,30 @@ html {
 
 /* Nút xác nhận xóa với nền màu đỏ và chữ màu trắng */
 #deleteModal .modal-content .button-group #confirmDelete {
-    background-color: #f44336; /* Nền màu đỏ */
+    background-color: #f44336;
+    /* Nền màu đỏ */
     color: white;
     border: none;
 }
 
 /* Nút xác nhận xóa khi hover với nền màu đỏ đậm hơn */
 #deleteModal .modal-content .button-group #confirmDelete:hover {
-    background-color: #d32f2f; /* Nền màu đỏ đậm hơn khi hover */
+    background-color: #d32f2f;
+    /* Nền màu đỏ đậm hơn khi hover */
 }
 
 /* Nút hủy với nền màu xám và chữ màu đen */
 #deleteModal .modal-content .button-group #cancelDelete {
-    background-color: #ccc; /* Nền màu xám */
+    background-color: #ccc;
+    /* Nền màu xám */
     color: black;
     border: none;
 }
 
 /* Nút hủy khi hover với nền màu xám đậm hơn */
 #deleteModal .modal-content .button-group #cancelDelete:hover {
-    background-color: #b0b0b0; /* Nền màu xám đậm hơn khi hover */
+    background-color: #b0b0b0;
+    /* Nền màu xám đậm hơn khi hover */
 }
 
 /* Thêm truyện mới */
@@ -569,40 +780,50 @@ textarea {
 }
 
 #saveAdd {
-    background-color: #4CAF50; /* Green background */
+    background-color: #4CAF50;
+    /* Green background */
     color: white;
     padding: 10px 20px;
     border: none;
-    border-radius: 5px; /* Rounded corners */
+    border-radius: 5px;
+    /* Rounded corners */
     cursor: pointer;
     font-size: 16px;
 }
 
 #saveAdd:hover {
-    background-color: #45a049; /* Darker green on hover */
+    background-color: #45a049;
+    /* Darker green on hover */
 }
+
 .chapter-header {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
 }
+
 .chapter-header img {
     width: 200px;
     height: auto;
     margin-right: 20px;
 }
+
 .chapter-header div {
     flex: 1;
 }
+
 .chapters table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
-.chapters th, .chapters td {
+
+.chapters th,
+.chapters td {
     border: 1px solid #ddd;
     padding: 8px;
 }
+
 .chapters th {
     background-color: #f2f2f2;
 }

@@ -1,151 +1,139 @@
 const Comic = require('../models/comics_model');
-const multer = require('multer');
-const path = require('path');
+const Category = require('../models/categorys'); // Assuming you have a Category model
+const cloudinary = require('cloudinary').v2;
 
-// Setup multer for image uploads
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads'); // Set the directory for storing uploaded files
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname)); // Set the filename as current timestamp + original extension
-    }
+// Cloudinary Configuration
+cloudinary.config({
+  cloud_name: "dwfmpiozq",
+  api_key: 698787751885177,
+  api_secret: "WbcBy270Rx36KWI3q7jeOXCh4vI"
 });
 
-const upload = multer({ storage: storage });
+// Create a new comic
+exports.createComic = async (req, res) => {
+  try {
+    const { title, category, author, description } = req.body;
+    const file = req.file;
 
-// Tạo mới một comic
-// Hàm để tạo mới một truyện
-exports.createComic = [
-    upload.single('image'), // Middleware để xử lý upload file
-    async (req, res) => {
-        try {
-            // Lấy số lượng tài liệu hiện có trong collection
-            const comicCount = await Comic.countDocuments({});
-            const comicId = comicCount + 1; // comicId sẽ là số lượng hiện tại + 1
-
-            const { title, category, author, description, chapters } = req.body;
-            const image = req.file ? `/backend/database/uploads/${req.file.filename}` : '';
-
-            // Tạo mới một truyện với comicId được tính toán ở trên
-            const newComic = new Comic({
-                // comicId: comicId.toString(), // Chuyển số thành chuỗi nếu comicId là chuỗi
-                title,
-                category,
-                author,
-                description,
-                image,
-                chapters: 0,// Đảm bảo chapters là chuỗi nếu schema yêu cầu
-                views: 0, // Lượt xem mặc định là 0
-                status: 'Đang cập nhật ', // Trạng thái mặc định là "Ongoing"
-                rating: 5 // Đánh giá mặc định
-            });
-
-            // Lưu truyện mới vào MongoDB
-            const savedComic = await newComic.save();
-
-            // Trả về kết quả thành công
-            res.status(201).json(savedComic);
-        } catch (err) {
-            console.error("Error creating comic:", err);
-            res.status(500).send(err.message);
-        }
+    if (!file) {
+      return res.status(400).json({ message: 'No file uploaded.' });
     }
-];
 
+    // Ensure `category` is an array
+    const categoryArray = Array.isArray(category) ? category : [category];
 
+    // Upload image to Cloudinary
+    const result = await cloudinary.uploader.upload(file.path);
 
-// Lấy tất cả comics
-exports.getComics = async (req, res) => {
-    try {
-        const comics = await Comic.find().lean().exec();
-        res.status(200).json(comics);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
+    if (!result.public_id) {
+      return res.status(500).json({ message: 'Failed to upload image to Cloudinary. publicId not returned.' });
     }
+
+    // Create a new comic
+    const newComic = new Comic({
+      title,
+      category: categoryArray, // Store category IDs as an array
+      author,
+      description,
+      imageUrl: result.secure_url,
+      publicId: result.public_id,
+      chapters: [], // Initialize chapters as an empty array
+      views: 0,
+      likes:0,
+      status: 'Đang cập nhật',
+      rating: 5,
+      creationDate: new Date(),
+      updateDate: new Date(),
+    });
+
+    const savedComic = await newComic.save();
+
+    // Update the categories to include the new comic
+    await Category.updateMany(
+      { _id: { $in: categoryArray } },
+      { $push: { comics: savedComic._id } }
+    );
+
+    res.status(201).json(savedComic);
+  } catch (err) {
+    console.error('Error creating comic:', err);
+    res.status(500).json({ message: 'Error creating comic', error: err.message });
+  }
 };
 
-// Lấy comic theo ID
-exports.getComicById = async (req, res) => {
-    try {
-        const comic = await Comic.findById(req.params.id);
-        if (comic) {
-            res.status(200).json(comic);
-        } else {
-            res.status(404).json({ message: 'Comic not found' });
-        }
-    } catch (error) {
-        res.status(400).json({ message: error.message });
+
+// Update an existing comic
+exports.updateComic = async (req, res) => {
+  try {
+    const { title, category, author, description } = req.body;
+    const file = req.file;
+
+    const comic = await Comic.findById(req.params.id);
+
+    if (!comic) {
+      return res.status(404).json({ message: 'Comic not found.' });
     }
+
+    comic.title = title;
+    comic.category = category;
+    comic.author = author;
+    comic.description = description;
+    comic.updateDate = new Date();
+
+    if (file) {
+      if (comic.publicId) {
+        await cloudinary.uploader.destroy(comic.publicId);
+      }
+
+      const result = await cloudinary.uploader.upload(file.path);
+
+      comic.imageUrl = result.secure_url;
+      comic.publicId = result.public_id;
+    }
+
+    const updatedComic = await comic.save();
+    res.status(200).json(updatedComic);
+  } catch (err) {
+    console.error('Error updating comic:', err);
+    res.status(500).json({ message: 'Error updating comic', error: err.message });
+  }
 };
 
-// Cập nhật comic
-exports.updateComic = [
-    upload.single('image'), // Middleware to handle image upload
-    async (req, res) => {
-        const { title, category, author, description } = req.body;
-        const image = req.file ? `/backend/database/uploads/${req.file.filename}` : undefined;
-
-        const updateData = {
-            title,
-            category,
-            author,
-            description,
-            ...(image && { image }) // Only update image if a new one was uploaded
-        };
-
-        try {
-            const updatedComic = await Comic.findByIdAndUpdate(
-                req.params.id,
-                updateData,
-                { new: true }
-            );
-
-            if (updatedComic) {
-                res.status(200).json(updatedComic);
-            } else {
-                res.status(404).json({ message: 'Comic not found' });
-            }
-        } catch (error) {
-            res.status(400).json({ message: error.message });
-        }
-    }
-];
-
-// Xóa comic theo ID và các chapters liên quan
+// Delete a comic
 exports.deleteComic = async (req, res) => {
-    try {
-        const deletedComic = await Comic.findByIdAndDelete(req.params.id);
-        if (deletedComic) {
-            res.status(200).json({ message: 'Comic deleted' });
-        } else {
-            res.status(404).json({ message: 'Comic not found' });
-        }
-    } catch (error) {
-        res.status(400).json({ message: error.message });
+  try {
+    const comic = await Comic.findByIdAndDelete(req.params.id);
+    if (!comic) {
+      return res.status(404).json({ message: 'Comic not found.' });
     }
+
+    if (comic.publicId) {
+      await cloudinary.uploader.destroy(comic.publicId);
+      console.log('Deleted image from Cloudinary:', comic.publicId);
+    }
+
+    res.status(200).json({ message: 'Comic and associated image deleted successfully.' });
+  } catch (err) {
+    console.error('Error deleting comic:', err);
+    res.status(500).json({ message: 'Error deleting comic', error: err.message });
+  }
 };
 
-// Tìm kiếm comics theo tên
-exports.searchComics = async (req, res) => {
-    try {
-        const { search } = req.query;
-        if (search) {
-            // Tạo regex để tìm kiếm theo title (không phân biệt chữ hoa chữ thường)
-            const regex = new RegExp(search, 'i');
-            const comics = await Comic.find({ title: { $regex: regex } }).lean().exec();
-            if (comics.length > 0) {
-                res.status(200).json(comics);
-            } else {
-                res.status(404).json({ message: 'Không tìm thấy truyện nào phù hợp.' });
-            }
-        } else {
-            res.status(400).json({ message: "Chưa cung cấp từ khóa tìm kiếm." });
-        }
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-};
+// Get all comics
+exports.getComics = async (req, res) => {
+  try {
+    const comics = await Comic.find();
 
+    const comicsWithChapterCount = comics.map(comic => ({
+      ...comic._doc,
+      chapterCount: (comic.chapters && Array.isArray(comic.chapters)) ? comic.chapters.length : 0,
+    }));
+
+    res.status(200).json(comicsWithChapterCount);
+  } catch (err) {
+    console.error('Error fetching comics:', err);
+    res.status(500).json({ message: 'Error fetching comics', error: err.message });
+  }
+};
 
 

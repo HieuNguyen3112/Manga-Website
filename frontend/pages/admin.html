@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Quản lý truyện</title>
     <link rel="stylesheet" href="../admin_css/styles.css">
-    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
+
 </head>
 
 <body>
@@ -20,8 +21,8 @@
                 <ul class="submenu hidden">
                     <li><a href="#" onclick="showSection('quanlytruyen')"><i class="fas fa-circle"></i> Danh sách
                             truyện</a></li>
-                    <li><a href="#" onclick="showSection('quanlychuong')"><i class="fas fa-circle"></i> Danh sách
-                            chương</a></li>
+                    <!-- <li><a href="#" onclick="showSection('quanlychuong')"><i class="fas fa-circle"></i> Danh sách
+                            chương</a></li> -->
                     <li><a href="#" onclick="showSection('themmoitruyen')"><i class="fas fa-circle"></i> Thêm mới
                             truyện</a></li>
                 </ul>
@@ -35,9 +36,11 @@
             <h1>Quản lý truyện</h1>
             <div class="user-info">
                 <div class="user-dropdown">
-                    <img src="../image/AKame.jpg" alt="User Avatar">
+                    <img src="https://res.cloudinary.com/dwfmpiozq/image/upload/v1724125571/pngtree-admin-rolls-glyph-black-icon-png-image_691507_ta7kyi.jpg"
+                        alt=" User Avatar">
                     <div class="dropdown-content">
-                        <img src="../image/AKame.jpg" alt="User Avatar">
+                        <img src="https://res.cloudinary.com/dwfmpiozq/image/upload/v1724125571/pngtree-admin-rolls-glyph-black-icon-png-image_691507_ta7kyi.jpg"
+                            alt="User Avatar">
                         <div class="additional-buttons">
                             <span>Chào Vinh</span>
                             <button>Xem thông tin</button>
@@ -48,7 +51,7 @@
             </div>
         </header>
         <main>
-            <section id="tongquan" class="section hidden">
+            <section id="tongquan" class="section">
                 <div class="stats">
                     <div class="stat-item">
                         <div class="stat-icon book">
@@ -56,7 +59,7 @@
                         </div>
                         <div class="stat-info">
                             <h3>Truyện</h3>
-                            <span>18</span>
+                            <span id="total-comics">0</span> <!-- Thêm ID cho các phần tử -->
                         </div>
                     </div>
                     <div class="stat-item">
@@ -65,7 +68,7 @@
                         </div>
                         <div class="stat-info">
                             <h3>Lượt thích</h3>
-                            <span>4</span>
+                            <span id="total-likes">0</span>
                         </div>
                     </div>
                     <div class="stat-item">
@@ -74,7 +77,7 @@
                         </div>
                         <div class="stat-info">
                             <h3>Lượt xem</h3>
-                            <span>105</span>
+                            <span id="total-views">0</span>
                         </div>
                     </div>
                     <div class="stat-item">
@@ -83,15 +86,12 @@
                         </div>
                         <div class="stat-info">
                             <h3>Thành viên</h3>
-                            <span>2</span>
+                            <span id="total-members">0</span>
                         </div>
                     </div>
                 </div>
-                <div class="chart">
-                    <h2>Top truyện có lượt xem cao nhất</h2>
-                    <canvas id="topComicsChart"></canvas>
-                </div>
             </section>
+
             <section id="quanlytruyen" class="section hidden">
                 <div class="search-container">
                     <input type="text" id="searchInput" placeholder="Tìm kiếm theo tên truyện, số chương, danh mục">
@@ -116,10 +116,11 @@
                     <span id="pageInfo"></span>
                 </div>
                 <!-- Modal Structure -->
+                <!-- Modal Structure for Editing Comic -->
                 <div id="editModal" class="modal hidden">
                     <div class="modal-content">
                         <span class="close">&times;</span>
-                        <form id="editForm">
+                        <form id="editForm" enctype="multipart/form-data">
                             <!-- Form content goes here -->
                             <label for="editHinhAnh">Hình ảnh:</label>
                             <input type="file" id="editHinhAnh" name="editHinhAnh">
@@ -128,10 +129,10 @@
                             <input type="text" id="editTenTruyen" name="editTenTruyen">
 
                             <label for="editDanhMuc">Danh mục:</label>
-                            <input type="text" id="editDanhMuc" name="editDanhMuc">
-
-                            <!-- <label for="editSoChuong">Số chương:</label>
-                            <input type="number" id="editSoChuong" name="editSoChuong"> -->
+                            <select id="editDanhMuc" name="editDanhMuc">                                
+                            <option value="">Chọn danh mục</option>
+                                <!-- Các tùy chọn danh mục sẽ được chèn vào đây -->
+                            </select>
 
                             <label for="editTacgia">Tác giả:</label>
                             <input type="text" id="editTacgia" name="editTacgia">
@@ -144,6 +145,7 @@
                     </div>
                 </div>
 
+
                 <div id="deleteModal" class="modal hidden">
                     <div class="modal-content">
                         <span class="close" id="closeDeleteModal">&times;</span>
@@ -155,18 +157,18 @@
             </section>
             <section id="quanlychuong" class="section hidden">
                 <div class="chapter-header">
-                    <img id="chapterImage" src="../image/AKame.jpg" alt="Truyện Image">
+                    <img id="chapterImage" src="/file/1723742432493.jpg" alt="Truyện Image">
                     <div>
                         <h1 id="chapterTitle"></h1>
                         <p id="chapterAuthor"><strong>Tác giả:</strong> </p>
-                        <p id="chapterStatus"><strong>Trạng thái:</strong> </p>
+                        <!-- <p id="chapterStatus"><strong>Trạng thái:</strong> </p> -->
                         <p id="chapterViews"><strong>Lượt xem:</strong></p>
                         <p id="chapterDescription"><strong>Mô tả:</strong></p>
                     </div>
                 </div>
                 <div class="chapters">
                     <h2>Danh Sách Chương</h2>
-                    <button class="add-btn">Thêm chương mới</button>
+                    <button class="add-btn" onclick="showAddChapterModal()">Thêm chương mới</button>
                     <table>
                         <thead>
                             <tr>
@@ -175,38 +177,93 @@
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
-                        <tbody id="chapterTableBody"></tbody>
+                        <tbody id="chapterTableBody" data-comic-id="66bb8a7cec174ef949c35733">
                     </table>
+                </div>
+            </section>
+
+            <!-- Modal thêm chương mới -->
+            <section id="addChapterModal" class="modal hidden">
+                <div class="modal-content">
+                    <span class="close" onclick="closeAddChapterModal()">&times;</span>
+                    <form id="addChapterForm" enctype="multipart/form-data">
+                        <label for="chapterNumber">Số chương</label>
+                        <input type="number" id="chapterNumber" name="chapterNumber" value="1" required>
+
+
+                        <label for="chapterTitle">Tên chương</label>
+                        <input type="text" id="chapterTitle" name="chapterTitle" required>
+
+                        <label for="chapterContentType">Loại nội dung</label>
+                        <select id="chapterContentType" name="chapterContentType">
+                            <option value="text">Truyện chữ (TXT)</option>
+                            <option value="pdf">Truyện tranh (PDF)</option>
+                        </select>
+
+                        <!-- Trường tải lên file -->
+                        <div id="fileUploadWrapper">
+                            <label for="chapterFile">Tải lên file</label>
+                            <input type="file" id="chapterFile" name="chapterFile" accept=".txt,.pdf" required>
+                        </div>
+
+                        <button type="button" id="saveChapterForm">Thêm Chương</button>
+                    </form>
+                </div>
+            </section>
+            <section id="editChapterModal" class="modal hidden">
+                <div class="modal-content">
+                    <span class="close" onclick="closeEditChapterModal()">&times;</span>
+                    <form id="editChapterForm" enctype="multipart/form-data">
+                        <label for="editChapterTitle">Tên chương</label>
+                        <input type="text" id="editChapterTitle" name="editChapterTitle" required>
+
+                        <label for="editChapterFile">Tải lên file</label>
+                        <input type="file" id="editChapterFile" name="editChapterFile" accept=".txt,.pdf">
+
+                        <button type="button" id="saveEditChapter">Lưu thay đổi</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Modal Xóa chương -->
+            <section id="deleteChapterModal" class="modal hidden">
+                <div class="modal-content">
+                    <span class="close" onclick="closeDeleteChapterModal()">&times;</span>
+                    <p>Bạn có chắc chắn muốn xóa chương này không?</p>
+                    <button id="confirmDeleteChapter">Xóa</button>
+                    <button id="cancelDeleteChapter">Hủy</button>
                 </div>
             </section>
             <section id="themmoitruyen" class="section hidden">
                 <form id="addForm" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="addHinhAnh">Hình ảnh:</label>
-                        <input type="file" id="addHinhAnh" name="hinhAnh" >
-                    </div>
-                    <div class="form-group">
-                        <label for="addTenTruyen">Tên truyện:</label>
-                        <input type="text" id="addTenTruyen" name="tenTruyen">
-                    </div>
-                    <div class="form-group">
-                        <label for="addDanhMuc">Danh mục:</label>
-                        <input type="text" id="addDanhMuc" name="danhMuc">
-                    </div>
-                    <div class="form-group">
-                        <label for="addTacgia">Tác giả:</label>
-                        <input type="text" id="addTacgia" name="tacgia">
-                    </div>
-                    <div class="form-group">
-                        <label for="addMoTaNgan">Mô tả ngắn:</label>
-                        <input type="text" id="addMoTaNgan" name="moTaNgan">
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" id="saveAddForm">Lưu</button>
 
-                    </div>
+                    <label for="addHinhAnh">Hình ảnh</label>
+                    <input type="file" id="addHinhAnh" name="image">
+
+                    <label for="addTenTruyen">Tên truyện</label>
+                    <input type="text" id="addTenTruyen" name="addTenTruyen">
+
+                    <label for="addDanhMuc">Danh mục</label>
+                    <select id="selectedCategory" name="selectedCategory">
+                        <option value="">Chọn danh mục</option>
+                        <!-- Các tùy chọn danh mục sẽ được chèn vào đây -->
+                    </select>
+
+
+                    <label for="addTacgia">Tác giả</label>
+                    <input type="text" id="addTacgia" name="addTacgia">
+
+                    <label for="addMoTaNgan">Mô tả ngắn</label>
+                    <textarea id="addMoTaNgan" name="addMoTaNgan"></textarea>
+
+
+
+                    <button type="submit" id="saveAddForm" class="btn-submit">Thêm Truyện</button>
                 </form>
-                
+            </section>
+
+
+
             </section>
             <section id="thongke" class="section hidden">
                 <h2>Thống Kê</h2>
@@ -233,9 +290,8 @@
                             <th>Tên thành viên</th>
                             <th>Email</th>
                             <th>Ngày đăng ký</th>
-                            <th>Vai trò</th>            
-                            <!-- <th>Số lượt truyện truy cập</th>
-                            <th>Nội dung yêu thích</th> -->
+                            <th>Vai trò</th>
+
                         </tr>
                     </thead>
                     <tbody id="memberTableBody">
@@ -250,16 +306,54 @@
     <script src="../js/admin_js/codequanlychuong.js"></script>
     <script src="../js/admin_js/codethongke.js"></script>
     <script src="../js/admin_js/codethanhvien.js"></script>
+
+
+
+    <script src="/backend//src/Components/NavBar/NavBarAdmin.js"></script>
     <script>
-        // Khởi tạo CKEditor
         document.addEventListener('DOMContentLoaded', function () {
-            CKEDITOR.replace('addNoiDungTruyen');
+            const contentTypeSelect = document.getElementById('chapterContentType');
+            const chapterFileInput = document.getElementById('chapterFile');
+
+            // Cập nhật thuộc tính "accept" của input file dựa trên loại nội dung
+            contentTypeSelect.addEventListener('change', function () {
+                const selectedType = this.value;
+
+                if (selectedType === 'text') {
+                    chapterFileInput.accept = '.txt'; // Chỉ cho phép tệp .txt
+                } else if (selectedType === 'pdf') {
+                    chapterFileInput.accept = '.pdf'; // Chỉ cho phép tệp .pdf
+                }
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            const categorySelect = document.getElementById('selectedCategory');
+            const editCategorySelect = document.getElementById('editDanhMuc');
+            async function fetchCategories() {
+                try {
+                    const response = await fetch('http://localhost:3000/api/categories');
+                    const categories = await response.json();
+
+                    categories.forEach(category => {
+                        const option = document.createElement('option');
+                        option.value = category._id;
+                        option.textContent = category.name;
+
+                        // Add options to both the add and edit forms
+                        categorySelect.appendChild(option.cloneNode(true));
+                        editCategorySelect.appendChild(option.cloneNode(true));
+                    });
+                } catch (error) {
+                    console.error('Error fetching categories:', error);
+                }
+            }
+
+            fetchCategories();
         });
 
     </script>
 
-    <script src="/backend//src/Components/NavBar/NavBarAdmin.js"></script>
-    
+
 </body>
 
 </html>

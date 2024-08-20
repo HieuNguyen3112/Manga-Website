@@ -15,92 +15,124 @@ function showSection(section) {
         selectedSection.classList.remove('hidden');
     }
 
-    // Ẩn modal khi chuyển sang phần khác
-    // const editModal = document.getElementById("editModal");
-    // if (editModal) {
-    //     editModal.style.display = 'none';
-    // }
-    const deleteModal = document.getElementById("deleteModal");
-    if (deleteModal) {
-        deleteModal.style.display = 'none';
-    }
+    // Ẩn các modal khi chuyển sang phần khác
+    closeEditModal();
+    closeDeleteModal();
+    closeAddChapterModal();
+    closeEditChapterModal();
+    closeDeleteChapterModal();
 }
 
+// Đảm bảo modal bị ẩn khi trang tải
 document.addEventListener('DOMContentLoaded', () => {
-    // Ensure the modal is hidden by default
     const editModal = document.getElementById("editModal");
     if (editModal) {
         editModal.style.display = 'none';
     }
 
-    // Add close button event listener
-    const closeModalButton = document.querySelector(".close");
-    if (closeModalButton) {
-        closeModalButton.addEventListener("click", () => {
-            editModal.style.display = 'none';
-        });
+    const deleteModal = document.getElementById("deleteModal");
+    if (deleteModal) {
+        deleteModal.style.display = 'none';
+    }
+
+    const addChapterModal = document.getElementById("addChapterModal");
+    if (addChapterModal) {
+        addChapterModal.style.display = 'none';
+    }
+
+    const editChapterModal = document.getElementById("editChapterModal");
+    if (editChapterModal) {
+        editChapterModal.style.display = 'none';
+    }
+
+    const deleteChapterModal = document.getElementById("deleteChapterModal");
+    if (deleteChapterModal) {
+        deleteChapterModal.style.display = 'none';
     }
 });
-// Hàm để hiển thị modal
-function showEditModal() {
-    const editModal = document.getElementById("editModal");
-    if (editModal) {
-        editModal.style.display = 'flex'; // Hiển thị modal
-    }
-}
-
-// Hàm để đóng modal
 function closeEditModal() {
     const editModal = document.getElementById("editModal");
     if (editModal) {
         editModal.style.display = 'none';
     }
 }
-
-// Thêm sự kiện đóng modal khi nhấn nút đóng
-const closeModalButton = document.querySelector(".close");
-if (closeModalButton) {
-    closeModalButton.addEventListener("click", closeEditModal);
-}
-
-function showDeleteModal() {
-    const deleteModal = document.getElementById('deleteModal');
-    if (deleteModal) {
-        deleteModal.style.display = 'none';
-    }
-}
-
 function closeDeleteModal() {
-    const deleteModal = document.getElementById('deleteModal');
+    const deleteModal = document.getElementById("deleteModal");
     if (deleteModal) {
         deleteModal.style.display = 'none';
     }
 }
 
-// Thêm sự kiện đóng modal khi nhấn nút đóng
-const confirmButton = document.getElementById('confirmDelete');
-const cancelButton = document.getElementById('cancelDelete');
+// Hiển thị modal chỉnh sửa chương
+function showEditChapterModal() {
+    const editChapterModal = document.getElementById("editChapterModal");
+    if (editChapterModal) {
+        editChapterModal.style.display = 'flex';
+    }
+}
 
-if (confirmButton) {
-    confirmButton.onclick = () => {
-        // Thêm mã xóa truyện ở đây
+// Đóng modal chỉnh sửa chương
+function closeEditChapterModal() {
+    const editChapterModal = document.getElementById("editChapterModal");
+    if (editChapterModal) {
+        editChapterModal.style.display = 'none';
+    }
+}
+
+// Hiển thị modal xóa chương
+function showDeleteChapterModal() {
+    const deleteChapterModal = document.getElementById('deleteChapterModal');
+    if (deleteChapterModal) {
+        deleteChapterModal.style.display = 'flex';
+    }
+}
+
+// Đóng modal xóa chương
+function closeDeleteChapterModal() {
+    const deleteChapterModal = document.getElementById('deleteChapterModal');
+    if (deleteChapterModal) {
+        deleteChapterModal.style.display = 'none';
+    }
+}
+
+// Hiển thị modal thêm chương
+function showAddChapterModal() {
+    const modal = document.getElementById('addChapterModal');
+    if (modal) {
+        modal.style.display = 'flex';
+    }
+}
+
+// Đóng modal thêm chương
+function closeAddChapterModal() {
+    const modal = document.getElementById('addChapterModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Sự kiện cho nút đóng của các modal
+document.querySelectorAll('.close').forEach(button => {
+    button.addEventListener('click', () => {
+        closeEditModal();
         closeDeleteModal();
-    };
-}
-
-if (cancelButton) {
-    cancelButton.onclick = closeDeleteModal;
-}
+        closeAddChapterModal();
+        closeEditChapterModal();
+        closeDeleteChapterModal();
+    });
+});
 
 // Đóng modal khi nhấn bên ngoài modal
-// window.onclick = function(event) {
-//     const deleteModal = document.getElementById('deleteModal');
-//     if (event.target == deleteModal) {
-//         deleteModal.style.display = 'none';
-//     }
-// }
+window.onclick = function(event) {
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    });
+};
 
-// Thêm sự kiện cho nút truyện để mở rộng hoặc thu gọn submenu
+// Sự kiện mở rộng hoặc thu gọn submenu
 document.querySelector('.toggle-menu').addEventListener('click', function(event) {
     event.preventDefault();
     const submenu = document.querySelector('.submenu');
@@ -116,7 +148,8 @@ document.querySelector('.toggle-menu').addEventListener('click', function(event)
         arrow.classList.add('down');
     }
 });
-// Đặt đoạn mã này vào code.js hoặc một file JavaScript thích hợp khác
+
+// Hiển thị dropdown người dùng
 document.addEventListener('DOMContentLoaded', function() {
     var userDropdown = document.querySelector('.user-dropdown span');
     var dropdownContent = document.querySelector('.dropdown-content');
@@ -133,4 +166,19 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+});
+
+// Cập nhật thông tin thống kê khi tải trang
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const response = await fetch('http://localhost:3000/api/stats');
+        const stats = await response.json();
+
+        document.querySelector('#total-comics').textContent = stats.totalComics;
+        document.querySelector('#total-likes').textContent = stats.totalLikes;
+        document.querySelector('#total-views').textContent = stats.totalViews;
+        document.querySelector('#total-members').textContent = stats.totalMembers;
+    } catch (error) {
+        console.error('Lỗi khi lấy dữ liệu thống kê:', error);
+    }
 });
