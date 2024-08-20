@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 // Cập nhật các khung dữ liệu mẫu với nội dung
                 sampleBoxes[index].innerHTML = `
                     <div class="collection-img position-relative">
-                        <img src="${comic.image}" class="w-100 img-fluid custom-img" alt="${comic.title}">
+                        <img src="${comic.imageUrl}" class="w-100 img-fluid custom-img" alt="${comic.title}">
                         ${comic.status === 'Đang cập nhật' ? '<span class="position-absolute bg-primary text-white d-flex align-items-center justify-content-center">New</span>' : ''}
                     </div>
                     <div class="text-center">

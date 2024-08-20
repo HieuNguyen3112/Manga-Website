@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Comic = require('../models/comics_model');
 
 const ChapterSchema = new mongoose.Schema({
     comicTitle: {
@@ -8,7 +7,7 @@ const ChapterSchema = new mongoose.Schema({
     },
     comicId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Comic',  // Tham chiếu đến model Comic bằng _id
+        ref: 'Comic',
         required: true,
     },
     chapterNumber: {
@@ -21,12 +20,21 @@ const ChapterSchema = new mongoose.Schema({
     },
     content: {
         type: String,
+        required: true,  // URL of the uploaded file
+    },
+    contentType: {
+        type: String,
+        enum: ['PDF', 'TXT', 'CBZ'],  // Adjust enum to expected types
         required: true,
     },
     chapterId: {
         type: String,
         required: true,
     },
-}, { timestamps: true });
+    uploadDate: {
+        type: Date,
+        default: Date.now,
+    },
+});
 
 module.exports = mongoose.model('Chapter', ChapterSchema);

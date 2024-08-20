@@ -1,4 +1,4 @@
-require('dotenv').config(); 
+require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
@@ -6,74 +6,95 @@ const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const multer = require('multer');
 const cors = require('cors');
+
 const app = express();
 app.use(cors());
-// Cấu hình Cloudinary
+
+// Cloudinary Configuration
 cloudinary.config({
-  cloud_name: "dwfmpiozq",  // Thay thế bằng cloud name từ Cloudinary dashboard
-  api_key: 698787751885177,  // Thay thế bằng API key từ Cloudinary dashboard
-  api_secret: "WbcBy270Rx36KWI3q7jeOXCh4vI"  // Thay thế bằng API secret từ Cloudinary dashboard
+  cloud_name: "dwfmpiozq", 
+  api_key: 698787751885177, 
+  api_secret: "WbcBy270Rx36KWI3q7jeOXCh4vI" 
 });
 
-const storage = new CloudinaryStorage({
+// Storage for Comic Images
+const imageStorage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'comics', // Thư mục trên Cloudinary
-    allowed_formats: ['jpeg', 'png', 'jpg'], // Định dạng được phép
+    folder: 'comics', 
+    allowed_formats: ['jpeg', 'png', 'jpg'],
   },
 });
 
-// Tạo middleware cho Multer
-const upload = multer({ storage });
+// Middleware for uploading comic images
+const uploadImage = multer({ storage: imageStorage });
 
-// Kết nối MongoDB
-mongoose.connect('mongodb+srv://vinh:0798595814@cluster0.q9lnnq3.mongodb.net/comic_db?retryWrites=true&w=majority&appName=Cluster0', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(() => {
-  console.log('Kết nối MongoDB thành công');
-}).catch(err => {
-  console.error('Lỗi kết nối MongoDB:', err);
+// Storage for Chapter Files
+const chapterStorage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'comic_chapters',
+    allowed_formats: ['pdf', 'txt'],
+    resource_type: 'auto',
+  },
 });
 
-app.use('/backend/database/uploads', express.static(path.join(__dirname, 'uploads')));
+// Middleware for uploading chapter files
+const uploadChapter = multer({ storage: chapterStorage });
 
-// Kết nối MongoDB
-const mongoUri = process.env.MONGOB_SERVER; 
+// MongoDB Connection
+const mongoUri = process.env.MONGOB_SERVER;
 
 mongoose.connect(mongoUri)
-    .then(() => {
-        console.log('Kết nối MongoDB thành công');
-    })
-    .catch(err => {
-        console.error('Lỗi kết nối', err);
-    });
+  .then(() => {
+    console.log('Connected to MongoDB successfully');
+  })
+  .catch(err => {
+    console.error('MongoDB connection error:', err);
+  });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Route để tải ảnh lên Cloudinary
-app.post('/upload', upload.single('image'), async (req, res) => {
-  console.log('Nhận được request thêm mới truyện');
-  
+// Route to upload comic images
+app.post('/api/comics/uploadImage', uploadImage.single('image'), async (req, res) => {
+  console.log('Received request to upload a new comic image');
+
   if (!req.file) {
-    return res.status(400).json({ message: 'Không có tệp nào được tải lên' });
+    return res.status(400).json({ message: 'No file uploaded' });
   }
 
   try {
-    // Trả về URL của hình ảnh đã tải lên Cloudinary
     res.json({ url: req.file.path, id: req.file.filename });
   } catch (err) {
-    console.error('Lỗi tải lên Cloudinary:', err);
-    res.status(500).json({ message: 'Lỗi tải lên Cloudinary' });
+    console.error('Error uploading to Cloudinary:', err);
+    res.status(500).json({ message: 'Error uploading to Cloudinary' });
   }
 });
 
-// Định nghĩa các route
-app.use('/api/comics', require('../mongodb/Router/comics'));
+// Route to upload chapter files
+app.post('/api/chapters/uploadFile', uploadChapter.single('contentFile'), async (req, res) => {
+  console.log('Received request to upload a new chapter file');
 
-// Khởi chạy server
+  if (!req.file) {
+    return res.status(400).json({ message: 'No file uploaded' });
+  }
+
+  try {
+    res.json({ url: req.file.path, id: req.file.filename });
+  } catch (err) {
+    console.error('Error uploading to Cloudinary:', err);
+    res.status(500).json({ message: 'Error uploading to Cloudinary' });
+  }
+});
+
+// Define other routes
+app.use('/api/comics', require('../mongodb/Router/comics'));
+app.use('/api/chapters', require('../mongodb/Router/chapters'));
+app.use('/api/categories', require('../mongodb/Router/categorys')); // Sử dụng đường dẫn chính xác
+app.use('/api/stats', require('../mongodb/Router/stats' ));
+// Start the server
 const port = 3000;
 app.listen(port, () => {
-  console.log(`Server đang chạy trên cổng ${port}`);
+  console.log(`Server is running on port ${port}`);
 });
