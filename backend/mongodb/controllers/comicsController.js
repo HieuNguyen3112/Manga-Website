@@ -125,3 +125,27 @@ exports.deleteComic = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 };
+
+// Tìm kiếm comics theo tên
+exports.searchComics = async (req, res) => {
+    try {
+        const { search } = req.query;
+        if (search) {
+            // Tạo regex để tìm kiếm theo title (không phân biệt chữ hoa chữ thường)
+            const regex = new RegExp(search, 'i');
+            const comics = await Comic.find({ title: { $regex: regex } }).lean().exec();
+            if (comics.length > 0) {
+                res.status(200).json(comics);
+            } else {
+                res.status(404).json({ message: 'Không tìm thấy truyện nào phù hợp.' });
+            }
+        } else {
+            res.status(400).json({ message: "Chưa cung cấp từ khóa tìm kiếm." });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+
+

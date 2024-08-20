@@ -572,6 +572,41 @@ footer a:hover{
     font-size: 1rem; /* Thay đổi giá trị này để điều chỉnh kích thước chữ */
 }
 
+/* thanh tìm kiếm */
+.modal {
+    z-index: 1050; /* Đảm bảo modal nằm trên tất cả các thành phần khác */
+}
+
+.modal-backdrop {
+    z-index: 1040; /* Đảm bảo nền tối của modal nằm dưới modal */
+}
+
+.modal-dialog {
+    max-width: 500px; /* Đảm bảo modal không quá rộng */
+    margin: 1.75rem auto; /* Canh giữa modal */
+}
+
+/* thanh tìm kiếm */
+.modal-backdrop {
+    display: none;
+}
+
+.modal-backdrop.show {
+    opacity: 0.1; /* Giảm độ mờ xuống 10% */
+}
+
+.modal-backdrop {
+    pointer-events: none;
+}
+
+/* nút tìm kiếm */
+#searchBtn {
+    background-color: #e5345b; /* Màu đỏ */
+    border-color: #e5345b;     /* Màu đường viền đỏ */
+    color: #fff;               /* Màu chữ trắng */
+}
+
+
 
 /* media queries */
 @media(min-width: 992px){
