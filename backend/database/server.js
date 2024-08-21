@@ -6,7 +6,8 @@ const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const multer = require('multer');
 const cors = require('cors');
-
+const Comic = require('../mongodb/models/comics_model')
+const Category = require('../mongodb/models/categorys');
 const app = express();
 app.use(cors());
 

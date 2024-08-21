@@ -8,6 +8,21 @@ body {
     background-color: #f3f4f7;
 }
 
+.logo-container {
+    display: flex;
+    justify-content: center; /* Căn giữa logo */
+    align-items: center;
+    margin-top: 20px;
+}
+
+.logo {
+    width: 100px; /* Điều chỉnh kích thước hình tròn */
+    height: 100px;
+    border-radius: 50%; /* Làm cho hình ảnh tròn */
+    object-fit: cover; /* Đảm bảo hình ảnh vừa với khung tròn */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Tùy chọn: Thêm bóng đổ */
+}
+
 /* User Info */
 .user-info {
     position: absolute;
@@ -142,14 +157,17 @@ body {
 }
 
 .sidebar {
+    position: fixed; /* Cố định vị trí của thanh bên */
+    top: 0;
+    left: 0;
+    height: 100vh; /* Chiều cao bằng với chiều cao của cửa sổ trình duyệt */
     background-color: #222630;
     color: #fff;
     width: 250px;
-
     padding: 20px;
     box-sizing: border-box;
+    z-index: 1000; /* Đảm bảo thanh bên hiển thị phía trên các phần tử khác */
 }
-
 .select-container {
     position: relative;
     width: 00%;
@@ -361,8 +379,8 @@ select:focus {
 
 /* Nội dung chính (main content) */
 .main-content {
-    flex-grow: 1;
-    padding: 20px;
+    margin-left: 260px; /* Đặt lề trái để tránh nội dung chính bị che bởi sidebar */
+    padding: 10px;
     box-sizing: border-box;
 }
 
@@ -391,6 +409,8 @@ header h1 {
 
 /* Các phần (section) */
 .section {
+    width: 1190px;
+    height: auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
@@ -402,25 +422,39 @@ header h1 {
 }
 
 /* Bảng thống kê (stats) */
-.stats {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-}
-
 .stat-item {
     display: flex;
     align-items: center;
     background-color: #f4f4f4;
-    padding: 20px;
-    border-radius: 8px;
-    width: 200px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 40px; /* Tăng padding để phần tử lớn hơn */
+    border-radius: 12px; /* Bo góc nhiều hơn */
+    width: 200px; /* Tăng chiều rộng của mỗi khối */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Tăng bóng đổ */
+    margin: 30px; /* Thêm khoảng cách giữa các khối */
 }
 
 .stat-icon {
-    margin-right: 20px;
+    margin-right: 20px; /* Tăng khoảng cách giữa icon và thông tin */
+    font-size: 40px; /* Tăng kích thước icon */
 }
+
+.stat-info h3 {
+    margin: 0;
+    font-size: 24px; /* Tăng kích thước tiêu đề */
+}
+
+.stat-info span {
+    font-size: 40px; /* Tăng kích thước số liệu */
+    font-weight: bold;
+    color: #333; /* Đổi màu chữ cho nổi bật hơn */
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between; /* Đảm bảo khoảng cách đều giữa các phần tử */
+    flex-wrap: wrap; /* Cho phép các phần tử xuống hàng nếu màn hình nhỏ */
+}
+
 
 /* Các loại thống kê khác */
 .stat-icon.book {
@@ -435,10 +469,15 @@ header h1 {
     color: #0e6ab5;
 }
 
-.stat-icon.member {
+.stat-icon users {
     color: #0b07f2;
 }
+.stat-icon category {
+    color: #2ef207;
 
+}.stat-icon rating {
+    color: #f2bf07;
+}
 .stat-info h3 {
     margin: 0;
 }
@@ -492,49 +531,48 @@ form {
     flex-direction: column;
 }
 
+#addForm input[type="text"],
+#addForm select,
+#addForm textarea ,#addForm input[type="file"]  {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 40px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+
 /* Đặt nút ở phía bên phải */
 #saveAddForm {
-
+    margin-top : 10px;
     align-self: flex-end;
-    /* Đưa nút sang phía bên phải */
-    background-color: #4CAF50;
-    /* Màu nền */
+    background-color: #0d100d;
     color: white;
-    /* Màu chữ */
     padding: 12px 24px;
-    /* Kích thước padding */
     border: none;
-    /* Xóa viền */
-    border-radius: 4px;
-    /* Bo tròn góc */
+    border-radius: 40px;
     font-size: 16px;
-    /* Kích thước chữ */
     cursor: pointer;
-    /* Biểu tượng con trỏ chuột */
     transition: background-color 0.3s ease, transform 0.2s ease;
-    /* Hiệu ứng chuyển */
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    /* Đổ bóng */
 }
 
 #saveAddForm:hover {
     background-color: #45a049;
-    /* Màu nền khi hover */
     transform: translateY(-2px);
-    /* Hiệu ứng khi di chuột */
 }
 
 #saveAddForm:active {
     background-color: #3e8e41;
-    /* Màu nền khi nhấn */
     transform: translateY(1px);
-    /* Hiệu ứng khi nhấn */
 }
 
 /* Các nút (button) */
 button {
-    background-color: #333;
-    color: #fff;
+    background-color: #f2f2f2;
+    color: #050505;
     border: none;
     padding: 10px;
     border-radius: 4px;
@@ -543,7 +581,7 @@ button {
 }
 
 button:hover {
-    background-color: #555;
+    background-color: #cccccc;
 }
 
 #pagination {
@@ -578,38 +616,48 @@ html {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    width: 100%;
+    position: relative;
 }
 
 /* Ô tìm kiếm */
 #searchInput {
     flex: 1;
-    padding: 10px;
+    padding: 10px 20px; /* Thêm padding để tạo không gian cho icon bên trong */
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 50px;
     font-size: 16px;
+    padding-left: 40px; /* Tạo không gian cho icon bên trái */
+    box-sizing: border-box;
+    background-color: #d8dadd; /* Màu nền cho ô tìm kiếm */
 }
 
 /* Nút tìm kiếm */
 #searchButton {
-    background-color: #333;
-    color: #fff;
+    position: absolute;
+    right: 10px; /* Điều chỉnh vị trí icon bên trong ô tìm kiếm */
+    top:-3px;
+    background-color: transparent;
     border: none;
-    padding: 10px;
-    border-radius: 4px;
     cursor: pointer;
-    margin-left: 10px;
     display: flex;
     align-items: center;
+    justify-content: center;
+    font-size: 16px; /* Kích thước của biểu tượng */
+    color: #888; /* Màu của biểu tượng */
 }
 
 #searchButton i {
-    font-size: 16px;
+    font-size: 26px; /* Điều chỉnh kích thước biểu tượng */
+    color: #ffffff;
 }
 
-/* Thay đổi màu nền khi hover */
-#searchButton:hover {
-    background-color: #555;
+#searchButton:hover i {
+    color: #555;
 }
+
+
+
 
 /* Modal */
 .modal {
@@ -627,13 +675,13 @@ html {
 }
 
 .modal-content {
-    background-color: #fefefe;
-    margin: auto;
+    background-color: #fefcfc;
+    margin-left: 350px;
     padding: 20px;
     border: 1px solid #eeebeb;
-    width: 50%;
-    max-width: 500px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 250%;
+    max-width: 1000px;
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
     border-radius: 10px;
 }
 
@@ -805,6 +853,7 @@ textarea {
 .chapter-header img {
     width: 200px;
     height: auto;
+    border-radius: 50px;
     margin-right: 20px;
 }
 
@@ -826,4 +875,118 @@ textarea {
 
 .chapters th {
     background-color: #f2f2f2;
+}
+.table-container {
+    width: 100%;
+    margin: 0px auto;
+    border-radius: 10px;
+    overflow: auto; /* Để có thanh cuộn */
+    max-height: 1200px; /* Đặt chiều cao tối đa cho bảng */
+    box-shadow: 0 0 20px rgba(227, 225, 225, 0.1);
+}
+
+.styled-table {
+    width: 100%;
+}
+
+.styled-table thead tr {
+    background-color: #13e49f;
+    color: #111111;
+  
+}
+
+
+#showStatsBtn {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #ffffff;
+    color: #e14b4beb;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+#showStatsBtn i {
+    font-size: 30px;
+}
+
+#showStatsBtn:hover {
+    background-color:#e0dfdf69;
+}
+
+.chart-container {
+    margin-top: 20px;
+}
+.thongke-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+/* Table styling */
+.styled-table {
+    width: 100%;
+    border-collapse:collapse;
+    background-color: #fff;
+    border-radius: 50px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgb(220, 217, 217);
+}
+
+/* Table header */
+.styled-table thead tr {
+    color: #555050;
+    text-align: left;
+    font-weight: bold;
+}
+
+/* Table cells */
+.styled-table th, .styled-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;  /* Đường viền giữa các cột */
+    text-align: center;       /* Căn giữa nội dung */
+    vertical-align: middle;   /* Căn giữa theo chiều dọc */
+}
+
+/* Row hover effect */
+.styled-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Image styling */
+.styled-table img {
+    border-radius: 18px;
+    width: 80px;
+    height: auto;
+}
+
+/* Button styling */
+.styled-table button {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin: 2px;
+    transition: background-color 0.3s ease;
+}
+
+.styled-table button:hover {
+    background-color: #e0e0e0;
+}
+
+/* Specific icon button styles */
+.edit-btn {
+    color: #4CAF50;
+}
+
+.trash-alt-btn {
+    color: #f44336;
+}
+
+.eye-btn {
+    color: #2196F3;
 }

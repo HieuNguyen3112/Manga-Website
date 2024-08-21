@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Kaisei+Tokumin:wght@400;500;700&family=Poppins:wght@300;400;500&display=swap');
-
+.logo {
+    width: 1000px; /* Điều chỉnh kích thước hình tròn */
+    border-radius: 50%; /* Làm cho hình ảnh tròn */
+    object-fit: cover; /* Đảm bảo hình ảnh vừa với khung tròn */
+}
 :root{
     --lg-font: 'Kaisei Tokumin', serif;
     --sm-font:  "Rubik", sans-serif;
