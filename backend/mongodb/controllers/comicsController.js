@@ -136,4 +136,22 @@ exports.getComics = async (req, res) => {
   }
 };
 
+// Tìm kiếm truyện theo tiêu đề
+exports.searchComics = async (req, res) => {
+  try {
+    const query = req.query.q;
+    if (!query) {
+      return res.status(400).json({ message: 'No search query provided.' });
+    }
+
+    const comics = await Comic.find({ title: { $regex: query, $options: 'i' } });
+
+    res.status(200).json(comics);
+  } catch (err) {
+    console.error('Error searching comics:', err);
+    res.status(500).json({ message: 'Error searching comics', error: err.message });
+  }
+};
+
+
 

@@ -20,4 +20,8 @@ router.put('/:id', upload.single('image'), comicsController.updateComic);
 
 // Xóa truyện
 router.delete('/:id', comicsController.deleteComic);
+
+//tìm kiếm truyện
+router.get('/search', comicsController.searchComics);
+
 module.exports = router;
