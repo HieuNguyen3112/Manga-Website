@@ -41,6 +41,29 @@ nav {
      margin-bottom: -20px;
 }
 
+.navbar-custom-fix {
+    justify-content: space-between; /* Căn đều các phần tử trong navbar */
+    align-items: center;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+.navbar {
+    line-height: 1.5;
+    padding: 10px 15px;
+}
+
+.navbar .navbar-brand, .navbar .navbar-nav .nav-link {
+    padding: 8px 15px;
+    line-height: normal;
+}
+
+
+
 .user-account-box{
     position: relative;
     width: 120px;
@@ -99,7 +122,7 @@ nav ul li a {
 
 .fixed-top {
     position: fixed;
-    top: -22px;
+    top: 0px;
     right: 0;
     left: 0;
     z-index: 1030;
@@ -257,8 +280,9 @@ body.light-mode #icon {
             box-shadow: 0 3px 9px 3px rgba(0, 0, 0, 0.1);
 }
 .navbar-brand img{
-    width: 50px;
-
+    max-height: 30px;
+    margin-right: 10px;
+    vertical-align: middle;
 }
 .custom-img {
     height: 350px; /* Chiều cao cố định */
@@ -325,6 +349,10 @@ body.light-mode #icon {
 }
 .collection-img img {
     transition: transform 0.5s ease-in-out; /* hiệu ứng chuyển đổi */
+    max-width: 100% !important;
+    height: 450px !important; 
+    object-fit: cover; /* Đảm bảo hình ảnh luôn lấp đầy khung chứa mà không bị méo */
+    object-position: center; /* Đặt hình ảnh ở giữa khung chứa */
 }
 
 .collection-img img:hover {
@@ -451,75 +479,6 @@ body.light-mode #icon {
     border: 1px solid rgb(85, 85, 85);
 }
 
-/* Truyện chữ img */
-
-
-.truyenchu-img {
-    height: 500px; 
-    object-fit: cover; 
-    width: 100%; /* Đảm bảo ảnh lấp đầy chiều rộng khung */
-}
-
-.truyenchu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-
-
-/* SP CHAY */
-#about{
-    background-color: rgba(179, 179, 179, 0.05);
-}
-
-.SPCHAY-img{
-    height: 600px; 
-    object-fit: cover; 
-    width: 100%;
-}
-.SPCHAY {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-#about {
-    background-color: #F4D9D0; /* Nền nhẹ */
-    border: 1px solid #a17878; /* Đường viền nhẹ */
-    border-radius: 10px; /* Bo góc đường viền */
-    padding: 2rem; /* Padding cho toàn bộ phần */
-    margin-bottom: 2rem; /* Margin phía dưới */
-}
-
-
-
-/* thống kê */
-
- .thongke-img {
-    height: 200px; 
-    object-fit:fill; 
-    width: 60%;
-    border: 2px solid pink;
-    border-radius: 5px;
-    border-color: #e5345b;
-}
-.thongke {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-
-.position-relative {
-    position: relative;
-}
-
-.hot-badge {
-    top: 3px; /* khoảng cách từ đỉnh ảnh xuống */
-    right: 170px; /* khoảng cách từ phải ảnh vào */
-    padding: 5px 10px; /* thêm một chút khoảng đệm cho chữ */
-    border-radius: 5px; /* bo tròn góc */
-}
 
 /* MEOW MEOW */
 #meow{
@@ -574,6 +533,233 @@ footer a:hover{
 }
 .custom-small-text {
     font-size: 1rem; /* Thay đổi giá trị này để điều chỉnh kích thước chữ */
+}
+
+/* thanh tìm kiếm */
+.modal {
+    z-index: 1050; /* Đảm bảo modal nằm trên tất cả các thành phần khác */
+}
+
+.modal-backdrop {
+    z-index: 1040; /* Đảm bảo nền tối của modal nằm dưới modal */
+}
+
+.modal-dialog {
+    max-width: 500px; /* Đảm bảo modal không quá rộng */
+    margin: 1.75rem auto; /* Canh giữa modal */
+}
+
+/* thanh tìm kiếm */
+.modal-backdrop {
+    display: none;
+}
+
+.modal-backdrop.show {
+    opacity: 0.1; /* Giảm độ mờ xuống 10% */
+}
+
+.modal-backdrop {
+    pointer-events: none;
+}
+
+/* nút tìm kiếm */
+#searchBtn {
+    background-color: #e5345b; /* Màu đỏ */
+    border-color: #e5345b;     /* Màu đường viền đỏ */
+    color: #fff;               /* Màu chữ trắng */
+}
+
+
+
+/* Thiết lập lại khoảng cách và font cho toàn bộ trang */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Rubik', sans-serif;
+    background-color: #f4d9d0;
+}
+
+
+
+/* Điều chỉnh khoảng cách cho phần #collection */
+#collection {
+    margin-bottom: 5rem; /* Tăng khoảng cách dưới */
+    overflow: hidden;
+    height: auto; 
+}
+
+/* Điều chỉnh chiều cao tối thiểu cho mỗi section */
+section {
+    min-height: 60vh;
+}
+
+.section-collection{
+    min-height: 280vh;
+}
+
+.section-footer {
+    min-height: 10vh;
+}
+
+.section-meow {
+    min-height: 5vh !important;
+}
+
+.section-footer {
+    min-height: 10vh;
+}
+
+.section-closer {
+    margin-bottom: 0rem !important; 
+    padding-bottom: 1rem !important; 
+}
+
+.section-meow-closer {
+    padding-top: 2rem !important;
+    margin-top: 2rem !important;
+    background-color: #f8f9fa; 
+}
+
+
+
+
+
+/* Thiết lập ảnh và text trong phần collection */
+.collection-img img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.collection-list .text-center {
+    margin-top: 1rem;
+}
+
+/* Đảm bảo nhãn "New" được hiển thị đúng vị trí */
+.collection-img span {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+}
+
+
+/* Điều chỉnh khoảng cách cho các section khác nếu cần */
+footer {
+    margin-top: 3rem;
+}
+
+
+/* Điều chỉnh khoảng cách cho phần #meow */
+
+/* Đảm bảo các phần tử bên trong #meow được sắp xếp đúng */
+#meow .d-flex {
+    flex-wrap: wrap; /* Đảm bảo các phần tử có thể xuống dòng */
+    justify-content: center;
+    align-items: center;
+    gap: 2rem; /* Khoảng cách giữa các phần tử */
+}
+
+/* Điều chỉnh khoảng cách giữa các phần tử */
+#meow .d-flex > * {
+    margin-bottom: 2rem;
+}
+
+/* điều chỉnh khoảng cách giữa 2 session để không bị trùng nhau */
+#collection {
+    margin-bottom: 5rem !important;
+    padding-bottom: 3rem !important;
+}
+
+#meow {
+    padding-top: 6rem !important; 
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+    background-color: #f8f9fa;
+}
+
+#meow .container {
+    margin-top: 4rem !important;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.section {
+    padding-bottom: 3rem;
+    padding-top: 3rem;
+}
+
+#collection.py-5 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+}
+
+/* điều chỉnh khoảng cách giữa 2 session để không bị trùng nhau */
+#collection {
+    margin-bottom: 5rem !important;
+    padding-bottom: 3rem !important;
+}
+
+#meow {
+    padding-top: 2rem !important; 
+    margin-top: 2rem !important;
+    margin-bottom: 2rem !important;
+    background-color: #f4d9d0;
+}
+
+#meow .container {
+    margin-top: 4rem !important;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background-color: #d544302e;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#collection.py-5 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+}
+
+/* thanh chuyển trang */
+#pagination-container {
+    display: flex;
+    justify-content: center; /* Căn giữa các nút trong thanh phân trang */
+    align-items: center;
+    margin-top: 20px; /* Khoảng cách phía trên thanh phân trang */
+}
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.pagination .page-item {
+    margin: 0 5px; /* Khoảng cách giữa các nút */
+}
+
+.pagination .page-item .page-link {
+    padding: 8px 16px;
+    color: #212529;
+    background-color: #e9ecef;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+}
+
+.pagination .page-item.active .page-link {
+    color: #fff;
+    background-color: #ff6f61;
+    border-color: #ff6f61;
+}
+
+.pagination .page-item .page-link:hover {
+    color: #fff;
+    background-color: #ff6f61;
+    border-color: #ff6f61;
 }
 
 
