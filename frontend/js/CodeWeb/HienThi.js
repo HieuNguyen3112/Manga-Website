@@ -49,6 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (deleteChapterModal) {
         deleteChapterModal.style.display = 'none';
     }
+    const viewChapterModal= document.getElementById("viewChapterModal");
+    if (viewChapterModal) {
+        viewChapterModal.style.display = 'none';
+    }
 });
 function closeEditModal() {
     const editModal = document.getElementById("editModal");
@@ -110,7 +114,13 @@ function closeAddChapterModal() {
         modal.style.display = 'none';
     }
 }
+function closeViewChapterModal() {
+    const modal = document.getElementById('viewChapterModal');
+    const chapterViewer = document.getElementById('chapterViewer');
 
+    chapterViewer.src = ""; // Reset src để tránh lỗi khi đóng modal
+    modal.style.display = 'none';
+}
 // Sự kiện cho nút đóng của các modal
 document.querySelectorAll('.close').forEach(button => {
     button.addEventListener('click', () => {
@@ -174,11 +184,23 @@ document.addEventListener('DOMContentLoaded', async () => {
         const response = await fetch('http://localhost:3000/api/stats');
         const stats = await response.json();
 
+        // Cập nhật các giá trị thống kê trên trang
         document.querySelector('#total-comics').textContent = stats.totalComics;
         document.querySelector('#total-likes').textContent = stats.totalLikes;
         document.querySelector('#total-views').textContent = stats.totalViews;
         document.querySelector('#total-members').textContent = stats.totalMembers;
+
+        // Cập nhật số lượng thể loại và trung bình đánh giá (nếu có phần tử trong HTML)
+        if (document.querySelector('#total-categories')) {
+            document.querySelector('#total-categories').textContent = stats.totalCategories;
+        }
+
+        if (document.querySelector('#average-rating')) {
+            document.querySelector('#average-rating').textContent = stats.averageRating.toFixed(2); // Hiển thị 2 chữ số thập phân
+        }
+
     } catch (error) {
         console.error('Lỗi khi lấy dữ liệu thống kê:', error);
     }
 });
+

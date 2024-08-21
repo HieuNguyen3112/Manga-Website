@@ -71,17 +71,14 @@ class HangTruyen {
         nut.appendChild(icon);
         return nut;
     }
-    getCategoryNameById(categoryIds) {
-        // Kiểm tra nếu categoryIds là mảng, nếu không thì biến nó thành mảng
-        const ids = Array.isArray(categoryIds) ? categoryIds : [categoryIds];
 
-        // Lấy tên của tất cả các danh mục tương ứng với các ID
+    // Lấy tên của tất cả các danh mục tương ứng với các ID
+    getCategoryNameById(categoryIds) {
+        const ids = Array.isArray(categoryIds) ? categoryIds : [categoryIds];
         const categoryNames = ids.map(id => {
             const category = danhSachDanhMuc.find(c => c._id === id);
             return category ? category.name : 'Danh mục không xác định';
         });
-
-        // Nối các tên danh mục thành một chuỗi, ngăn cách bởi dấu phẩy
         return categoryNames.join(', ');
     }
 
@@ -89,11 +86,10 @@ class HangTruyen {
     taoHang() {
         const Hang = document.createElement('tr');
 
-        // Ô hình ảnh
         const cellHinhAnh = document.createElement('td');
         const Img = document.createElement('img');
-        Img.src = this.imageUrl;  // Sử dụng URL từ Cloudinary
-        Img.style.width = "70px";
+        Img.src = this.imageUrl;  
+        Img.style.width = "80px";
         cellHinhAnh.appendChild(Img);
         Hang.appendChild(cellHinhAnh);
 
@@ -504,13 +500,23 @@ function thayDoiTrang(huong) {
 
 async function searchComics() {
     const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    
+    // Filter the list of comics based on the search term
     const filteredTruyen = danhSachTruyen.filter(truyen => {
-        return truyen.title.toLowerCase().includes(searchTerm) ||
-            truyen.category.toLowerCase().includes(searchTerm) ||
-            truyen.author.toLowerCase().includes(searchTerm);
+        const titleMatch = truyen.title.toLowerCase().includes(searchTerm);
+        const authorMatch = truyen.author.toLowerCase().includes(searchTerm);
+        
+        // Get category names for the comic
+        const categoryNames = truyen.getCategoryNameById(truyen.categoryId).toLowerCase();
+        const categoryMatch = categoryNames.includes(searchTerm);
+
+        return titleMatch || authorMatch || categoryMatch;
     });
+
+    // Display the filtered comics
     hienThiBang(trangHienTai, filteredTruyen);
 }
+
 
 document.getElementById('searchButton').addEventListener('click', searchComics);
 document.getElementById('searchInput').addEventListener('input', searchComics);
@@ -659,20 +665,26 @@ moChinhSua() {
 
     // Xem nội dung chương
     async moXem() {
+        const modal = document.getElementById('viewChapterModal');
+        const chapterViewer = document.getElementById('chapterViewer');
+    
         try {
             const response = await fetch(`http://localhost:3000/api/chapters/${this._id}`);
             const chapter = await response.json();
-            if (chapter) {
-                window.open(chapter.content, '_blank'); // Mở tệp chương trong tab mới
+            if (chapter && chapter.content) {
+                chapterViewer.src = chapter.content; // Gán đường dẫn PDF vào iframe
+                modal.style.display = 'block'; // Hiển thị modal
             } else {
-                console.error("Chương không tồn tại.");
+                console.error("Chương không tồn tại hoặc không có nội dung.");
             }
         } catch (err) {
             console.error("Lỗi khi xem chương:", err);
         }
     }
+    
 }
-
+    
+    // Hàm đóng modal xem chương
 // Thêm mới chương và cập nhật danh sách chương sau khi thêm
 document.getElementById('saveChapterForm').addEventListener('click', async function (event) {
     event.preventDefault();
