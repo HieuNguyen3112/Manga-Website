@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const memberTableBody = document.getElementById('memberTableBody');
+    const searchInput = document.getElementById('searchMemberInput');
 
     async function fetchAllUsers() {
         const token = localStorage.getItem('accessToken');
@@ -20,8 +21,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (response.ok) {
                 const users = await response.json();
-                console.log(users); // Kiểm tra dữ liệu trả về từ API
                 populateUserTable(users);
+
+                // Lắng nghe sự kiện nhập liệu để tìm kiếm
+                searchInput.addEventListener('input', () => filterUsers(users));
             } else {
                 console.error('Lấy thông tin người dùng thất bại');
             }
@@ -70,6 +73,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
             memberTableBody.appendChild(row);
         });
+    }
+
+    function filterUsers(users) {
+        const searchTerm = searchInput.value.toLowerCase();
+        const filteredUsers = users.filter(user => {
+            return user.username.toLowerCase().includes(searchTerm) ||
+                   user.email.toLowerCase().includes(searchTerm);
+        });
+        populateUserTable(filteredUsers);
     }
 
     fetchAllUsers();

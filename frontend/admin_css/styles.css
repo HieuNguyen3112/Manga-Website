@@ -622,7 +622,16 @@ html {
 }
 
 /* Ô tìm kiếm */
-#searchInput {
+#searchMemberInput{flex: 1;
+    padding: 10px 20px; /* Thêm padding để tạo không gian cho icon bên trong */
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    font-size: 16px;
+    padding-left: 40px; /* Tạo không gian cho icon bên trái */
+    box-sizing: border-box;
+    background-color: #d8dadd; /* Màu nền cho ô tìm kiếm */
+}
+#searchInput{
     flex: 1;
     padding: 10px 20px; /* Thêm padding để tạo không gian cho icon bên trong */
     border: 1px solid #ccc;
