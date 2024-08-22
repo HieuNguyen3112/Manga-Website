@@ -597,7 +597,7 @@ body {
 
 /* Điều chỉnh khoảng cách cho phần #collection */
 #collection {
-    margin-bottom: 5rem; /* Tăng khoảng cách dưới */
+    margin-bottom: 5rem !important; /* Tăng khoảng cách dưới */
     overflow: hidden;
     height: auto; 
 }
@@ -648,6 +648,18 @@ section {
 .collection-list .text-center {
     margin-top: 1rem;
 }
+
+.collection-list .col-md-6 {
+    transition: opacity 0.5s ease-in-out;
+    opacity: 1;
+}
+.collection-list .col-md-6.hidden {
+    opacity: 0;
+    pointer-events: none;
+    height: 0;
+    overflow: hidden;
+}
+
 
 /* Đảm bảo nhãn "New" được hiển thị đúng vị trí */
 .collection-img span {

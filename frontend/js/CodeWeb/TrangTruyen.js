@@ -31,11 +31,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         const end = start + comicsPerPage;
         const comicsToDisplay = comics.slice(start, end);
 
+        const collectionList = document.querySelector('.collection-list');
         collectionList.innerHTML = ''; // Xóa các phần tử hiện tại trước khi thêm mới
 
         comicsToDisplay.forEach(comic => {
             const box = document.createElement('div');
-            box.classList.add('col-md-6', 'col-lg-4', 'col-xl-3', 'p-2');
+            box.className = 'col-md-6 col-lg-4 col-xl-3 p-2';
 
             box.innerHTML = `
                 <div class="collection-img position-relative">
