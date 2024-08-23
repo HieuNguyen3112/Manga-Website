@@ -209,6 +209,24 @@
         </nav>
     </div>
     
+    <!-- Modal thông báo không tìm thấy kết quả -->
+    <div class="modal fade" id="noResultsModal" tabindex="-1" aria-labelledby="noResultsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="noResultsModalLabel">Thông báo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Không tìm thấy truyện nào phù hợp với từ khóa của bạn. Trang sẽ tự động làm mới.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- MEOW MEOW -->
     <section id="meow" class="py-5 section-meow section-meow-closer">
@@ -376,6 +394,7 @@
     <script src="bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
     <script src="js/script1.js"></script>
     <script src="/backend/src/Components/search/search.js"></script>
+    <script src="/frontend/js/CodeWeb/truyenYeuThich.js"></script>
 </body>
 
 </html>

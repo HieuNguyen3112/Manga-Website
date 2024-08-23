@@ -32,28 +32,27 @@
    
 
     <!-- navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-custom py-0 fixed-top">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center order-lg-0" href="Trang_truyen.html">
-                <img src="image/logo-am-ban.jpg" alt="site icon">
-                <span class="text-uppercase fw-lighter ms-1 text-white">Meow</span>
-            </a>
-    
-            <div class="order-lg-2 nav-btns d-flex align-items-center">
+    <nav class="navbar navbar-expand-lg navbar-light bg-custom py-0 fixed-top navbar-custom-fix">
+      <div class="container">
+          <a href="Trang_truyen.html">
+              <img src="https://res.cloudinary.com/dwfmpiozq/image/upload/v1724220931/Nude_Boba_Milk_Tea_Logo_1_amomjt.png" alt="Logo" class="logo">
+          </a>
+
+          <div class="order-lg-2 nav-btns d-flex align-items-center">
               <button type="button" class="btn position-relative">
                   <div class="user-account-box d-flex align-items-center">
                       <img src="image/R.png" class="user-pic" onclick="toggleMenu()"
                           style="width: 30px; height: 30px;">
                       <span class="text-uppercase text-decoration-none text-white ms-1 user-pic"
                           onclick="toggleMenu()"> Tài khoản</span>
-                  
+                  </div>
                   <div class="sub-menu-wrap" id="subMenu">
                       <div class="sub-menu">
                           <div class="user-info">
                               <h2>MEO MEOW</h2>
                           </div>
                           <hr>
-                          <a href="edit pro.html" class="sub-menu-link">
+                          <a href="/frontend/pages/edit pro.html" class="sub-menu-link">
                               <img src="image/profile.png">
                               <p>Edit Profile</p>
                           </a>
@@ -72,141 +71,200 @@
                       </div>
                   </div>
               </button>
-    
-                <button type="button" class="btn2 position-relative">
-                    <i class="text-white fa fa-heart"></i>
-                    <span class="position-absolute top-0 start-100 translate-middle badge bg-primary">2</span>
-                </button>
-                <button type="button" class="btn2 position-relative">
-                    <i class="text-white fa fa-search"></i>
-                </button>
-            </div>
-    
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-    
-            <div class="collapse navbar-collapse order-lg-1" id="navMenu">
-                <ul class="navbar-nav mx-auto text-center">
-                    <li class="nav-item px-2 py-2 border-0">
-                        <a class="nav-link text-uppercase text-dark" href="#icon"id="dark-mode-toggle">
-                            <img src="image/moon.png" id="icon-fluid">
-                        </a>
-                    </li>
-                    <li class="nav-item px-2 py-2">
-                        <a class="nav-link text-uppercase text-white" href="Trang_truyen.html">Trang chủ</a>
-                    </li>
-                    <!-- <li class="nav-item px-2 py-2">
-                        <a class="nav-link text-uppercase text-white" href="#collection">Mới ra mắt</a>
-                    </li> -->
-                    <li class="nav-item px-2 py-2">
-                        <a class="nav-link text-uppercase text-white" href="#special">Yêu thích</a>
-                    </li>
-                    <li class="nav-item dropdown px-2 py-2">
-                        <a class="nav-link dropdown-toggle text-uppercase text-white" href="#" id="theloaiDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Thể loại
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="theloaiDropdown">
-                            <li><a class="dropdown-item" href="#theloai1">Thể loại 1</a></li>
-                            <li><a class="dropdown-item" href="#theloai2">Thể loại 2</a></li>
-                            <li><a class="dropdown-item" href="#theloai3">Thể loại 3</a></li>
-                            <li><a class="dropdown-item" href="#theloai4">Thể loại 4</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
+
+                  
+
+              <button type="button" class="btn1 position-relative">
+                  <i class="text-white fa fa-heart"></i>
+                  <span class="position-absolute top-0 start-100 translate-middle badge bg-primary">2</span>
+              </button>
+
+              <!-- Nút Tìm Kiếm -->
+              <button type="button" class="btn1 position-relative" data-bs-toggle="modal" data-bs-target="#searchModal">
+                  <i class="text-white fa fa-search"></i>
+              </button>
+
+              <!-- Modal Tìm Kiếm -->
+              <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="searchModalLabel">Tìm kiếm Truyện</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                              <input type="text" id="searchInput" class="form-control" placeholder="Nhập tên truyện...">
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-primary" id="searchBtn">Tìm kiếm</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+  
+              <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="searchModalLabel">Tìm kiếm Truyện</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                              <input type="text" id="searchInput" class="form-control" placeholder="Nhập tên truyện...">
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-primary" id="searchBtn">Tìm kiếm</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+  
+              <li class="nav-item px-2 py-2 border-0">
+                  <a class="nav-link1 text-uppercase text-dark" href="#" id="dark-mode-toggle">
+                      <img src="image/moon.png" id="icon-fluid">
+                  </a>
+              </li>
+          </div>
+
+          
+
+          <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse order-lg-1" id="navMenu">
+              <ul class="navbar-nav mx-auto text-center">
+                  
+                  <li class="nav-item px-2 py-2">
+                      <a class="nav-link text-uppercase text-white" href="Trang_truyen.html">Trang chủ</a>
+                  </li>
+                  <!-- <li class="nav-item px-2 py-2">
+                      <a class="nav-link text-uppercase text-white" href="#collection">Mới ra mắt</a>
+                  </li> -->
+                  <li class="nav-item px-2 py-2">
+                      <a class="nav-link text-uppercase text-white" href="#special">Yêu thích</a>
+                  </li>
+                  <li class="nav-item dropdown px-2 py-2">
+                      <a class="nav-link dropdown-toggle text-uppercase text-white" href="#" id="theloaiDropdown"
+                          role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Thể loại
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="theloaiDropdown">
+                          <li><a class="dropdown-item" href="#theloai1">Thể loại 1</a></li>
+                          <li><a class="dropdown-item" href="#theloai2">Thể loại 2</a></li>
+                          <li><a class="dropdown-item" href="#theloai3">Thể loại 3</a></li>
+                          <li><a class="dropdown-item" href="#theloai4">Thể loại 4</a></li>
+                      </ul>
+                  </li>
+              </ul>
+          </div>
+      </div>
     </nav>
     
 
-<!-- end NAV-->
+    <!-- end NAV-->
 
-<section>
-  <div class="contain-main">
-      <div class="container-flex">
-          <div class="left">
-              <div class="main_image">
-                  <img src="image/AKame.jpg" class="slide">
+    <!-- Modal thông báo không tìm thấy kết quả -->
+    <div class="modal fade" id="noResultsModal" tabindex="-1" aria-labelledby="noResultsModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="noResultsModalLabel">Thông báo</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  Không tìm thấy truyện nào phù hợp với từ khóa của bạn. Trang sẽ tự động làm mới.
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
               </div>
           </div>
-          <div class="right">
-            <h3 class="title-fluid text-danger title-adjust">AKame Ga Kill</h3> <!-- Adjust the value as needed -->
-              <hr class="divider">
-              <ul class="list-info">
-                  <li class="author row">
-                      <div class="name col-xs-3">
-                          <i class="fa fa-user"></i> Tác giả
-                      </div>
-                      <div class="col-xs-9">Đang Cập Nhật</div>
-                  </li>
-                  <li class="status row">
-                      <div class="name col-xs-3">
-                          <i class="fa fa-rss"></i> Tình trạng
-                      </div>
-                      <div class="col-xs-9">Đang Cập Nhật</div>
-                  </li>
-                  <li class="row">
-                      <div class="name col-xs-3">
-                          <i class="fa fa-thumbs-up"></i> Lượt thích
-                      </div>
-                      <div class="col-xs-9 number-like">2210</div>
-                  </li>
-                  <li class="row">
-                      <div class="name col-xs-3">
-                          <i class="fa fa-heart"></i> Lượt theo dõi
-                      </div>
-                      <div class="col-xs-9">13,584</div>
-                  </li>
-                  <li class="row">
-                      <div class="name col-xs-3">
-                          <i class="fa fa-eye"></i> Lượt xem
-                      </div>
-                      <div class="col-xs-9">2,126,539</div>
-                  </li>
-              </ul>
-              <ul class="story-detail-menu">
-                  <li class="li01">
-                      <a href="#" class="button is-rounded green-button">
-                          <i class="fa fa-book"></i> Đọc từ đầu
-                      </a>
-                  </li>
-                  <li class="li02">
-                      <a href="#" class="button is-danger is-rounded btn-subscribe subscribeBook red-button" data-page="index" data-id="3898">
-                          <span class="fa fa-heart"></span> Theo dõi
-                      </a>
-                  </li>
-                  <li class="li03">
-                      <a href="#" class="button is-danger is-rounded btn-like purple-button" data-id="3898">
-                          <i class="fa fa-thumbs-up"></i> Thích
-                      </a>
-                  </li>
-              </ul>
-          </div>
       </div>
-  </div>
-</section>
+    </div>
+
+
+    <section>
+        <div class="contain-main">
+            <div class="container-flex">
+                <div class="left">
+                    <div class="main_image">
+                        <img src="image/AKame.jpg" class="slide">
+                    </div>
+                </div>
+                <div class="right">
+                  <h3 class="title-fluid text-danger title-adjust">AKame Ga Kill</h3> <!-- Adjust the value as needed -->
+                    <hr class="divider">
+                    <ul class="list-info">
+                        <li class="author row">
+                            <div class="name col-xs-3">
+                                <i class="fa fa-user"></i> Tác giả
+                            </div>
+                            <div class="col-xs-9">Đang Cập Nhật</div>
+                        </li>
+                        <li class="status row">
+                            <div class="name col-xs-3">
+                                <i class="fa fa-rss"></i> Tình trạng
+                            </div>
+                            <div class="col-xs-9">Đang Cập Nhật</div>
+                        </li>
+                        <li class="row">
+                            <div class="name col-xs-3">
+                                <i class="fa fa-thumbs-up"></i> Lượt thích
+                            </div>
+                            <div class="col-xs-9 number-like">2210</div>
+                        </li>
+                        <li class="row">
+                            <div class="name col-xs-3">
+                                <i class="fa fa-heart"></i> Lượt theo dõi
+                            </div>
+                            <div class="col-xs-9">13,584</div>
+                        </li>
+                        <li class="row">
+                            <div class="name col-xs-3">
+                                <i class="fa fa-eye"></i> Lượt xem
+                            </div>
+                            <div class="col-xs-9">2,126,539</div>
+                        </li>
+                    </ul>
+                    <ul class="story-detail-menu">
+                        <li class="li01">
+                            <a href="#" class="button is-rounded green-button">
+                                <i class="fa fa-book"></i> Đọc từ đầu
+                            </a>
+                        </li>
+                        <li class="li02">
+                            <a href="#" class="button is-danger is-rounded btn-subscribe subscribeBook red-button" data-page="index" data-id="3898">
+                                <span class="fa fa-heart"></span> Theo dõi
+                            </a>
+                        </li>
+                        <li class="li03">
+                            <a href="#" class="button is-danger is-rounded btn-like purple-button" data-id="3898">
+                                <i class="fa fa-thumbs-up"></i> Thích
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
     
-       <div class="list-gioithieu">
-        
-          </ul> 
-   
-              <div class="gioi_thieu">
-                <i class="fa fa-info-circle text-warning"></i> Giới thiệu:
-             </div>
-                   <div class="#">
-              Tatsumi là một chiến binh, cùng hai người bạn thời thơ ấu của mình, đến Thủ đô tìm cách kiếm tiền để làm giàu cho ngôi làng nghèo khó của mình. Sau khi bị lạc và đến thủ đô một mình, Tatsumi không những thất bại trong việc gia nhập quân đội mà còn bị lừa cho hết tiền. 
-              Sau đó anh được một gia đình quý tộc giúp đỡ, nhưng thực ra họ có ý định tra tấn và giết anh, giống như họ đã làm với hai người bạn của anh và hàng chục người khác. Tatsumi được giải cứu bởi một nhóm sát thủ được gọi là Night Raid.
-                   </div>
+          <div class="list-gioithieu">
+              </ul> 
+                  <div class="gioi_thieu">
+                    <i class="fa fa-info-circle text-warning"></i> Giới thiệu:
+                  </div>
+                    <div class="#">
+                  Tatsumi là một chiến binh, cùng hai người bạn thời thơ ấu của mình, đến Thủ đô tìm cách kiếm tiền để làm giàu cho ngôi làng nghèo khó của mình. Sau khi bị lạc và đến thủ đô một mình, Tatsumi không những thất bại trong việc gia nhập quân đội mà còn bị lừa cho hết tiền. 
+                  Sau đó anh được một gia đình quý tộc giúp đỡ, nhưng thực ra họ có ý định tra tấn và giết anh, giống như họ đã làm với hai người bạn của anh và hàng chục người khác. Tatsumi được giải cứu bởi một nhóm sát thủ được gọi là Night Raid.
+                    </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
 
-  <div class="list-flex">
+      <div class="list-flex">
   <h3>
     <i class="fa fa-database" aria-hidden="true"></i> Danh sách chương
     </h3>
@@ -460,122 +518,116 @@
        
           
           </div>
-        </div>
+      </div>
         
         <!--END CMT-->
 
-        <!-- FOOTER-->
-        <footer class="bg-dark py-5">
-          <div class="container">
-              <div class="row text-white g-4">
-                  <div class="col-md-6 col-lg-3">
-                      <a class="text-uppercase text-decoration-none brand text-white" href="index.html">Meow</a>
-                      <p class="text-white text-muted mt-3">Chào mừng mọi người đến với web truyện của MEOW MEOW. Nếu có
-                          gì thắc mắc thì xin hãy liên hệ ở đây.</p>
-                      <a href="#" class="btn-note">Đóng góp ý kiến</a>
+        <!-- footer -->
+      <footer class="bg-dark py-5 section-footer section-closer">
+      <div class="container">
+          <div class="row text-white g-4">
+              <div class="col-md-6 col-lg-3">
+                  <a class="text-uppercase text-decoration-none brand text-white" href="index.html">Meow</a>
+                  <p class="text-white text-muted mt-3">Chào mừng mọi người đến với web truyện của MEOW MEOW. Nếu có
+                      gì thắc mắc thì xin hãy liên hệ ở đây.</p>
+                  <a href="#" class="btn-note">Đóng góp ý kiến</a>
+              </div>
+
+              <div class="col-md-6 col-lg-3">
+                  <h5 class="fw-light">Links</h5>
+                  <ul class="list-unstyled">
+                      <li class="my-3">
+                          <a href="#" class="text-white text-decoration-none text-muted">
+                              <i class="fas fa-chevron-right me-1"></i>Trang chủ
+                          </a>
+                      </li>
+                      <li class="my-3">
+                          <a href="#" class="text-white text-decoration-none text-muted">
+                              <i class="fas fa-chevron-right me-1"></i> Mới ra mắt
+                          </a>
+                      </li>
+                      <li class="my-3">
+                          <a href="#" class="text-white text-decoration-none text-muted">
+                              <i class="fas fa-chevron-right me-1"></i> Yêu thích
+                          </a>
+                      </li>
+                      <li class="my-3">
+                          <a href="#" class="text-white text-decoration-none text-muted">
+                              <i class="fas fa-chevron-right me-1"></i> Thống kê
+                          </a>
+                      </li>
+                  </ul>
+              </div>
+              <div class="col-md-6 col-lg-3">
+                  <h5 class="fw-light mb-3">Địa chỉ</h5>
+                  <div class="d-flex justify-content-start align-items-start my-2 text-muted">
+                      <span class="me-3">
+                          <i class="fas fa-map-marked-alt"></i>
+                      </span>
+                      <span class="fw-light">
+                          <iframe
+                              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.650665616816!2d106.67959617480462!3d10.76138318938645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b8a072901%3A0x2fb4502ebd044212!2zxJDhuqFpIEjhu41jIFPGsCBQaOG6oW0gVHAuSENNIENTMQ!5e0!3m2!1svi!2s!4v1722180039624!5m2!1svi!2s"
+                              width="250" height="200" style="border:0;" allowfullscreen="" loading="lazy"
+                              referrerpolicy="no-referrer-when-downgrade">
+                          </iframe>
+                      </span>
                   </div>
-  
-                  <div class="col-md-6 col-lg-3">
-                      <h5 class="fw-light">Links</h5>
-                      <ul class="list-unstyled">
-                          <li class="my-3">
-                              <a href="#" class="text-white text-decoration-none text-muted">
-                                  <i class="fas fa-chevron-right me-1"></i>Trang chủ
+                  <div class="d-flex justify-content-start align-items-start my-2 text-muted">
+                      <span class="me-3">
+                          <i class="fas fa-envelope"></i>
+                      </span>
+                      <span class="fw-light">
+                          <p><a href="mailto:buiquochuy08122003@gmail.com"
+                                  class="text-secondary">buiquochuy08122003@gmail.com</a></p>
+                      </span>
+                  </div>
+                  <div class="d-flex justify-content-start align-items-start my-2 text-muted">
+                      <span class="me-3">
+                          <i class="fas fa-phone-alt"></i>
+                      </span>
+                      <span class="fw-light  ">
+                          <p> <a href="tel:" class="text-secondary"> 0822097983</a></p>
+                      </span>
+                  </div>
+              </div>
+
+              <div class="col-md-6 col-lg-3">
+                  <h5 class="fw-light mb-3">Liên hệ</h5>
+                  <div>
+                      <ul class="list-unstyled row">
+                          <li class="col-3 mb-3 text-center">
+                              <a href="https://www.facebook.com/bity0984549118"
+                                  class="text-white text-decoration-none text-muted fs-4 d-flex flex-column align-items-center">
+                                  <i class="fab fa-facebook"></i>
+                                  <span class="custom-small-text">Quốc Huy</span>
                               </a>
                           </li>
-                          <li class="my-3">
-                              <a href="#" class="text-white text-decoration-none text-muted">
-                                  <i class="fas fa-chevron-right me-1"></i> Mới ra mắt
+                          <li class="col-3 mb-3 text-center">
+                              <a href="https://www.facebook.com/profile.php?id=100059127823057"
+                                  class="text-white text-decoration-none text-muted fs-4 d-flex flex-column align-items-center">
+                                  <i class="fab fa-facebook"></i>
+                                  <span class="custom-small-text">Nguyễn Minh Hiếu</span>
                               </a>
                           </li>
-                          <li class="my-3">
-                              <a href="#" class="text-white text-decoration-none text-muted">
-                                  <i class="fas fa-chevron-right me-1"></i> Yêu thích
+                          <li class="col-3 mb-3 text-center">
+                              <a href="https://www.facebook.com/danghuynhkhanhdoan974"
+                                  class="text-white text-decoration-none text-muted fs-4 d-flex flex-column align-items-center">
+                                  <i class="fab fa-facebook"></i>
+                                  <span class="custom-small-text">Đàng Huỳnh Khánh Đoan</span>
                               </a>
                           </li>
-                          <li class="my-3">
-                              <a href="#" class="text-white text-decoration-none text-muted">
-                                  <i class="fas fa-chevron-right me-1"></i> Thống kê
+                          <li class="col-3 mb-3 text-center">
+                              <a href="https://www.facebook.com/profile.php?id=100034309667088"
+                                  class="text-white text-decoration-none text-muted fs-4 d-flex flex-column align-items-center">
+                                  <i class="fab fa-facebook"></i>
+                                  <span class="custom-small-text">Nguyễn Quang Vinh</span>
                               </a>
                           </li>
                       </ul>
                   </div>
-  
-                  <div class="col-md-6 col-lg-3">
-                      <h5 class="fw-light mb-3">Địa chỉ</h5>
-                      <div class="d-flex justify-content-start align-items-start my-2 text-muted">
-                          <span class="me-3">
-                              <i class="fas fa-map-marked-alt"></i>
-                          </span>
-                          <span class="fw-light">
-                              <iframe
-                                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.650665616816!2d106.67959617480462!3d10.76138318938645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b8a072901%3A0x2fb4502ebd044212!2zxJDhuqFpIEjhu41jIFPGsCBQaOG6oW0gVHAuSENNIENTMQ!5e0!3m2!1svi!2s!4v1722180039624!5m2!1svi!2s"
-                                  width="250" height="200" style="border:0;" allowfullscreen="" loading="lazy"
-                                  referrerpolicy="no-referrer-when-downgrade">
-                              </iframe>
-                          </span>
-                      </div>
-  
-                      <div class="d-flex justify-content-start align-items-start my-2 text-muted">
-                          <span class="me-3">
-                              <i class="fas fa-envelope"></i>
-                          </span>
-                          <span class="fw-light">
-                              <p><a href="mailto:buiquochuy08122003@gmail.com"
-                                      class="text-secondary">buiquochuy08122003@gmail.com</a></p>
-                          </span>
-                      </div>
-  
-  
-                      <div class="d-flex justify-content-start align-items-start my-2 text-muted">
-                          <span class="me-3">
-                              <i class="fas fa-phone-alt"></i>
-                          </span>
-                          <span class="fw-light  ">
-                              <p> <a href="tel:" class="text-secondary"> 0822097983</a></p>
-                          </span>
-                      </div>
-                  </div>
-  
-                  <div class="col-md-6 col-lg-3">
-                      <h5 class="fw-light mb-3">Liên hệ</h5>
-                      <div>
-                          <ul class="list-unstyled row">
-                              <li class="col-3 mb-3 text-center">
-                                  <a href="https://www.facebook.com/bity0984549118"
-                                      class="text-white text-decoration-none text-muted fs-4 d-flex flex-column align-items-center">
-                                      <i class="fab fa-facebook"></i>
-                                      <span class="custom-small-text">Quốc Huy</span>
-                                  </a>
-                              </li>
-                              <li class="col-3 mb-3 text-center">
-                                  <a href="https://www.facebook.com/profile.php?id=100059127823057"
-                                      class="text-white text-decoration-none text-muted fs-4 d-flex flex-column align-items-center">
-                                      <i class="fab fa-facebook"></i>
-                                      <span class="custom-small-text">Nguyễn Minh Hiếu</span>
-                                  </a>
-                              </li>
-                              <li class="col-3 mb-3 text-center">
-                                  <a href="https://www.facebook.com/danghuynhkhanhdoan974"
-                                      class="text-white text-decoration-none text-muted fs-4 d-flex flex-column align-items-center">
-                                      <i class="fab fa-facebook"></i>
-                                      <span class="custom-small-text">Đàng Huỳnh Khánh Đoan</span>
-                                  </a>
-                              </li>
-                              <li class="col-3 mb-3 text-center">
-                                  <a href="https://www.facebook.com/profile.php?id=100034309667088"
-                                      class="text-white text-decoration-none text-muted fs-4 d-flex flex-column align-items-center">
-                                      <i class="fab fa-facebook"></i>
-                                      <span class="custom-small-text">Nguyễn Quang Vinh</span>
-                                  </a>
-                              </li>
-                          </ul>
-  
-  
-                      </div>
-                  </div>
               </div>
           </div>
+      </div>
       </footer>
 
       
@@ -600,7 +652,7 @@
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
     <!-- bootstrap js -->
     <script src = "bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
-<!-- custom js -->
+    <!-- custom js -->
     <script src = "js/script1.js"></script>
 
 
@@ -634,6 +686,7 @@
 <script src="/frontend/js/CodeWeb/DocTruyen.js"></script>
 <script src="/frontend/js/CodeWeb/codeChapterDocNgay.js"></script>
 <script src="/backend/src/Components/NavBar/NavBar.js"></script>
+<script src="/backend/src/Components/search/search.js"></script>
 
 </body>
 </html>

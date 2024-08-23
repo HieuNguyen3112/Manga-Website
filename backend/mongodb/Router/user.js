@@ -12,4 +12,13 @@ router.get('/', middlewareController.verifyTokenAndAdminAuth, userController.get
 //delete user
 router.delete("/:id", middlewareController.verifyTokenAndAdminAuth, userController.deleteUser);
 
+// Thêm truyện vào danh sách yêu thích
+router.post("/favorites/add", middlewareController.verifyToken, userController.addToFavorites);
+
+// Xóa truyện khỏi danh sách yêu thích
+router.post("/favorites/remove", middlewareController.verifyToken, userController.removeFromFavorites);
+
+// Lấy danh sách truyện yêu thích của người dùng
+router.get("/favorites", middlewareController.verifyToken, userController.getFavorites);
+
 module.exports = router;

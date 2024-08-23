@@ -127,15 +127,12 @@ function createPagination(comics) {
     paginationContainer.appendChild(paginationList);
 }
 
-// Hàm hiển thị thông báo không tìm thấy kết quả
+// Hàm hiển thị thông báo không tìm thấy kết quả và tự động refresh trang
 function displayNoResultsMessage() {
-    const collectionList = document.querySelector('.collection-list');
-    collectionList.innerHTML = `
-        <div class="col-12 text-center">
-            <p class="text-muted">Không tìm thấy truyện nào phù hợp với từ khóa của bạn.</p>
-        </div>
-    `;
+    const noResultsModal = new bootstrap.Modal(document.getElementById('noResultsModal'));
+    noResultsModal.show();
 
-    const paginationContainer = document.getElementById('pagination-container');
-    paginationContainer.innerHTML = ''; // Xóa pagination nếu không có kết quả
+    setTimeout(() => {
+        window.location.reload();
+    }, 3000); // Trang sẽ tự động refresh sau 3 giây
 }

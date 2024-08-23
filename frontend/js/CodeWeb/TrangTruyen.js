@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <p class="text-capitalize fw-bold">${comic.title}</p>
                     <span class="fw-bold d-block">
                         <a href="doc_ngay.html?id=${comic._id}" class="btn btn-primary mt-3">Đọc ngay</a>
-                        <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
+                        <a href="#" class="btn btn-primary mt-3 favorite-btn" data-comic-id="${comic._id}"><i class="fa-regular fa-heart"></i></a>
                     </span>
                 </div>
             `;

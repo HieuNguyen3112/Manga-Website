@@ -24,6 +24,18 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    favoriteComics: [
+        {
+            comicId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Comic',
+            },
+            addedAt: {
+                type: Date,
+                default: Date.now
+            }
+        }
+    ],
 },
     { timestamps: true }
 );
