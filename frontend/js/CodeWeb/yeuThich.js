@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const collectionList = document.querySelector('.collection-list');
     const paginationContainer = document.getElementById('pagination-container');
     let favoriteComics = [];
+    let comicsPerPage = 12;
+    let currentPage = 1;
+    let totalPages = 1;
 
     // Gắn sự kiện nhấn vào link "Yêu Thích"
     favoriteLink.addEventListener('click', async (event) => {
@@ -24,8 +27,16 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (response.ok) {
-                favoriteComics = await response.json();
-                displayComics(favoriteComics);
+                const data = await response.json();
+                const comicIds = data.map(item => item.comicId);
+
+                // Lấy chi tiết các truyện dựa trên comicIds
+                const comicDetailsPromises = comicIds.map(id => fetch(`http://localhost:3000/api/comics/${id}`).then(res => res.json()));
+                favoriteComics = await Promise.all(comicDetailsPromises);
+                
+                totalPages = Math.ceil(favoriteComics.length / comicsPerPage);
+                createPagination(); // Tạo phân trang cho danh sách truyện yêu thích
+                displayComics(currentPage); // Hiển thị các truyện yêu thích của trang đầu tiên
             } else {
                 console.error('Lỗi khi lấy danh sách truyện yêu thích:', response.statusText);
                 alert("Không thể lấy danh sách truyện yêu thích.");
@@ -37,11 +48,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Hàm hiển thị các truyện yêu thích
-    function displayComics(comics) {
+    function displayComics(page) {
+        const start = (page - 1) * comicsPerPage;
+        const end = start + comicsPerPage;
+        const comicsToDisplay = favoriteComics.slice(start, end);
+
         collectionList.innerHTML = ''; // Xóa các phần tử hiện tại
 
-        comics.forEach(comicData => {
-            const comic = comicData.comicId; // Truy cập đối tượng comic
+        comicsToDisplay.forEach(comic => {
             const box = document.createElement('div');
             box.className = 'col-md-6 col-lg-4 col-xl-3 p-2';
 
@@ -56,16 +70,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="text-capitalize fw-bold">${comic.title}</p>
                     <span class="fw-bold d-block">
                         <a href="doc_ngay.html?id=${comic._id}" class="btn btn-primary mt-3">Đọc ngay</a>
-                        <a href="#" class="btn btn-primary mt-3 favorite-btn active" data-comic-id="${comic._id}">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
                     </span>
                 </div>
             `;
             collectionList.appendChild(box);
         });
-
-        paginationContainer.style.display = 'none'; // Ẩn phân trang vì tất cả các truyện yêu thích đều được hiển thị
     }
 
     // Hàm tạo HTML cho rating
@@ -78,5 +87,65 @@ document.addEventListener('DOMContentLoaded', () => {
             ratingHtml += '<span class="text-primary"><i class="fas fa-star-half-alt"></i></span>';
         }
         return ratingHtml;
+    }
+
+    // Tạo phân trang
+    function createPagination() {
+        const paginationList = document.createElement('ul');
+        paginationList.classList.add('pagination');
+
+        // Nút Previous
+        const prevPageItem = document.createElement('li');
+        prevPageItem.classList.add('page-item');
+        prevPageItem.innerHTML = `<a class="page-link" href="#" id="prev-page">Previous</a>`;
+        prevPageItem.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                displayComics(currentPage);
+                updatePagination();
+            }
+        });
+        paginationList.appendChild(prevPageItem);
+
+        // Các nút số trang
+        for (let i = 1; i <= totalPages; i++) {
+            const pageItem = document.createElement('li');
+            pageItem.classList.add('page-item');
+            if (i === currentPage) {
+                pageItem.classList.add('active');
+            }
+            pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+            pageItem.addEventListener('click', () => {
+                currentPage = i;
+                displayComics(currentPage);
+                updatePagination();
+            });
+            paginationList.appendChild(pageItem);
+        }
+
+        // Nút Next
+        const nextPageItem = document.createElement('li');
+        nextPageItem.classList.add('page-item');
+        nextPageItem.innerHTML = `<a class="page-link" href="#" id="next-page">Next</a>`;
+        nextPageItem.addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                displayComics(currentPage);
+                updatePagination();
+            }
+        });
+        paginationList.appendChild(nextPageItem);
+
+        paginationContainer.innerHTML = ''; // Xóa phân trang hiện tại
+        paginationContainer.appendChild(paginationList);
+    }
+
+    // Cập nhật phân trang
+    function updatePagination() {
+        const pageItems = paginationContainer.querySelectorAll('.page-item');
+        pageItems.forEach(item => item.classList.remove('active'));
+        if (pageItems[currentPage]) {
+            pageItems[currentPage].classList.add('active');
+        }
     }
 });

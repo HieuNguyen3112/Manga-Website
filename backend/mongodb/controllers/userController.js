@@ -79,7 +79,8 @@ const userController = {
     // Get user's favorite comics
     getFavorites: async (req, res) => {
         try {
-            const user = await User.findById(req.user.id).populate('favoriteComics.comicId', 'title imageUrl');
+            const userId = req.user.id; // Lấy userId từ middleware xác thực
+            const user = await User.findById(userId).populate('favoriteComics');
             if (user) {
                 res.status(200).json(user.favoriteComics);
             } else {

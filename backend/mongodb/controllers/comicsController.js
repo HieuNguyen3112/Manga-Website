@@ -154,6 +154,23 @@ exports.searchComics = async (req, res) => {
   }
 };
 
+// Get comic by ID
+exports.getComicById = async (req, res) => {
+  try {
+    const comicId = req.params.id;
 
+    // Tìm truyện theo ID
+    const comic = await Comic.findById(comicId);
+
+    if (!comic) {
+      return res.status(404).json({ message: 'Comic not found.' });
+    }
+
+    res.status(200).json(comic);
+  } catch (err) {
+    console.error('Error fetching comic:', err);
+    res.status(500).json({ message: 'Error fetching comic', error: err.message });
+  }
+};
 
 

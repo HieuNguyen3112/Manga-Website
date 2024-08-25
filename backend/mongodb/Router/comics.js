@@ -24,4 +24,8 @@ router.delete('/:id', comicsController.deleteComic);
 //tìm kiếm truyện
 router.get('/search', comicsController.searchComics);
 
+// Lấy truyện theo ID
+router.get('/:id', comicsController.getComicById);
+
+
 module.exports = router;
