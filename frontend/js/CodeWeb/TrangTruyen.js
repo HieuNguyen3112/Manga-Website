@@ -11,6 +11,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Fetch user data including favorites
     async function fetchUserData() {
         const token = localStorage.getItem("accessToken") || sessionStorage.getItem("accessToken");
+        
+        // Kiểm tra nếu token không tồn tại, hiển thị thông báo và kết thúc hàm
+        if (!token) {
+            console.warn("No token found. User is not logged in.");
+            showAlert("Vui lòng đăng nhập để xem thông tin cá nhân.", "warning");
+            return; // Không thực hiện lệnh fetch khi không có token
+        }
+    
         try {
             const response = await fetch("http://localhost:8000/v1/user/me", {
                 method: "GET",
@@ -28,8 +36,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         } catch (error) {
             console.error("Error fetching user data:", error);
+            showAlert("Đã xảy ra lỗi khi lấy thông tin người dùng. Vui lòng thử lại sau.", "danger");
         }
     }
+    
 
     // Fetch comics from API
     async function fetchComics(categoryId = null) {

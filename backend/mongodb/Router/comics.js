@@ -27,5 +27,11 @@ router.get('/search', comicsController.searchComics);
 // Lấy truyện theo ID
 router.get('/:id', comicsController.getComicById);
 
+// Like truyện
+router.post('/:id/like', comicsController.likeComic);
+
+//Dislike truyện
+router.post('/:id/dislike', comicsController.dislikeComic);
+
 
 module.exports = router;

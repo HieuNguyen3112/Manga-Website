@@ -10,13 +10,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Gắn sự kiện nhấn vào link "Yêu Thích"
     favoriteLink.addEventListener('click', async (event) => {
         event.preventDefault();
-        await fetchFavoriteComics();
+
+        // Kiểm tra token
+        let token = localStorage.getItem("accessToken") || sessionStorage.getItem("accessToken");
+        if (!token) {
+            // Nếu không có token, hiển thị thông báo yêu cầu đăng nhập
+            showAlert('Vui lòng đăng nhập để sử dụng trang yêu thích.', 'danger');
+            return;
+        }
+
+        await fetchFavoriteComics(token);
     });
 
     // Hàm lấy danh sách truyện yêu thích của người dùng
-    async function fetchFavoriteComics() {
-        let token = localStorage.getItem("accessToken") || sessionStorage.getItem("accessToken");
-
+    async function fetchFavoriteComics(token) {
         try {
             const response = await fetch('http://localhost:8000/v1/user/favorites', {
                 method: 'GET',
@@ -39,11 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 displayComics(currentPage); // Hiển thị các truyện yêu thích của trang đầu tiên
             } else {
                 console.error('Lỗi khi lấy danh sách truyện yêu thích:', response.statusText);
-                alert("Không thể lấy danh sách truyện yêu thích.");
+                showAlert("Không thể lấy danh sách truyện yêu thích.", "danger");
             }
         } catch (error) {
             console.error('Có lỗi xảy ra:', error);
-            alert("Đã xảy ra lỗi khi lấy danh sách truyện yêu thích.");
+            showAlert("Đã xảy ra lỗi khi lấy danh sách truyện yêu thích.", "danger");
         }
     }
 
@@ -147,5 +154,22 @@ document.addEventListener('DOMContentLoaded', () => {
         if (pageItems[currentPage]) {
             pageItems[currentPage].classList.add('active');
         }
+    }
+
+    // Hàm hiển thị thông báo
+    function showAlert(message, type) {
+        const alertBox = document.createElement('div');
+        alertBox.className = `alert alert-${type} alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3`;
+        alertBox.style.zIndex = 9999;
+        alertBox.innerHTML = `
+            <strong>${message}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+
+        document.body.appendChild(alertBox);
+
+        setTimeout(() => {
+            alertBox.remove();
+        }, 3000);
     }
 });

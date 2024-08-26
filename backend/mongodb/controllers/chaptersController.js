@@ -177,3 +177,24 @@ exports.deleteChapter = async (req, res) => {
       res.status(400).json({ message: error.message });
   }
 };
+
+exports.getFirstChapter = async (req, res) => {
+  try {
+      const { comicId } = req.params;
+
+      if (!comicId) {
+          return res.status(400).json({ message: 'Comic ID is required.' });
+      }
+
+      const firstChapter = await Chapter.findOne({ comicId }).sort({ chapterNumber: 1 });
+
+      if (!firstChapter) {
+          return res.status(404).json({ message: 'No chapters found for this comic.' });
+      }
+
+      res.status(200).json(firstChapter);
+  } catch (err) {
+      console.error('Error fetching first chapter:', err);
+      res.status(500).json({ message: 'Error fetching first chapter', error: err.message });
+  }
+};
