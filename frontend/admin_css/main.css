@@ -7,33 +7,33 @@
 :root{
     --lg-font: 'Kaisei Tokumin', serif;
     --sm-font:  "Rubik", sans-serif;
-    --pink: #e5345b;
+    --pink: #f2c185
 }
 body{
     font-family: var(--sm-font);
-    background-color: white;
+    background-color: #050505;
 }
 
 
 .hero {
     width: 100%;
     min-height: 100vh;
-    background: #eceaff;
-    color: #525252;
+    background: #1c0f98;
+    color: #d70101;
 }
-
 nav {
-    background: #641a2a;
+    background-color: #00000088;
     width: 100%;
     padding: 10px 10%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: relative;
+    z-index: 1000; /* Đảm bảo thanh menu nằm trên cùng */
 }
 
 .logo {
-    width: 50px;
+    width: 100px;
 }
 .navbar-brand .text-uppercase {
      font-family: "Playwrite CL", cursive;
@@ -102,7 +102,7 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #fff;
+    color: #f7f3f3;
     text-decoration: none;
 }
 
@@ -122,7 +122,6 @@ nav ul li a {
 }
 
 .sub-menu {
-    background: #fff;
     padding: 20px;
     margin: 10px;
     position: relative;
@@ -157,7 +156,7 @@ nav ul li a {
     border: 0;
     height: 1px;  
     width: 100%;
-    background: #ccc;
+    background: #e70f0f;
     margin: 15px 0 10px;
 }
 
@@ -207,7 +206,7 @@ nav ul li a {
 }
 
 .bg-custom{
-    color:#ff3366;
+    color:#1e1517;
 }
 
 
@@ -226,11 +225,11 @@ nav ul li a {
 }
 .btn:not(.nav-btns button):hover{
     background-color: var(--pink);
-    color: #5a3d3d;
+    color: #e3e3e3;
     border-color: var(--pink);
 }
 .bg-custom{
-    color:#60333d;
+    color:#ff0037;
 }
 .btn {
     margin-right: 70px;
@@ -290,7 +289,7 @@ body.light-mode #icon {
 
 /* navbar */
 .navbar{
-    -webkit-box-shadow: 0 3px 9px 3px rgba(200, 9, 9, 0.1);
+    -webkit-box-shadow: 0 3px 9px 3px rgb(138, 22, 22);
             box-shadow: 0 3px 9px 3px rgba(0, 0, 0, 0.1);
 }
 .navbar-brand img{
@@ -358,7 +357,7 @@ body.light-mode #icon {
 /*  ẢNH HEADER*/
 .active-filter-btn{
     background-color: var(--pink)!important;
-    color: #fff!important;
+    color: #090909!important;
     border-color: var(--pink)!important;
 }
 .collection-img img {
@@ -386,7 +385,7 @@ body.light-mode #icon {
 
 /* click */
 .filter-button-group .btn:hover{
-    color: #fff!important;
+    color: #f5f4f4!important;
 }
 /* ảnh */
 .collection-img span{
@@ -487,7 +486,7 @@ body.light-mode #icon {
 
 .btn1:not(.nav-btns button){
     background-color: #fff;
-    color: rgb(85, 85, 85);
+    color: rgb(203, 5, 5);
     padding: 10px 28px;
     border-radius: 25px;
     border: 1px solid rgb(85, 85, 85);
@@ -740,7 +739,7 @@ footer {
     margin-top: 4rem !important;
     padding-top: 2rem;
     padding-bottom: 2rem;
-    background-color: #d544302e;
+    background-color: #fdfcfc2e;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -794,4 +793,34 @@ footer {
     .nav-item{
         border-bottom: none;
     }
+}
+.carousel-inner {
+    margin-top: -100px; /* Điều chỉnh giá trị này để kiểm soát mức độ tràn */
+}
+.carousel-item {
+    height: 75vh; /* Chiều cao của carousel item */
+    width: 100vw; /* Chiều rộng chiếm toàn bộ viewport */
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+   
+}
+
+.carousel-inner img {
+    width: 100%; /* Đảm bảo hình ảnh chiếm toàn bộ chiều ngang */
+    height: 100%;
+    object-fit: fill; /* Đảm bảo hình ảnh được căn chỉnh đầy đủ và giữ nguyên tỷ lệ */
+}
+
+.section-trending {
+    background-color: #592E1E;
+    height: 70vh;
+}
+
+
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgb(200, 18, 18);
+    border-radius: 50%;
 }
