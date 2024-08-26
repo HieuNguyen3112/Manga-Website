@@ -173,4 +173,37 @@ exports.getComicById = async (req, res) => {
   }
 };
 
+//Like comic
+exports.likeComic = async (req, res) => {
+  try {
+      const comic = await Comic.findById(req.params.id);
+      if (!comic) {
+          return res.status(404).json({ message: 'Comic not found.' });
+      }
+      comic.likes += 1;
+      await comic.save();
+      res.status(200).json({ message: 'Liked comic.' });
+  } catch (err) {
+      console.error('Error liking comic:', err);
+      res.status(500).json({ message: 'Error liking comic', error: err.message });
+  }
+};
+
+//Dislike comics
+exports.dislikeComic = async (req, res) => {
+  try {
+      const comic = await Comic.findById(req.params.id);
+      if (!comic) {
+          return res.status(404).json({ message: 'Comic not found.' });
+      }
+      if (comic.likes > 0) {
+          comic.likes -= 1;
+      }
+      await comic.save();
+      res.status(200).json({ message: 'Disliked comic.' });
+  } catch (err) {
+      console.error('Error disliking comic:', err);
+      res.status(500).json({ message: 'Error disliking comic', error: err.message });
+  }
+};
 

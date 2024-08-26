@@ -20,4 +20,8 @@ router.put('/:id', uploadChapter.single('contentFile'), chaptersController.updat
 // Route xóa chương theo ID
 router.delete('/:id', chaptersController.deleteChapter);
 
+//Route lấy chapter đầu tiên
+router.get('/first/:comicId', chaptersController.getFirstChapter);
+
+
 module.exports = router;

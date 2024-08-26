@@ -54,6 +54,7 @@ async function checkLoginStatus() {
 
     const accountMenuText = document.querySelector('.user-account-box .user-pic:nth-child(2)');
     const logoutLink = document.querySelector('.sub-menu-link:last-child p');
+    const favoriteBadge = document.querySelector('.btn1.position-relative .badge');
 
     // Kiểm tra giá trị của token
     if (!token) {
@@ -61,6 +62,7 @@ async function checkLoginStatus() {
         accountMenuText.textContent = "Tài khoản";
         logoutLink.textContent = "Login";
         logoutLink.parentElement.href = "/frontend/pages/login.html";
+        favoriteBadge.textContent = "0"; // Đặt số lượng yêu thích là 0 nếu chưa đăng nhập
         return;
     }
 
@@ -86,17 +88,30 @@ async function checkLoginStatus() {
         const user = await fetchUserData(token);
         console.log("User data:", user);
         if (user && user.username) {
-                accountMenuText.textContent = `Hi ${user.username}`;
-                accountMenuText.textContent = `Hi ${user.username}`;
-                // Thay đổi "Login" thành "Logout"
             accountMenuText.textContent = `Hi ${user.username}`;
-                // Thay đổi "Login" thành "Logout"
             logoutLink.textContent = "Logout";
             logoutLink.parentElement.href = "#";
             logoutLink.parentElement.addEventListener('click', function(event) {
                 event.preventDefault();
                 handleLogout(true);
             });
+
+            // Lấy và hiển thị số lượng truyện yêu thích
+            const favoriteResponse = await fetch('http://localhost:8000/v1/user/favorites', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Token': `Bearer ${token}`
+                }
+            });
+
+            if (favoriteResponse.ok) {
+                const favoriteData = await favoriteResponse.json();
+                favoriteBadge.textContent = favoriteData.length; // Cập nhật số lượng trên badge
+            } else {
+                favoriteBadge.textContent = "0"; // Đặt số lượng là 0 nếu có lỗi khi lấy danh sách yêu thích
+            }
+
         }
     } catch (err) {
         console.error("Error fetching user data:", err);
@@ -150,10 +165,12 @@ async function handleLogout(redirect) {
             // Cập nhật giao diện sau khi đăng xuất
             const accountMenuText = document.querySelector('.user-account-box .user-pic:nth-child(2)');
             const logoutLink = document.querySelector('.sub-menu-link:last-child p');
+            const favoriteBadge = document.querySelector('.btn1.position-relative .badge');
 
             accountMenuText.textContent = "Tài khoản";
             logoutLink.textContent = "Login";
             logoutLink.parentElement.href = "/frontend/pages/login.html"; 
+            favoriteBadge.textContent = "0"; // Đặt số lượng yêu thích là 0 sau khi đăng xuất
             logoutLink.parentElement.removeEventListener('click', function(event) {
                 event.preventDefault();
                 handleLogout(true);
@@ -176,7 +193,6 @@ async function handleLogout(redirect) {
         alert("Đã xảy ra lỗi khi đăng xuất.");
     }
 }
-
 
 // Hàm lưu token sau khi người dùng đăng nhập thành công
 function saveToken(accessToken) {
