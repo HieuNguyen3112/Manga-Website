@@ -2,21 +2,32 @@ document.addEventListener('DOMContentLoaded', async () => {
     const comicsPerPage = 12;
     const collectionList = document.querySelector('.collection-list');
     const paginationContainer = document.getElementById('pagination-container');
+    const loadMoreButton = document.getElementById('load-more-button');
+    const comicsContainer = document.getElementById('comics-container');
 
     let currentPage = 1;
     let totalPages = 1;
     let comics = [];
     let favoriteComics = [];
 
+    // Ẩn thanh phân trang khi trang tải lên
+    paginationContainer.style.display = 'none';
+
+    // Xóa dữ liệu hiện tại khi nhấn nút Xem thêm nhiều truyện
+    function clearData() {
+        collectionList.innerHTML = '';
+        comicsContainer.innerHTML = ''; // Xóa danh mục hiện tại
+        paginationContainer.style.display = 'none';
+    }
+
     // Fetch user data including favorites
     async function fetchUserData() {
         const token = localStorage.getItem("accessToken") || sessionStorage.getItem("accessToken");
         
-        // Kiểm tra nếu token không tồn tại, hiển thị thông báo và kết thúc hàm
         if (!token) {
             console.warn("No token found. User is not logged in.");
             showAlert("Vui lòng đăng nhập để xem thông tin cá nhân.", "warning");
-            return; // Không thực hiện lệnh fetch khi không có token
+            return; 
         }
     
         try {
@@ -39,12 +50,66 @@ document.addEventListener('DOMContentLoaded', async () => {
             showAlert("Đã xảy ra lỗi khi lấy thông tin người dùng. Vui lòng thử lại sau.", "danger");
         }
     }
-    
+
+    // Fetch categories from API
+    async function fetchCategories() {
+        try {
+            const response = await fetch('http://localhost:3000/api/categories');
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch categories');
+            }
+
+            const categories = await response.json();
+            console.log('Categories data:', categories);
+            const categoryList = document.querySelector('#theloaiDropdown + .dropdown-menu');
+
+            categoryList.innerHTML = '';
+
+            categories.forEach(category => {
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                link.className = 'dropdown-item';
+                link.href = '#';
+                link.setAttribute('data-category-id', category._id);
+                link.textContent = category.name;
+                listItem.appendChild(link);
+                categoryList.appendChild(listItem);
+
+                link.addEventListener('click', async (event) => {
+                    event.preventDefault();
+                    clearData(); // Xóa dữ liệu trước khi tải danh mục mới
+                    console.log(`Selected category: ${category._id}`);
+                    currentPage = 1;
+                    await fetchComics(category._id);
+                });
+            });
+
+            const allItem = document.createElement('li');
+            const allLink = document.createElement('a');
+            allLink.className = 'dropdown-item';
+            allLink.href = '#';
+            allLink.textContent = 'Tất cả';
+            allItem.appendChild(allLink);
+            categoryList.insertBefore(allItem, categoryList.firstChild);
+
+            allLink.addEventListener('click', async (event) => {
+                event.preventDefault();
+                clearData(); // Xóa dữ liệu trước khi tải toàn bộ danh mục
+                console.log('Selected all categories');
+                currentPage = 1;
+                await fetchComics();
+            });
+
+        } catch (error) {
+            console.error('Error fetching categories:', error);
+        }
+    }
 
     // Fetch comics from API
     async function fetchComics(categoryId = null) {
         try {
-            const url = 'http://localhost:3000/api/comics';
+            const url = categoryId ? `http://localhost:3000/api/comics?category=${categoryId}` : 'http://localhost:3000/api/comics';
             const response = await fetch(url);
     
             if (!response.ok) {
@@ -54,16 +119,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             const data = await response.json();
             if (!data || data.length === 0) {
                 console.warn('No comics found!');
-                collectionList.innerHTML = '<p class="text-center text-muted">Khonog .</p>';
+                collectionList.innerHTML = '<p class="text-center text-muted">Không tìm thấy truyện nào.</p>';
                 return;
             }
     
-            comics = categoryId 
-                ? data.filter(comic => comic.category && comic.category.includes(categoryId))
-                : data;
-    
+            comics = data;
             if (comics.length === 0) {
-                collectionList.innerHTML = '<p class="text-center text-muted">No comics found in this category.</p>';
+                collectionList.innerHTML = '<p class="text-center text-muted">Không có truyện nào trong thể loại này.</p>';
                 return;
             }
     
@@ -71,12 +133,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             createPagination();
             displayComics(currentPage);
             setupFavoriteButtons();
+            
+            // Hiển thị thanh phân trang khi dữ liệu được tải thành công
+            paginationContainer.style.display = 'flex';
         } catch (error) {
             console.error('Error fetching comics:', error);
-            collectionList.innerHTML = '<p class="text-center text-danger">Failed to load comics.</p>';
+            collectionList.innerHTML = '<p class="text-center text-danger">Không thể tải truyện.</p>';
         }
     }
-    
 
     // Display comics for the current page
     function displayComics(page) {
@@ -324,60 +388,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    async function fetchCategories() {
-        try {
-            const response = await fetch('http://localhost:3000/api/categories');
-
-            if (!response.ok) {
-                throw new Error('Failed to fetch categories');
-            }
-
-            const categories = await response.json();
-            console.log('Categories data:', categories);
-            const categoryList = document.querySelector('#theloaiDropdown + .dropdown-menu');
-
-            categoryList.innerHTML = '';
-
-            categories.forEach(category => {
-                const listItem = document.createElement('li');
-                const link = document.createElement('a');
-                link.className = 'dropdown-item';
-                link.href = '#';
-                link.setAttribute('data-category-id', category._id);
-                link.textContent = category.name;
-                listItem.appendChild(link);
-                categoryList.appendChild(listItem);
-
-                link.addEventListener('click', async (event) => {
-                    event.preventDefault();
-                    console.log(`Selected category: ${category._id}`);
-                    currentPage = 1;
-                    await fetchComics(category._id);
-                });
-            });
-
-            const allItem = document.createElement('li');
-            const allLink = document.createElement('a');
-            allLink.className = 'dropdown-item';
-            allLink.href = '#';
-            allLink.textContent = 'Tất cả';
-            allItem.appendChild(allLink);
-            categoryList.insertBefore(allItem, categoryList.firstChild);
-
-            allLink.addEventListener('click', async (event) => {
-                event.preventDefault();
-                console.log('Selected all categories');
-                currentPage = 1;
-                await fetchComics();
-            });
-
-        } catch (error) {
-            console.error('Error fetching categories:', error);
-        }
-    }
-
-    // Initialize the page
+    // Tải dữ liệu người dùng và danh mục khi trang tải lên
     await fetchUserData();
     await fetchCategories();
-    await fetchComics();
+
+    // Nút xem thêm nhiều truyện
+    loadMoreButton.addEventListener('click', async () => {
+        clearData();  // Xóa dữ liệu hiện tại trước khi tải thêm
+        loadMoreButton.style.display = 'none';
+        await fetchComics();
+    });
 });

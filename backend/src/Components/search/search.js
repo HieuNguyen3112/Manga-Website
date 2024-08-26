@@ -9,6 +9,7 @@ document.getElementById('searchBtn').addEventListener('click', async () => {
             const comics = await response.json();
             if (comics.length > 0) {
                 totalPages = Math.ceil(comics.length / comicsPerPage);
+                clearPreviousData(); // Xóa các dữ liệu cũ trước khi hiển thị kết quả tìm kiếm
                 displaySearchResults(comics, 1); // Bắt đầu từ trang 1
             } else {
                 displayNoResultsMessage();
@@ -23,9 +24,24 @@ const comicsPerPage = 12;
 let totalPages = 1;
 let currentPage = 1;
 
+function clearPreviousData() {
+    const collectionList = document.querySelector('.collection-list');
+    const paginationContainer = document.getElementById('pagination-container');
+    const loadMoreButton = document.getElementById('load-more-button'); // Tham chiếu đến nút "Xem thêm nhiều truyện"
+    const comicsContainer = document.getElementById('comics-container'); // Tham chiếu đến container dữ liệu động cũ
+
+    collectionList.innerHTML = ''; // Xóa các kết quả cũ
+    paginationContainer.innerHTML = ''; // Xóa phân trang hiện tại
+    if (loadMoreButton) {
+        loadMoreButton.style.display = 'none'; // Ẩn nút "Xem thêm nhiều truyện"
+    }
+    if (comicsContainer) {
+        comicsContainer.innerHTML = ''; // Xóa dữ liệu động cũ trong comicsContainer
+    }
+}
+
 function displaySearchResults(comics, page) {
     const collectionList = document.querySelector('.collection-list');
-    collectionList.innerHTML = ''; // Xóa các kết quả cũ
 
     const start = (page - 1) * comicsPerPage;
     const end = start + comicsPerPage;

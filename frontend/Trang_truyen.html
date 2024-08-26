@@ -212,7 +212,9 @@
             </button>
         </div>
     </div>
-</section>
+    </section>
+
+
 
     <!-- end of navbar -->
 
@@ -237,19 +239,24 @@
                     <!-- dữ liệu động sẽ được thêm vào ở đây -->
                 </div>
             </div>
+            
+            <!-- lấy truyện từ danh mục để trình bày xuống trang chính 
+                trước khi nhấn nút đọc thêm truyện -->
+            <div id="comics-container">
+                
+            </div>
         </div>
     </section>
     <!-- end of HEADER-->
 
     <!-- nút phân trang -->
     <div id="pagination-container" class="d-flex justify-content-center mt-4">
-        <nav class="pagination-custom" aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#" id="prev-page">Previous</a></li>
-                <!-- Nút trang sẽ được thêm vào đây bởi JavaScript -->
-                <li class="page-item"><a class="page-link" href="#" id="next-page">Next</a></li>
-            </ul>
-        </nav>
+        <!-- nút phân trang sẽ xuất hiện khi nhấn nút xem thêm truyện -->
+    </div>
+
+    <!-- nút xem thêm nhiều truyện -->
+    <div class="d-flex justify-content-center mt-4">
+        <button id="load-more-button" class="btn btn-primary">Xem thêm nhiều truyện</button>
     </div>
 
     <!-- Modal thông báo không tìm thấy kết quả -->
@@ -439,6 +446,7 @@
     <script src="/backend/src/Components/search/search.js"></script>
     <script src="/frontend/js/CodeWeb/truyenYeuThich.js"></script>
     <script src="/frontend/js/CodeWeb/yeuThich.js"></script>
+    <script src="/frontend/js/CodeWeb/trinhBayDanhMucRaTrangTruyen.js"></script>
 </body>
 
 </html>

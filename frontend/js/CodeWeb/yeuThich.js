@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const favoriteLink = document.querySelector('.nav-link[href="#special"]');
     const collectionList = document.querySelector('.collection-list');
     const paginationContainer = document.getElementById('pagination-container');
+    const loadMoreButton = document.getElementById('load-more-button');
+    const comicsContainer = document.getElementById('comics-container'); // Thêm dòng này để tham chiếu đến container chứa comics
+    
     let favoriteComics = [];
     let comicsPerPage = 12;
     let currentPage = 1;
@@ -10,6 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Gắn sự kiện nhấn vào link "Yêu Thích"
     favoriteLink.addEventListener('click', async (event) => {
         event.preventDefault();
+
+        // Xóa các dữ liệu còn lại từ danh mục và nút "Xem thêm nhiều truyện"
+        clearPreviousData();
 
         // Kiểm tra token
         let token = localStorage.getItem("accessToken") || sessionStorage.getItem("accessToken");
@@ -21,6 +27,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         await fetchFavoriteComics(token);
     });
+
+    // Hàm xóa các dữ liệu còn lại
+    function clearPreviousData() {
+        collectionList.innerHTML = ''; // Xóa truyện hiện tại trong danh sách
+        paginationContainer.innerHTML = ''; // Xóa phân trang hiện tại
+        comicsContainer.innerHTML = ''; // Xóa các truyện hiện có trong comics-container
+        loadMoreButton.style.display = 'none'; // Ẩn nút "Xem thêm nhiều truyện"
+    }
 
     // Hàm lấy danh sách truyện yêu thích của người dùng
     async function fetchFavoriteComics(token) {
