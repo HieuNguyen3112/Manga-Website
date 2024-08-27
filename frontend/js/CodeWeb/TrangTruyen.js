@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const paginationContainer = document.getElementById('pagination-container');
     const loadMoreButton = document.getElementById('load-more-button');
     const comicsContainer = document.getElementById('comics-container');
+    const carouselInner = document.getElementById('carousel-inner');
+    const carouselIndicators = document.getElementById('carousel-indicators');
 
     let currentPage = 1;
     let totalPages = 1;
@@ -70,20 +72,18 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const listItem = document.createElement('li');
                 const link = document.createElement('a');
                 link.className = 'dropdown-item';
-                link.href = '#';
-                link.setAttribute('data-category-id', category._id);
+                link.href = `The_loai.html?categoryId=${category._id}`; // Chuyển hướng đến trang thể loại với tham số categoryId
                 link.textContent = category.name;
                 listItem.appendChild(link);
                 categoryList.appendChild(listItem);
-
-                link.addEventListener('click', async (event) => {
+            
+                link.addEventListener('click', (event) => {
                     event.preventDefault();
-                    clearData(); // Xóa dữ liệu trước khi tải danh mục mới
-                    console.log(`Selected category: ${category._id}`);
-                    currentPage = 1;
-                    await fetchComics(category._id);
+                    // Chuyển hướng đến trang The_loai.html và truyền tham số categoryId
+                    window.location.href = `The_loai.html?categoryId=${category._id}`;
                 });
             });
+            
 
             const allItem = document.createElement('li');
             const allLink = document.createElement('a');
@@ -136,6 +136,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             
             // Hiển thị thanh phân trang khi dữ liệu được tải thành công
             paginationContainer.style.display = 'flex';
+
+            // Display comics in carousel
+            displayComicsInCarousel();
         } catch (error) {
             console.error('Error fetching comics:', error);
             collectionList.innerHTML = '<p class="text-center text-danger">Không thể tải truyện.</p>';
@@ -178,6 +181,42 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
 
         updatePagination();
+        setupFavoriteButtons();
+    }
+
+    // Display comics in carousel
+    function displayComicsInCarousel() {
+        carouselInner.innerHTML = '';
+        carouselIndicators.innerHTML = '';
+
+        comics.forEach((comic, index) => {
+            const isActive = index === 0 ? 'active' : '';
+
+            // Create carousel item
+            const itemHtml = `
+                <div class="carousel-item ${isActive}" style="background-image: url('${comic.imageUrl}')">
+                    <div class="carousel-text">
+                        <h5>${comic.title}</h5>
+                        <p>${comic.description}</p>
+                        <div class="button-group">
+                            <a href="doc_ngay.html?id=${comic._id}" class="btn btn-primary">Đọc ngay</a>
+                            <button class="btn btn-outline-light favorite-btn ${favoriteComics.includes(comic._id) ? 'active' : ''}" data-comic-id="${comic._id}">
+                                Yêu thích
+                            </button>
+                        </div>
+                    </div>
+                    <img src="${comic.imageUrl}" class="carousel-image d-block" alt="${comic.title}">
+                </div>
+            `;
+            carouselInner.innerHTML += itemHtml;
+
+            // Create carousel indicator
+            const indicatorHtml = `
+                <button type="button" data-bs-target="#comicCarousel" data-bs-slide-to="${index}" class="${isActive}" aria-label="Slide ${index + 1}"></button>
+            `;
+            carouselIndicators.innerHTML += indicatorHtml;
+        });
+
         setupFavoriteButtons();
     }
 

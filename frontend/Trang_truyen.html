@@ -34,7 +34,38 @@
             rel="stylesheet">
 
     </head>
+<style>.carousel-inner {
+    margin-top: -100px; /* Điều chỉnh giá trị này để kiểm soát mức độ tràn */
+}
+.carousel-item {
+    height: 75vh; /* Chiều cao của carousel item */
+    width: 100vw; /* Chiều rộng chiếm toàn bộ viewport */
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+   box-shadow: inset;
+   
+}
 
+.carousel-inner img {
+    width: 100%; /* Đảm bảo hình ảnh chiếm toàn bộ chiều ngang */
+    height: 100%;
+    object-fit: fill; /* Đảm bảo hình ảnh được căn chỉnh đầy đủ và giữ nguyên tỷ lệ */
+}
+
+.section-trending {
+    background-color: #592E1E;
+    height: 70vh;
+    box-shadow:#c51414;
+}
+
+
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(5, 5, 5, 0.515);
+    border-radius: 50%;
+}</style>
 </head>
 
 <body>
@@ -43,12 +74,22 @@
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-custom py-0 fixed-top navbar-custom-fix">
         <div class="container">
+            <!-- Logo -->
             <a href="Trang_truyen.html">
                 <img src="https://res.cloudinary.com/dwfmpiozq/image/upload/v1724220931/Nude_Boba_Milk_Tea_Logo_1_amomjt.png"
                     alt="Logo" class="logo">
             </a>
-
             <div class="order-lg-2 nav-btns d-flex align-items-center">
+
+                <!-- Nút Tìm Kiếm -->
+                <div id="searchBarContainer" class="search-container" style="display: none;">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Nhập tên sách, tác giả...">
+                </div>
+                <button class="search-btn" id="searchIcon">
+                    <i class="fa fa-search"></i>
+                </button>
+
+                <!-- tài khoản  -->
                 <button type="button" class="btn position-relative">
                     <div class="user-account-box d-flex align-items-center">
                         <img src="image/R.png" class="user-pic" onclick="toggleMenu()"
@@ -79,34 +120,17 @@
                     </div>
                 </button>
 
-
-
                 <!-- <button type="button" class="btn1 position-relative">
                     <i class="text-white fa fa-heart"></i>
                     <span class="position-absolute top-0 start-100 translate-middle badge bg-primary">2</span>
                 </button> -->
-
-                <!-- Nút Tìm Kiếm -->
-                <!-- Search bar container (hidden by default) -->
-                <div id="searchBarContainer" class="search-container" style="display: none;">
-                    <input type="text" id="searchInput" class="search-input" placeholder="Nhập tên sách, tác giả...">
-                </div>
-                <button class="search-btn" id="searchIcon">
-                    <i class="fa fa-search"></i>
-                </button>
-                
-                
-                
-
-
+                <!-- chế độ sáng tối  -->
                 <li class="nav-item px-2 py-2 border-0">
                     <a class="nav-link1 text-uppercase text-dark" href="#" id="dark-mode-toggle">
                         <img src="image/moon.png" id="icon-fluid">
                     </a>
                 </li>
             </div>
-
-
 
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
                 <span class="navbar-toggler-icon"></span>
@@ -121,9 +145,6 @@
                     <!-- <li class="nav-item px-2 py-2">
                         <a class="nav-link text-uppercase text-white" href="#collection">Mới ra mắt</a>
                     </li> -->
-                    <li class="nav-item px-2 py-2">
-                        <a class="nav-link text-uppercase text-white" href="#special">Yêu thích</a>
-                    </li>
                     <li class="nav-item dropdown px-2 py-2">
                         <a class="nav-link dropdown-toggle text-uppercase text-white" href="#" id="theloaiDropdown"
                             role="button">
@@ -134,9 +155,10 @@
                         </ul>
                     </li>
 
-
-
-
+                    <li class="nav-item px-2 py-2">
+                        <a class="nav-link text-uppercase text-white" href="#special">Yêu thích</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -207,11 +229,11 @@
                     <!-- dữ liệu động sẽ được thêm vào ở đây -->
                 </div>
             </div>
-            
+
             <!-- lấy truyện từ danh mục để trình bày xuống trang chính 
                 trước khi nhấn nút đọc thêm truyện -->
             <div id="comics-container">
-                
+
             </div>
         </div>
     </section>

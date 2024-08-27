@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MEOW MEOW </title>
+        <!-- fontawesome cdn -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+            integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!-- bootstrap css -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- custom css -->
+        <link rel="stylesheet" href="/frontend/admin_css/main.css">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <!-- Font body-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+            rel="stylesheet">
+        <!-- FONT MEOW-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Playwrite+BE+VLG:wght@100..400&family=Playwrite+CL:wght@100..400&family=Playwrite+CU:wght@100..400&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+            rel="stylesheet">
+    </head>
+    <!-- Custom CSS -->
+     <head>
+    <style>
+        body {
+            font-family: 'Merriweather', serif;
+        }
+
+        .carousel-item {
+            position: relative;
+            display: none;
+            align-items: center;
+            padding: 20px;
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .carousel-item.active {
+            display: flex;
+        }
+
+        .carousel-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 800%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .carousel-text {
+            z-index: 2;
+            width: 40%;
+            text-align: center;
+            color: white;
+            margin-left: 40px
+        }
+
+        .carousel-image {
+            flex-shrink: 0;
+            width: 350px;
+            height: 500px;
+            transition: transform 0.5s ease;
+            object-fit: cover;
+            margin-left: 400px;
+            z-index: 2;
+            border-radius: 10px;
+        }
+
+        .carousel-inner {
+            display: flex;
+            overflow: hidden;
+            height: 600px;
+        }
+
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: rgba(5, 5, 5, 0.515);
+            border-radius: 50%;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 5%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-custom py-0 fixed-top navbar-custom-fix">
+        <div class="container">
+            <a href="Trang_truyen.html">
+                <img src="https://res.cloudinary.com/dwfmpiozq/image/upload/v1724220931/Nude_Boba_Milk_Tea_Logo_1_amomjt.png"
+                    alt="Logo" class="logo">
+            </a>
+            <div class="order-lg-2 nav-btns d-flex align-items-center">
+                <!-- Search Bar -->
+                <div id="searchBarContainer" class="search-container" style="display: none;">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Nhập tên sách, tác giả...">
+                </div>
+                <button class="search-btn" id="searchIcon">
+                    <i class="fa fa-search"></i>
+                </button>
+                <!-- Account Menu -->
+                <button type="button" class="btn position-relative">
+                    <div class="user-account-box d-flex align-items-center">
+                        <img src="image/R.png" class="user-pic" onclick="toggleMenu()"
+                            style="width: 30px; height: 30px;">
+                        <span class="text-uppercase text-decoration-none text-white ms-1 user-pic"
+                            onclick="toggleMenu()"> Tài khoản</span>
+                    </div>
+                    <div class="sub-menu-wrap" id="subMenu">
+                        <div class="sub-menu">
+                            <a href="/frontend/pages/edit pro.html" class="sub-menu-link">
+                                <img src="image/profile.png">
+                                <p>Edit Profile</p>
+                            </a>
+                            <a href="#" class="sub-menu-link">
+                                <img src="image/setting.png">
+                                <p>Settings</p>
+                            </a>
+                            <a href="#" class="sub-menu-link">
+                                <img src="image/help.png">
+                                <p>Help</p>
+                            </a>
+                            <a href="#" class="sub-menu-link">
+                                <img src="image/logout.png">
+                                <p>Logout</p>
+                            </a>
+                        </div>
+                    </div>
+                </button>
+                <!-- Dark Mode Toggle -->
+                <li class="nav-item px-2 py-2 border-0">
+                    <a class="nav-link1 text-uppercase text-dark" href="#" id="dark-mode-toggle">
+                        <img src="image/moon.png" id="icon-fluid">
+                    </a>
+                </li>
+            </div>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse order-lg-1" id="navMenu">
+                <ul class="navbar-nav mx-auto text-center">
+                    <li class="nav-item px-2 py-2">
+                        <a class="nav-link text-uppercase text-white" href="Trang_truyen.html">Trang chủ</a>
+                    </li>
+                    <li class="nav-item dropdown px-2 py-2">
+                        <a class="nav-link dropdown-toggle text-uppercase text-white" href="#" id="theloaiDropdown"
+                            role="button">
+                            Thể loại
+                        </a>
+                        <ul class="dropdown-menu dropdown-grid">
+                            <!-- Dropdown items will be dynamically injected here -->
+                        </ul>
+                    </li>
+                    <li class="nav-item px-2 py-2">
+                        <a class="nav-link text-uppercase text-white" href="#special">Yêu thích</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Carousel Section -->
+    <div id="comicCarousel" class="carousel slide mt-5 pt-3" data-bs-ride="carousel" data-bs-interval="2000">
+        <div class="carousel-indicators" id="carousel-indicators">
+            <!-- Dynamic buttons will be injected here -->
+        </div>
+        <div class="carousel-inner" id="carousel-inner">
+            <!-- Dynamic items will be injected here -->
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#comicCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#comicCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!-- Comic Collection Section -->
+    <section id="collection" class="py-5 section-collection section-closer">
+        <div class="container">
+            <h2 class="mb-4">Truyện thuộc thể loại đã chọn</h2>
+            <div class="row collection-list" id="collection-list">
+                <!-- Dynamic items will be injected here -->
+            </div>
+        </div>
+    </section>
+    <footer class="bg-dark py-5 section-footer section-closer">
+        <div class="container">
+            <div class="row text-white g-4">
+                <div class="col-md-6 col-lg-3">
+                    <a class="text-uppercase text-decoration-none brand text-primary" href="index.html">Meow</a>
+                    <p class="text-white text-muted mt-3">Chào mừng mọi người đến với web truyện của MEOW MEOW. Nếu có
+                        gì thắc mắc thì xin hãy liên hệ ở đây.</p>
+                    <a href="#" class="btn btn-primary">Đóng góp ý kiến</a>
+                </div>
+    
+                <div class="col-md-6 col-lg-3">
+                    <h5 class="text-primary fw-light">Liên kết</h5>
+                    <ul class="list-unstyled">
+                        <li class="my-3">
+                            <a href="#" class="text-white text-decoration-none text-muted">
+                                <i class="fas fa-chevron-right me-1 text-primary"></i>Trang chủ
+                            </a>
+                        </li>
+                        <li class="my-3">
+                            <a href="#" class="text-white text-decoration-none text-muted">
+                                <i class="fas fa-chevron-right me-1 text-primary"></i>Mới ra mắt
+                            </a>
+                        </li>
+                        <li class="my-3">
+                            <a href="#" class="text-white text-decoration-none text-muted">
+                                <i class="fas fa-chevron-right me-1 text-primary"></i>Yêu thích
+                            </a>
+                        </li>
+                        <li class="my-3">
+                            <a href="#" class="text-white text-decoration-none text-muted">
+                                <i class="fas fa-chevron-right me-1 text-primary"></i>Thống kê
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+    
+                <div class="col-md-6 col-lg-3">
+                    <h5 class="text-primary fw-light mb-3">Địa chỉ</h5>
+                    <div class="d-flex justify-content-start align-items-start my-2 text-muted">
+                        <span class="me-3">
+                            <i class="fas fa-map-marked-alt text-primary"></i>
+                        </span>
+                        <span class="fw-light">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.650665616816!2d106.67959617480462!3d10.76138318938645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b8a072901%3A0x2fb4502ebd044212!2zxJDhuqFpIEjhu41jIFPGsCBQaOG6oW0gVHAuSENNIENTMQ!5e0!3m2!1svi!2s!4v1722180039624!5m2!1svi!2s"
+                                width="250" height="200" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </span>
+                    </div>
+                    <div class="d-flex justify-content-start align-items-start my-2 text-muted">
+                        <span class="me-3">
+                            <i class="fas fa-envelope text-primary"></i>
+                        </span>
+                        <span class="fw-light">
+                            <p><a href="mailto:buiquochuy08122003@gmail.com"
+                                    class="text-secondary">buiquochuy08122003@gmail.com</a></p>
+                        </span>
+                    </div>
+                    <div class="d-flex justify-content-start align-items-start my-2 text-muted">
+                        <span class="me-3">
+                            <i class="fas fa-phone-alt text-primary"></i>
+                        </span>
+                        <span class="fw-light">
+                            <p><a href="tel:0822097983" class="text-secondary">0822097983</a></p>
+                        </span>
+                    </div>
+                </div>
+    
+                <div class="col-md-6 col-lg-3">
+                    <h5 class="text-primary fw-light mb-3">Liên hệ</h5>
+                    <div>
+                        <ul class="list-unstyled row">
+                            <li class="col-3 mb-3 text-center">
+                                <a href="https://www.facebook.com/bity0984549118"
+                                    class="text-white text-decoration-none text-muted fs-4 d-flex flex-column align-items-center">
+                                    <i class="fab fa-facebook text-primary"></i>
+                                    <span class="custom-small-text">Quốc Huy</span>
+                                </a>
+                            </li>
+                            <li class="col-3 mb-3 text-center">
+                                <a href="https://www.facebook.com/profile.php?id=100059127823057"
+                                    class="text-white text-decoration-none text-muted fs-4 d-flex flex-column align-items-center">
+                                    <i class="fab fa-facebook text-primary"></i>
+                                    <span class="custom-small-text">Nguyễn Minh Hiếu</span>
+                                </a>
+                            </li>
+                            <li class="col-3 mb-3 text-center">
+                                <a href="https://www.facebook.com/danghuynhkhanhdoan974"
+                                    class="text-white text-decoration-none text-muted fs-4 d-flex flex-column align-items-center">
+                                    <i class="fab fa-facebook text-primary"></i>
+                                    <span class="custom-small-text">Đàng Huỳnh Khánh Đoan</span>
+                                </a>
+                            </li>
+                            <li class="col-3 mb-3 text-center">
+                                <a href="https://www.facebook.com/profile.php?id=100034309667088"
+                                    class="text-white text-decoration-none text-muted fs-4 d-flex flex-column align-items-center">
+                                    <i class="fab fa-facebook text-primary"></i>
+                                    <span class="custom-small-text">Nguyễn Quang Vinh</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    
+  
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="/backend/src/Components/NavBar/NavBar.js"></script>
+    <script src="/frontend/js/CodeWeb//TrangTruyen.js"></script>
+    <script src="js/jquery-3.6.0.js"></script>
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script1.js"></script>
+    <script src="/backend/src/Components/search/search.js"></script>
+    <script src="/frontend/js/CodeWeb/truyenYeuThich.js"></script>
+    <script src="/frontend/js/CodeWeb/yeuThich.js"></script>
+
+
+
+
+
+    <script>
+   document.addEventListener('DOMContentLoaded', async () => {
+    const carouselInner = document.getElementById('carousel-inner');
+    const carouselIndicators = document.getElementById('carousel-indicators');
+    const collectionList = document.getElementById('collection-list');
+
+    const FAVORITES_KEY = 'favoriteComics';
+
+    async function fetchCategories() {
+        try {
+            const response = await fetch('http://localhost:3000/api/categories');
+            if (!response.ok) {
+                throw new Error('Failed to fetch categories');
+            }
+            const categories = await response.json();
+            const categoryList = document.querySelector('#theloaiDropdown + .dropdown-menu');
+
+            categoryList.innerHTML = '';
+
+            categories.forEach(category => {
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                link.className = 'dropdown-item';
+                link.href = `The_loai.html?categoryId=${category._id}`; 
+                link.textContent = category.name;
+                listItem.appendChild(link);
+                categoryList.appendChild(listItem);
+            });
+        } catch (error) {
+            console.error('Error fetching categories:', error);
+        }
+    }
+
+    await fetchCategories();
+
+    async function fetchComics(categoryId) {
+    try {
+        const url = `http://localhost:3000/api/comics?category=${categoryId}`;
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error('Failed to fetch comics');
+        }
+
+        const comics = await response.json();
+        collectionList.innerHTML = ''; // Clear previous content
+
+        if (comics.length === 0) {
+            collectionList.innerHTML = '<p class="text-center">Không có truyện nào thuộc thể loại này.</p>';
+            return;
+        }
+
+        // Lọc các truyện có categoryId nằm trong mảng category
+        const filteredComics = comics.filter(comic => comic.category.includes(categoryId));
+
+        if (filteredComics.length === 0) {
+            collectionList.innerHTML = '<p class="text-center">Không có truyện nào thuộc thể loại này.</p>';
+            return;
+        }
+
+        filteredComics.forEach(comic => {
+            const itemHtml = `
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="${comic.imageUrl}" class="card-img-top" alt="${comic.title}">
+                    <div class="card-body">
+                        <h5 class="card-title">${comic.title}</h5>
+                        <a href="doc_ngay.html?id=${comic._id}" class="btn btn-primary">Đọc truyện</a>
+                    </div>
+                </div>
+            </div>`;
+            collectionList.innerHTML += itemHtml;
+        });
+    } catch (error) {
+        console.error('Error fetching comics:', error);
+    }
+}
+
+
+async function fetchFeaturedComics(categoryId) {
+        try {
+            const url = `http://localhost:3000/api/comics?category=${categoryId}`;
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error('Failed to fetch featured comics');
+            }
+
+            const featuredComics = await response.json();
+            carouselInner.innerHTML = ''; 
+            carouselIndicators.innerHTML = ''; 
+
+            if (featuredComics.length === 0) {
+                carouselInner.innerHTML = '<p class="text-center">Không có truyện nào thuộc thể loại này.</p>';
+                return;
+            }
+
+            const filteredComics = featuredComics.filter(comic => comic.category.includes(categoryId));
+
+            filteredComics.forEach((comic, index) => {
+                const isActive = index === 0 ? 'active' : '';
+
+                const itemHtml = `
+                <div class="carousel-item ${isActive}" style="background-image: url('${comic.imageUrl}')">
+                    <div class="carousel-text">
+                        <h5>${comic.title}</h5>
+                        <p>${comic.description}</p>
+                        <div class="button-group">
+                            <a href="doc_ngay.html?id=${comic._id}" class="btn btn-primary">Đọc ngay</a>
+                            <button class="btn btn-outline-light favorite-btn" data-comic-id="${comic._id}" onclick="toggleFavorite('${comic._id}')">Yêu thích</button>
+                        </div>
+                    </div>
+                    <img src="${comic.imageUrl}" class="carousel-image d-block" alt="${comic.title}">
+                </div>`;
+                carouselInner.innerHTML += itemHtml;
+
+                const indicatorHtml = `
+                <button type="button" data-bs-target="#comicCarousel" data-bs-slide-to="${index}" class="${isActive}" aria-label="Slide ${index + 1}"></button>`;
+                carouselIndicators.innerHTML += indicatorHtml;
+            });
+
+            updateFavoriteButtons(); 
+        } catch (error) {
+            console.error('Error fetching featured comics:', error);
+        }
+    }
+
+    function getFavorites() {
+        const favorites = localStorage.getItem(FAVORITES_KEY);
+        return favorites ? JSON.parse(favorites) : [];
+    }
+
+    function saveFavorites(favorites) {
+        localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+    }
+
+    function toggleFavorite(comicId) {
+        let favorites = getFavorites();
+        if (favorites.includes(comicId)) {
+            favorites = favorites.filter(id => id !== comicId);
+        } else {
+            favorites.push(comicId);
+        }
+        saveFavorites(favorites);
+        updateFavoriteButtons();
+    }
+
+    function updateFavoriteButtons() {
+        const favorites = getFavorites();
+        document.querySelectorAll('.favorite-btn').forEach(button => {
+            const comicId = button.getAttribute('data-comic-id');
+            if (favorites.includes(comicId)) {
+                button.classList.add('active');
+                button.textContent = 'Đã yêu thích';
+            } else {
+                button.classList.remove('active');
+                button.textContent = 'Yêu thích';
+            }
+        });
+    }
+
+    function updateActiveItem() {
+        const items = carouselInner.querySelectorAll('.carousel-item');
+        items.forEach((item) => {
+            const textElement = item.querySelector('.carousel-text');
+            const imageElement = item.querySelector('.carousel-image');
+            if (textElement && imageElement) {
+                textElement.style.display = 'none'; 
+                imageElement.style.display = 'none'; 
+            }
+        });
+
+        const activeItem = carouselInner.querySelector('.carousel-item.active');
+        const activeText = activeItem.querySelector('.carousel-text');
+        const activeImage = activeItem.querySelector('.carousel-image');
+        if (activeText && activeImage) {
+            activeText.style.display = 'block'; 
+            activeImage.style.display = 'block'; 
+        }
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryId = urlParams.get('categoryId');
+
+    if (categoryId) {
+        await fetchFeaturedComics(categoryId);
+        await fetchComics(categoryId);
+    } else {
+        console.error("Không có categoryId trong URL.");
+    }
+
+    const carousel = document.getElementById('comicCarousel');
+    carousel.addEventListener('slid.bs.carousel', function () {
+        updateActiveItem();
+    });
+
+});
+
+
+
+    </script>
+
+    <!-- Dark Mode Toggle Script -->
+    <script>
+
+
+const dropdown = document.querySelector('.nav-item.dropdown');
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+
+        dropdown.addEventListener('mouseleave', () => {
+            dropdownMenu.style.display = 'none';
+            dropdownMenu.style.opacity = '0';
+            dropdownMenu.style.transform = 'translateY(10px)';
+        });
+
+        dropdown.addEventListener('mouseenter', () => {
+            dropdownMenu.style.display = 'block';
+            dropdownMenu.style.opacity = '1';
+            dropdownMenu.style.transform = 'translateY(0)';
+        });
+
+        dropdownMenu.addEventListener('mouseleave', () => {
+            dropdownMenu.style.display = 'none';
+            dropdownMenu.style.opacity = '0';
+            dropdownMenu.style.transform = 'translateY(10px)';
+        });
+
+        document.getElementById('dark-mode-toggle').onclick = function () {
+            document.body.classList.toggle('dark-mode');
+
+            // Optionally, toggle the icon's image too
+            const icon = document.getElementById('icon-fluid');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.src = 'image/moon.png'; // Change icon to sun for light mode
+            } else {
+                icon.src = 'image/sun.png'; // Change icon to moon for dark mode
+            }
+        };
+    </script>
+</body>
+
+</html>
