@@ -203,29 +203,49 @@
                     <button type="button" class="btn m-2 text-dark" data-filter=".new">Mới ra mắt</button>
                 </div>
 
+                
+            </div>
+            
+            
+            
+            <div id="comics-container">
                 <div class="collection-list mt-4 row gx-0 gy-3">
                     <!-- dữ liệu động sẽ được thêm vào ở đây -->
                 </div>
             </div>
+
             
-            <!-- lấy truyện từ danh mục để trình bày xuống trang chính 
-                trước khi nhấn nút đọc thêm truyện -->
-            <div id="comics-container">
-                
-            </div>
+
         </div>
     </section>
     <!-- end of HEADER-->
+
+    <!-- Modal thông tin truyện -->
+    <div class="modal fade" id="comicModal" tabindex="-1" aria-labelledby="comicModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="comicModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex">
+                    <img src="" class="img-fluid me-4" id="comicModalImage" alt="Comic Image" style="max-width: 40%;">
+                    <div>
+                        <p id="comicModalDescription"></p>
+                        <a href="#" id="comicModalLink" class="btn btn-primary mt-3">Đọc ngay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
 
     <!-- nút phân trang -->
     <div id="pagination-container" class="d-flex justify-content-center mt-4">
         <!-- nút phân trang sẽ xuất hiện khi nhấn nút xem thêm truyện -->
     </div>
 
-    <!-- nút xem thêm nhiều truyện -->
-    <div class="d-flex justify-content-center mt-4">
-        <button id="load-more-button" class="btn btn-primary">Xem thêm nhiều truyện</button>
-    </div>
 
     <!-- Modal thông báo không tìm thấy kết quả -->
     <div class="modal fade" id="noResultsModal" tabindex="-1" aria-labelledby="noResultsModalLabel" aria-hidden="true">
