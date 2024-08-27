@@ -7,18 +7,18 @@
 :root{
     --lg-font: 'Kaisei Tokumin', serif;
     --sm-font:  "Rubik", sans-serif;
-    --pink: #f2c185
+    
 }
 body{
     font-family: var(--sm-font);
-    background-color: #050505;
+    background-color: #000000;
 }
 
 
 .hero {
     width: 100%;
     min-height: 100vh;
-    background: #1c0f98;
+    background: #030303;
     color: #efefef;
 }
 nav {
@@ -79,7 +79,7 @@ nav {
     left: -20px;
 }
 .user-account-box {
-    margin-right: 60px; /* Thay đổi giá trị tùy thuộc vào khoảng cách bạn muốn */
+    margin-left:60px;
 }
 .user-pic {
     width: 30px; /* Giảm kích thước hình ảnh */
@@ -103,7 +103,7 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #f7f3f3;
+    color: #000000;
     text-decoration: none;
 }
 
@@ -521,33 +521,97 @@ body.light-mode #icon {
 
 
 /* footer */
-footer .brand{
+footer .brand {
     font-family: var(--lg-font);
     letter-spacing: 2px;
 }
-footer a{
-    -webkit-transition: color 0.3s ease;
-    -o-transition: color 0.3s ease;
-    transition: color 0.3s ease;
-}   
-footer a:hover{
-    color: var(--pink)!important;
+
+footer-container {
+    background-color: #000000; /* Match background with the page */
 }
 
-.btn-note:not(.nav-btns button):hover{
-    background-color: white;
-    color: #fff;
-    border-color: var(--pink);
+footer a {
+    color: #ffffff; /* Ensure links are white */
+    transition: color 0.3s ease;
+}   
+
+.btn-note:not(.nav-btns button):hover {
+    background-color: #333333; /* Darker background on hover */
+    color: #ffffff; /* White text on hover */
+    border-color: #ffffff; /* White border on hover */
 }
-.btn-note:not(.nav-btns button){
-    background-color: #fff;
-    color: rgb(85, 85, 85);
+
+.btn-note:not(.nav-btns button) {
+    background-color: #000000; /* Match button background with the page */
+    color: #ffffff; /* White text color */
     padding: 10px 28px;
     border-radius: 25px;
-    border: 1px solid rgb(85, 85, 85);
+    border: 1px solid #ffffff; /* White border color */
 }
+
 .custom-small-text {
-    font-size: 1rem; /* Thay đổi giá trị này để điều chỉnh kích thước chữ */
+    font-size: 1rem; /* Adjust text size as needed */
+}
+
+footer h5 {
+    color: #ffffff; /* White color for headings */
+}
+
+footer p, footer a {
+    color: #ffffff; /* White color for text and links */
+}
+
+/* Footer Styles */
+footer- {
+    background-color: #000000; /* Background color for footer */
+}
+
+footer .text-white {
+    color: #ffffff !important; /* Ensure all text in footer is white */
+}
+
+footer .text-muted {
+    color: #cccccc !important; /* Light grey for muted text */
+}
+
+footer .btn-primary {
+    background-color: #ef476f; /* Button background color */
+    color: #ffffff;
+    border: 1px solid #ef476f;
+}
+
+footer .btn-primary:hover {
+    background-color: #ffffff;
+    color: #ef476f;
+    border-color: #ef476f;
+}
+
+footer h5.text-primary,
+footer a.text-primary,
+footer i.text-primary,
+footer span.text-primary {
+    color: #ef476f !important; /* Primary color for headings, links, icons */
+}
+
+.custom-small-text {
+    font-size: 1rem; /* Adjust font size */
+}
+
+footer a {
+    transition: color 0.3s ease; /* Smooth transition for link color */
+}
+
+footer a:hover {
+    color: #ef476f !important; /* Change link color on hover */
+}
+
+/* Make sure to include these common utility classes */
+.text-primary {
+    color: #ef476f !important; /* Primary color */
+}
+
+.text-white {
+    color: #ffffff !important; /* White text color */
 }
 
 /* thanh tìm kiếm */
@@ -603,6 +667,8 @@ footer a:hover{
     cursor: pointer;
     margin-left: -40px;
     z-index: 100;
+    margin-right:30px;
+
 }
 
 .search-btn i {
@@ -619,7 +685,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Rubik', sans-serif;
-    background-color: #0000009f;
+    background-color: #000000;
 }
 
 
@@ -738,14 +804,14 @@ footer {
     padding-top: 6rem !important; 
     margin-top: 4rem;
     margin-bottom: 3rem;
-    background-color: #f8f9fa;
+    background-color: #c6790e;
 }
 
 #meow .container {
     margin-top: 4rem !important;
     padding-top: 2rem;
     padding-bottom: 2rem;
-    background-color: #ffffff;
+    background-color: #000000;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -777,13 +843,15 @@ footer {
     margin-top: 4rem !important;
     padding-top: 2rem;
     padding-bottom: 2rem;
-    background-color: #fdfcfc2e;
+    background-color: #bc1111;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 #collection.py-5 {
     padding-top: 3rem !important;
+    background-color: #000000;
+
     padding-bottom: 3rem !important;
 }
 
@@ -816,14 +884,14 @@ footer {
 
 .pagination .page-item.active .page-link {
     color: #fff;
-    background-color: #ff6f61;
+    background-color: #0a0a0a;
     border-color: #ff6f61;
 }
 
 .pagination .page-item .page-link:hover {
     color: #fff;
-    background-color: #ff6f61;
-    border-color: #ff6f61;
+    background-color: #e5210f;
+    border-color: #ed200d;
 }
 
 
@@ -833,39 +901,7 @@ footer {
         border-bottom: none;
     }
 }
-.carousel-inner {
-    margin-top: -100px; /* Điều chỉnh giá trị này để kiểm soát mức độ tràn */
-}
-.carousel-item {
-    height: 75vh; /* Chiều cao của carousel item */
-    width: 100vw; /* Chiều rộng chiếm toàn bộ viewport */
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-   box-shadow: inset;
-   
-}
 
-.carousel-inner img {
-    width: 100%; /* Đảm bảo hình ảnh chiếm toàn bộ chiều ngang */
-    height: 100%;
-    object-fit: fill; /* Đảm bảo hình ảnh được căn chỉnh đầy đủ và giữ nguyên tỷ lệ */
-}
-
-.section-trending {
-    background-color: #592E1E;
-    height: 70vh;
-    box-shadow:#c51414;
-}
-
-
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    background-color: rgba(5, 5, 5, 0.515);
-    border-radius: 50%;
-}
-/* modal danh mục  */
 /* Cài đặt mặc định cho dropdown menu */
 .dropdown-menu {
     display: none;
