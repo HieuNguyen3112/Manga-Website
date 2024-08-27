@@ -1,4 +1,37 @@
-document.getElementById('searchBtn').addEventListener('click', async () => {
+// Khai báo biến cho số lượng truyện trên mỗi trang
+const comicsPerPage = 12;
+let totalPages = 1;
+let currentPage = 1;
+
+// Khai báo biến để kiểm soát trạng thái của thanh tìm kiếm
+let isSearchVisible = false;
+
+document.getElementById('searchIcon').addEventListener('click', () => {
+    const searchBarContainer = document.getElementById('searchBarContainer');
+    
+    if (isSearchVisible) {
+        searchBarContainer.style.display = 'none';
+        isSearchVisible = false;
+    } else {
+        searchBarContainer.style.display = 'flex';
+        document.getElementById('searchInput').focus(); // Đặt focus vào thanh tìm kiếm khi hiện lên
+        isSearchVisible = true;
+    }
+});
+
+// Ẩn thanh tìm kiếm khi nhấp ra ngoài
+document.addEventListener('click', function(event) {
+    const searchBarContainer = document.getElementById('searchBarContainer');
+    const searchIcon = document.getElementById('searchIcon');
+    
+    if (isSearchVisible && !searchBarContainer.contains(event.target) && !searchIcon.contains(event.target)) {
+        searchBarContainer.style.display = 'none';
+        isSearchVisible = false;
+    }
+});
+
+// Sự kiện khi người dùng nhập vào ô tìm kiếm
+document.getElementById('searchInput').addEventListener('input', async () => {
     const query = document.getElementById('searchInput').value.trim();
     if (query) {
         try {
@@ -10,19 +43,18 @@ document.getElementById('searchBtn').addEventListener('click', async () => {
             if (comics.length > 0) {
                 totalPages = Math.ceil(comics.length / comicsPerPage);
                 clearPreviousData(); // Xóa các dữ liệu cũ trước khi hiển thị kết quả tìm kiếm
-                displaySearchResults(comics, 1); // Bắt đầu từ trang 1
+                displaySearchResults(comics, 1); // Hiển thị kết quả từ trang 1
             } else {
                 displayNoResultsMessage();
             }
         } catch (error) {
             console.error('Lỗi khi tìm kiếm:', error);
         }
+    } else {
+        document.querySelector('.collection-list').innerHTML = ''; // Xóa kết quả nếu ô tìm kiếm rỗng
     }
 });
 
-const comicsPerPage = 12;
-let totalPages = 1;
-let currentPage = 1;
 
 function clearPreviousData() {
     const collectionList = document.querySelector('.collection-list');
@@ -72,13 +104,6 @@ function displaySearchResults(comics, page) {
 
     // Cập nhật pagination
     createPagination(comics);
-
-    // Đóng modal sau khi hiển thị kết quả
-    const modalElement = document.getElementById('searchModal');
-    const modalInstance = bootstrap.Modal.getInstance(modalElement);
-    if (modalInstance) {
-        modalInstance.hide();
-    }
 }
 
 // Hàm tạo HTML cho rating (dùng lại từ TrangTruyen.js)
