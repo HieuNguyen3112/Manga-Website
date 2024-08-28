@@ -365,7 +365,7 @@ body.light-mode #icon {
 .collection-img img {
     transition: transform 0.5s ease-in-out; /* hiệu ứng chuyển đổi */
     max-width: 100% !important;
-    height: 450px !important; 
+    height: 800px !important; 
     object-fit: cover; /* Đảm bảo hình ảnh luôn lấp đầy khung chứa mà không bị méo */
     object-position: center; /* Đặt hình ảnh ở giữa khung chứa */
 }
@@ -755,6 +755,14 @@ section {
     overflow: hidden;
 }
 
+.collection-list .col-md-6.col-lg-4.col-xl-3 {
+    flex: 0 0 calc(100% / 5); /* Đặt chiều rộng của mỗi truyện là 1/5 của hàng */
+    max-width: calc(100% / 5); 
+    height: 30vh; /* Điều chỉnh chiều cao để căn đều các hình */
+    overflow: hidden;
+}
+
+
 
 /* Đảm bảo nhãn "New" được hiển thị đúng vị trí */
 .collection-img span {
@@ -946,4 +954,139 @@ footer {
 /* Đảm bảo menu thả xuống nằm ở giữa mục "Thể loại" */
 
 
+.category-comics {
+    display: flex;
+    overflow: hidden;
+}
+
+.comic-card {
+    background-color: #28282800;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
+}
+
+.comic-card img {
+    width: 100% !important;
+    height: 250px;
+    border-radius: 7px !important;
+}
+
+.prev-btn, .next-btn {
+    opacity: 0; /* Bắt đầu với nút không hiển thị */
+    transition: opacity 0.3s ease; /* Thêm hiệu ứng xuất hiện từ từ */
+    background-color: #fff;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.prev-btn:hover, .next-btn:hover {
+    opacity: 1;
+}
+
+
+/* Cắt tỉ lệ ảnh và loại bỏ viền */
+.comic-card img {
+    width: 100%;
+    height: 300px; /* Đặt chiều cao cố định */
+    object-fit: cover; /* Giữ tỷ lệ ảnh mà không bị méo */
+    border-radius: 0; /* Loại bỏ bo góc */
+    box-shadow: none; /* Loại bỏ bóng */
+}
+
+/* Đặt tên truyện ra ngoài và bỏ viền trắng */
+.comic-title {
+    margin-top: 10px;
+    color: #ececec;
+}
+
+.btn-prev,
+.btn-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    border: none;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.prev-btn {
+    left: -20px; /* Điều chỉnh vị trí nút trái */
+    top: 20vh;
+}
+
+.next-btn {
+    right: -80px; /* Điều chỉnh vị trí nút phải */
+    top: 20vh;
+}
+
+.prev-btn:hover, .next-btn:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.category-comics {
+    scroll-behavior: smooth; /* Thêm hiệu ứng cuộn mượt */
+    
+}
+
+.card {
+    border: none;
+    box-shadow: none;
+}
+
+.card-title {
+    margin-top: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.category-section:hover .prev-btn, 
+.category-section:hover .next-btn {
+    opacity: 0.8; /* Khi hover vào category-section, các nút sẽ xuất hiện */
+}
+
+/* modal nhá truyện */
+.modal-dialog {
+    max-width: 800px; /* Đảm bảo modal có độ rộng phù hợp */
+    margin: 1.75rem auto;
+}
+
+.modal-content {
+    background-color: #fff; /* Đảm bảo nền modal hiển thị tốt */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out; /* Thêm hiệu ứng cho modal */
+}
+
+.modal.show .modal-content {
+    transform: translateY(0); /* Đảm bảo modal trượt từ dưới lên */
+}
+
+.comic-info-overlay {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8); /* Điều chỉnh độ mờ của nền */
+    color: white;
+    padding: 15px; /* Điều chỉnh padding cho nội dung bên trong */
+    display: none; /* Bắt đầu với việc ẩn modal */
+    z-index: 10; /* Đảm bảo modal nằm trên các thành phần khác */
+    border-radius: 5px; /* Thêm bo tròn góc */
+}
 

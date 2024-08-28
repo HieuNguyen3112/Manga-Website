@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
     const comicsPerPage = 12;
     const collectionList = document.querySelector('.collection-list');
-    const paginationContainer = document.getElementById('pagination-container');
-    const loadMoreButton = document.getElementById('load-more-button');
     const comicsContainer = document.getElementById('comics-container');
     const carouselInner = document.getElementById('carousel-inner');
     const carouselIndicators = document.getElementById('carousel-indicators');
@@ -12,14 +10,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     let comics = [];
     let favoriteComics = [];
 
-    // Ẩn thanh phân trang khi trang tải lên
-    paginationContainer.style.display = 'none';
-
-    // Xóa dữ liệu hiện tại khi nhấn nút Xem thêm nhiều truyện
+    // Xóa dữ liệu hiện tại
     function clearData() {
         collectionList.innerHTML = '';
         comicsContainer.innerHTML = ''; // Xóa danh mục hiện tại
-        paginationContainer.style.display = 'none';
     }
 
     // Fetch user data including favorites
@@ -130,7 +124,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
     
             totalPages = Math.ceil(comics.length / comicsPerPage);
-            createPagination();
             displayComics(currentPage);
             setupFavoriteButtons();
             
@@ -146,38 +139,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // Display comics for the current page
-    function displayComics(page) {
-        const start = (page - 1) * comicsPerPage;
-        const end = start + comicsPerPage;
-        const comicsToDisplay = comics.slice(start, end);
-
-        collectionList.innerHTML = '';
-
-        comicsToDisplay.forEach(comic => {
-            const box = document.createElement('div');
-            box.className = 'col-md-6 col-lg-4 col-xl-3 p-2';
-
-            const isFavorited = favoriteComics.includes(comic._id) ? 'active' : '';
-
-            box.innerHTML = `
+    function displayComics(comics) {
+        const comicsContainer = document.querySelector('.collection-list');
+        comicsContainer.innerHTML = '';
+    
+        comics.forEach(comic => {
+            const comicElement = document.createElement('div');
+            comicElement.classList.add('col-md-6', 'col-lg-4', 'col-xl-2', 'p-2');  // Mỗi hàng 5 truyện
+            
+            comicElement.innerHTML = `
                 <div class="collection-img position-relative">
-                    <img src="${comic.imageUrl}" class="w-100 img-fluid custom-img" alt="${comic.title}">
-                    ${comic.status === 'Đang cập nhật' ? '<span class="position-absolute bg-primary text-white d-flex align-items-center justify-content-center">New</span>' : ''}
+                    <img src="${comic.image}" class="img-fluid custom-img" alt="${comic.title}">
+                    ${comic.status === 'new' ? '<span class="position-absolute bg-primary text-white d-flex align-items-center justify-content-center">New</span>' : ''}
                 </div>
-                <div class="text-center">
-                    <div class="rating mt-3">
-                        ${generateRatingHtml(comic.rating)}
-                    </div>
-                    <p class="text-capitalize fw-bold">${comic.title}</p>
-                    <span class="fw-bold d-block">
-                        <a href="doc_ngay.html?id=${comic._id}" class="btn btn-primary mt-3">Đọc ngay</a>
-                        <a href="#" class="btn btn-primary mt-3 favorite-btn ${isFavorited}" data-comic-id="${comic._id}">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
-                    </span>
+                <div class="text-center mt-2">
+                    <p class="text-capitalize fw-bold mb-1">${comic.title}</p>
+                    <a href="doc_ngay.html?id=${comic.id}" class="btn btn-primary">Đọc ngay</a>
                 </div>
             `;
-            collectionList.appendChild(box);
+            comicsContainer.appendChild(comicElement);
         });
 
         updatePagination();
@@ -430,11 +410,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Tải dữ liệu người dùng và danh mục khi trang tải lên
     await fetchUserData();
     await fetchCategories();
-
-    // Nút xem thêm nhiều truyện
-    loadMoreButton.addEventListener('click', async () => {
-        clearData();  // Xóa dữ liệu hiện tại trước khi tải thêm
-        loadMoreButton.style.display = 'none';
-        await fetchComics();
-    });
 });
