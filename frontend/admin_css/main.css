@@ -688,7 +688,7 @@ section {
 }
 
 .section-collection{
-    min-height: auto;
+    min-height: 100vh;
 }
 
 .section-footer {
