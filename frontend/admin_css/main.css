@@ -9,16 +9,13 @@
     --sm-font:  "Rubik", sans-serif;
     
 }
-body{
-    font-family: var(--sm-font);
-    background-color: #000000;
-}
+
 
 
 .hero {
     width: 100%;
     min-height: 100vh;
-    background: #030303;
+    background: #eceaea;
     color: #efefef;
 }
 nav {
@@ -497,7 +494,7 @@ body.light-mode #icon {
 
 /* MEOW MEOW */
 #meow{
-    background-color: rgba(179, 179, 179, 0.05);
+    background-color: rgb(18 18 20);
 }
 #meow p{
     max-width: 600px;
@@ -510,8 +507,8 @@ body.light-mode #icon {
     border-bottom-left-radius: 25px;
 }
 #meow .btn{
-    background-color:#000;
-    color: #0c0c0c;
+    background-color:#000000;
+    color: #ffffff;
     border-color: var(--pink);
 }
 #meow .btn:hover{
@@ -574,24 +571,12 @@ footer .text-muted {
     color: #cccccc !important; /* Light grey for muted text */
 }
 
-footer .btn-primary {
-    background-color: #ef476f; /* Button background color */
-    color: #ffffff;
-    border: 1px solid #ef476f;
-}
 
-footer .btn-primary:hover {
-    background-color: #ffffff;
-    color: #ef476f;
-    border-color: #ef476f;
-}
+
 
 footer h5.text-primary,
 footer a.text-primary,
 footer i.text-primary,
-footer span.text-primary {
-    color: #ef476f !important; /* Primary color for headings, links, icons */
-}
 
 .custom-small-text {
     font-size: 1rem; /* Adjust font size */
@@ -602,7 +587,7 @@ footer a {
 }
 
 footer a:hover {
-    color: #ef476f !important; /* Change link color on hover */
+    color: #424141a1 !important; /* Change link color on hover */
 }
 
 /* Make sure to include these common utility classes */
@@ -685,7 +670,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Rubik', sans-serif;
-    background-color: #000000;
+    background-color: rgb(18 18 20);
 }
 
 
@@ -804,14 +789,13 @@ footer {
     padding-top: 6rem !important; 
     margin-top: 4rem;
     margin-bottom: 3rem;
-    background-color: #c6790e;
 }
 
 #meow .container {
     margin-top: 4rem !important;
     padding-top: 2rem;
     padding-bottom: 2rem;
-    background-color: #000000;
+    background-color: #e2dede;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -836,21 +820,14 @@ footer {
     padding-top: 2rem !important; 
     margin-top: 2rem !important;
     margin-bottom: 2rem !important;
-    background-color: #f4d9d0;
+    background-color: rgb(18 18 20);
 }
 
-#meow .container {
-    margin-top: 4rem !important;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    background-color: #bc1111;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+
 
 #collection.py-5 {
     padding-top: 3rem !important;
-    background-color: #000000;
+    background-color: rgb(18 18 20);
 
     padding-bottom: 3rem !important;
 }
@@ -953,23 +930,10 @@ footer {
 
 /* Đảm bảo menu thả xuống nằm ở giữa mục "Thể loại" */
 
-
+.category-title{color: #fff;}
 .category-comics {
     display: flex;
     overflow: hidden;
-}
-
-.comic-card {
-    background-color: #28282800;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 5px;
-}
-
-.comic-card img {
-    width: 100% !important;
-    height: 250px;
-    border-radius: 7px !important;
 }
 
 .prev-btn, .next-btn {
@@ -994,6 +958,53 @@ footer {
     opacity: 1;
 }
 
+.comic-card {
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    background-color: #1b1c1e;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.comic-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.comic-image {
+    width: 100%;
+    height: 250px; /* Adjust the height to maintain a good aspect ratio */
+    object-fit: cover;
+    transition: opacity 0.3s;
+}
+
+.comic-card:hover .comic-image {
+    opacity: 0.8;
+}
+
+.comic-overlay {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    transition: opacity 0.3s;
+    opacity: 0;
+}
+
+.comic-card:hover .comic-overlay {
+    opacity: 1;
+}
+
+.comic-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
 
 /* Cắt tỉ lệ ảnh và loại bỏ viền */
 .comic-card img {

@@ -81,9 +81,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             const allItem = document.createElement('li');
             const allLink = document.createElement('a');
-            allLink.className = 'dropdown-item';
-            allLink.href = '#';
-            allLink.textContent = 'Tất cả';
             allItem.appendChild(allLink);
             categoryList.insertBefore(allItem, categoryList.firstChild);
 

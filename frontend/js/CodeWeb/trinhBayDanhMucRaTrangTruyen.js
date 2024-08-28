@@ -9,9 +9,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         return await response.json();
     }
 
-    // Fetch truyện theo danh mục từ API
-    async function fetchComicsByCategory(categoryId) {
-        const response = await fetch(`${comicsUrl}?category=${categoryId}`);
+    // Fetch truyện từ API
+    async function fetchComics() {
+        const response = await fetch(comicsUrl);
         if (!response.ok) throw new Error('Failed to fetch comics');
         return await response.json();
     }
@@ -19,17 +19,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Tạo phần tử HTML cho từng truyện
     function createComicElement(comic) {
         return `
-            <div class="col-md-2 p-2">
-                <div class="comic-card text-center position-relative" data-read-link="doc_ngay.html?id=${comic._id}">
-                    <img src="${comic.imageUrl}" class="img-fluid comic-image" alt="${comic.title}">
-                    <h5 class="mt-2 comic-title">${comic.title}</h5>
-                    <div class="comic-info-overlay position-absolute p-3 bg-dark text-white rounded" style="bottom: 0; left: 0; right: 0; display: none; z-index: 2;">
-                        <h6>${comic.title}</h6>
-                        <p>${comic.description || 'Không có mô tả.'}</p>
-                        <button class="btn btn-primary btn-sm mt-2">Đọc sách</button>
-                    </div>
-                </div>
-            </div>
+             <div class="col-md-2 p-2">
+                                    <div class="comic-card position-relative">
+                                    <img src="${comic.imageUrl}" class="comic-image" alt="${comic.title}">
+                            <div class="comic-overlay position-absolute p-2">
+                                        <h5 class="comic-title">${comic.title}</h5>
+                        <a href="doc_ngay.html?id=${comic._id}" class="btn btn-primary btn-sm">Đọc sách</a>
+                                   </div>
+                                     </div>
+                              </div>
+                                      
         `;
     }
 
@@ -93,29 +92,20 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    // Khi người dùng nhấp vào một truyện, modal sẽ mở ra với nội dung tương ứng
-    function openComicModal(comic) {
-        document.getElementById('comicModalLabel').innerText = comic.title;
-        document.getElementById('comicModalImage').src = comic.imageUrl;
-        document.getElementById('comicModalDescription').innerText = comic.description;
-        document.getElementById('comicModalLink').href = `doc_ngay.html?id=${comic._id}`;
-        
-        // Mở modal
-        const modalElement = document.getElementById('comicModal');
-        const modalInstance = new bootstrap.Modal(modalElement);
-        modalInstance.show();
-    }
-
-
     // Hiển thị danh mục và các truyện tương ứng
     async function displayCategoriesAndComics() {
         try {
             const categories = await fetchCategories();
+            const comics = await fetchComics(); // Fetch all comics once
+            
             clearPreviousData(); // Xóa các dữ liệu cũ trước khi thêm mới
-            const categorySections = await Promise.all(categories.map(async category => {
-                const comics = await fetchComicsByCategory(category._id);
-                return createCategorySection(category, comics);
-            }));
+            
+            // Iterate over each category and filter comics that include the category ID
+            const categorySections = categories.map(category => {
+                const comicsInCategory = comics.filter(comic => comic.category.includes(category._id));
+                return createCategorySection(category, comicsInCategory);
+            });
+
             document.getElementById('comics-container').innerHTML = categorySections.join('');
             addScrollEvents();
             addHoverAndClickEvents();
