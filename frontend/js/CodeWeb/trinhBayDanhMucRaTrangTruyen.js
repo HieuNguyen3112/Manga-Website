@@ -19,16 +19,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Tạo phần tử HTML cho từng truyện
     function createComicElement(comic) {
         return `
-             <div class="col-md-2 p-2">
-                                    <div class="comic-card position-relative">
-                                    <img src="${comic.imageUrl}" class="comic-image" alt="${comic.title}">
-                            <div class="comic-overlay position-absolute p-2">
-                                        <h5 class="comic-title">${comic.title}</h5>
-                        <a href="doc_ngay.html?id=${comic._id}" class="btn btn-primary btn-sm">Đọc sách</a>
-                                   </div>
-                                     </div>
-                              </div>
-                                      
+            <div class="col-md-2 p-2">
+                <div class="comic-card position-relative" data-read-link="doc_ngay.html?id=${comic._id}">
+                    <img src="${comic.imageUrl}" class="comic-image" alt="${comic.title}" style="cursor: pointer;">
+                    <div class="comic-overlay position-absolute p-2">
+                        <h5 class="comic-title">${comic.title}</h5>
+                        <a href="doc_ngay.html?id=${comic._id}" class="btn btn-primary btn-sm">Đọc truyện</a>
+                    </div>
+                </div>
+            </div>
         `;
     }
 
@@ -76,18 +75,26 @@ document.addEventListener('DOMContentLoaded', async () => {
     function addHoverAndClickEvents() {
         document.querySelectorAll('.comic-card').forEach(comicCard => {
             const overlay = comicCard.querySelector('.comic-info-overlay');
-            
+            const readLink = comicCard.dataset.readLink;
+
+            // Hiển thị overlay khi di chuột vào
             comicCard.addEventListener('mouseenter', () => {
-                $(overlay).fadeIn(200); // Hiển thị modal mượt mà khi di chuột vào
+                $(overlay).fadeIn(200);
             });
 
+            // Ẩn overlay khi di chuột ra
             comicCard.addEventListener('mouseleave', () => {
-                $(overlay).fadeOut(200); // Ẩn modal mượt mà khi di chuột ra
+                $(overlay).fadeOut(200);
             });
 
+            // Điều hướng đến trang chi tiết khi nhấn vào ảnh
+            comicCard.querySelector('img').addEventListener('click', () => {
+                window.location.href = readLink;
+            });
+
+            // Điều hướng đến trang chi tiết khi nhấn vào thẻ chứa
             comicCard.addEventListener('click', () => {
-                const readLink = comicCard.dataset.readLink;
-                window.location.href = readLink; // Điều hướng đến trang chi tiết truyện
+                window.location.href = readLink;
             });
         });
     }

@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         if (!token) {
             console.warn("No token found. User is not logged in.");
-            showAlert("Vui lòng đăng nhập để xem thông tin cá nhân.", "warning");
             return; 
         }
     

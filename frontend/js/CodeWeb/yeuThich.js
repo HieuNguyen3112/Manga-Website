@@ -1,26 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
     const favoriteLink = document.querySelector('.nav-link[href="#special"]');
-    const collectionList = document.querySelector('.collection-list');
-    const paginationContainer = document.getElementById('pagination-container');
-    const loadMoreButton = document.getElementById('load-more-button');
-    const comicsContainer = document.getElementById('comics-container'); // Thêm dòng này để tham chiếu đến container chứa comics
-    
+    const comicsContainer = document.getElementById('comics-container');
     let favoriteComics = [];
-    let comicsPerPage = 12;
+    let comicsPerPage = 6; // Set to 6 comics per row
     let currentPage = 1;
     let totalPages = 1;
 
-    // Gắn sự kiện nhấn vào link "Yêu Thích"
+    // Event listener for the "Favorite" link
     favoriteLink.addEventListener('click', async (event) => {
         event.preventDefault();
-
-        // Xóa các dữ liệu còn lại từ danh mục và nút "Xem thêm nhiều truyện"
-        clearPreviousData();
 
         // Kiểm tra token
         let token = localStorage.getItem("accessToken") || sessionStorage.getItem("accessToken");
         if (!token) {
-            // Nếu không có token, hiển thị thông báo yêu cầu đăng nhập
+            // Show a message if no token is found
             showAlert('Vui lòng đăng nhập để sử dụng trang yêu thích.', 'danger');
             return;
         }
@@ -28,15 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         await fetchFavoriteComics(token);
     });
 
-    // Hàm xóa các dữ liệu còn lại
-    function clearPreviousData() {
-        collectionList.innerHTML = ''; // Xóa truyện hiện tại trong danh sách
-        paginationContainer.innerHTML = ''; // Xóa phân trang hiện tại
-        comicsContainer.innerHTML = ''; // Xóa các truyện hiện có trong comics-container
-        loadMoreButton.style.display = 'none'; // Ẩn nút "Xem thêm nhiều truyện"
-    }
-
-    // Hàm lấy danh sách truyện yêu thích của người dùng
+    // Function to fetch the user's favorite comics
     async function fetchFavoriteComics(token) {
         try {
             const response = await fetch('http://localhost:8000/v1/user/favorites', {
@@ -51,126 +36,90 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
                 const comicIds = data.map(item => item.comicId);
 
-                // Lấy chi tiết các truyện dựa trên comicIds
+                // Fetch details of comics based on comicIds
                 const comicDetailsPromises = comicIds.map(id => fetch(`http://localhost:3000/api/comics/${id}`).then(res => res.json()));
                 favoriteComics = await Promise.all(comicDetailsPromises);
-                
+
+                // Check if the favoriteComics array is empty
+                if (favoriteComics.length === 0) {
+                    // Display alert if no favorite comics without clearing the page content
+                    showAlert('Bạn chưa có truyện yêu thích nào, hãy thêm truyện yêu thích trước khi truy cập mục này.', 'warning');
+                    return;
+                }
+
                 totalPages = Math.ceil(favoriteComics.length / comicsPerPage);
-                createPagination(); // Tạo phân trang cho danh sách truyện yêu thích
-                displayComics(currentPage); // Hiển thị các truyện yêu thích của trang đầu tiên
+                clearPreviousData(); // Clear only if there are comics to show
+                displayComics(currentPage); // Display the favorite comics on the first page
             } else {
-                console.error('Lỗi khi lấy danh sách truyện yêu thích:', response.statusText);
+                console.error('Error fetching favorite comics:', response.statusText);
                 showAlert("Không thể lấy danh sách truyện yêu thích.", "danger");
             }
         } catch (error) {
-            console.error('Có lỗi xảy ra:', error);
+            console.error('An error occurred:', error);
             showAlert("Đã xảy ra lỗi khi lấy danh sách truyện yêu thích.", "danger");
         }
     }
 
-    // Hàm hiển thị các truyện yêu thích
+    // Function to clear existing data
+    function clearPreviousData() {
+        comicsContainer.innerHTML = ''; // Clear current comics in comics-container
+    }
+
+    // Function to display favorite comics
     function displayComics(page) {
         const start = (page - 1) * comicsPerPage;
         const end = start + comicsPerPage;
         const comicsToDisplay = favoriteComics.slice(start, end);
 
-        collectionList.innerHTML = ''; // Xóa các phần tử hiện tại
+        const row = document.createElement('div');
+        row.classList.add('row', 'gx-2', 'gy-4'); // Create a row with spacing
 
         comicsToDisplay.forEach(comic => {
-            const box = document.createElement('div');
-            box.className = 'col-md-6 col-lg-4 col-xl-3 p-2';
-
-            box.innerHTML = `
-                <div class="collection-img position-relative">
-                    <img src="${comic.imageUrl}" class="w-100 img-fluid custom-img" alt="${comic.title}">
-                </div>
-                <div class="text-center">
-                    <div class="rating mt-3">
-                        ${generateRatingHtml(comic.rating || 0)}
+            const comicElement = document.createElement('div');
+            comicElement.className = 'col-md-2 p-2'; // Each comic takes up 1/6 of the row
+            comicElement.innerHTML = `
+                <div class="comic-card position-relative">
+                    <img src="${comic.imageUrl}" class="comic-image" alt="${comic.title}" style="cursor: pointer;">
+                    <div class="comic-overlay position-absolute p-2 bg-dark text-white rounded" style="display: none; background-color: rgba(0, 0, 0, 0.7); border-radius: 5px;">
+                        <h5 class="comic-title">${comic.title}</h5>
+                        <a href="doc_ngay.html?id=${comic._id}" class="btn btn-primary btn-sm">Đọc truyện</a>
                     </div>
-                    <p class="text-capitalize fw-bold">${comic.title}</p>
-                    <span class="fw-bold d-block">
-                        <a href="doc_ngay.html?id=${comic._id}" class="btn btn-primary mt-3">Đọc ngay</a>
-                    </span>
                 </div>
             `;
-            collectionList.appendChild(box);
+            row.appendChild(comicElement);
         });
+
+        comicsContainer.appendChild(row);
+
+        addHoverAndClickEvents();
     }
 
-    // Hàm tạo HTML cho rating
-    function generateRatingHtml(rating) {
-        let ratingHtml = '';
-        for (let i = 0; i < Math.floor(rating); i++) {
-            ratingHtml += '<span class="text-primary"><i class="fas fa-star"></i></span>';
-        }
-        if (rating % 1 !== 0) {
-            ratingHtml += '<span class="text-primary"><i class="fas fa-star-half-alt"></i></span>';
-        }
-        return ratingHtml;
-    }
+    // Function to add hover and click events
+    function addHoverAndClickEvents() {
+        document.querySelectorAll('.comic-card').forEach(comicCard => {
+            const overlay = comicCard.querySelector('.comic-overlay');
 
-    // Tạo phân trang
-    function createPagination() {
-        const paginationList = document.createElement('ul');
-        paginationList.classList.add('pagination');
-
-        // Nút Previous
-        const prevPageItem = document.createElement('li');
-        prevPageItem.classList.add('page-item');
-        prevPageItem.innerHTML = `<a class="page-link" href="#" id="prev-page">Previous</a>`;
-        prevPageItem.addEventListener('click', () => {
-            if (currentPage > 1) {
-                currentPage--;
-                displayComics(currentPage);
-                updatePagination();
-            }
-        });
-        paginationList.appendChild(prevPageItem);
-
-        // Các nút số trang
-        for (let i = 1; i <= totalPages; i++) {
-            const pageItem = document.createElement('li');
-            pageItem.classList.add('page-item');
-            if (i === currentPage) {
-                pageItem.classList.add('active');
-            }
-            pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-            pageItem.addEventListener('click', () => {
-                currentPage = i;
-                displayComics(currentPage);
-                updatePagination();
+            // Show overlay on hover
+            comicCard.addEventListener('mouseenter', () => {
+                $(overlay).fadeIn(200);
             });
-            paginationList.appendChild(pageItem);
-        }
 
-        // Nút Next
-        const nextPageItem = document.createElement('li');
-        nextPageItem.classList.add('page-item');
-        nextPageItem.innerHTML = `<a class="page-link" href="#" id="next-page">Next</a>`;
-        nextPageItem.addEventListener('click', () => {
-            if (currentPage < totalPages) {
-                currentPage++;
-                displayComics(currentPage);
-                updatePagination();
-            }
+            // Hide overlay when not hovering
+            comicCard.addEventListener('mouseleave', () => {
+                $(overlay).fadeOut(200);
+            });
+
+            // Navigate to details page when clicking on the image
+            comicCard.addEventListener('click', (e) => {
+                if (e.target.tagName !== 'A') { // Prevent navigation conflict when clicking the "Read" button
+                    const readLink = e.currentTarget.querySelector('a').href;
+                    window.location.href = readLink;
+                }
+            });
         });
-        paginationList.appendChild(nextPageItem);
-
-        paginationContainer.innerHTML = ''; // Xóa phân trang hiện tại
-        paginationContainer.appendChild(paginationList);
     }
 
-    // Cập nhật phân trang
-    function updatePagination() {
-        const pageItems = paginationContainer.querySelectorAll('.page-item');
-        pageItems.forEach(item => item.classList.remove('active'));
-        if (pageItems[currentPage]) {
-            pageItems[currentPage].classList.add('active');
-        }
-    }
-
-    // Hàm hiển thị thông báo
+    // Function to display alerts
     function showAlert(message, type) {
         const alertBox = document.createElement('div');
         alertBox.className = `alert alert-${type} alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3`;
