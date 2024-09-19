@@ -111,7 +111,7 @@
                     </div>
                     <div class="sub-menu-wrap" id="subMenu">
                         <div class="sub-menu">
-                            <a href="/frontend/pages/edit_pro.html" class="sub-menu-link">
+                            <a href="/frontend/pages/edit pro.html" class="sub-menu-link">
                                 <img src="image/profile.png" alt="Profile Icon">
                                 <p>Edit Profile</p>
                             </a>
@@ -228,12 +228,6 @@
             </div>
             
             
-            
-            <div id="comics-container">
-                <div class="collection-list mt-4 row gx-0 gy-3">
-                    <!-- dữ liệu động sẽ được thêm vào ở đây -->
-                </div>
-            </div>
 
             <!-- lấy truyện từ danh mục để trình bày xuống trang chính 
                 trước khi nhấn nút đọc thêm truyện -->
@@ -440,6 +434,15 @@
         });
     </script>
 
+    <!-- modal login -->
+    <script>
+        let subMenu = document.getElementById("subMenu");
+
+        function toggleMenu() {
+            subMenu.classList.toggle("open-menu");
+        }
+    </script>
+
 
     <script src="/backend/src/Components/NavBar/NavBar.js"></script>
     <script src="/frontend/js/CodeWeb//TrangTruyen.js"></script>
@@ -453,3 +456,14 @@
 </body>
 
 </html>
+
+
+<!-- Comic Collection Section
+<section id="collection" class="py-5 section-collection section-closer">
+    <div class="container">
+        <h2 class="mb-4"> Truyện thuộc thể loại đã chọn</h2>
+            <div id="comics-container">
+
+            </div>
+    </div>
+</section> -->

@@ -14,78 +14,63 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- custom css -->
     <link rel="stylesheet" href="/frontend/admin_css/main.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Font body-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
-        rel="stylesheet">
-    <!-- FONT MEOW-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Playwrite+BE+VLG:wght@100..400&family=Playwrite+CL:wght@100..400&family=Playwrite+CU:wght@100..400&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
-        rel="stylesheet">
-</head>
-<!-- Custom CSS -->
 
-<head>
+
+    <head>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <!-- Font body-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+            rel="stylesheet">
+
+        <!-- FONT MEOW-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Playwrite+BE+VLG:wght@100..400&family=Playwrite+CL:wght@100..400&family=Playwrite+CU:wght@100..400&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+            rel="stylesheet">
+
+    </head>
+
     <style>
         body {
             font-family: 'Merriweather', serif;
         }
 
-        .carousel-item {
-            position: relative;
-            display: none;
-            align-items: center;
-            padding: 20px;
-            background-size: cover;
-            background-position: center;
-            color: white;
-        }
-
-        .carousel-item.active {
-            display: flex;
-        }
-
-        .carousel-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 800%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1;
-        }
-
-        .carousel-text {
-            z-index: 2;
-            width: 40%;
-            text-align: center;
-            color: white;
-            margin-left: 40px
-        }
-
-        .carousel-image {
-            flex-shrink: 0;
-            width: 350px;
-            height: 500px;
-            transition: transform 0.5s ease;
-            object-fit: cover;
-            margin-left: 400px;
-            z-index: 2;
-            border-radius: 10px;
-        }
-
         .carousel-inner {
-            display: flex;
-            overflow: hidden;
-            height: 600px;
+            margin-top: -100px;
+            /* Điều chỉnh giá trị này để kiểm soát mức độ tràn */
         }
+
+        .carousel-item {
+            height: 75vh;
+            /* Chiều cao của carousel item */
+            width: 100vw;
+            /* Chiều rộng chiếm toàn bộ viewport */
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: inset;
+
+        }
+
+        .carousel-inner img {
+            width: 100%;
+            /* Đảm bảo hình ảnh chiếm toàn bộ chiều ngang */
+            height: 100%;
+            object-fit: fill;
+            /* Đảm bảo hình ảnh được căn chỉnh đầy đủ và giữ nguyên tỷ lệ */
+        }
+
+        .section-trending {
+            background-color: #592E1E;
+            height: 70vh;
+            box-shadow: #c51414;
+        }
+
 
 
         .carousel-control-prev-icon,
@@ -93,32 +78,31 @@
             background-color: rgba(5, 5, 5, 0.515);
             border-radius: 50%;
         }
-
-        .carousel-control-prev,
-        .carousel-control-next {
-            width: 5%;
-        }
     </style>
 </head>
 
 <body>
 
-    <!-- Navbar -->
+
+    <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-custom py-0 fixed-top navbar-custom-fix">
         <div class="container">
+            <!-- Logo -->
             <a href="Trang_truyen.html">
                 <img src="https://res.cloudinary.com/dwfmpiozq/image/upload/v1724220931/Nude_Boba_Milk_Tea_Logo_1_amomjt.png"
                     alt="Logo" class="logo">
             </a>
             <div class="order-lg-2 nav-btns d-flex align-items-center">
-                <!-- Search Bar -->
+
+                <!-- Nút Tìm Kiếm -->
                 <div id="searchBarContainer" class="search-container">
                     <input type="text" id="searchInput" class="search-input" placeholder="Nhập tên sách, tác giả...">
                 </div>
                 <button class="search-btn" id="searchIcon" aria-label="Search" title="Search">
                     <i class="fa fa-search"></i>
                 </button>
-                <!-- Account Menu -->
+
+                <!-- tài khoản  -->
                 <button type="button" class="btn position-relative">
                     <div class="user-account-box d-flex align-items-center">
                         <img src="image/R.png" class="user-pic" alt="User profile picture" onclick="toggleMenu()">
@@ -147,58 +131,144 @@
                     </div>
                 </button>
             </div>
+
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" aria-label="Toggle navigation" title="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse order-lg-1" id="navMenu">
                 <ul class="navbar-nav mx-auto text-center">
+
                     <li class="nav-item px-2 py-2">
                         <a class="nav-link text-uppercase text-white" href="Trang_truyen.html">Trang chủ</a>
                     </li>
+                    <!-- <li class="nav-item px-2 py-2">
+                        <a class="nav-link text-uppercase text-white" href="#collection">Mới ra mắt</a>
+                    </li> -->
                     <li class="nav-item dropdown px-2 py-2">
                         <a class="nav-link dropdown-toggle text-uppercase text-white" href="#" id="theloaiDropdown"
                             role="button">
                             Thể loại
                         </a>
                         <ul class="dropdown-menu dropdown-grid">
-                            <!-- Dropdown items will be dynamically injected here -->
+                            <!-- Các mục dropdown sẽ được tạo động ở đây bởi JavaScript -->
                         </ul>
                     </li>
+
                     <li class="nav-item px-2 py-2">
                         <a class="nav-link text-uppercase text-white" href="#special">Yêu thích</a>
                     </li>
+
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Carousel Section -->
-    <div id="comicCarousel" class="carousel slide mt-5 pt-3" data-bs-ride="carousel" data-bs-interval="2000">
-        <div class="carousel-indicators" id="carousel-indicators">
-            <!-- Dynamic buttons will be injected here -->
+    <!-- Trending Comics Section -->
+    <section id="trending" class="py-5 section-trending">
+        <div class="container-fluid p-0">
+            <div class="title text-center">
+                <h2 class="position-relative d-inline-block">Trending Comics</h2>
+            </div>
+
+            <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="./image/TOP WEEK (1).png" class="d-block w-100" alt="Comic 1">
+
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./image/topmonth.png" class="d-block w-100" alt="Comic 2">
+
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./image/Modern room.png" class="d-block w-100" alt="Comic 3">
+
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./image/overlord.png" class="d-block w-100" alt="Comic 3">
+
+                    </div>
+                </div>
+
+                <!-- Carousel Controls -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
         </div>
-        <div class="carousel-inner" id="carousel-inner">
-            <!-- Dynamic items will be injected here -->
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#comicCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#comicCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
+    </section>
+
+    <!-- end of navbar -->
+
+    <!-- header -->
 
     <!-- Comic Collection Section -->
     <section id="collection" class="py-5 section-collection section-closer">
         <div class="container">
+            <div class="row g-0">
+                <div class="d-flex flex-wrap justify-content-center mt-5 filter-button-group">
+                    <button type="button" class="btn m-2 text-dark" data-filter=".best">Truyện hot</button>
+                    <button type="button" class="btn m-2 text-dark" data-filter=".feat">Nhiều người đọc</button>
+                    <button type="button" class="btn m-2 text-dark" data-filter=".new">Mới ra mắt</button>
+                </div>
+ 
+                
+            </div>
+
             <h2 class="mb-4"> Truyện thuộc thể loại đã chọn</h2>
                 <div id="comics-container">
 
                 </div>
         </div>
     </section>
+
+    <!-- Modal thông tin truyện -->
+    <div class="modal fade" id="comicModal" tabindex="-1" aria-labelledby="comicModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="comicModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex">
+                    <img src="" class="img-fluid me-4" id="comicModalImage" alt="Comic Image">
+                    <div>
+                        <p id="comicModalDescription"></p>
+                        <a href="#" id="comicModalLink" class="btn btn-primary mt-3">Đọc ngay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Modal thông báo không tìm thấy kết quả -->
+    <div class="modal fade" id="noResultsModal" tabindex="-1" aria-labelledby="noResultsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="noResultsModalLabel">Thông báo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Không tìm thấy truyện nào phù hợp với từ khóa của bạn. Trang sẽ tự động làm mới.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
     <!-- footer -->
@@ -246,7 +316,7 @@
                         <span class="fw-light">
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.650665616816!2d106.67959617480462!3d10.76138318938645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b8a072901%3A0x2fb4502ebd044212!2zxJDhuqFpIEjhu41jIFPGsCBQaOG6oW0gVHAuSENNIENTMQ!5e0!3m2!1svi!2s!4v1722180039624!5m2!1svi!2s"
-                                title="Google Maps" class= "map-edit" allowfullscreen="">
+                                title="Google Maps" class= "map-edit" allowfullscreen>
                             </iframe>
                         </span>
                     </div>
@@ -308,6 +378,37 @@
         </div>
     </footer>
 
+    <script>
+        const dropdown = document.querySelector('.nav-item.dropdown');
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+
+        dropdown.addEventListener('mouseleave', () => {
+            dropdownMenu.style.display = 'none';
+            dropdownMenu.style.opacity = '0';
+            dropdownMenu.style.transform = 'translateY(10px)';
+        });
+
+        dropdown.addEventListener('mouseenter', () => {
+            dropdownMenu.style.display = 'block';
+            dropdownMenu.style.opacity = '1';
+            dropdownMenu.style.transform = 'translateY(0)';
+        });
+
+        dropdownMenu.addEventListener('mouseleave', () => {
+            dropdownMenu.style.display = 'none';
+            dropdownMenu.style.opacity = '0';
+            dropdownMenu.style.transform = 'translateY(10px)';
+        });
+    </script>
+
+    <!-- modal login -->
+    <script>
+        let subMenu = document.getElementById("subMenu");
+
+        function toggleMenu() {
+            subMenu.classList.toggle("open-menu");
+        }
+    </script>
 
 
     <!-- Bootstrap JS -->
@@ -323,7 +424,8 @@
     <script src="/frontend/js/CodeWeb/yeuThich.js"></script>
     <script src="/frontend//js/CodeWeb/truyenTrongTrangTheLoai.js"></script>
 
-
 </body>
 
 </html>
+
+
