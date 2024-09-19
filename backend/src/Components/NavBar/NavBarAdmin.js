@@ -44,7 +44,7 @@ async function checkAdminLoginStatus(accountMenuText, logoutButton) {
 }
 
 async function fetchAdminData(token) {
-    const response = await fetch('http://localhost:8000/v1/user/me', { 
+    const response = await fetch('http://localhost:3000/v1/user/me', { 
         method: "GET",
         headers: {
             "Token": `Bearer ${token}`,
@@ -75,7 +75,7 @@ async function handleAdminLogout(redirect) {
     const token = localStorage.getItem("accessToken");
 
     try {
-        const response = await fetch('http://localhost:8000/v1/auth/logout', {
+        const response = await fetch('http://localhost:3000/v1/auth/logout', {
             method: 'POST',
             headers: {
                 "Token": `Bearer ${token}`,

@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         checkLoginAndExecute(async () => {
             const comicId = new URLSearchParams(window.location.search).get('id');
             try {
-                const favoriteResponse = await fetch(`http://localhost:8000/v1/user/favorites`, {
+                const favoriteResponse = await fetch(`http://localhost:3000/v1/user/favorites`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         document.getElementById('confirmDelete').addEventListener('click', async () => {
                             confirmModal.hide();
-                            const unfollowResponse = await fetch(`http://localhost:8000/v1/user/favorites/remove`, {
+                            const unfollowResponse = await fetch(`http://localhost:3000/v1/user/favorites/remove`, {
                                 method: 'DELETE',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             }
                         });
                     } else {
-                        const response = await fetch(`http://localhost:8000/v1/user/favorites/add`, {
+                        const response = await fetch(`http://localhost:3000/v1/user/favorites/add`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',

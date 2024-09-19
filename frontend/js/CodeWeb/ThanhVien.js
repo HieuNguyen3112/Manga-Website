@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         try {
-            const response = await fetch('http://localhost:8000/v1/user', {
+            const response = await fetch('http://localhost:3000/v1/user', {
                 method: 'GET',
                 headers: {
                     'Token': `Bearer ${token}`,

@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
             };
             
             // Gửi dữ liệu tới máy chủ để xử lý
-            fetch('http://localhost:8000/v1/auth/forgot', {
+            fetch('http://localhost:3000/v1/auth/forgot', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

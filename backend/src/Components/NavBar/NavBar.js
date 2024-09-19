@@ -1,7 +1,7 @@
 // Hàm làm mới token
 async function refreshToken() {
     try {
-        const response = await fetch('http://localhost:8000/v1/auth/refresh', {
+        const response = await fetch('http://localhost:3000/v1/auth/refresh', {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -37,7 +37,7 @@ function parseJwt(token) {
 // Hàm làm mới token
 async function refreshToken() {
     try {
-        const response = await fetch('http://localhost:8000/v1/auth/refresh', {
+        const response = await fetch('http://localhost:3000/v1/auth/refresh', {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -127,7 +127,7 @@ async function checkLoginStatus() {
 
             // Lấy và hiển thị số lượng truyện yêu thích
             if (favoriteBadge) {
-                const favoriteResponse = await fetch('http://localhost:8000/v1/user/favorites', {
+                const favoriteResponse = await fetch('http://localhost:3000/v1/user/favorites', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -153,7 +153,7 @@ async function checkLoginStatus() {
 
 async function fetchUserData(token) {
     try {
-        const response = await fetch("http://localhost:8000/v1/user/me", {
+        const response = await fetch("http://localhost:3000/v1/user/me", {
             method: "GET",
             headers: {
                 "Token": `Bearer ${token}`, 
@@ -179,7 +179,7 @@ async function fetchUserData(token) {
 async function handleLogout(redirect) {
     const token = localStorage.getItem("accessToken");
     try {
-        const response = await fetch('http://localhost:8000/v1/auth/logout', {
+        const response = await fetch('http://localhost:3000/v1/auth/logout', {
             method: 'POST',
             headers: {
                 'Token': `Bearer ${token}`, 

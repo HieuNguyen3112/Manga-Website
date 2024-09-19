@@ -1,95 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    try {
-        // Lấy comicId từ URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const comicId = urlParams.get('id');
-
-        if (!comicId) {
-            console.error('Không tìm thấy ID truyện!');
-            return;
-        }
-
-        // Gửi yêu cầu đến API để lấy tất cả các truyện
-        const response = await fetch('http://localhost:3000/api/comics');
-        const comics = await response.json();
-
-        // Tìm truyện có ID khớp với comicId
-        const comic = comics.find(comic => comic._id === comicId);
-
-        if (!comic) {
-            console.error('Không tìm thấy thông tin truyện với ID:', comicId);
-            return;
-        }
-
-        // Cập nhật tiêu đề truyện
-        const titleElement = document.querySelector('.title-fluid');
-        if (titleElement) {
-            titleElement.textContent = comic.title;
-        }
-
-        // Cập nhật hình ảnh
-        const imageElement = document.querySelector('.main_image img');
-        if (imageElement) {
-            imageElement.src = comic.imageUrl;
-        }
-
-        // Cập nhật tác giả
-        const authorElement = document.querySelector('.author .col-xs-9');
-        if (authorElement) {
-            authorElement.textContent = comic.author;
-        }
-
-        // Cập nhật trạng thái
-        const statusElement = document.querySelector('.status .col-xs-9');
-        if (statusElement) {
-            statusElement.textContent = comic.status;
-        }
-
-        // Cập nhật số lượt thích
-        const likesElement = document.querySelector('.number-like');
-        if (likesElement) {
-            likesElement.textContent = comic.likes || 0;  // Nếu không có likes, hiển thị 0
-        }
-
-        // Cập nhật số lượt xem
-        const viewsElement = document.querySelector('.fa-eye').nextElementSibling;
-        if (viewsElement) {
-            viewsElement.textContent = comic.views || 0;  // Nếu không có lượt xem, hiển thị 0
-        }
-
-        // Cập nhật mô tả
-        const descriptionElement = document.querySelector('.gioi_thieu + div');
-        if (descriptionElement) {
-            descriptionElement.innerHTML = comic.description; // Sử dụng innerHTML để giữ định dạng HTML
-        }
-
-        // Đặt hình ảnh truyện làm background cho toàn bộ trang với lớp phủ đen mờ
-        if (comic.imageUrl) {
-            document.body.style.backgroundImage = `url(${comic.imageUrl})`;
-            document.body.style.backgroundSize = 'cover';
-            document.body.style.backgroundPosition = 'center';
-            document.body.style.backgroundAttachment = 'fixed';
-            
-            // Thêm lớp phủ đen mờ
-            const overlay = document.createElement('div');
-            overlay.style.position = 'fixed';
-            overlay.style.top = 0;
-            overlay.style.left = 0;
-            overlay.style.width = '100%';
-            overlay.style.height = '100%';
-            overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-            overlay.style.zIndex = '-1';
-            document.body.appendChild(overlay);
-        }
-
-    } catch (error) {
-        console.error('Lỗi khi lấy dữ liệu:', error);
-    }
-});
-document.addEventListener('DOMContentLoaded', async () => {
     const carouselInner = document.getElementById('carousel-inner');
     const carouselIndicators = document.getElementById('carousel-indicators');
-    const collectionList = document.getElementById('collection-list');
+    const collectionList = document.getElementById('comics-container');
 
     const FAVORITES_KEY = 'favoriteComics';
 
@@ -144,24 +56,33 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return;
             }
 
-            filteredComics.forEach(comic => {
-                const itemHtml = `
-                    <div class="col-md-3">
-                        <div class="card">
-                            <img src="${comic.imageUrl}" class="card-img-top" alt="${comic.title}">
-                            <div class="card-body">
-                                <h5 class="card-title">${comic.title}</h5>
-                                <a href="doc_ngay.html?id=${comic._id}" class="btn btn-primary">Đọc truyện</a>
+            // Create a row and add comics in columns
+            let row = '<div class="row gx-3 gy-3">'; // Create a new row with spacing
+            filteredComics.forEach((comic, index) => {
+                row += `
+                    <div class="col-2 p-2"> <!-- Create column with col-2 for each comic -->
+                        <div class="comic-card position-relative">
+                            <img src="${comic.imageUrl}" class="comic-image" alt="${comic.title}">
+                            <div class="comic-overlay position-absolute p-2">
+                                <h5 class="comic-title">${comic.title}</h5>
+                                <a href="doc_ngay.html?id=${comic._id}" class="btn btn-primary btn-sm">Đọc sách</a>
                             </div>
                         </div>
-                    </div>`;
-                collectionList.innerHTML += itemHtml;
+                    </div>
+                `;
+
+                // Close the row and open a new row after every 6 comics
+                if ((index + 1) % 6 === 0) {
+                    row += '</div><div class="row gx-3 gy-3">';
+                }
             });
+            row += '</div>'; // Close the last row
+
+            collectionList.innerHTML = row; // Update the content with the new layout
         } catch (error) {
             console.error('Error fetching comics:', error);
         }
     }
-
 
     async function fetchFeaturedComics(categoryId) {
         try {
@@ -186,21 +107,20 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const isActive = index === 0 ? 'active' : '';
 
                 const itemHtml = `
-        <div class="carousel-item ${isActive}" style="background-image: url('${comic.imageUrl}')">
-            <div class="carousel-text">
-                <h5>${comic.title}</h5>
-                <p>${comic.description}</p>
-                <div class="button-group">
-                    <a href="doc_ngay.html?id=${comic._id}" class="btn btn-primary">Đọc ngay</a>
-                    <button class="btn btn-outline-light favorite-btn" data-comic-id="${comic._id}" onclick="toggleFavorite('${comic._id}')">Yêu thích</button>
-                </div>
-            </div>
-            <img src="${comic.imageUrl}" class="carousel-image d-block" alt="${comic.title}">
-        </div>`;
+                    <div class="carousel-item ${isActive}" style="background-image: url('${comic.imageUrl}')">
+                        <div class="carousel-text">
+                            <h5>${comic.title}</h5>
+                            <p>${comic.description}</p>
+                            <div class="button-group">
+                                <a href="doc_ngay.html?id=${comic._id}" class="btn btn-primary">Đọc ngay</a>
+                            </div>
+                        </div>
+                        <img src="${comic.imageUrl}" class="carousel-image d-block" alt="${comic.title}">
+                    </div>`;
                 carouselInner.innerHTML += itemHtml;
 
                 const indicatorHtml = `
-        <button type="button" data-bs-target="#comicCarousel" data-bs-slide-to="${index}" class="${isActive}" aria-label="Slide ${index + 1}"></button>`;
+                    <button type="button" data-bs-target="#comicCarousel" data-bs-slide-to="${index}" class="${isActive}" aria-label="Slide ${index + 1}"></button>`;
                 carouselIndicators.innerHTML += indicatorHtml;
             });
 

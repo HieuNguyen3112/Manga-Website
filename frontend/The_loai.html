@@ -112,49 +112,42 @@
             </a>
             <div class="order-lg-2 nav-btns d-flex align-items-center">
                 <!-- Search Bar -->
-                <div id="searchBarContainer" class="search-container" style="display: none;">
+                <div id="searchBarContainer" class="search-container">
                     <input type="text" id="searchInput" class="search-input" placeholder="Nhập tên sách, tác giả...">
                 </div>
-                <button class="search-btn" id="searchIcon">
+                <button class="search-btn" id="searchIcon" aria-label="Search" title="Search">
                     <i class="fa fa-search"></i>
                 </button>
                 <!-- Account Menu -->
                 <button type="button" class="btn position-relative">
                     <div class="user-account-box d-flex align-items-center">
-                        <img src="image/R.png" class="user-pic" onclick="toggleMenu()"
-                            style="width: 30px; height: 30px;">
+                        <img src="image/R.png" class="user-pic" alt="User profile picture" onclick="toggleMenu()">
                         <span class="text-uppercase text-decoration-none text-white ms-1 user-pic"
                             onclick="toggleMenu()"> Tài khoản</span>
                     </div>
                     <div class="sub-menu-wrap" id="subMenu">
                         <div class="sub-menu">
-                            <a href="/frontend/pages/edit pro.html" class="sub-menu-link">
-                                <img src="image/profile.png">
+                            <a href="/frontend/pages/edit_pro.html" class="sub-menu-link">
+                                <img src="image/profile.png" alt="Profile Icon">
                                 <p>Edit Profile</p>
                             </a>
                             <a href="#" class="sub-menu-link">
-                                <img src="image/setting.png">
+                                <img src="image/setting.png" alt="Settings Icon">
                                 <p>Settings</p>
                             </a>
                             <a href="#" class="sub-menu-link">
-                                <img src="image/help.png">
+                                <img src="image/help.png" alt="Help Icon">
                                 <p>Help</p>
                             </a>
                             <a href="#" class="sub-menu-link">
-                                <img src="image/logout.png">
+                                <img src="image/logout.png" alt="Logout Icon">
                                 <p>Logout</p>
                             </a>
                         </div>
                     </div>
                 </button>
-                <!-- Dark Mode Toggle -->
-                <li class="nav-item px-2 py-2 border-0">
-                    <a class="nav-link1 text-uppercase text-dark" href="#" id="dark-mode-toggle">
-                        <img src="image/moon.png" id="icon-fluid">
-                    </a>
-                </li>
             </div>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" aria-label="Toggle navigation" title="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse order-lg-1" id="navMenu">
@@ -200,9 +193,9 @@
     <!-- Comic Collection Section -->
     <section id="collection" class="py-5 section-collection section-closer">
         <div class="container">
-            <h2 class="mb-4">Truyện thuộc thể loại đã chọn</h2>
-                <div class="row collection-list" id="collection-list">
-                    <!-- Dynamic items will be injected here -->
+            <h2 class="mb-4"> Truyện thuộc thể loại đã chọn</h2>
+                <div id="comics-container">
+
                 </div>
         </div>
     </section>
@@ -253,8 +246,7 @@
                         <span class="fw-light">
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.650665616816!2d106.67959617480462!3d10.76138318938645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b8a072901%3A0x2fb4502ebd044212!2zxJDhuqFpIEjhu41jIFPGsCBQaOG6oW0gVHAuSENNIENTMQ!5e0!3m2!1svi!2s!4v1722180039624!5m2!1svi!2s"
-                                width="250" height="200" style="border:0;" allowfullscreen="" loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade">
+                                title="Google Maps" class= "map-edit" allowfullscreen="">
                             </iframe>
                         </span>
                     </div>
@@ -328,260 +320,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script1.js"></script>
     <script src="/backend/src/Components/search/search.js"></script>
-    <script src="/frontend/js/CodeWeb/truyenYeuThich.js"></script>
     <script src="/frontend/js/CodeWeb/yeuThich.js"></script>
+    <script src="/frontend//js/CodeWeb/truyenTrongTrangTheLoai.js"></script>
 
 
-
-
-
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            const carouselInner = document.getElementById('carousel-inner');
-            const carouselIndicators = document.getElementById('carousel-indicators');
-            const collectionList = document.getElementById('collection-list');
-
-            const FAVORITES_KEY = 'favoriteComics';
-
-            async function fetchCategories() {
-                try {
-                    const response = await fetch('http://localhost:3000/api/categories');
-                    if (!response.ok) {
-                        throw new Error('Failed to fetch categories');
-                    }
-                    const categories = await response.json();
-                    const categoryList = document.querySelector('#theloaiDropdown + .dropdown-menu');
-
-                    categoryList.innerHTML = '';
-
-                    categories.forEach(category => {
-                        const listItem = document.createElement('li');
-                        const link = document.createElement('a');
-                        link.className = 'dropdown-item';
-                        link.href = `The_loai.html?categoryId=${category._id}`;
-                        link.textContent = category.name;
-                        listItem.appendChild(link);
-                        categoryList.appendChild(listItem);
-                    });
-                } catch (error) {
-                    console.error('Error fetching categories:', error);
-                }
-            }
-
-            await fetchCategories();
-
-            async function fetchComics(categoryId) {
-                try {
-                    const url = `http://localhost:3000/api/comics?category=${categoryId}`;
-                    const response = await fetch(url);
-                    if (!response.ok) {
-                        throw new Error('Failed to fetch comics');
-                    }
-
-                    const comics = await response.json();
-                    collectionList.innerHTML = ''; // Clear previous content
-
-                    if (comics.length === 0) {
-                        collectionList.innerHTML = '<p class="text-center">Không có truyện nào thuộc thể loại này.</p>';
-                        return;
-                    }
-
-                    // Lọc các truyện có categoryId nằm trong mảng category
-                    const filteredComics = comics.filter(comic => comic.category.includes(categoryId));
-
-                    if (filteredComics.length === 0) {
-                        collectionList.innerHTML = '<p class="text-center">Không có truyện nào thuộc thể loại này.</p>';
-                        return;
-                    }
-
-                    filteredComics.forEach(comic => {
-                        const itemHtml = `
-                                        <div class="col-md-2 p-2">
-                                    <div class="comic-card position-relative">
-                                    <img src="${comic.imageUrl}" class="comic-image" alt="${comic.title}">
-                            <div class="comic-overlay position-absolute p-2">
-                                        <h5 class="comic-title">${comic.title}</h5>
-                        <a href="doc_ngay.html?id=${comic._id}" class="btn btn-primary btn-sm">Đọc sách</a>
-                                   </div>
-                                     </div>
-                              </div>
-                                       `;
-                        collectionList.innerHTML += itemHtml;
-                    });
-                } catch (error) {
-                    console.error('Error fetching comics:', error);
-                }
-            }
-
-
-            async function fetchFeaturedComics(categoryId) {
-                try {
-                    const url = `http://localhost:3000/api/comics?category=${categoryId}`;
-                    const response = await fetch(url);
-                    if (!response.ok) {
-                        throw new Error('Failed to fetch featured comics');
-                    }
-
-                    const featuredComics = await response.json();
-                    carouselInner.innerHTML = '';
-                    carouselIndicators.innerHTML = '';
-
-                    if (featuredComics.length === 0) {
-                        carouselInner.innerHTML = '<p class="text-center">Không có truyện nào thuộc thể loại này.</p>';
-                        return;
-                    }
-
-                    const filteredComics = featuredComics.filter(comic => comic.category.includes(categoryId));
-
-                    filteredComics.forEach((comic, index) => {
-                        const isActive = index === 0 ? 'active' : '';
-
-                        const itemHtml = `
-                <div class="carousel-item ${isActive}" style="background-image: url('${comic.imageUrl}')">
-                    <div class="carousel-text">
-                        <h5>${comic.title}</h5>
-                        <p>${comic.description}</p>
-                        <div class="button-group">
-                            <a href="doc_ngay.html?id=${comic._id}" class="btn btn-primary">Đọc ngay</a>
-                            
-                        </div>
-                    </div>
-                    <img src="${comic.imageUrl}" class="carousel-image d-block" alt="${comic.title}">
-                </div>`;
-                        carouselInner.innerHTML += itemHtml;
-
-                        const indicatorHtml = `
-                <button type="button" data-bs-target="#comicCarousel" data-bs-slide-to="${index}" class="${isActive}" aria-label="Slide ${index + 1}"></button>`;
-                        carouselIndicators.innerHTML += indicatorHtml;
-                    });
-
-                    updateFavoriteButtons();
-                } catch (error) {
-                    console.error('Error fetching featured comics:', error);
-                }
-            }
-
-            function getFavorites() {
-                const favorites = localStorage.getItem(FAVORITES_KEY);
-                return favorites ? JSON.parse(favorites) : [];
-            }
-
-            function saveFavorites(favorites) {
-                localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
-            }
-
-            function toggleFavorite(comicId) {
-                let favorites = getFavorites();
-                if (favorites.includes(comicId)) {
-                    favorites = favorites.filter(id => id !== comicId);
-                } else {
-                    favorites.push(comicId);
-                }
-                saveFavorites(favorites);
-                updateFavoriteButtons();
-            }
-
-            function updateFavoriteButtons() {
-                const favorites = getFavorites();
-                document.querySelectorAll('.favorite-btn').forEach(button => {
-                    const comicId = button.getAttribute('data-comic-id');
-                    if (favorites.includes(comicId)) {
-                        button.classList.add('active');
-                        button.textContent = 'Đã yêu thích';
-                    } else {
-                        button.classList.remove('active');
-                        button.textContent = 'Yêu thích';
-                    }
-                });
-            }
-
-            function updateActiveItem() {
-                const items = carouselInner.querySelectorAll('.carousel-item');
-                items.forEach((item) => {
-                    const textElement = item.querySelector('.carousel-text');
-                    const imageElement = item.querySelector('.carousel-image');
-                    if (textElement && imageElement) {
-                        textElement.style.display = 'none';
-                        imageElement.style.display = 'none';
-                    }
-                });
-
-                const activeItem = carouselInner.querySelector('.carousel-item.active');
-                const activeText = activeItem.querySelector('.carousel-text');
-                const activeImage = activeItem.querySelector('.carousel-image');
-                if (activeText && activeImage) {
-                    activeText.style.display = 'block';
-                    activeImage.style.display = 'block';
-                }
-            }
-
-            const urlParams = new URLSearchParams(window.location.search);
-            const categoryId = urlParams.get('categoryId');
-
-            if (categoryId) {
-                await fetchFeaturedComics(categoryId);
-                await fetchComics(categoryId);
-            } else {
-                console.error("Không có categoryId trong URL.");
-            }
-
-            const carousel = document.getElementById('comicCarousel');
-            carousel.addEventListener('slid.bs.carousel', function () {
-                updateActiveItem();
-            });
-
-        });
-
-
-
-    </script>
-
-    <!-- Dark Mode Toggle Script -->
-    <script>
-
-
-        const dropdown = document.querySelector('.nav-item.dropdown');
-        const dropdownMenu = document.querySelector('.dropdown-menu');
-
-        dropdown.addEventListener('mouseleave', () => {
-            dropdownMenu.style.display = 'none';
-            dropdownMenu.style.opacity = '0';
-            dropdownMenu.style.transform = 'translateY(10px)';
-        });
-
-        dropdown.addEventListener('mouseenter', () => {
-            dropdownMenu.style.display = 'block';
-            dropdownMenu.style.opacity = '1';
-            dropdownMenu.style.transform = 'translateY(0)';
-        });
-
-        dropdownMenu.addEventListener('mouseleave', () => {
-            dropdownMenu.style.display = 'none';
-            dropdownMenu.style.opacity = '0';
-            dropdownMenu.style.transform = 'translateY(10px)';
-        });
-
-        document.getElementById('dark-mode-toggle').onclick = function () {
-            document.body.classList.toggle('dark-mode');
-
-            // Optionally, toggle the icon's image too
-            const icon = document.getElementById('icon-fluid');
-            if (document.body.classList.contains('dark-mode')) {
-                icon.src = 'image/moon.png'; // Change icon to sun for light mode
-            } else {
-                icon.src = 'image/sun.png'; // Change icon to moon for dark mode
-            }
-        };
-    </script>
-
-    <script>
-        let subMenu = document.getElementById("subMenu");
-
-        c7b53430df2d0e6e2fb723aa07a0b3895ed8c33e
-        function toggleMenu() {
-            subMenu.classList.toggle("open-menu");
-        }
-    </script>
 </body>
 
 </html>

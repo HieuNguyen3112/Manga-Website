@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const loginUser = async (user, dispatch, navigate) => {
     try {
-      const response = await fetch("http://localhost:8000/v1/auth/login", {
+      const response = await fetch("http://localhost:3000/v1/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

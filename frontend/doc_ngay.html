@@ -50,51 +50,48 @@
         </a>
         <div class="order-lg-2 nav-btns d-flex align-items-center">
             <!-- Search Bar -->
-            <div id="searchBarContainer" class="search-container" style="display: none;">
+            <div id="searchBarContainer" class="search-container">
                 <input type="text" id="searchInput" class="search-input" placeholder="Nhập tên sách, tác giả...">
             </div>
-            <button class="search-btn" id="searchIcon">
-                <i class="fa fa-search"></i>
+
+            <button class="search-btn" id="searchIcon" aria-label="Search" title="Search">
+              <i class="fa fa-search"></i>
             </button>
             <!-- Account Menu -->
-            <button type="button" class="btn position-relative">
-                <div class="user-account-box d-flex align-items-center">
-                    <img src="image/R.png" class="user-pic" onclick="toggleMenu()"
-                        style="width: 30px; height: 30px;">
-                    <span class="text-uppercase text-decoration-none text-white ms-1 user-pic"
-                        onclick="toggleMenu()"> Tài khoản</span>
-                </div>
-                <div class="sub-menu-wrap" id="subMenu">
-                    <div class="sub-menu">
-                        <a href="/frontend/pages/edit pro.html" class="sub-menu-link">
-                            <img src="image/profile.png">
-                            <p>Edit Profile</p>
-                        </a>
-                        <a href="#" class="sub-menu-link">
-                            <img src="image/setting.png">
-                            <p>Settings</p>
-                        </a>
-                        <a href="#" class="sub-menu-link">
-                            <img src="image/help.png">
-                            <p>Help</p>
-                        </a>
-                        <a href="#" class="sub-menu-link">
-                            <img src="image/logout.png">
-                            <p>Logout</p>
-                        </a>
-                    </div>
-                </div>
-            </button>
-            <!-- Dark Mode Toggle -->
-            <li class="nav-item px-2 py-2 border-0">
-                <a class="nav-link1 text-uppercase text-dark" href="#" id="dark-mode-toggle">
-                    <img src="image/moon.png" id="icon-fluid">
-                </a>
-            </li>
+            <button type="button" class="btn position-relative" aria-label="User account menu">
+              <div class="user-account-box d-flex align-items-center">
+                  <img src="image/R.png" class="user-pic" alt="User profile picture" onclick="toggleMenu()">
+                  <span class="text-uppercase text-decoration-none text-white ms-1 user-pic"
+                      onclick="toggleMenu()"> Tài khoản</span>
+              </div>
+              <div class="sub-menu-wrap" id="subMenu">
+                  <div class="sub-menu">
+                      <a href="/frontend/pages/edit_pro.html" class="sub-menu-link">
+                          <img src="image/profile.png" alt="Profile Icon">
+                          <p>Edit Profile</p>
+                      </a>
+                      <a href="#" class="sub-menu-link">
+                          <img src="image/setting.png" alt="Settings Icon">
+                          <p>Settings</p>
+                      </a>
+                      <a href="#" class="sub-menu-link">
+                          <img src="image/help.png" alt="Help Icon">
+                          <p>Help</p>
+                      </a>
+                      <a href="#" class="sub-menu-link">
+                          <img src="image/logout.png" alt="Logout Icon">
+                          <p>Logout</p>
+                      </a>
+                  </div>
+                  
+              </div>
+          </button>
         </div>
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-            <span class="navbar-toggler-icon"></span>
+
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" aria-label="Toggle navigation" title="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse order-lg-1" id="navMenu">
             <ul class="navbar-nav mx-auto text-center">
                 <li class="nav-item px-2 py-2">
@@ -115,7 +112,7 @@
             </ul>
         </div>
     </div>
-</nav>
+  </nav>
 
 
   <!-- end NAV-->
@@ -147,7 +144,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <iframe id="chapterContent" src="" style="width:100%; height:600px;" frameborder="0"></iframe>
+          <iframe id="chapterContent" src="" title="Google Maps" class= "map-edit" frameborder="0"></iframe>
         </div>
       </div>
     </div>
@@ -178,7 +175,7 @@
   <section class="comic-details">
     <div class="contain-main">
         <div class="main_image">
-            <img src="image/AKame.jpg" class="slide">
+            <img src="image/AKame.jpg" class="slide" alt="Profile icon">
         </div>
         <div class="info-panel">
             <h3 class="title-fluid text-danger title-adjust">Doraemon</h3>
@@ -377,9 +374,8 @@
             </span>
             <span class="fw-light">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.650665616816!2d106.67959617480462!3d10.76138318938645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b8a072901%3A0x2fb4502ebd044212!2zxJDhuqFpIEjhu41jIFPGsCBQaOG6oW0gVHAuSENNIENTMQ!5e0!3m2!1svi!2s!4v1722180039624!5m2!1svi!2s"
-                width="250" height="200" style="border:0;" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade">
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.650665616816!2d106.67959617480462!3d10.76138318938645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b8a072901%3A0x2fb4502ebd044212!2zxJDhuqFpIEjhu41jIFPGsCBQaOG6oW0gVHAuSENNIENTMQ!5e0!3m2!1svi!2s!4v1722180039624!5m2!1svi!2s"
+                  title="Google Maps" class= "map-edit" allowfullscreen>
               </iframe>
             </span>
           </div>

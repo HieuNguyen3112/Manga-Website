@@ -253,10 +253,6 @@ nav ul li a {
     color: var(--pink)!important;
 }
 
-body.light-mode {
-    background-color: white;
-    color: black;
-}
 #icon-fluid {
     width: 30px; /* Chỉnh kích thước theo nhu cầu của bạn */
     height: 30px; 
@@ -267,18 +263,6 @@ body.light-mode {
 .icon.light-mode {
     background-color: white;
     color: black;
-}
-
-body.dark-mode {
-    background-color: black;
-    color: white;
-}
-body.dark-mode #icon {
-    content: url('image/sun.png');
-}
-
-body.light-mode #icon {
-    content: url('image/moon.png');
 }
 
 
@@ -628,7 +612,7 @@ footer a:hover {
 
 /* nút tìm kiếm */
 .search-container {
-    display: flex;
+    display: none;
     align-items: center;
     position: relative;
 }
@@ -688,7 +672,7 @@ section {
 }
 
 .section-collection{
-    min-height: 100vh;
+    min-height: 10vh;
 }
 
 .section-footer {
@@ -1101,3 +1085,17 @@ footer {
     border-radius: 5px; /* Thêm bo tròn góc */
 }
 
+/* Chỉnh sửa lại map */
+.map-edit{
+    width: 250px;
+    height: 200px;
+    border-radius: 5px;
+}
+
+.mb-4{
+    color: whitesmoke;
+}
+
+.comics-container {
+    margin-top: 30px; /* Điều chỉnh khoảng cách theo ý muốn */
+}

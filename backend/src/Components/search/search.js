@@ -1,179 +1,183 @@
-// Khai báo biến cho số lượng truyện trên mỗi trang
-const comicsPerPage = 12;
-let totalPages = 1;
-let currentPage = 1;
+document.addEventListener('DOMContentLoaded', function () {
+    // Khai báo biến cho số lượng truyện trên mỗi trang
+    const comicsPerPage = 12;
+    let totalPages = 1;
+    let currentPage = 1;
 
-// Khai báo biến để kiểm soát trạng thái của thanh tìm kiếm
-let isSearchVisible = false;
+    // Khai báo biến để kiểm soát trạng thái của thanh tìm kiếm
+    let isSearchVisible = false;
 
-document.getElementById('searchIcon').addEventListener('click', () => {
-    const searchBarContainer = document.getElementById('searchBarContainer');
-    
-    if (isSearchVisible) {
-        searchBarContainer.style.display = 'none';
-        isSearchVisible = false;
-    } else {
-        searchBarContainer.style.display = 'flex';
-        document.getElementById('searchInput').focus(); // Đặt focus vào thanh tìm kiếm khi hiện lên
-        isSearchVisible = true;
-    }
-});
+    // Lưu trữ bố cục ban đầu để phục hồi sau khi xóa tìm kiếm
+    const initialLayout = document.getElementById('comics-container').innerHTML;
 
-// Ẩn thanh tìm kiếm khi nhấp ra ngoài
-document.addEventListener('click', function(event) {
-    const searchBarContainer = document.getElementById('searchBarContainer');
-    const searchIcon = document.getElementById('searchIcon');
-    
-    if (isSearchVisible && !searchBarContainer.contains(event.target) && !searchIcon.contains(event.target)) {
-        searchBarContainer.style.display = 'none';
-        isSearchVisible = false;
-    }
-});
-
-// Sự kiện khi người dùng nhập vào ô tìm kiếm
-document.getElementById('searchInput').addEventListener('input', async () => {
-    const query = document.getElementById('searchInput').value.trim();
-    if (query) {
-        try {
-            const response = await fetch(`http://localhost:3000/api/comics/search?search=${encodeURIComponent(query)}`);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const comics = await response.json();
-            if (comics.length > 0) {
-                totalPages = Math.ceil(comics.length / comicsPerPage);
-                clearPreviousData(); // Xóa các dữ liệu cũ trước khi hiển thị kết quả tìm kiếm
-                displaySearchResults(comics, 1); // Hiển thị kết quả từ trang 1
-            } else {
-                displayNoResultsMessage();
-            }
-        } catch (error) {
-            console.error('Lỗi khi tìm kiếm:', error);
+    document.getElementById('searchIcon').addEventListener('click', () => {
+        const searchBarContainer = document.getElementById('searchBarContainer');
+        
+        if (isSearchVisible) {
+            searchBarContainer.style.display = 'none';
+            isSearchVisible = false;
+        } else {
+            searchBarContainer.style.display = 'flex';
+            document.getElementById('searchInput').focus(); // Đặt focus vào thanh tìm kiếm khi hiện lên
+            isSearchVisible = true;
         }
-    } else {
-        document.querySelector('.collection-list').innerHTML = ''; // Xóa kết quả nếu ô tìm kiếm rỗng
+    });
+
+    // Ẩn thanh tìm kiếm khi nhấp ra ngoài
+    document.addEventListener('click', function(event) {
+        const searchBarContainer = document.getElementById('searchBarContainer');
+        const searchIcon = document.getElementById('searchIcon');
+        
+        if (isSearchVisible && !searchBarContainer.contains(event.target) && !searchIcon.contains(event.target)) {
+            searchBarContainer.style.display = 'none';
+            isSearchVisible = false;
+        }
+    });
+
+    // Sự kiện khi người dùng gõ trong ô tìm kiếm
+    document.getElementById('searchInput').addEventListener('input', async () => {
+        const query = document.getElementById('searchInput').value.trim();
+        if (query) {
+            try {
+                const response = await fetch(`http://localhost:3000/api/comics/search?search=${encodeURIComponent(query)}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const comics = await response.json();
+                if (comics.length > 0) {
+                    totalPages = Math.ceil(comics.length / comicsPerPage);
+                    clearPreviousData(); // Xóa các dữ liệu cũ trước khi hiển thị kết quả tìm kiếm
+                    displaySearchResults(comics, 1); // Hiển thị kết quả từ trang 1
+                } else {
+                    clearPreviousData(); // Xóa kết quả tìm kiếm hiện tại nếu không tìm thấy
+                }
+            } catch (error) {
+                console.error('Lỗi khi tìm kiếm:', error);
+            }
+        } else {
+            resetToInitialLayout(); // Phục hồi bố cục ban đầu nếu ô tìm kiếm rỗng
+        }
+    });
+
+    // Sự kiện khi người dùng nhấn Enter trong ô tìm kiếm
+    document.getElementById('searchInput').addEventListener('keydown', async (event) => {
+        if (event.key === 'Enter') {
+            const query = document.getElementById('searchInput').value.trim();
+            if (query) {
+                try {
+                    const response = await fetch(`http://localhost:3000/api/comics/search?search=${encodeURIComponent(query)}`);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const comics = await response.json();
+                    if (comics.length === 0) {
+                        displayNoResultsMessage(); // Hiển thị thông báo không tìm thấy truyện khi nhấn Enter
+                    }
+                } catch (error) {
+                    console.error('Lỗi khi tìm kiếm:', error);
+                }
+            } else {
+                window.location.reload(); // Refresh lại trang để hiển thị bố cục ban đầu
+            }
+        }
+    });
+
+    function clearPreviousData() {
+        const comicsContainer = document.getElementById('comics-container');
+        const paginationContainer = document.getElementById('pagination-container');
+        const loadMoreButton = document.getElementById('load-more-button');
+
+        if (comicsContainer) {
+            comicsContainer.innerHTML = ''; // Xóa các kết quả cũ trong comicsContainer
+        }
+        if (paginationContainer) {
+            paginationContainer.innerHTML = ''; // Xóa phân trang hiện tại nếu phần tử tồn tại
+        }
+        if (loadMoreButton) {
+            loadMoreButton.style.display = 'none'; // Ẩn nút "Xem thêm nhiều truyện" nếu phần tử tồn tại
+        }
     }
-});
 
-
-function clearPreviousData() {
-    const collectionList = document.querySelector('.collection-list');
-    const paginationContainer = document.getElementById('pagination-container');
-    const loadMoreButton = document.getElementById('load-more-button'); // Tham chiếu đến nút "Xem thêm nhiều truyện"
-    const comicsContainer = document.getElementById('comics-container'); // Tham chiếu đến container dữ liệu động cũ
-
-    collectionList.innerHTML = ''; // Xóa các kết quả cũ
-    paginationContainer.innerHTML = ''; // Xóa phân trang hiện tại
-    if (loadMoreButton) {
-        loadMoreButton.style.display = 'none'; // Ẩn nút "Xem thêm nhiều truyện"
-    }
-    if (comicsContainer) {
-        comicsContainer.innerHTML = ''; // Xóa dữ liệu động cũ trong comicsContainer
-    }
-}
-
-function displaySearchResults(comics, page) {
-    const collectionList = document.querySelector('.collection-list');
-
-    const start = (page - 1) * comicsPerPage;
-    const end = start + comicsPerPage;
-    const comicsToDisplay = comics.slice(start, end);
-
-    comicsToDisplay.forEach(comic => {
-        const box = document.createElement('div');
-        box.className = 'col-md-6 col-lg-4 col-xl-3 p-2';
-
-        box.innerHTML = `
-            <div class="collection-img position-relative">
-                <img src="${comic.imageUrl}" class="w-100 img-fluid custom-img" alt="${comic.title}">
-                ${comic.status === 'Đang cập nhật' ? '<span class="position-absolute bg-primary text-white d-flex align-items-center justify-content-center">New</span>' : ''}
-            </div>
-            <div class="text-center">
-                <div class="rating mt-3">
-                    ${generateRatingHtml(comic.rating)}
+    function createComicElement(comic) {
+        return `
+            <div class="col-2 p-2">
+                <div class="comic-card position-relative" data-read-link="doc_ngay.html?id=${comic._id}">
+                    <img src="${comic.imageUrl}" class="w-100 img-fluid custom-img" alt="${comic.title}" style="cursor: pointer;">
+                    <div class="comic-overlay position-absolute p-2">
+                        <h5 class="comic-title">${comic.title}</h5>
+                        <a href="doc_ngay.html?id=${comic._id}" class="btn btn-primary btn-sm">Đọc truyện</a>
+                    </div>
                 </div>
-                <p class="text-capitalize fw-bold">${comic.title}</p>
-                <span class="fw-bold d-block">
-                    <a href="doc_ngay.html?id=${comic._id}" class="btn btn-primary mt-3">Đọc ngay</a>
-                    <a href="#" class="btn btn-primary mt-3"><i class="fa-regular fa-heart"></i></a>
-                </span>
             </div>
         `;
-        collectionList.appendChild(box);
-    });
-
-    // Cập nhật pagination
-    createPagination(comics);
-}
-
-// Hàm tạo HTML cho rating (dùng lại từ TrangTruyen.js)
-function generateRatingHtml(rating) {
-    let ratingHtml = '';
-    for (let i = 0; i < Math.floor(rating); i++) {
-        ratingHtml += '<span class="text-primary"><i class="fas fa-star"></i></span>';
     }
-    if (rating % 1 !== 0) {
-        ratingHtml += '<span class="text-primary"><i class="fas fa-star-half-alt"></i></span>';
+
+    function displaySearchResults(comics, page) {
+        const comicsContainer = document.getElementById('comics-container');
+        if (!comicsContainer) return; // Thoát nếu phần tử không tồn tại
+    
+        const start = (page - 1) * comicsPerPage;
+        const end = start + comicsPerPage;
+        const comicsToDisplay = comics.slice(start, end);
+    
+        // Thêm hoạt ảnh mượt mà cho quá trình hiển thị kết quả
+        comicsContainer.classList.add('fade'); // Thêm hiệu ứng fade
+        comicsContainer.classList.add('comics-container'); // Thêm lớp tạo khoảng cách
+        comicsContainer.style.opacity = 0; // Đặt opacity ban đầu để hoạt ảnh bắt đầu từ đây
+    
+        setTimeout(() => {
+            let row = '<div class="row gx-0 gy-3">'; // Thêm hàng để chứa các truyện
+            comicsToDisplay.forEach((comic, index) => {
+                row += createComicElement(comic);
+                // Nếu đủ 6 truyện thì đóng hàng và mở hàng mới
+                if ((index + 1) % 6 === 0) {
+                    row += '</div><div class="row gx-0 gy-3">';
+                }
+            });
+            row += '</div>'; // Đóng hàng cuối cùng
+    
+            comicsContainer.innerHTML = row; // Cập nhật nội dung
+            comicsContainer.style.opacity = 1; // Đặt opacity về 1 sau khi cập nhật xong
+            addHoverAndClickEvents(); // Thêm các sự kiện hover và click vào mỗi truyện
+        }, 200); // Độ trễ để hoạt ảnh mượt mà hơn
     }
-    return ratingHtml;
-}
+    
 
-// Hàm tạo pagination cho kết quả tìm kiếm
-function createPagination(comics) {
-    const paginationContainer = document.getElementById('pagination-container');
-    const paginationList = document.createElement('ul');
-    paginationList.classList.add('pagination');
+    // Hàm hiển thị thông báo không tìm thấy kết quả và tự động refresh trang
+    function displayNoResultsMessage() {
+        const noResultsModal = new bootstrap.Modal(document.getElementById('noResultsModal'));
+        noResultsModal.show();
 
-    // Nút Previous
-    const prevPageItem = document.createElement('li');
-    prevPageItem.classList.add('page-item');
-    prevPageItem.innerHTML = `<a class="page-link" href="#" id="prev-page">Previous</a>`;
-    prevPageItem.addEventListener('click', function () {
-        if (currentPage > 1) {
-            currentPage--;
-            displaySearchResults(comics, currentPage);
-        }
-    });
-    paginationList.appendChild(prevPageItem);
+        setTimeout(() => {
+            window.location.reload();
+        }, 5000); // Trang sẽ tự động refresh sau 5 giây
+    }
 
-    // Các nút số trang
-    for (let i = 1; i <= totalPages; i++) {
-        const pageItem = document.createElement('li');
-        pageItem.classList.add('page-item');
-        if (i === currentPage) {
-            pageItem.classList.add('active');
-        }
-        pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-        pageItem.addEventListener('click', function () {
-            currentPage = i;
-            displaySearchResults(comics, currentPage);
+    // Thêm các sự kiện hover và click vào mỗi truyện
+    function addHoverAndClickEvents() {
+        document.querySelectorAll('.comic-card').forEach(comicCard => {
+            const overlay = comicCard.querySelector('.comic-overlay');
+            const readLink = comicCard.dataset.readLink;
+
+            // Hiển thị overlay khi di chuột vào
+            comicCard.addEventListener('mouseenter', () => {
+                $(overlay).fadeIn(200);
+            });
+
+            // Ẩn overlay khi di chuột ra
+            comicCard.addEventListener('mouseleave', () => {
+                $(overlay).fadeOut(200);
+            });
+
+            // Điều hướng đến trang chi tiết khi nhấn vào ảnh
+            comicCard.querySelector('img').addEventListener('click', () => {
+                window.location.href = readLink;
+            });
+
+            // Điều hướng đến trang chi tiết khi nhấn vào thẻ chứa
+            comicCard.addEventListener('click', () => {
+                window.location.href = readLink;
+            });
         });
-        paginationList.appendChild(pageItem);
     }
-
-    // Nút Next
-    const nextPageItem = document.createElement('li');
-    nextPageItem.classList.add('page-item');
-    nextPageItem.innerHTML = `<a class="page-link" href="#" id="next-page">Next</a>`;
-    nextPageItem.addEventListener('click', function () {
-        if (currentPage < totalPages) {
-            currentPage++;
-            displaySearchResults(comics, currentPage);
-        }
-    });
-    paginationList.appendChild(nextPageItem);
-
-    // Thêm thanh phân trang vào container
-    paginationContainer.innerHTML = ''; // Xóa các phần tử hiện tại trước khi thêm mới
-    paginationContainer.appendChild(paginationList);
-}
-
-// Hàm hiển thị thông báo không tìm thấy kết quả và tự động refresh trang
-function displayNoResultsMessage() {
-    const noResultsModal = new bootstrap.Modal(document.getElementById('noResultsModal'));
-    noResultsModal.show();
-
-    setTimeout(() => {
-        window.location.reload();
-    }, 3000); // Trang sẽ tự động refresh sau 3 giây
-}
+});

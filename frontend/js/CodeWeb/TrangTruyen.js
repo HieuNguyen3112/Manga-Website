@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     
         try {
-            const response = await fetch("http://localhost:8000/v1/user/me", {
+            const response = await fetch("http://localhost:3000/v1/user/me", {
                 method: "GET",
                 headers: {
                     "Token": `Bearer ${token}`,
@@ -313,7 +313,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Add comic to favorites
     async function addFavorite(comicId, token) {
-        const response = await fetch('http://localhost:8000/v1/user/favorites/add', {
+        const response = await fetch('http://localhost:3000/v1/user/favorites/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -331,7 +331,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Remove comic from favorites
     async function removeFavorite(comicId, token) {
-        const response = await fetch('http://localhost:8000/v1/user/favorites/remove', {
+        const response = await fetch('http://localhost:3000/v1/user/favorites/remove', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
